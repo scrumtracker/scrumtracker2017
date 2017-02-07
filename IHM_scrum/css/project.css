@@ -7,3 +7,11 @@
 	border: 1px solid #C8C8C8;
 	border-radius: 3px;
 }
+.glybtnleft {
+	margin-left: 5px;
+}
+.sprintdetails{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 20px;
+}
