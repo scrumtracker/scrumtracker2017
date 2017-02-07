@@ -15,3 +15,9 @@
 	margin-bottom: 10px;
 	font-size: 20px;
 }
+#btnedit{
+	//float: right;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
