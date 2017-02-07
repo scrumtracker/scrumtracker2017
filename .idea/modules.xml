@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/scrumtracker.iml" filepath="$PROJECT_DIR$/scrumtracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scrumtracker-app/scrumtracker-app.iml" filepath="$PROJECT_DIR$/scrumtracker-app/scrumtracker-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scrumtracker-core/scrumtracker-core.iml" filepath="$PROJECT_DIR$/scrumtracker-core/scrumtracker-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scrumtracker-web/scrumtracker-web.iml" filepath="$PROJECT_DIR$/scrumtracker-web/scrumtracker-web.iml" />
+    </modules>
+  </component>
+</project>

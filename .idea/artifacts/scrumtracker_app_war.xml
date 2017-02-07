@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="scrumtracker-app:war">
+    <output-path>$PROJECT_DIR$/scrumtracker-app/target</output-path>
+    <root id="archive" name="scrumtracker-app-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="scrumtracker-app:war exploded" />
+    </root>
+  </artifact>
+</component>
