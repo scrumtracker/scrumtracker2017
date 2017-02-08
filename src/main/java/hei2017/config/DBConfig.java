@@ -24,7 +24,9 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "hei2017.dao")
 public class DBConfig {
 
-    final private String dbURL = "DATABASE_URL";
+    final private String HEROKU_DATABASE_URL = "DATABASE_URL";
+    final private String HEROKU_DATABASE_USR = "JDBC_DATABASE_USERNAME";
+    final private String HEROKU_DATABASE_PWD = "JDBC_DATABASE_PASSWORD";
 
     @Bean
     public DataSource dataSource(Properties dbProperties)
@@ -32,14 +34,27 @@ public class DBConfig {
         String username = "";
         username = dbProperties.getProperty("username");
 
+        if(null!=System.getenv(HEROKU_DATABASE_USR)){
+            username = System.getenv(HEROKU_DATABASE_USR);
+        }
+
         String password = "";
         password = dbProperties.getProperty("password");
 
-        System.err.println(System.getenv(dbURL));
+        if(null!=System.getenv(HEROKU_DATABASE_PWD)){
+            password = System.getenv(HEROKU_DATABASE_PWD);
+        }
+
+        String jdbcUrl = "";
+        jdbcUrl = dbProperties.getProperty("jdbcUrl");
+
+        if(null!=System.getenv(HEROKU_DATABASE_URL)){
+            jdbcUrl = "jdbc:"+System.getenv(HEROKU_DATABASE_URL);
+        }
 
         BoneCPDataSource dataSource = new BoneCPDataSource();
         dataSource.setDriverClass(dbProperties.getProperty("driverClass"));
-        dataSource.setJdbcUrl(dbProperties.getProperty("jdbcUrl"));
+        dataSource.setJdbcUrl(jdbcUrl);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         dataSource.setIdleConnectionTestPeriodInMinutes(60);
