@@ -51,7 +51,7 @@ public class DBConfig {
         if(null!=System.getenv(HEROKU_DATABASE_URL)){
             //"jdbc:"+
             jdbcUrl = "jdbc:"+System.getenv(HEROKU_DATABASE_URL);
-            jdbcUrl.replace("postgres","postgresql");
+            jdbcUrl = jdbcUrl.replace("postgres","postgresql");
         }
 
         BoneCPDataSource dataSource = new BoneCPDataSource();
