@@ -65,7 +65,7 @@ Si vous souhaitez vous familiariser avec Thymeleaf, un tutoriel en ligne est dis
 ###  Librairies JS
 | Librairie | Description|Version |
 |-----------|---------|---------|
-|https://jquery.com |Doit-on vraiment vous présenter JQurey ?| 3.1.1|
+|https://jquery.com |Doit-on vraiment vous présenter JQuery ?| 3.1.1|
 |https://momentjs.com |Moment.js nous permet de gérer facilement les conversions de date|2.17.1|
 |https://datatables.net|Permet de créer des tableaux dynamiques (recherche, classement, etc)|1.10.13|
 |http://codeseven.github.io/toastr|Permet d'afficher des Toasts (notifications) |2.1.3|
