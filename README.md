@@ -14,11 +14,7 @@ Scrumtracker est une application web permettant la gestion de Sprints, Stories e
 
 ## Fonctionnement du projet
 
-L'application est divisée en 3 modules:
-* scrumtracker
-    * scrumtracker-app
-    * scrumtracker-core
-    * scrumtracker-web
+Description à réaliser.
 
 ## Technologies utilisées
 Le framework Spring est une boite à outils très riche permettant de structurer, 

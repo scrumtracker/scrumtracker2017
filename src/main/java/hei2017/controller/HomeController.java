@@ -25,11 +25,9 @@ public class HomeController {
     public String goHome(Model model, HttpServletRequest request, HttpServletResponse reponse)
     {
         Sprint sprintTest = new Sprint();
-        sprintTest.setNom("Hello World d'un Sprint");
-
-        model.addAttribute("ObjetTest", sprintTest);
-
-        return "pageDeTest";
+        sprintTest.setNom("Test 08/02/2017 dada");
+        sprintService.saveSprint(sprintTest);
+        return "home";
     }
 
 }
