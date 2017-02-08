@@ -1,5 +1,0 @@
-hei\project\entity\User.class
-hei\project\dao\UserDao.class
-hei\project\config\AppConfig.class
-hei\project\config\DBConfig.class
-hei\project\service\UserService.class
