@@ -11,6 +11,8 @@
 
     <artifactId>scrumtracker-web</artifactId>
 
+    <packaging>war</packaging>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
