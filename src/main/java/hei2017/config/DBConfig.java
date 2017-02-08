@@ -1,6 +1,7 @@
 package hei2017.config;
 
 import com.jolbox.bonecp.BoneCPDataSource;
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -23,14 +24,24 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "hei2017.dao")
 public class DBConfig {
 
+    final private String dbURL = "DATABASE_URL";
+
     @Bean
     public DataSource dataSource(Properties dbProperties)
     {
+        String username = "";
+        username = dbProperties.getProperty("username");
+
+        String password = "";
+        password = dbProperties.getProperty("password");
+
+        System.err.println(System.getenv(dbURL));
+
         BoneCPDataSource dataSource = new BoneCPDataSource();
         dataSource.setDriverClass(dbProperties.getProperty("driverClass"));
         dataSource.setJdbcUrl(dbProperties.getProperty("jdbcUrl"));
-        dataSource.setUsername(dbProperties.getProperty("username"));
-        dataSource.setPassword(dbProperties.getProperty("password"));
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
         dataSource.setIdleConnectionTestPeriodInMinutes(60);
         dataSource.setIdleMaxAgeInMinutes(240);
         dataSource.setMaxConnectionsPerPartition(10);
