@@ -71,6 +71,13 @@ Si vous souhaitez vous familiariser avec Thymeleaf, un tutoriel en ligne est dis
 |http://codeseven.github.io/toastr|Permet d'afficher des Toasts (notifications) |2.1.3|
 
 
+## Commandes CLI utiles
+| Commande | Description|
+|----------|------------|
+|`heroku info scrumtracker2017`| Affichage des infos concernant l'application|
+|`heroku logs --app scrumtracker2017 --tail`| Affichage du log de l'application (CTRL + C pour break)|
+|`heroku ps:scale web=1 --app scrumtracker2017`| Active l'app en temps qu'appli web|
+
 ## FAQ
 
 

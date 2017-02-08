@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* scrumtracker
+web: java $JAVA_OPTS -cp target/scrumtracker-1.0-SNAPSHOT.war
