@@ -127,7 +127,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                    <!-- <warSourceDirectory>src/main/webapp</warSourceDirectory> -->
                     <warName>scrumtracker-1.0-SNAPSHOT</warName>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -137,22 +137,6 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>1.1.3</version>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.4</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
 
             <!--
             If your app has any dependencies, the pom.xml file should include the maven-dependency-plugin.
@@ -217,6 +201,7 @@
                                     <excludes>
                                         <exclude>*.war</exclude>
                                         <exclude>dependency/*.jar</exclude>
+                                        <exclude>webapp/*.war</exclude>
                                     </excludes>
                                 </fileset>
                             </filesets>
