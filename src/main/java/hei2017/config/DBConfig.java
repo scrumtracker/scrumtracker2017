@@ -50,7 +50,7 @@ public class DBConfig {
 
         if(null!=System.getenv(HEROKU_DATABASE_URL)){
             //"jdbc:"+
-            jdbcUrl = System.getenv(HEROKU_DATABASE_URL);
+            jdbcUrl = "jdbc:"+System.getenv(HEROKU_DATABASE_URL);
         }
 
         BoneCPDataSource dataSource = new BoneCPDataSource();

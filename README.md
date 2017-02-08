@@ -77,7 +77,7 @@ Si vous souhaitez vous familiariser avec Thymeleaf, un tutoriel en ligne est dis
 |`heroku info scrumtracker2017`| Affichage des infos concernant l'application|
 |`heroku logs --app scrumtracker2017 --tail`| Affichage du log de l'application (CTRL + C pour break)|
 |`heroku ps:scale web=1 --app scrumtracker2017`| Active l'app en temps qu'appli web|
-
+|`heroku run env --app scrumtracker2017`| Affiche les variables locales définies sur le serveur|
 ## FAQ
 
 
