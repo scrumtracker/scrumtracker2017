@@ -5,10 +5,10 @@
                 <a class="navbar-brand" th:href="@{home}" th:text="#{scrumtracker}"></a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#" th:text="#{home}"></a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
+                <li th:classappend="${isHomePage} ? active"><a href="#" th:text="#{home}"></a></li>
+                <li th:classappend="${isProjectPage} ? active : a"><a href="#"></a></li>
+                <li th:classappend="${isSprintPage} ? active : a"><a href="#"></a></li>
+                <li th:classappend="${isStoryPage} ? active : a"><a href="#"></a></li>
             </ul>
         </div>
     </nav>
