@@ -12,6 +12,7 @@ public interface SprintDAO extends JpaRepository<Sprint, Long>
 {
     List<Sprint> findAll();
 
-    long count();
+    Sprint findOneByNom(String nom);
 
+    long count();
 }
