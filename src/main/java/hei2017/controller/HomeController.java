@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.Timestamp;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by pic on 08/02/2017.
@@ -25,8 +24,11 @@ public class HomeController {
     public String goHome(Model model, HttpServletRequest request, HttpServletResponse reponse)
     {
         Sprint sprintTest = new Sprint();
-        sprintTest.setNom("Test 08/02/2017 dada");
+        sprintTest.setNom("Sprint Test");
         sprintService.saveSprint(sprintTest);
+
+        model.addAttribute("sprints", sprintService.findAll());
+
         return "home";
     }
 
