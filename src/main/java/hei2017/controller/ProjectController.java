@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 public class ProjectController {
 
     @RequestMapping("/projects")
-    public String goProject(Model model, HttpServletRequest request, HttpServletResponse response)
+    public String goProject(Model model,
+                            HttpServletRequest request,
+                            HttpServletResponse response)
     {
-        
+        model.addAttribute("isProjectPage", true);
         return "project";
     }
 

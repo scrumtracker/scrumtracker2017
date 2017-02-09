@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 public class ErrorController {
 
     @RequestMapping("/*")
-    public String goError(Model model, HttpServletRequest request, HttpServletResponse response)
+    public String goError(Model model,
+                          HttpServletRequest request,
+                          HttpServletResponse response)
     {
+        model.addAttribute("isErrorPage", true);
         return "erreur";
     }
 

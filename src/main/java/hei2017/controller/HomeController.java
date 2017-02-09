@@ -20,8 +20,11 @@ public class HomeController {
     SprintService sprintService;
 
     @RequestMapping({"/","/home"})
-    public String goIndex(Model model, HttpServletRequest request, HttpServletResponse reponse)
+    public String goIndex(Model model,
+                          HttpServletRequest request,
+                          HttpServletResponse response)
     {
+        model.addAttribute("isHomePage", true);
         return "home";
     }
 
