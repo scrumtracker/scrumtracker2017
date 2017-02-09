@@ -22,6 +22,10 @@ public class Sprint {
 
     private Timestamp dateModification;
 
+    private Timestamp dateDebut;
+
+    private Timestamp dateFin;
+
 
     //Constructeurs
     public Sprint(){
@@ -35,6 +39,8 @@ public class Sprint {
 
 
     //Méthodes
+    public Long getId() { return id; }
+
     public String getNom() {
         return nom;
     }
@@ -61,5 +67,21 @@ public class Sprint {
 
     public void setDateModification(Timestamp dateModification) {
         this.dateModification = dateModification;
+    }
+
+    public Timestamp getDateDebut() {
+        return dateDebut;
+    }
+
+    public void setDateDebut(Timestamp dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public Timestamp getDateFin() {
+        return dateFin;
+    }
+
+    public void setDateFin(Timestamp dateFin) {
+        this.dateFin = dateFin;
     }
 }
