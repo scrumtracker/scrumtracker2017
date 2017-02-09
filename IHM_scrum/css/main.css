@@ -4,3 +4,9 @@
 .h2{
 	margin-bottom: 30px;
 }
+.glybtnleft {
+	margin-left: 5px;
+}
+.glybtnright{
+	margin-right: 5px;
+}

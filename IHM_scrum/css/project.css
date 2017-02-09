@@ -16,12 +16,6 @@
 	padding-left: 0px;
 	padding-right: 0px;
 }*/
-.glybtnleft {
-	margin-left: 5px;
-}
-.glybtnright{
-	margin-right: 5px;
-}
 #headerproject{
 	margin-bottom: 60px;
 }
@@ -56,8 +50,9 @@
 	background-color:#5F5F5F;
 	color: white;
 }
-.list-group-item{
-	//height: 46px;
+.list-group-item:first-child{
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
 }
 #divaddsprint{
 	margin-bottom: 15px;
