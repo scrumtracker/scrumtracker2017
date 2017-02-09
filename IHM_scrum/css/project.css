@@ -2,9 +2,25 @@
 	background-color: #F8F8F8;
 	border: 1px solid #C8C8C8;
 	border-radius: 3px;
+}/*
+.row{
+	margin-right: 0px;
+	margin-left: 0px;
+}*/
+#divcontent{
+	margin-right: 0px;
+	margin-left: 0px;
 }
+/*
+#divsprint{
+	padding-left: 0px;
+	padding-right: 0px;
+}*/
 .glybtnleft {
 	margin-left: 5px;
+}
+.glybtnright{
+	margin-right: 5px;
 }
 #headerproject{
 	margin-bottom: 60px;
@@ -16,6 +32,17 @@
 	position: absolute;
 	right: 10px;
 	top: 10px;
+}
+.glyremove{
+	height: 46px;
+	line-height: 46px;
+	color: red;
+	font-size: 17px;
+}
+.btnremove{
+	border: 0px;
+	height: 46px;
+	background-color: white;
 }
 .btnseestories{
 	float: right;
@@ -30,5 +57,25 @@
 	color: white;
 }
 .list-group-item{
-	height: 46px;
+	//height: 46px;
 }
+#divaddsprint{
+	margin-bottom: 15px;
+}
+
+/*
+.btnremove1{
+	float: right;
+	//height: 25px;
+	//line-height: 26px;
+	color: red;
+	font-size: 17px;
+	background-color: white;
+	border: 0px;
+}
+.btnnext{
+	background-color: #878787;
+	color: white;
+	margin-bottom: 10px;
+}
+*/
