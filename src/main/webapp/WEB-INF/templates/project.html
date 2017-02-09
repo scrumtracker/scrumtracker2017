@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>ITI - ScrumTracker</title>
-    <link rel="icon" href="../../static/img/unicorn2.ico" />
+    <link rel="icon" href="../../static/img/unicorn2.ico"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,75 +10,78 @@
     <link rel="stylesheet" type="text/css" href="../../../../../IHM_scrum/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
     <link rel="stylesheet" type="text/css" href="../../static/css/project.css">
-  </head>
+</head>
 
-  <body>
-    <header>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="home.html">ScrumTracker</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
-          </ul>
-        </div>
-      </nav>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<section class="container content-page">
+
+    <header id="headerproject">
+        <a href="home.html" id="btnback" type="button" class="btn-md btn btn-default"><span
+                class="glybtnleft glyphicon glyphicon-chevron-left"></span>Back to Projects list</a>
+        <p class="h2 text-center">First Project</p>
     </header>
 
-    <section class="container content-page">
-
-      <header id="headerproject">
-        <a href="home.html" id="btnback" type="button" class="btn-md btn btn-default"><span class="glybtnleft glyphicon glyphicon-chevron-left"></span>Back to Projects list</a>
-        <p class="h2 text-center">First Project</p>
-      </header>
-      
-      <div id ="divcontent"class="row">
+    <div id="divcontent" class="row">
 
         <div id="divsprint" class="col-sm-7">
 
-          <div id="divaddsprint">
-            <form action="addSprint" method="post">
-              <button type="submit" class="btn-md btn btn-primary" onClick=""><span id="newSprint" class="glybtn glyphicon glyphicon-plus"></span>New Sprint</button>
-            </form>
-          </div>
-
-          <div id="divlistsprint" class="list-group">
-
-            
-            <div class="row">
-              <a href="#" class="list-group-item col-sm-11">Sprint 1<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>
-              <form class="col-sm-1" action="removeSprint" method="post">
-                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
-              </form>
-            </div>
-            <div class="row">
-              <a href="#" class="list-group-item col-sm-11">Sprint 2<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>
-              <form class="col-sm-1" action="removeSprint" method="post">
-                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
-              </form>
-            </div>
-            <div class="row">
-              <a href="#" class="list-group-item col-sm-11">Sprint 3<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>
-              <form class="col-sm-1" action="removeSprint" method="post">
-                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
-              </form>
+            <div id="divaddsprint">
+                <form action="addSprint" method="post">
+                    <button type="submit" class="btn-md btn btn-primary" onClick=""><span id="newSprint"
+                                                                                          class="glybtn glyphicon glyphicon-plus"></span>New
+                        Sprint
+                    </button>
+                </form>
             </div>
 
-            <!--
-            <a href="#" class="list-group-item">Sprint 1<button class="btnremove1" onclick="location.href='sprint.html'"><span class="glyphicon glyphicon-remove-sign"></span></button></a>
-            <a href="#" class="list-group-item">Sprint 2<button class="btnremove1" onclick="location.href='sprint.html'"><span class="glyphicon glyphicon-remove-sign"></span></button></a>
-            <a href="#" class="list-group-item">Sprint 3<button class="btnremove1" onclick="location.href='sprint.html'"><span class="glyphicon glyphicon-remove-sign"></span></button></a>-->
+            <div id="divlistsprint" class="list-group">
 
-            <!--
-            <a href="#" class="list-group-item">Sprint 1<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>
-            <a href="#" class="list-group-item">Sprint 2<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>
-            <a href="#" class="list-group-item">Sprint 3<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>-->
 
-          </div>
+                <div class="row">
+                    <a href="#" class="list-group-item col-sm-11">Sprint 1
+                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See
+                            stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                    </a>
+                    <form class="col-sm-1" action="removeSprint" method="post">
+                        <button type="submit" class="btnremove"><span
+                                class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+                    </form>
+                </div>
+                <div class="row">
+                    <a href="#" class="list-group-item col-sm-11">Sprint 2
+                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See
+                            stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                    </a>
+                    <form class="col-sm-1" action="removeSprint" method="post">
+                        <button type="submit" class="btnremove"><span
+                                class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+                    </form>
+                </div>
+                <div class="row">
+                    <a href="#" class="list-group-item col-sm-11">Sprint 3
+                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See
+                            stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                    </a>
+                    <form class="col-sm-1" action="removeSprint" method="post">
+                        <button type="submit" class="btnremove"><span
+                                class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+                    </form>
+                </div>
+
+                <!--
+                <a href="#" class="list-group-item">Sprint 1<button class="btnremove1" onclick="location.href='sprint.html'"><span class="glyphicon glyphicon-remove-sign"></span></button></a>
+                <a href="#" class="list-group-item">Sprint 2<button class="btnremove1" onclick="location.href='sprint.html'"><span class="glyphicon glyphicon-remove-sign"></span></button></a>
+                <a href="#" class="list-group-item">Sprint 3<button class="btnremove1" onclick="location.href='sprint.html'"><span class="glyphicon glyphicon-remove-sign"></span></button></a>-->
+
+                <!--
+                <a href="#" class="list-group-item">Sprint 1<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>
+                <a href="#" class="list-group-item">Sprint 2<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>
+                <a href="#" class="list-group-item">Sprint 3<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>-->
+
+            </div>
         </div>
 
         <div class="col-sm-1">
@@ -86,30 +89,29 @@
 
         <div id="divdetail" class="col-sm-4">
 
-          <div>
-            <p class="h4 text-center">Details Sprint</p>
             <div>
-              <button id="btnedit" type="button" class="btn-xs btn btn-default" onClick=""><span class="glybtnright glyphicon glyphicon-edit"></span>Edit</button>
+                <p class="h4 text-center">Details Sprint</p>
+                <div>
+                    <button id="btnedit" type="button" class="btn-xs btn btn-default" onClick=""><span
+                            class="glybtnright glyphicon glyphicon-edit"></span>Edit
+                    </button>
+                </div>
             </div>
-          </div>
 
-          <p>Sprint name : xxx</p>
-          <p>Creation date : xxx</p>
-          <p>Total hours of works : xxx</p>
-          <p>Number of Stories : xxx</p>
-          <p>Description : xxx</p>
-          <p>Last modification : xxx</p>
+            <p>Sprint name : xxx</p>
+            <p>Creation date : xxx</p>
+            <p>Total hours of works : xxx</p>
+            <p>Number of Stories : xxx</p>
+            <p>Description : xxx</p>
+            <p>Last modification : xxx</p>
 
-          <!--
-          <div class="text-right">
-            <button type="button" class="btn-sm btn btn-default btnnext" onClick="">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>-->
-          </div>
+            <!--
+            <div class="text-right">
+              <button type="button" class="btn-sm btn btn-default btnnext" onClick="">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>-->
         </div>
-
-      </div>
-
-    </section>
-
-
-  </body>
+    </div>
+    </div>
+</section>
+<div th:replace="fragments/header :: header"></div>
+</body>
 </html>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>ITI - ScrumTracker</title>
-    <link rel="icon" href="../../static/img/unicorn2.ico" />
+    <link rel="icon" href="../../static/img/unicorn2.ico"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,130 +10,122 @@
     <link rel="stylesheet" type="text/css" href="../../../../../IHM_scrum/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
     <link rel="stylesheet" type="text/css" href="../../static/css/sprint.css">
-  </head>
+</head>
 
-  <body>
-    <header>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="home.html">ScrumTracker</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+<body>
 
-    <section class="container content-page">
+<div th:replace="fragments/header :: header"></div>
 
-         <header id="headersprint">
-        <a href="project.html" id="btnback" type="button" class="btn-md btn btn-default"><span class="glybtnleft glyphicon glyphicon-chevron-left"></span>Back to Sprint list</a>
+<section class="container content-page">
+
+    <header id="headersprint">
+        <a href="project.html" id="btnback" type="button" class="btn-md btn btn-default"><span
+                class="glybtnleft glyphicon glyphicon-chevron-left"></span>Back to Sprint list</a>
         <p class="h2 text-center">Sprint 1</p>
-      </header>
+    </header>
 
     <div class="row">
         <div id="divliststory" class="col-sm-8">
-	        <div class="row">
-	            <div id="divliststory" class="col-sm-4">
-	               <div class="list-group">
-	                  <button <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button> 
+            <div class="row">
+                <div id="divliststory" class="col-sm-4">
+                    <div class="list-group">
+                        <button
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Launch demo modal
+                        </button>
 
-	                  <ul class="list-group-item">Story 1...
-	                  	<ul>
-	                  		<li>tâche 1...............</li>
-	                  		<li>tâche 2...............</li>
-	                  		<li>tâche 3...............</li>
-	                 	</ul>
-	                 	</ul>
-	                  <ul href="#" class="list-group-item">Story 2...
-	                  	<ul>
-	                  		<li>tâche 1...............</li>
-	                  		<li>tâche 2...............</li>
-	                  		<li>tâche 3...............</li>
-	                 	</ul>
-	                 	</ul>
-	                  <ul href="#" class="list-group-item">Story 3...
-	                  	<ul>
-	                  		<li>tâche 1...............</li>
-	                  		<li>tâche 2...............</li>
-	                  		<li>tâche 3...............</li>
-	                 	</ul>
-	                 	</ul>
-	                  <ul href="#" class="list-group-item">Story 4...</ul>
-	                  <ul href="#" class="list-group-item">Story 5...</ul>
-	                  <ul href="#" class="list-group-item">Story 6...</ul>
-	                  <ul href="#" class="list-group-item">Story 7...</ul>
-	                  <ul href="#" class="list-group-item">Story 8...</ul>
-	                </div>
-	            </div>
+                        <ul class="list-group-item">Story 1...
+                            <ul>
+                                <li>tâche 1...............</li>
+                                <li>tâche 2...............</li>
+                                <li>tâche 3...............</li>
+                            </ul>
+                        </ul>
+                        <ul href="#" class="list-group-item">Story 2...
+                            <ul>
+                                <li>tâche 1...............</li>
+                                <li>tâche 2...............</li>
+                                <li>tâche 3...............</li>
+                            </ul>
+                        </ul>
+                        <ul href="#" class="list-group-item">Story 3...
+                            <ul>
+                                <li>tâche 1...............</li>
+                                <li>tâche 2...............</li>
+                                <li>tâche 3...............</li>
+                            </ul>
+                        </ul>
+                        <ul href="#" class="list-group-item">Story 4...</ul>
+                        <ul href="#" class="list-group-item">Story 5...</ul>
+                        <ul href="#" class="list-group-item">Story 6...</ul>
+                        <ul href="#" class="list-group-item">Story 7...</ul>
+                        <ul href="#" class="list-group-item">Story 8...</ul>
+                    </div>
+                </div>
 
-	            <div class="col-sm-0.5"></div>
-	                
-	            <div id="divliststory" class="col-sm-4">
-	                  <div class="list-group">
-	                    <a href="#" class="list-group-item">Story 1...</a>
-	                    <a href="#" class="list-group-item">Story 2...</a>
-	                    <a href="#" class="list-group-item">Story 3...</a>
-	                    <a href="#" class="list-group-item">Story 4...</a>
-	                    <a href="#" class="list-group-item">Story 5...</a>
-	                  </div>
-	            </div>
+                <div class="col-sm-0.5"></div>
 
-	            <div class="col-sm-0.5"></div>
+                <div id="divliststory" class="col-sm-4">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">Story 1...</a>
+                        <a href="#" class="list-group-item">Story 2...</a>
+                        <a href="#" class="list-group-item">Story 3...</a>
+                        <a href="#" class="list-group-item">Story 4...</a>
+                        <a href="#" class="list-group-item">Story 5...</a>
+                    </div>
+                </div>
 
-	            <div id="divliststory" class="col-sm-2"> 
-	                   <button type="button" class="btn-lg btn btn-primary" onclick="addnewStory(this)"><span id="newProject" class="glybtn glyphicon glyphicon-plus"></span>New Story</button>
-	            </div>
-			</div>
-		</div>
+                <div class="col-sm-0.5"></div>
 
-		<div class="col-sm-1"></div>
+                <div id="divliststory" class="col-sm-2">
+                    <button type="button" class="btn-lg btn btn-primary" onclick="addnewStory(this)"><span
+                            id="newProject" class="glybtn glyphicon glyphicon-plus"></span>New Story
+                    </button>
+                </div>
+            </div>
+        </div>
 
-		<div id="divdetail" class="col-sm-3">
-			
-			<p class="h4 text-center">Details Story 1</p>
-			<button id="btnedit" type="button" class="btn-xs btn btn-default" onclick=""><span class="glybtnleft glyphicon glyphicon-edit"></span>Edit</button>
-	          <p>Sprint name : xxx</p>
-	          <p>Creation date : xxx</p>
-	          <p>Total hours of works : xxx</p>
-	          <p>Number of tasks : xxx</p>
-	          <p>Description : xxx</p>
+        <div class="col-sm-1"></div>
+
+        <div id="divdetail" class="col-sm-3">
+
+            <p class="h4 text-center">Details Story 1</p>
+            <button id="btnedit" type="button" class="btn-xs btn btn-default" onclick=""><span
+                    class="glybtnleft glyphicon glyphicon-edit"></span>Edit
+            </button>
+            <p>Sprint name : xxx</p>
+            <p>Creation date : xxx</p>
+            <p>Total hours of works : xxx</p>
+            <p>Number of tasks : xxx</p>
+            <p>Description : xxx</p>
         </div>
 
 
-	</div>
-	
-
     </div>
-	</section>
+    </div>
+</section>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-  </body>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
 </html>
