@@ -1,0 +1,31 @@
+#divdetail{
+	background-color: #F8F8F8;
+	border: 1px solid #C8C8C8;
+	border-radius: 3px;
+}
+.glybtnleft {
+	margin-left: 5px;
+}
+#headerproject{
+	margin-bottom: 60px;
+}
+#btnback{
+	position: absolute;
+}
+#btnedit{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+.btnseestories{
+	float: right;
+	height: 25px;
+	padding: 3px 5px;
+	//background-color: #777;
+	background-color: #878787;
+	color: white;
+}
+.btnseestories:hover{
+	background-color:#5F5F5F;
+	color: white;
+}
