@@ -14,7 +14,7 @@ Scrumtracker est une application web permettant la gestion de Sprints, Stories e
 
 ## Fonctionnement du projet
 
-Description à réaliser.
+Description à réaliser. Test Audrey.
 
 ## Technologies utilisées
 Le framework Spring est une boite à outils très riche permettant de structurer, 
