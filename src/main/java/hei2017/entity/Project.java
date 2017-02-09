@@ -1,15 +1,13 @@
 package hei2017.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Properties;
 
 /**
  * Created by pic on 09/02/2017.
  */
+@Entity
 public class Project {
 
     @Id
