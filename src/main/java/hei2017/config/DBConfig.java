@@ -13,6 +13,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -29,29 +31,22 @@ public class DBConfig {
     final private String HEROKU_DATABASE_PWD = "JDBC_DATABASE_PASSWORD";
 
     @Bean
-    public DataSource dataSource(Properties dbProperties)
-    {
+    public DataSource dataSource(Properties dbProperties) throws URISyntaxException {
         String username = "";
         username = dbProperties.getProperty("username");
-
-        if(null!=System.getenv(HEROKU_DATABASE_USR)){
-            username = System.getenv(HEROKU_DATABASE_USR);
-        }
 
         String password = "";
         password = dbProperties.getProperty("password");
 
-        if(null!=System.getenv(HEROKU_DATABASE_PWD)){
-            password = System.getenv(HEROKU_DATABASE_PWD);
-        }
-
         String jdbcUrl = "";
         jdbcUrl = dbProperties.getProperty("jdbcUrl");
 
-        if(null!=System.getenv(HEROKU_DATABASE_URL)){
-            //"jdbc:"+
-            jdbcUrl = "jdbc:"+System.getenv(HEROKU_DATABASE_URL);
-            jdbcUrl = jdbcUrl.replace("postgres","postgresql");
+        if(null!=System.getenv("DATABASE_URL")){
+            //jdbc:postgresql://<host>:<port>/<dbname>
+            URI dbUri = new URI(System.getenv("DATABASE_URL"));
+            username = dbUri.getUserInfo().split(":")[0];
+            password = dbUri.getUserInfo().split(":")[1];
+            jdbcUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
         }
 
         BoneCPDataSource dataSource = new BoneCPDataSource();
