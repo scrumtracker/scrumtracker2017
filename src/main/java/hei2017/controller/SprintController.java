@@ -19,6 +19,6 @@ public class SprintController {
                             HttpServletResponse response)
     {
         model.addAttribute("isSprintPage", true);
-        return "sprint";
+        return "sprints";
     }
 }

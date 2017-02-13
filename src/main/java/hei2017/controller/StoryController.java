@@ -19,6 +19,6 @@ public class StoryController {
                             HttpServletResponse response)
     {
         model.addAttribute("isStoryPage", true);
-        return "story";
+        return "stories";
     }
 }
