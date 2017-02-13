@@ -8,3 +8,9 @@ $("#codeActivated").change(function(){
         $("#code").prop('disabled', true);
     }
 });
+
+$("#newProject").click(function(){
+    bootbox.alert({
+        message: "This is the small alert!"
+    });
+})

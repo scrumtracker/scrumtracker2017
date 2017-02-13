@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/project.css}">
     <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
+    <script type="text/javascript" th:src="@{/js/project.js}"></script>
 </head>
 
 <body>
@@ -30,9 +31,9 @@
 
             <div id="divaddsprint">
                 <form action="addSprint" method="post">
-                    <button type="submit" class="btn-md btn btn-primary" onClick=""><span id="newSprint"
-                                                                                          class="glybtn glyphicon glyphicon-plus"></span>New
-                        Sprint
+                    <button id="newSprint" type="submit" class="btn-md btn btn-primary" onClick="">
+                        <span class="glybtn glyphicon glyphicon-plus"></span>
+                        <span th:text="#{new.sprint}"></span>
                     </button>
                 </form>
             </div>
