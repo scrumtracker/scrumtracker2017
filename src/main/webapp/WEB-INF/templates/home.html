@@ -6,10 +6,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
 </head>
 
 <body>
@@ -30,19 +30,21 @@
         </form>
     </div>
 
-    <div id="divlistspring">
+    <div id="divlistspring" th:if="${projects}">
         <p class="h2 text-center" th:text="#{project.list}"></p>
         <div class="row">
             <div class="col-sm-2">
             </div>
             <div class="col-sm-8 list-group">
-                <a href="project.html" class="list-group-item">First Project</a>
-                <a href="#" class="list-group-item">Second Project</a>
-                <a href="#" class="list-group-item">Third Project</a>
+                <a th:each="project:${projects}" href="@{/project/project.id}" class="list-group-item" th:text="${project.nom}"></a>
             </div>
             <div class="col-sm-2">
             </div>
         </div>
+    </div>
+
+    <div id="divlistspring" th:unless="${projects}">
+        <p class="h2 text-center" th:text="#{project.none}"></p>
     </div>
 </section>
 
