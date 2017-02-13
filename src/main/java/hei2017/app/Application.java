@@ -17,13 +17,13 @@ public class Application {
     {
         ConfigurableApplicationContext context = new AnnotationConfigApplicationContext("hei2017.config");
 
+
+        /*
         SprintService sprintService = context.getBean(SprintService.class);
         Sprint sprintTest = new Sprint();
         sprintTest.setNom("test sprint");
         sprintService.saveSprint(sprintTest);
-
-        System.out.println("YOLO");
-
+         */
         context.close();
     }
 
