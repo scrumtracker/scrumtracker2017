@@ -22,6 +22,12 @@
 #btnback{
 	position: absolute;
 }
+#formaddnewsprint{
+	display: none;
+}
+#newsprintdescription{
+	resize: none;
+}
 #btnedit{
 	position: absolute;
 	right: 10px;

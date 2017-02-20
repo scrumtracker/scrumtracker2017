@@ -9,8 +9,12 @@
 #headerproject{
 	margin-bottom: 60px;
 }
-#addNewStory{
+#formaddnewstory{
 	margin-bottom: 30px;
+	display: none;
+}
+#newStory{
+	margin-bottom: 15px;
 }
 #btnback{
 	position: absolute;
