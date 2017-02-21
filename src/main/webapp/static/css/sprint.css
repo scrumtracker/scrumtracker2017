@@ -9,7 +9,14 @@
 #headerproject{
 	margin-bottom: 60px;
 }
-#addNewStory{
+#formaddnewstory{
+	margin-bottom: 30px;
+	display: none;
+}
+#newstorydescription{
+	resize: none;
+}
+#newStory{
 	margin-bottom: 30px;
 }
 #btnback{
