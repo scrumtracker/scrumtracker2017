@@ -44,7 +44,7 @@
 	display: inline-block;
 	width: 90%;
 }
-.deletestories{
+.deletetask{
 	display: inline-block;
 	width: 10%;
 	vertical-align: top;
@@ -52,13 +52,19 @@
 }
 .btnremove{
 	border: 0px;
-	//height: 46px;
-	background-color: white;
+	background: none;
 }
 .glyremove{
-	//height: 46px;
-	//line-height: 46px;
+	line-height: 45px;
+	color: red;
+	font-size: 17px;
+}
+.deletetasklist{
+	float: right;
+	vertical-align: top;
+}
+.glyremovelist{
 	color: red;
 	padding-top: 2px;
-	//font-size: 17px;
+	font-size: 17px;
 }
