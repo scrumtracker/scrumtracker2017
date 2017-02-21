@@ -40,11 +40,14 @@
 	background-color:#5F5F5F;
 	color: white;
 }
-.listtask{
+.taskinstory{
 	display: inline-block;
 	width: 90%;
 }
-.deletetask{
+.padd{
+	padding-right: 35px;
+}
+.deletestory{
 	display: inline-block;
 	width: 10%;
 	vertical-align: top;
@@ -59,9 +62,12 @@
 	color: red;
 	font-size: 17px;
 }
-.deletetasklist{
-	float: right;
-	vertical-align: top;
+.deleteStorylist{
+	//float: right;
+	//vertical-align: top;
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
 .glyremovelist{
 	color: red;
