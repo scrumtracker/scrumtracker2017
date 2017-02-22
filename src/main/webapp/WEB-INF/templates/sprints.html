@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/sprint.css}">
     <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
+    <script type="text/javascript" th:src="@{/js/sprint.js}"></script>
 </head>
 
 <body>
@@ -18,6 +19,7 @@
 
 <section class="container content-page">
 
+<<<<<<< HEAD
     <header id="headersprint">
         <a href="projects.html" id="btnback" type="button" class="btn-md btn btn-default"><span
                 class="glybtnleft glyphicon glyphicon-chevron-left"></span>Back to Sprint list</a>
@@ -62,9 +64,61 @@
                         <ul href="#" class="list-group-item">Story 8...</ul>
                     </div>
                 </div>
+=======
+        <header id="headerproject">
+            <a href="projects.html" id="btnback" class="btn-md btn btn-default"><span class="glybtnright glyphicon glyphicon-chevron-left"></span>Back to Sprints list</a>
+            <p class="h2 text-center">Sprint 1</p>
+        </header>
+
+        <div id="divcontent" class="row">
+
+        <div class="col-sm-4">
+            <div>
+                <button id="newStory" type="button" class="btn-md btn btn-primary" onclick="addNewSprint()">
+                    <span class="glybtn glyphicon glyphicon-plus"></span>
+                    <span th:text="#{new.story}"></span>
+                </button>
+                <form action="addStory" method="post" id="formaddnewstory">
+                    <div class="form-group">
+                        <label for="newstoryname">Story name</label>
+                        <input id="newstoryname" type="text" class="form-control" name="newstoryname" maxlength="50" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="newstorydescription">Story description</label>
+                        <textarea id="newstorydescription" rows="3" class="form-control" name="newstorydescription"></textarea>
+                    </div>
+                  <button id="createNewStory" type="submit" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
+                </form>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item padd">Story 3
+                    <form action="removeStory" method="post" class="deleteStorylist">
+                        <button type="submit" class="btnremove">
+                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </form>
+                </a>
+                <a href="#" class="list-group-item padd">Story 4
+                    <form action="removeStory" method="post" class="deleteStorylist">
+                        <button type="submit" class="btnremove">
+                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </form>
+                </a>
+                <a href="#" class="list-group-item padd">Story 7
+                    <form action="removeStory" method="post" class="deleteStorylist">
+                        <button type="submit" class="btnremove">
+                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </form>
+                </a>
+            </div>
+        </div>
+>>>>>>> 9cd944da6a114076d2d32b559486ccaa04dad16d
 
                 <div class="col-sm-0.5"></div>
 
+<<<<<<< HEAD
                 <div id="divliststory" class="col-sm-4">
                     <div class="list-group">
                         <a href="#" class="list-group-item">Story 1...</a>
@@ -82,6 +136,54 @@
                             id="newProject" class="glybtn glyphicon glyphicon-plus"></span>New Story
                     </button>
                 </div>
+=======
+        <div class="col-sm-5 list-group">
+
+            <div>
+                <a href="#" class="list-group-item taskinstory">Story 1
+                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                    <ul>
+                        <li>task 1...............</li>
+                        <li>task 2...............</li>
+                        <li>task 3...............</li>
+                    </ul>
+                </a><!--
+                --><form action="removeStory" method="post" class="deletestory">
+                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+              </form>
+            </div>
+            
+            <div>
+                <a href="#" class="list-group-item taskinstory">Story 2
+                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                    <ul>
+                        <li>task 1...............</li>
+                        <li>task 2...............</li>
+                        <li>task 3...............</li>
+                    </ul>
+                </a><!--
+                --><form action="removeStory" method="post" class="deletestory">
+                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+              </form>
+            </div>
+
+            <div>
+                <a href="#" class="list-group-item taskinstory">Story 5
+                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                </a><!--
+                --><form action="removeStory" method="post" class="deletestory">
+                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+              </form>
+            </div>
+
+            <div>
+                <a href="#" class="list-group-item taskinstory">Story 6
+                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                </a><!--
+                --><form action="removeStory" method="post" class="deletestory">
+                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+              </form>
+>>>>>>> 9cd944da6a114076d2d32b559486ccaa04dad16d
             </div>
         </div>
 

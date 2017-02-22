@@ -22,6 +22,12 @@
 #btnback{
 	position: absolute;
 }
+#formaddnewsprint{
+	display: none;
+}
+#newsprintdescription{
+	resize: none;
+}
 #btnedit{
 	position: absolute;
 	right: 10px;
@@ -56,7 +62,7 @@
 	border-top-right-radius: 0px;
 }
 #divaddsprint{
-	margin-bottom: 15px;
+	margin-bottom: 30px;
 }
 
 /*

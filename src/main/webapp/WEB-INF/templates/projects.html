@@ -20,7 +20,7 @@
 <section class="container content-page">
 
     <header id="headerproject">
-        <a href="home.html" id="btnback" type="button" class="btn-md btn btn-default"><span
+        <a href="home.html" id="btnback" class="btn-md btn btn-default"><span
                 class="glybtnleft glyphicon glyphicon-chevron-left"></span>Back to Projects list</a>
         <p class="h2 text-center">First Project</p>
     </header>
@@ -30,10 +30,21 @@
         <div id="divsprint" class="col-sm-7">
 
             <div id="divaddsprint">
-                <form action="addSprint" method="post">
-                    <button id="newSprint" type="submit" class="btn-md btn btn-primary" onClick="">
-                        <span class="glybtn glyphicon glyphicon-plus"></span>
-                        <span th:text="#{new.sprint}"></span>
+                <button id="newSprint" type="button" class="btn-md btn btn-primary" onClick="addNewSprint()">
+                    <span class="glybtn glyphicon glyphicon-plus"></span>
+                    <span th:text="#{new.sprint}"></span>
+                </button>
+                <form action="addSprint" method="post" id="formaddnewsprint">
+                    <div class="form-group">
+                        <label for="newsprintname">Sprint name</label>
+                        <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="newsprintdescription">Sprint description</label>
+                        <textarea id="newsprintdescription" rows="3" class="form-control" name="newsprintdescription"></textarea>
+                    </div>
+                    <button id="createnewSprint" type="submit" class="btn-md btn btn-primary">
+                        <span th:text="#{create.sprint}"></span>
                     </button>
                 </form>
             </div>
