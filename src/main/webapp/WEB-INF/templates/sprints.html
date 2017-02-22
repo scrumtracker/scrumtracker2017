@@ -18,94 +18,113 @@
 
 <section class="container content-page">
 
-        <header id="headerproject">
-            <a href="project.html" id="btnback" type="button" class="btn-md btn btn-default"><span class="glybtnright glyphicon glyphicon-chevron-left"></span>Back to Sprint list</a>
-            <p class="h2 text-center">Sprint 1</p>
-        </header>
+    <header id="headersprint">
+        <a href="projects.html" id="btnback" type="button" class="btn-md btn btn-default"><span
+                class="glybtnleft glyphicon glyphicon-chevron-left"></span>Back to Sprint list</a>
+        <p class="h2 text-center">Sprint 1</p>
+    </header>
 
-        <div id="divcontent" class="row">
+    <div class="row">
+        <div id="divliststory" class="col-sm-8">
+            <div class="row">
+                <div id="divliststory" class="col-sm-4">
+                    <div class="list-group">
+                        <button
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Launch demo modal
+                        </button>
 
-        <div class="col-sm-4">
-            <div>
-            <form action="addStory" method="post">
-                <div class="form-group">
-                    <label for="newstoryname">Story name :</label>
-                    <input id="newstoryname" type="text" class="form-control" name="newstoryname" maxlength="50" required/>
+                        <ul class="list-group-item">Story 1...
+                            <ul>
+                                <li>tâche 1...............</li>
+                                <li>tâche 2...............</li>
+                                <li>tâche 3...............</li>
+                            </ul>
+                        </ul>
+                        <ul href="#" class="list-group-item">Story 2...
+                            <ul>
+                                <li>tâche 1...............</li>
+                                <li>tâche 2...............</li>
+                                <li>tâche 3...............</li>
+                            </ul>
+                        </ul>
+                        <ul href="#" class="list-group-item">Story 3...
+                            <ul>
+                                <li>tâche 1...............</li>
+                                <li>tâche 2...............</li>
+                                <li>tâche 3...............</li>
+                            </ul>
+                        </ul>
+                        <ul href="#" class="list-group-item">Story 4...</ul>
+                        <ul href="#" class="list-group-item">Story 5...</ul>
+                        <ul href="#" class="list-group-item">Story 6...</ul>
+                        <ul href="#" class="list-group-item">Story 7...</ul>
+                        <ul href="#" class="list-group-item">Story 8...</ul>
+                    </div>
                 </div>
-              <button id="addNewStory" type="submit" class="btn-md btn btn-primary"><span id="newStory" class="glybtn glyphicon glyphicon-plus"></span>New Story</button>
-            </form>
-          </div>
-          <div class="list-group">
-            <a href="#" class="list-group-item">Story 3</a>
-            <a href="#" class="list-group-item">Story 4</a>
-            <a href="#" class="list-group-item">Story 7</a>
-          </div>
+
+                <div class="col-sm-0.5"></div>
+
+                <div id="divliststory" class="col-sm-4">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">Story 1...</a>
+                        <a href="#" class="list-group-item">Story 2...</a>
+                        <a href="#" class="list-group-item">Story 3...</a>
+                        <a href="#" class="list-group-item">Story 4...</a>
+                        <a href="#" class="list-group-item">Story 5...</a>
+                    </div>
+                </div>
+
+                <div class="col-sm-0.5"></div>
+
+                <div id="divliststory" class="col-sm-2">
+                    <button type="button" class="btn-lg btn btn-primary" onclick="addnewStory(this)"><span
+                            id="newProject" class="glybtn glyphicon glyphicon-plus"></span>New Story
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-1"></div>
+
+        <div id="divdetail" class="col-sm-3">
+
+            <p class="h4 text-center">Details Story 1</p>
+            <button id="btnedit" type="button" class="btn-xs btn btn-default" onclick=""><span
+                    class="glybtnleft glyphicon glyphicon-edit"></span>Edit
+            </button>
+            <p>Sprint name : xxx</p>
+            <p>Creation date : xxx</p>
+            <p>Total hours of works : xxx</p>
+            <p>Number of tasks : xxx</p>
+            <p>Description : xxx</p>
         </div>
 
 
-        <div class="col-sm-5 list-group">
+    </div>
+    </div>
+</section>
 
-            <div>
-                <a href="#" class="list-group-item listtask">Story 1
-                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
-                    <ul>
-                        <li>task 1...............</li>
-                        <li>task 2...............</li>
-                        <li>task 3...............</li>
-                    </ul>
-                </a><!--
-                --><form action="removeSprint" method="post" class="deletetask">
-                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
-              </form>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            
-            <div>
-                <a href="#" class="list-group-item listtask">Story 2
-                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
-                    <ul>
-                        <li>task 1...............</li>
-                        <li>task 2...............</li>
-                        <li>task 3...............</li>
-                    </ul>
-                </a><!--
-                --><form action="removeSprint" method="post" class="deletetask">
-                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
-              </form>
+            <div class="modal-body">
+                ...
             </div>
-
-            <div>
-                <a href="#" class="list-group-item listtask">Story 5
-                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
-                </a><!--
-                --><form action="removeSprint" method="post" class="deletetask">
-                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
-              </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
-
-            <div>
-                <a href="#" class="list-group-item listtask">Story 6
-                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
-                </a><!--
-                --><form action="removeSprint" method="post" class="deletetask">
-                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
-              </form>
-            </div>
-
-         </div>
-
-            <div id="divdetail" class="col-sm-3">
-                        
-                <p class="h4 text-center">Details Story</p>
-                <button id="btnedit" type="button" class="btn-xs btn btn-default" onclick=""><span class="glybtnright glyphicon glyphicon-edit"></span>Edit</button>
-                  <p>Story name : xxx</p>
-                  <p>Creation date : xxx</p>
-                  <p>Total hours of works : xxx</p>
-                  <p>Number of tasks : xxx</p>
-                  <p>Description : xxx</p>
-            </div>
-
         </div>
-    </section>
+    </div>
+</div>
 
 <div th:replace="fragments/footer :: footer"></div>
 
