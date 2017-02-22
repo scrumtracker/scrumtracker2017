@@ -1,0 +1,10 @@
+diff a/src/main/webapp/WEB-INF/templates/projects.html b/src/main/webapp/WEB-INF/templates/projects.html	(rejected hunks)
+@@ -43,7 +43,7 @@
+ 
+                 <div class="row">
+                     <a href="#" class="list-group-item col-sm-11">Sprint 1
+-                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint.html'">See
++                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprints.html'">See
+                             stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                     </a>
+                     <form class="col-sm-1" action="removeSprint" method="post">

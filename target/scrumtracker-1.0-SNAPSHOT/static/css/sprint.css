@@ -1,0 +1,56 @@
+#divdetail{
+	background-color: #F8F8F8;
+	border: 1px solid #C8C8C8;
+	border-radius: 3px;
+}
+#divcontent{
+	padding-right: 15px;
+}
+#headerproject{
+	margin-bottom: 60px;
+}
+#addNewStory{
+	margin-bottom: 30px;
+}
+#btnback{
+	position: absolute;
+}
+#btnedit{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+.btnseetasks{
+	float: right;
+	border: none;
+	height: 25px;
+	padding: 3px 5px;
+	//background-color: #777;
+	background-color: #878787;
+	color: white;
+}
+.btnseetasks:hover{
+	background-color:#5F5F5F;
+	color: white;
+}
+.listtask{
+	display: inline-block;
+	width: 90%;
+}
+.deletetask{
+	display: inline-block;
+	width: 10%;
+	vertical-align: top;
+	text-align: center;
+}
+.btnremove{
+	border: 0px;
+	height: 46px;
+	background-color: white;
+}
+.glyremove{
+	height: 46px;
+	line-height: 46px;
+	color: red;
+	font-size: 17px;
+}

@@ -1,0 +1,16 @@
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{home}" th:text="#{scrumtracker}"></a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li th:classappend="${isHomePage} ? active"><a th:href="@{/home}" th:text="#{home}"></a></li>
+                <li th:classappend="${isProjectPage} ? active : a"><a th:href="@{/projects}" th:text="#{projects}"></a></li>
+                <li th:classappend="${isSprintPage} ? active : a"><a th:href="@{/sprints}" th:text="#{sprints}"></a></li>
+                <li th:classappend="${isStoryPage} ? active : a"><a th:href="@{/stories}" th:text="#{stories}"></a></li>
+                <li th:classappend="${isTaskPage} ? active : a"><a th:href="@{/tasks}" th:text="#{tasks}"></a></li>
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title th:text="#{title.home}"></title>
+    <link rel="icon" th:href="@{/img/unicorn2.ico}"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <script type="text/javascript" th:src="@{/js/bootbox.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<section class="container content-page">
+
+    <div class="text-center">
+        <h1 th:text="#{home.welcome}"></h1>
+    </div>
+
+    <div id="divbtnnewproject" class="text-center">
+        <form action="addProject" method="post">
+            <button id="newProject" type="button" class="btn-lg btn btn-primary" onClick="">
+                <span class="glybtn glyphicon glyphicon-plus"></span>
+                <span th:text="#{project.new}"></span>
+            </button>
+        </form>
+    </div>
+
+    <div id="divlistspring" th:if="${projects}">
+        <p class="h2 text-center" th:text="#{project.list}"></p>
+        <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-8 list-group">
+                <a th:each="project:${projects}" href="@{/project/project.id}" class="list-group-item" th:text="${project.nom}"></a>
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+    </div>
+
+    <div th:unless="${projects}">
+        <p class="h2 text-center" th:text="#{project.none}"></p>
+    </div>
+</section>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
+
+

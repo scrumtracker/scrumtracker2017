@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ITI - ScrumTracker</title>
+    <link rel="icon" href="../../static/img/unicorn2.ico"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sprint.css}">
+    <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<section class="container content-page">
+
+        <header id="headerproject">
+            <a href="project.html" id="btnback" type="button" class="btn-md btn btn-default"><span class="glybtnright glyphicon glyphicon-chevron-left"></span>Back to Sprint list</a>
+            <p class="h2 text-center">Sprint 1</p>
+        </header>
+
+        <div id="divcontent" class="row">
+
+        <div class="col-sm-4">
+            <div>
+            <form action="addStory" method="post">
+                <div class="form-group">
+                    <label for="newstoryname">Story name :</label>
+                    <input id="newstoryname" type="text" class="form-control" name="newstoryname" maxlength="50" required/>
+                </div>
+              <button id="addNewStory" type="submit" class="btn-md btn btn-primary"><span id="newStory" class="glybtn glyphicon glyphicon-plus"></span>New Story</button>
+            </form>
+          </div>
+          <div class="list-group">
+            <a href="#" class="list-group-item">Story 3</a>
+            <a href="#" class="list-group-item">Story 4</a>
+            <a href="#" class="list-group-item">Story 7</a>
+          </div>
+        </div>
+
+
+        <div class="col-sm-5 list-group">
+
+            <div>
+                <a href="#" class="list-group-item listtask">Story 1
+                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                    <ul>
+                        <li>task 1...............</li>
+                        <li>task 2...............</li>
+                        <li>task 3...............</li>
+                    </ul>
+                </a><!--
+                --><form action="removeSprint" method="post" class="deletetask">
+                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+              </form>
+            </div>
+            
+            <div>
+                <a href="#" class="list-group-item listtask">Story 2
+                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                    <ul>
+                        <li>task 1...............</li>
+                        <li>task 2...............</li>
+                        <li>task 3...............</li>
+                    </ul>
+                </a><!--
+                --><form action="removeSprint" method="post" class="deletetask">
+                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+              </form>
+            </div>
+
+            <div>
+                <a href="#" class="list-group-item listtask">Story 5
+                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                </a><!--
+                --><form action="removeSprint" method="post" class="deletetask">
+                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+              </form>
+            </div>
+
+            <div>
+                <a href="#" class="list-group-item listtask">Story 6
+                    <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='stories.html'">See tasks<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                </a><!--
+                --><form action="removeSprint" method="post" class="deletetask">
+                <button type="submit" class="btnremove"><span class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+              </form>
+            </div>
+
+         </div>
+
+            <div id="divdetail" class="col-sm-3">
+                        
+                <p class="h4 text-center">Details Story</p>
+                <button id="btnedit" type="button" class="btn-xs btn btn-default" onclick=""><span class="glybtnright glyphicon glyphicon-edit"></span>Edit</button>
+                  <p>Story name : xxx</p>
+                  <p>Creation date : xxx</p>
+                  <p>Total hours of works : xxx</p>
+                  <p>Number of tasks : xxx</p>
+                  <p>Description : xxx</p>
+            </div>
+
+        </div>
+    </section>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
