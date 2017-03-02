@@ -15,4 +15,7 @@ public interface TaskService
 
     long count();
 
+    void save(Task task);
+
+    Boolean exists(String nom);
 }

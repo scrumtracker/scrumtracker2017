@@ -15,4 +15,8 @@ public interface StoryService
     Story findOneByNom(String nom);
 
     Long count();
+
+    void save(Story story);
+
+    Boolean exists(String nom);
 }

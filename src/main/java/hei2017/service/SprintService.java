@@ -14,4 +14,8 @@ public interface SprintService {
     long countAll();
 
     void saveSprint(Sprint sprint);
+
+    void save(Sprint sprint);
+
+    Boolean exists(String nom);
 }

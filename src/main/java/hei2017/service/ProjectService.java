@@ -15,4 +15,7 @@ public interface ProjectService {
 
     long count();
 
+    void save(Project project);
+
+    Boolean exists(String nom);
 }
