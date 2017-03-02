@@ -3,6 +3,7 @@ package hei2017.service.Impl;
 import hei2017.dao.TaskDAO;
 import hei2017.entity.Task;
 import hei2017.service.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -33,4 +34,10 @@ public class TaskServiceImpl implements TaskService
     public long count() {
         return taskDAO.count();
     }
+
+    @Override
+    public void save(Task task) { taskDAO.save(task); }
+
+    @Override
+    public Boolean exists(String nom) { return null!=taskDAO.findOneByNom(nom); }
 }

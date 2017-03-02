@@ -3,6 +3,7 @@ package hei2017.service.Impl;
 import hei2017.dao.SprintDAO;
 import hei2017.entity.Sprint;
 import hei2017.service.SprintService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -33,4 +34,10 @@ public class SprintServiceImpl implements SprintService {
     public void saveSprint(Sprint sprint) {
         sprintDAO.save(sprint);
     }
+
+    @Override
+    public Boolean exists(String nom) { return null!=sprintDAO.findOneByNom(nom); }
+
+    @Override
+    public void save(Sprint sprint) { sprintDAO.save(sprint); }
 }

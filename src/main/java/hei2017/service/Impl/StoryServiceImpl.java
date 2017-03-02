@@ -3,6 +3,7 @@ package hei2017.service.Impl;
 import hei2017.dao.StoryDAO;
 import hei2017.entity.Story;
 import hei2017.service.StoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -33,4 +34,10 @@ public class StoryServiceImpl implements StoryService
     public Long count() {
         return storyDAO.count();
     }
+
+    @Override
+    public void save(Story story) { storyDAO.save(story); }
+
+    @Override
+    public Boolean exists(String nom) { return null!=storyDAO.findOneByNom(nom); }
 }

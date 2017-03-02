@@ -3,6 +3,7 @@ package hei2017.service.Impl;
 import hei2017.dao.ProjectDAO;
 import hei2017.entity.Project;
 import hei2017.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -32,5 +33,18 @@ public class ProjectServiceImpl implements ProjectService
     @Override
     public long count() {
         return projectDAO.count();
+    }
+
+    @Override
+    public void save(Project project) {
+        projectDAO.save(project);
+    }
+
+    @Override
+    public Boolean exists(String nom) {
+        if(null!=projectDAO.findOneByNom(nom))
+            return true;
+        else
+            return false;
     }
 }
