@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ProjectDAO extends JpaRepository<Project, Long>
 {
-    List<Project> findAll();
+    Project findOneById(Long id);
 
     Project findOneByNom(String nom);
 
