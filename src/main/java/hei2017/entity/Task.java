@@ -12,7 +12,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique=true, nullable = false)
+    @Column(unique=true)
     private Long id;
 
     private String nom;
