@@ -1,6 +1,8 @@
 package hei2017.controller;
 
 import hei2017.entity.*;
+import hei2017.enumeration.StoryStatus;
+import hei2017.enumeration.UniteTemps;
 import hei2017.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 
@@ -48,36 +50,57 @@ public class ApiController {
     @RequestMapping(value = "/api/debug", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public String debug()
     {
-        for(int i = 0; i< 10; i++)
-        {
-            Project p = new Project();
-            p.setNom("Projet test "+i);
-            p.setDescription(Instant.now().toString());
-            projectService.save(p);
 
-            Sprint s = new Sprint();
-            s.setNom("Sprint test "+i);
-            s.setDescription(Instant.now().toString());
-            sprintService.save(s);
+        //CREATION DES ENTITES
+        User testeur = new User();
+        testeur.setNom("Teur");
+        testeur.setPrenom("Tess");
+        testeur.setEmail("tess.teur@da.fr");
+        testeur.setPassword("LetMeIn");
+        testeur.setPseudo("Mr Motte");
+        userService.save(testeur);
 
-            Story st = new Story();
-            st.setNom("Story test "+i);
-            st.setDescription(Instant.now().toString());
-            storyService.save(st);
+        Task tache = new Task();
+        tache.setNom("Créer une tâche via Controlleur "+Instant.now());
+        tache.setDescription("Je suis la description de la tâche");
+        tache.setTempsDeCharge(new Long(2));
+        tache.setUniteTempsDeCharge(UniteTemps.h);
+        taskService.save(tache);
 
-            Task t = new Task();
-            t.setNom("Task test "+i);
-            t.setDescription(Instant.now().toString());
-            taskService.save(t);
+        Story story = new Story();
+        story.setNom("Je suis une Story "+Instant.now());
+        story.setDescription("Une story correspond à une fonctionnalité attendue par le client");
+        story.setStatus(StoryStatus.DOING);
+        storyService.save(story);
 
-            User u = new User();
-            u.setNom("User test "+i);
-            u.setPrenom("Yolo"+i);
-            userService.save(u);
+        Sprint sprint = new Sprint();
+        sprint.setNom("Sprint test de "+Instant.now());
+        sprint.setDescription("Description du sprint");
+        sprint.setDateCreation(new Timestamp(System.currentTimeMillis()));
+        sprint.setDateDebut(new Timestamp(System.currentTimeMillis()));
+        sprint.setDateFin(new Timestamp(System.currentTimeMillis()));
+        sprintService.save(sprint);
 
-        }
-        LOGGER.debug("ApiController - debugProjects");
-        return "10 Projets / sprints / stories / tasks rajoutés en BDD";
+        Project projet = new Project();
+        projet.setNom("Projet test du "+ Instant.now());
+        projet.setDescription("Description du "+projet.getNom());
+        projectService.save(projet);
+
+        //CREATION DES LIAISONS INTER-ENTITES
+        projet.addSprint(sprint);
+        projet.addUser(testeur);
+        projectService.save(projet);
+
+        sprint.addStory(story);
+        sprintService.save(sprint);
+
+        story.addTask(tache);
+        storyService.save(story);
+
+        tache.addUser(testeur);
+        taskService.save(tache);
+
+        return "DB peuplée";
     }
 
 
@@ -272,7 +295,6 @@ public class ApiController {
     /*
      * Requêtes USER
      */
-
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/user", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<User> showUsers()
