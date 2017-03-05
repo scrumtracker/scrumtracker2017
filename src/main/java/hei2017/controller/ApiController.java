@@ -281,6 +281,23 @@ public class ApiController {
         return userService.findAll();
     }
 
+    @RequestMapping(value = "/api/user/add", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<User> sendUser(@RequestBody User user)
+    {
+        LOGGER.debug("ApiController - sendUser");
+        if(!userService.exists(user.getEmail()))
+        {
+            userService.save(user);
+            LOGGER.debug("ApiController - sendUser - User créé");
+            return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        }
+        else
+        {
+            LOGGER.debug("ApiController - sendUser - User déjà existant");
+            return new ResponseEntity<User>(user, HttpStatus.CONFLICT);
+        }
+    }
+
     @RequestMapping(value = "/api/user/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> deleteUser(@PathVariable("id") Long id)
     {

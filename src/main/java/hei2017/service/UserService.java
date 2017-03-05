@@ -15,6 +15,8 @@ public interface UserService
 
     Boolean exists(Long id);
 
+    Boolean exists(String email);
+
     List<User> findAll();
 
     User findOneById(Long id);

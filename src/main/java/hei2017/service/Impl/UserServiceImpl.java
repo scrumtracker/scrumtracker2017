@@ -51,4 +51,7 @@ public class UserServiceImpl implements UserService
 
     @Override
     public Boolean exists(Long id) { return userDAO.exists(id); }
+
+    @Override
+    public Boolean exists(String email) { return null!=userDAO.findOneByEmail(email); }
 }
