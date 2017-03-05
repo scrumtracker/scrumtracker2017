@@ -1,6 +1,11 @@
 package hei2017.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by pic on 02/03/2017.
@@ -22,6 +27,16 @@ public class User {
 
     private String email;
 
+    private String password;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "projectUsers", cascade = CascadeType.ALL)
+    private Set<Project> userProjects = new HashSet<Project>(0);
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "taskUsers", cascade = CascadeType.ALL)
+    private Set<Task> userTasks = new HashSet<Task>(0);
+
     public User() {}
 
     public User(String pseudo, String email) {
@@ -36,8 +51,10 @@ public class User {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
+    public User(String email, Set<Project> userProjects)
+    {
+        this.email = email;
+        this.userProjects = userProjects;
     }
 
     public String getNom() {
@@ -71,4 +88,26 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
+
+    public Set<Project> getUserProjects() {
+        return userProjects;
+    }
+
+    public void setUserProjects(Set<Project> userProjects) {
+        this.userProjects = userProjects;
+    }
+
+    public Set<Task> getUserTasks() {
+        return userTasks;
+    }
+
+    public void setUserTasks(Set<Task> userTasks) {
+        this.userTasks = userTasks;
+    }
+
+
 }

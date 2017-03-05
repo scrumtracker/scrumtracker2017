@@ -1,7 +1,11 @@
 package hei2017.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by pic on 08/02/2017.
@@ -25,6 +29,14 @@ public class Sprint {
     private Timestamp dateDebut;
 
     private Timestamp dateFin;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Project sprintProject = new Project();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "storySprint", cascade = CascadeType.ALL)
+    private Set<Story> sprintStories = new HashSet<Story>(0);
 
 
     //Constructeurs
@@ -83,5 +95,25 @@ public class Sprint {
 
     public void setDateFin(Timestamp dateFin) {
         this.dateFin = dateFin;
+    }
+
+    public void setDateCreation(Timestamp dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public Project getSprintProject() {
+        return sprintProject;
+    }
+
+    public void setSprintProject(Project sprintProject) {
+        this.sprintProject = sprintProject;
+    }
+
+    public Set<Story> getSprintStories() {
+        return sprintStories;
+    }
+
+    public void setSprintStories(Set<Story> sprintStories) {
+        this.sprintStories = sprintStories;
     }
 }

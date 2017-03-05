@@ -1,8 +1,11 @@
 package hei2017.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hei2017.enumeration.UniteTemps;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by pic on 09/02/2017.
@@ -22,6 +25,14 @@ public class Task {
     private Long tempsDeCharge;
 
     private UniteTemps uniteTempsDeCharge;
+
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<User> taskUsers = new HashSet<User>(0);
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "storyTasks", cascade = CascadeType.ALL)
+    private Set<Story> taskStories = new HashSet<Story>(0);
 
     //Constructeurs
     public Task(){};
@@ -66,5 +77,26 @@ public class Task {
 
     public void setUniteTempsDeCharge(UniteTemps uniteTempsDeCharge) {
         this.uniteTempsDeCharge = uniteTempsDeCharge;
+    }
+
+    public Set<User> getTaskUsers() {
+        return taskUsers;
+    }
+
+    public void setTaskUsers(Set<User> taskUsers) {
+        this.taskUsers = taskUsers;
+    }
+
+    public void addUser(User user)
+    {
+        this.taskUsers.add(user);
+    }
+
+    public Set<Story> getTaskStories() {
+        return taskStories;
+    }
+
+    public void setTaskStories(Set<Story> taskStories) {
+        this.taskStories = taskStories;
     }
 }

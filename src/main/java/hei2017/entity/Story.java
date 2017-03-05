@@ -1,8 +1,11 @@
 package hei2017.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hei2017.enumeration.StoryStatus;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by pic on 09/02/2017.
@@ -20,6 +23,14 @@ public class Story {
     private String description;
 
     private StoryStatus status;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Sprint storySprint = new Sprint();
+
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Task> storyTasks = new HashSet<Task>(0);
 
     //Constructeurs
     public Story(){};
@@ -43,4 +54,17 @@ public class Story {
     public StoryStatus getStatus() { return status; }
 
     public void setStatus(StoryStatus status) { this.status = status; }
+
+    public Sprint getStorySprint() {
+        return storySprint;
+    }
+
+    public void setStorySprint(Sprint storySprint) {
+        this.storySprint = storySprint;
+    }
+
+    public void addTask(Task task)
+    {
+        storyTasks.add(task);
+    }
 }
