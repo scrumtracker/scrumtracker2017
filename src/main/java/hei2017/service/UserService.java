@@ -11,7 +11,13 @@ public interface UserService
 {
     long count();
 
+    void deleteOneById(Long id);
+
+    Boolean exists(Long id);
+
     List<User> findAll();
+
+    User findOneById(Long id);
 
     User findOneByNomAndPrenom(String nom, String prenom);
 

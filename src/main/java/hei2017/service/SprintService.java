@@ -9,13 +9,17 @@ import java.util.List;
  */
 public interface SprintService {
 
-    List<Sprint> findAll();
-
     long countAll();
 
-    void saveSprint(Sprint sprint);
+    void deleteOneById(Long id);
 
-    void save(Sprint sprint);
+    Boolean exists(Long id);
 
     Boolean exists(String nom);
+
+    List<Sprint> findAll();
+
+    Sprint findOneById(Long id);
+
+    void save(Sprint sprint);
 }

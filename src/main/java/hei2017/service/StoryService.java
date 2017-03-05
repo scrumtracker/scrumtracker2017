@@ -10,13 +10,19 @@ import java.util.List;
 public interface StoryService
 {
 
+    Long count();
+
+    void deleteOneById(Long id);
+
+    Boolean exists(Long id);
+
+    Boolean exists(String nom);
+
+    Story findOneById(Long id);
+
     List<Story> findAll();
 
     Story findOneByNom(String nom);
 
-    Long count();
-
     void save(Story story);
-
-    Boolean exists(String nom);
 }

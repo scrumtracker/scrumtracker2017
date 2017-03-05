@@ -9,13 +9,20 @@ import java.util.List;
  */
 public interface TaskService
 {
-    List<Task> findAll();
-
-    Task findOneByNom(String nom);
 
     long count();
 
-    void save(Task task);
+    void deleteOneById(Long id);
+
+    Boolean exists(Long id);
 
     Boolean exists(String nom);
+
+    List<Task> findAll();
+
+    Task findOneById(Long id);
+
+    Task findOneByNom(String nom);
+
+    void save(Task task);
 }
