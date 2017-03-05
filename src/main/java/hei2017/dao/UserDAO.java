@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserDAO extends JpaRepository<User, Long>
 {
     long count();
+
     User findOneByNomAndPrenom(String nom, String prenom);
+
     User findOneByPseudo(String pseudo);
 }

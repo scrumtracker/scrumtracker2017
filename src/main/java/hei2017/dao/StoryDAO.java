@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface StoryDAO extends JpaRepository<Story, Long>
 {
-    Story findOneByNom(String nom);
     long count();
+
+    Story findOneByNom(String nom);
 }

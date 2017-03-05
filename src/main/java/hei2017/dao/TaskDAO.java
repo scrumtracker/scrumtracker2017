@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface TaskDAO extends JpaRepository<Task, Long>
 {
-    Task findOneByNom(String nom);
     long count();
+
+    Task findOneByNom(String nom);
 }

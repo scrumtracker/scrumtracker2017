@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface SprintDAO extends JpaRepository<Sprint, Long>
 {
-    Sprint findOneByNom(String nom);
     long count();
+
+    Sprint findOneByNom(String nom);
 }
