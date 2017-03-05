@@ -36,8 +36,17 @@ public class StoryServiceImpl implements StoryService
     }
 
     @Override
+    public void deleteOneById(Long id) { storyDAO.delete(id); }
+
+    @Override
+    public Boolean exists(Long id) { return storyDAO.exists(id); }
+
+    @Override
     public void save(Story story) { storyDAO.save(story); }
 
     @Override
     public Boolean exists(String nom) { return null!=storyDAO.findOneByNom(nom); }
+
+    @Override
+    public Story findOneById(Long id) { return storyDAO.findOne(id); }
 }

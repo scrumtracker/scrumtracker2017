@@ -26,6 +26,9 @@ public class ProjectServiceImpl implements ProjectService
     }
 
     @Override
+    public Project findOneById(Long id) { return projectDAO.findOne(id); }
+
+    @Override
     public Project findOneByNom(String nom) {
         return projectDAO.findOneByNom(nom);
     }
@@ -34,6 +37,9 @@ public class ProjectServiceImpl implements ProjectService
     public long count() {
         return projectDAO.count();
     }
+
+    @Override
+    public Boolean exists(Long id) { return projectDAO.exists(id); }
 
     @Override
     public void save(Project project) {
@@ -47,4 +53,7 @@ public class ProjectServiceImpl implements ProjectService
         else
             return false;
     }
+
+    @Override
+    public void deleteOneById(Long id) { projectDAO.delete(id); }
 }

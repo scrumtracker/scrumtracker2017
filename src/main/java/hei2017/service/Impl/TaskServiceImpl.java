@@ -26,6 +26,9 @@ public class TaskServiceImpl implements TaskService
     }
 
     @Override
+    public Task findOneById(Long id) { return taskDAO.findOne(id); }
+
+    @Override
     public Task findOneByNom(String nom) {
         return taskDAO.findOneByNom(nom);
     }
@@ -34,6 +37,12 @@ public class TaskServiceImpl implements TaskService
     public long count() {
         return taskDAO.count();
     }
+
+    @Override
+    public void deleteOneById(Long id) { taskDAO.delete(id); }
+
+    @Override
+    public Boolean exists(Long id) { return taskDAO.exists(id); }
 
     @Override
     public void save(Task task) { taskDAO.save(task); }

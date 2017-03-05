@@ -26,14 +26,18 @@ public class SprintServiceImpl implements SprintService {
     }
 
     @Override
+    public Sprint findOneById(Long id) { return sprintDAO.findOne(id); }
+
+    @Override
     public long countAll() {
         return sprintDAO.count();
     }
 
     @Override
-    public void saveSprint(Sprint sprint) {
-        sprintDAO.save(sprint);
-    }
+    public void deleteOneById(Long id) { sprintDAO.delete(id); }
+
+    @Override
+    public Boolean exists(Long id) { return sprintDAO.exists(id); }
 
     @Override
     public Boolean exists(String nom) { return null!=sprintDAO.findOneByNom(nom); }

@@ -26,6 +26,9 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
+    public User findOneById(Long id) { return userDAO.findOne(id); }
+
+    @Override
     public User findOneByNomAndPrenom(String nom, String prenom) {
         return userDAO.findOneByNomAndPrenom(nom, prenom);
     }
@@ -42,4 +45,10 @@ public class UserServiceImpl implements UserService
     public long count() {
         return userDAO.count();
     }
+
+    @Override
+    public void deleteOneById(Long id) { userDAO.delete(id); }
+
+    @Override
+    public Boolean exists(Long id) { return userDAO.exists(id); }
 }
