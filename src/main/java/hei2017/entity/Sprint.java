@@ -116,4 +116,9 @@ public class Sprint {
     public void setSprintStories(Set<Story> sprintStories) {
         this.sprintStories = sprintStories;
     }
+
+    public void addStory(Story story)
+    {
+        sprintStories.add(story);
+    }
 }

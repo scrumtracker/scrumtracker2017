@@ -82,4 +82,14 @@ public class Project {
     public void setProjectSprints(Set<Sprint> projectSprints) {
         this.projectSprints = projectSprints;
     }
+
+    public void addSprint(Sprint sprint)
+    {
+        projectSprints.add(sprint);
+    }
+
+    public void addUser(User user)
+    {
+        projectUsers.add(user);
+    }
 }
