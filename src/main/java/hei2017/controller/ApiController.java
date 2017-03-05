@@ -70,6 +70,11 @@ public class ApiController {
             t.setDescription(Instant.now().toString());
             taskService.save(t);
 
+            User u = new User();
+            u.setNom("User test "+i);
+            u.setPrenom("Yolo"+i);
+            userService.save(u);
+
         }
         LOGGER.debug("ApiController - debugProjects");
         return "10 Projets / sprints / stories / tasks rajoutés en BDD";
@@ -117,6 +122,21 @@ public class ApiController {
         }
     }
 
+    @RequestMapping(value = "/api/project/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity<Project> deleteProject(@PathVariable("id") Long id)
+    {
+        LOGGER.debug("ApiController - deleteProject");
+
+        Project project = null;
+        if(projectService.exists(id))
+        {
+            project = projectService.findOneById(id);
+            projectService.deleteOneById(id);
+            return new ResponseEntity<Project>(project, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<Project>(project, HttpStatus.NOT_FOUND);
+    }
+
     /*
      * Requêtes SPRINT
      */
@@ -144,6 +164,21 @@ public class ApiController {
             LOGGER.debug("ApiController - sendSprint - Sprint déjà existant");
             return new ResponseEntity<Sprint>(sprint, HttpStatus.CONFLICT);
         }
+    }
+
+    @RequestMapping(value = "/api/sprint/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity<Sprint> deleteSprint(@PathVariable("id") Long id)
+    {
+        LOGGER.debug("ApiController - deleteSprint");
+
+        Sprint sprint = null;
+        if(sprintService.exists(id))
+        {
+            sprint = sprintService.findOneById(id);
+            sprintService.deleteOneById(id);
+            return new ResponseEntity<Sprint>(sprint, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
     }
 
 
@@ -176,6 +211,21 @@ public class ApiController {
         }
     }
 
+    @RequestMapping(value = "/api/story/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity<Story> deleteStory(@PathVariable("id") Long id)
+    {
+        LOGGER.debug("ApiController - deleteStory");
+
+        Story story = null;
+        if(storyService.exists(id))
+        {
+            story = storyService.findOneById(id);
+            storyService.deleteOneById(id);
+            return new ResponseEntity<Story>(story, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
+    }
+
     /*
      * Requêtes TASK
      */
@@ -205,6 +255,20 @@ public class ApiController {
         }
     }
 
+    @RequestMapping(value = "/api/task/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity<Task> deleteTask(@PathVariable("id") Long id)
+    {
+        LOGGER.debug("ApiController - deleteTask");
+
+        Task task = null;
+        if(taskService.exists(id))
+        {
+            task = taskService.findOneById(id);
+            taskService.deleteOneById(id);
+            return new ResponseEntity<Task>(task, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
+    }
     /*
      * Requêtes USER
      */
@@ -215,6 +279,21 @@ public class ApiController {
     {
         LOGGER.debug("ApiController - showUsers");
         return userService.findAll();
+    }
+
+    @RequestMapping(value = "/api/user/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity<User> deleteUser(@PathVariable("id") Long id)
+    {
+        LOGGER.debug("ApiController - deleteUser");
+
+        User user = null;
+        if(userService.exists(id))
+        {
+            user = userService.findOneById(id);
+            userService.deleteOneById(id);
+            return new ResponseEntity<User>(user, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
     }
 
 
