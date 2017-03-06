@@ -86,7 +86,7 @@ public class ApiController {
         projet.setDescription("Description du "+projet.getNom());
         projectService.save(projet);
 
-        //CREATION DES LIAISONS INTER-ENTITES
+        //AJOUT DES LIAISONS INTER-ENTITES
         projet.addSprint(sprint);
         projet.addUser(testeur);
         projectService.save(projet);

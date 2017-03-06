@@ -52,50 +52,22 @@
             </div>
 
             <div id="divlistsprint" class="list-group">
-
-
-                <div class="row">
-                    <a href="#" class="list-group-item col-sm-11">Sprint 1
-                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprints'">See
-                            stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
+                <div class="row" th:each="project : ${projects}">
+                    <a href="#" class="list-group-item col-sm-11">
+                        <span th:text="${project.nom}"></span>
+                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprints'">
+                            <span th:text="#{stories.see}"></span>
+                            <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
+                        </button>
                     </a>
-                    <form class="col-sm-1" action="removeSprint" method="post">
+                    <form class="col-sm-1" action="#" method="post">
                         <button type="submit" class="btnremove"><span
-                                class="glyremove glyphicon glyphicon-remove-sign"></span></button>
+                                class="glyremove glyphicon glyphicon-remove-sign"></span>
+                        </button>
                     </form>
                 </div>
-                <div class="row">
-                    <a href="#" class="list-group-item col-sm-11">Sprint 2
-                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprints'">See
-                            stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
-                    </a>
-                    <form class="col-sm-1" action="removeSprint" method="post">
-                        <button type="submit" class="btnremove"><span
-                                class="glyremove glyphicon glyphicon-remove-sign"></span></button>
-                    </form>
-                </div>
-                <div class="row">
-                    <a href="#" class="list-group-item col-sm-11">Sprint 3
-                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprints'">See
-                            stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>
-                    </a>
-                    <form class="col-sm-1" action="removeSprint" method="post">
-                        <button type="submit" class="btnremove"><span
-                                class="glyremove glyphicon glyphicon-remove-sign"></span></button>
-                    </form>
-                </div>
-
-                <!--
-                <a href="#" class="list-group-item">Sprint 1<button class="btnremove1" onclick="location.href='sprint.'"><span class="glyphicon glyphicon-remove-sign"></span></button></a>
-                <a href="#" class="list-group-item">Sprint 2<button class="btnremove1" onclick="location.href='sprint'"><span class="glyphicon glyphicon-remove-sign"></span></button></a>
-                <a href="#" class="list-group-item">Sprint 3<button class="btnremove1" onclick="location.href='sprint'"><span class="glyphicon glyphicon-remove-sign"></span></button></a>-->
-
-                <!--
-                <a href="#" class="list-group-item">Sprint 1<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>
-                <a href="#" class="list-group-item">Sprint 2<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>
-                <a href="#" class="list-group-item">Sprint 3<button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprint'">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button></a>-->
-
             </div>
+
         </div>
 
         <div class="col-sm-1">
@@ -106,8 +78,8 @@
             <div>
                 <p class="h4 text-center">Details Sprint</p>
                 <div>
-                    <button id="btnedit" type="button" class="btn-xs btn btn-default" onClick=""><span
-                            class="glybtnright glyphicon glyphicon-edit"></span>Edit
+                    <button id="btnedit" type="button" class="btn-xs btn btn-default" onClick="">
+                        <span class="glybtnright glyphicon glyphicon-edit"></span>Edit
                     </button>
                 </div>
             </div>
@@ -126,8 +98,6 @@
     </div>
     </div>
 </section>
-
-<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
