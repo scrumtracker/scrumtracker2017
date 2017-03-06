@@ -12,6 +12,8 @@ public interface TaskService
 
     long count();
 
+    void delete(Task task);
+
     void deleteOneById(Long id);
 
     Boolean exists(Long id);

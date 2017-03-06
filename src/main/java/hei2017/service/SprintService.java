@@ -11,6 +11,8 @@ public interface SprintService {
 
     long countAll();
 
+    void delete(Sprint sprint);
+
     void deleteOneById(Long id);
 
     Boolean exists(Long id);

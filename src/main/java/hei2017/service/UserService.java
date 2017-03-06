@@ -11,6 +11,8 @@ public interface UserService
 {
     long count();
 
+    void delete(User user);
+
     void deleteOneById(Long id);
 
     Boolean exists(Long id);

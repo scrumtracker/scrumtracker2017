@@ -36,6 +36,9 @@ public class StoryServiceImpl implements StoryService
     }
 
     @Override
+    public void delete(Story story) { storyDAO.delete(story); }
+
+    @Override
     public void deleteOneById(Long id) { storyDAO.delete(id); }
 
     @Override

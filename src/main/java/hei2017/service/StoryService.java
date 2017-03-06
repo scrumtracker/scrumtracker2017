@@ -12,6 +12,8 @@ public interface StoryService
 
     Long count();
 
+    void delete(Story story);
+
     void deleteOneById(Long id);
 
     Boolean exists(Long id);
