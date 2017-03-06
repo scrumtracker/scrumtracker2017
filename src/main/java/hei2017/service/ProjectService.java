@@ -12,6 +12,8 @@ public interface ProjectService
 
     long count();
 
+    void delete(Project project);
+
     Boolean exists(Long id);
 
     Boolean exists(String nom);

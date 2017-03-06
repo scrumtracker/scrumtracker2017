@@ -39,6 +39,9 @@ public class TaskServiceImpl implements TaskService
     }
 
     @Override
+    public void delete(Task task) { taskDAO.delete(task); }
+
+    @Override
     public void deleteOneById(Long id) { taskDAO.delete(id); }
 
     @Override
