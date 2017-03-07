@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>ITI - ScrumTracker</title>
-    <link rel="icon" href="../../static/img/unicorn2.ico"/>
+    <link rel="icon"  th:href="@{/img/unicorn2.ico}"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,9 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/sprint.css}">
     <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootbox.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/sprint.js}"></script>
 </head>
 
@@ -133,8 +136,6 @@
 
         </div>
     </section>
-
-<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
