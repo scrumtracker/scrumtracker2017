@@ -50,7 +50,6 @@ public class ApiController {
     @RequestMapping(value = "/api/debug", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public String debug()
     {
-
         //CREATION DES ENTITES
         User testeur = new User();
         testeur.setNom("Teur");
@@ -58,51 +57,68 @@ public class ApiController {
         testeur.setEmail("tess.teur@da.fr");
         testeur.setPassword("LetMeIn");
         testeur.setPseudo("Mr Motte");
-        userService.save(testeur);
 
         Task tache = new Task();
         tache.setNom("Créer une tâche via Controlleur "+Instant.now());
         tache.setDescription("Je suis la description de la tâche");
         tache.setTempsDeCharge(new Long(2));
         tache.setUniteTempsDeCharge(UniteTemps.h);
-        taskService.save(tache);
 
         Story story = new Story();
         story.setNom("Je suis une Story "+Instant.now());
         story.setDescription("Une story correspond à une fonctionnalité attendue par le client");
         story.setStatus(StoryStatus.DOING);
-        storyService.save(story);
 
         Sprint sprint = new Sprint();
         sprint.setNom("Sprint test de "+Instant.now());
         sprint.setDescription("Description du sprint");
-        sprint.setDateCreation(new Timestamp(System.currentTimeMillis()));
         sprint.setDateDebut(new Timestamp(System.currentTimeMillis()));
         sprint.setDateFin(new Timestamp(System.currentTimeMillis()));
-        sprintService.save(sprint);
 
         Project projet = new Project();
         projet.setNom("Projet test du "+ Instant.now());
         projet.setDescription("Description du "+projet.getNom());
-        projectService.save(projet);
 
         //AJOUT DES LIAISONS INTER-ENTITES
         projet.addSprint(sprint);
         projet.addUser(testeur);
-        projectService.save(projet);
 
         sprint.addStory(story);
-        sprintService.save(sprint);
-
         story.addTask(tache);
-        storyService.save(story);
-
         tache.addUser(testeur);
+
+        projectService.save(projet);
+        sprintService.save(sprint);
+        storyService.save(story);
         taskService.save(tache);
+        userService.save(testeur);
 
         return "DB peuplée";
     }
 
+    //SUPPRESSION DES ENTITES EN BDD
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/debug/wipe", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public String debugWipe()
+    {
+        for (Project x:projectService.findAll()) {
+            projectService.delete(x);
+        }
+        for (Sprint x:sprintService.findAll()) {
+            sprintService.delete(x);
+        }
+        for (Story x:storyService.findAll()) {
+            storyService.delete(x);
+        }
+        for (Task x:taskService.findAll()) {
+            taskService.delete(x);
+        }
+        for (User x:userService.findAll()) {
+            userService.delete(x);
+        }
+
+        return "Reset BDD";
+    }
 
     /*
      * Requêtes générales

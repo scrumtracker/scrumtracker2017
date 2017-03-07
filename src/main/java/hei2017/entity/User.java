@@ -58,6 +58,8 @@ public class User {
         this.userProjects = userProjects;
     }
 
+    public Long getId() { return id; }
+
     public String getNom() {
         return nom;
     }
