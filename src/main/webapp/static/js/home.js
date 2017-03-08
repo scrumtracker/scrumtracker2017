@@ -1,3 +1,29 @@
+$(document).ready(function(){
+
+    $("#createNewProject").click(function(){
+
+
+        //var descriptionProject = document.getElementById("newprojectdescription");
+        //var nameProject = document.getElementById("newprojectname");
+
+        $.ajax({
+            url : '/api/project/add',
+            type : 'POST',
+            data : '{"description": "' + $("#newprojectdescription").val() + '", "nom": "' + $("#nameProject").val() + '"}',
+            dataType : 'application/json',
+            accept : 'application/json'
+           /* success : function('<h1>Success</h1>', statut){ // code_html contient le HTML renvoyé},
+            error : function(resultat, statut, erreur){ }
+
+            });*/
+
+        });
+
+    });
+
+});
+
+
 $("#codeActivated").change(function(){
     if($("#codeActivated").is(':checked'))
     {

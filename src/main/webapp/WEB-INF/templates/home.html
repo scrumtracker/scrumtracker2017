@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
-    <script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
     <script type="text/javascript" th:src="@{/js/bootbox.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/home.js}"></script>
@@ -30,10 +30,18 @@
             <span class="glybtn glyphicon glyphicon-plus"></span>
             <span th:text="#{project.new}"></span>
         </button>
-        <form action="addProject" method="post" id="formaddnewproject">
+        <form method="post" id="formaddnewproject">
             <div class="form-group">
                 <label for="newprojectname">Project name</label>
                 <input id="newprojectname" type="text" class="form-control" name="newprojectname" maxlength="50" required/>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="form-group col-sm-6">
+                    <label for="newprojectdescription">Project description</label>
+                    <textarea id="newprojectdescription" class="form-control" name="newprojecdescription"></textarea>
+                </div>
+                <div class="col-sm-3"></div>
             </div>
             <button id="createNewProject" type="submit" class="btn-md btn btn-primary">
                 <span th:text="#{project.create}"></span>
@@ -61,6 +69,7 @@
 
 <div th:replace="fragments/footer :: footer"></div>
 
+<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
 </body>
 </html>
 
