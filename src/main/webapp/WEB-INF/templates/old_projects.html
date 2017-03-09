@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ITI - ScrumTracker</title>
+    <link rel="icon" href="../../static/img/unicorn2.ico"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/project.css}">
+    <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/project.js}"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<section class="container content-page">
+
+    <header id="headerproject">
+        <a href="home" id="btnback" class="btn-md btn btn-default"><span
+                class="glybtnleft glyphicon glyphicon-chevron-left"></span>Back to Projects list</a>
+        <p class="h2 text-center">First Project</p>
+    </header>
+
+    <div id="divcontent" class="row">
+
+        <div id="divsprint" class="col-sm-7">
+
+            <div id="divaddsprint">
+                <button id="newSprint" type="button" class="btn-md btn btn-primary" onClick="addNewSprint()">
+                    <span class="glybtn glyphicon glyphicon-plus"></span>
+                    <span th:text="#{new.sprint}"></span>
+                </button>
+                <form action="addSprint" method="post" id="formaddnewsprint">
+                    <div class="form-group">
+                        <label for="newsprintname">Sprint name</label>
+                        <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="newsprintdescription">Sprint description</label>
+                        <textarea id="newsprintdescription" rows="3" class="form-control" name="newsprintdescription"></textarea>
+                    </div>
+                    <button id="createnewSprint" type="submit" class="btn-md btn btn-primary">
+                        <span th:text="#{create.sprint}"></span>
+                    </button>
+                </form>
+            </div>
+
+            <div id="divlistsprint" class="list-group">
+                <div class="row" th:each="project : ${projects}">
+                    <a href="#" class="list-group-item col-sm-11">
+                        <span th:text="${project.nom}"></span>
+                        <button class="btn btn-xs btn-default btnseestories" onclick="location.href='sprints'">
+                            <span th:text="#{stories.see}"></span>
+                            <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
+                        </button>
+                    </a>
+                    <form class="col-sm-1" action="#" method="post">
+                        <button type="submit" class="btnremove"><span
+                                class="glyremove glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-1">
+        </div>
+
+        <div id="divdetail" class="col-sm-4">
+
+            <div>
+                <p class="h4 text-center">Details Sprint</p>
+                <div>
+                    <button id="btnedit" type="button" class="btn-xs btn btn-default" onClick="">
+                        <span class="glybtnright glyphicon glyphicon-edit"></span>Edit
+                    </button>
+                </div>
+            </div>
+
+            <p>Sprint name : xxx</p>
+            <p>Creation date : xxx</p>
+            <p>Total hours of works : xxx</p>
+            <p>Number of Stories : xxx</p>
+            <p>Description : xxx</p>
+            <p>Last modification : xxx</p>
+
+            <!--
+            <div class="text-right">
+              <button type="button" class="btn-sm btn btn-default btnnext" onClick="">See stories<span class="glybtnleft glyphicon glyphicon-chevron-right"></span></button>-->
+        </div>
+    </div>
+    </div>
+</section>
+
+</body>
+</html>

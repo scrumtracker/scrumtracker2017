@@ -1,6 +1,3 @@
-.glybtn {
-	margin-right: 10px;
-}
 .h2{
 	margin-bottom: 30px;
 }
@@ -13,4 +10,12 @@
 #logo-menu{
 	margin-right:12px;
 	margin-top:-5px;
+}
+.bold{
+	font-weight: bold;
+	height: 25px;
+	line-height: 25px;
+}
+.glyedit{
+	font-size: 17px;
 }
