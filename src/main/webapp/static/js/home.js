@@ -2,20 +2,21 @@ $(document).ready(function(){
 
     $("#createNewProject").click(function(){
 
-
-        //var descriptionProject = document.getElementById("newprojectdescription");
-        //var nameProject = document.getElementById("newprojectname");
-
         $.ajax({
-            url : '/api/project/add',
-            type : 'POST',
-            data : '{"description": "' + $("#newprojectdescription").val() + '", "nom": "' + $("#nameProject").val() + '"}',
-            dataType : 'application/json',
-            accept : 'application/json'
-           /* success : function('<h1>Success</h1>', statut){ // code_html contient le HTML renvoyé},
-            error : function(resultat, statut, erreur){ }
 
-            });*/
+            url: '/api/project/add',
+            type: 'POST',
+            contentType: "application/json",
+            accept: 'application/json',
+            dataType: "json",
+            data: '{"nom":"WAOUUUUUU","description":"YOUHOUUUHOUUUHOUUUHOUUU"}',
+            //data : '{"description": "' + $("#newprojectdescription").val() + '", "nom": "' + $("#nameProject").val() + '"}',
+            success: function (data) {
+                $('#divTest').html(data);
+            },
+            error: function (resultat, statut, erreur) {
+                $('#divTest').html(resultat + " /// " + statut + " /// " + erreur);
+            }
 
         });
 
