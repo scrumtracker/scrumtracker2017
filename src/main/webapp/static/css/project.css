@@ -103,7 +103,7 @@ ul{
 #divlistsprint ul{
 	display: none;
 }
-ul li a{
+ul.list-group li a{
 	border: 1px solid #ddd;
 	border-radius: 6px;
 	margin-bottom: -1px;
