@@ -17,7 +17,6 @@ $(document).ready(function () {
                     $('#divMessage').html(data.nom + " has been successfully added.");
                     getListProjects();
                     getProjectsListMenu();
-
                 },
                 error: function (resultat, statut, erreur) {
                     $('#divMessage').html("This project already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
