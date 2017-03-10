@@ -33,7 +33,7 @@ $(document).ready(function () {
             function (data) {
                 listeProjets = document.getElementById("divlistproject");
 
-                if (data != '[]') {
+                if (data.length!=0) {
                     var html = '<p class="h2 text-center" th:text="#{project.list}"></p>';
 
                     $.each(data, function (key, val) {
