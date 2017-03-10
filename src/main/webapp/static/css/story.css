@@ -15,6 +15,7 @@
 }
 .btnremove{
     border: 0px;
+    padding: 0px;
     background: none;
 }
 .deletetask{
@@ -26,7 +27,7 @@
 }
 .glyremovelist{
     color: red;
-    padding-top: 2px;
+    padding-top: 3px;
 }
 .padd{
     padding-right: 35px;
@@ -36,4 +37,7 @@
 }
 #newtaskdescription{
     resize: none;
+}
+.task{
+    margin-bottom: 10px;
 }
