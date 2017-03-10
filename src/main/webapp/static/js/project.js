@@ -8,7 +8,7 @@ $(document).ready(function () {
             // cache: false,
             type: 'POST',
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data: '{"description": "' + $("#newstorydescriptionUnaffected").val() + '", "nom": "' + $("#newstorynameUnaffected").val() + '"}',
+            data: '{"description": "' + $("#newstorydescriptionUnaffected").val() + '", "nom": "' + $("#newstorynameUnaffected").val() + '", "points": "' + $("#newstorypointsUnaffected").val() + '"}',
             success: function (data) {
                 $('#divaddnewstoryUnaffected').hide();
                 $('#divaddnewstoryUnaffected').trigger("reset");
