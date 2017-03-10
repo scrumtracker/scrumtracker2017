@@ -15,6 +15,7 @@
 }
 .btnremove{
     border: 0px;
+    padding: 0px;
     background: none;
 }
 .deletetask{
@@ -26,14 +27,25 @@
 }
 .glyremovelist{
     color: red;
-    padding-top: 2px;
+    padding-top: 3px;
 }
 .padd{
     padding-right: 35px;
 }
-#formaddnewtask{
+.divaddnewtask{
     display: none;
 }
-#newtaskdescription{
+#divaddnewstory{
+    display: none;
+}
+textarea{
     resize: none;
+}
+.task{
+    margin-bottom: 10px;
+}
+.story{
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: solid 1px #dddddd;
 }

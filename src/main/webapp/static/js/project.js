@@ -1,12 +1,12 @@
 function addNewSprint(){
 
-    var formaddnewsprint = document.getElementById("formaddnewsprint");
+    var divaddnewsprint = document.getElementById("divaddnewsprint");
     var newSprint = document.getElementById("newSprint");
 
     var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
     var newStoryUnaffected = document.getElementById("newStoryUnaffected");
 
-    formaddnewsprint.style.display = "block";
+    divaddnewsprint.style.display = "block";
     newSprint.style.display = "none";
 
 
@@ -61,7 +61,7 @@ function addNewStory(obj){
 
 
 
-	var formaddnewsprint = document.getElementById("formaddnewsprint");
+	var divaddnewsprint = document.getElementById("divaddnewsprint");
     var newSprint = document.getElementById("newSprint");
     var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
     var newStoryUnaffected = document.getElementById("newStoryUnaffected");
@@ -71,17 +71,17 @@ function addNewStory(obj){
 		newStoryUnaffected.style.display = "block";
 	}
 	if(newSprint.style.display == "none"){
-		formaddnewsprint.style.display = "none";
+        divaddnewsprint.style.display = "none";
 		newSprint.style.display = "block";
 	}
 }
 
-function addNewSprintUnaffected(){
+function addNewStoryUnaffected(){
 
 	var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
     var newStoryUnaffected = document.getElementById("newStoryUnaffected");
 
-    var formaddnewsprint = document.getElementById("formaddnewsprint");
+    var divaddnewsprint = document.getElementById("divaddnewsprint");
     var newSprint = document.getElementById("newSprint");
 
     divaddnewstoryUnaffected.style.display = "block";
@@ -90,6 +90,6 @@ function addNewSprintUnaffected(){
 
 
 
-    formaddnewsprint.style.display = "none";
+    divaddnewsprint.style.display = "none";
     newSprint.style.display = "block";
 }

@@ -31,7 +31,7 @@
 
         <div class="col-sm-3">
             <div id="divaddstoryunaffected">
-                <button id="newStoryUnaffected" type="button" class="btn-md btn btn-primary" onclick="addNewSprintUnaffected()">
+                <button id="newStoryUnaffected" type="button" class="btn-md btn btn-primary" onclick="addNewStoryUnaffected()">
                     <span class="glybtnright glyphicon glyphicon-plus"></span>
                     <span th:text="#{new.story}"></span>
                 </button>
@@ -49,7 +49,7 @@
             </div>
             <ul class="list-group">
                 <li>
-                    <a href="#">Story 1
+                    <a href="#" class="padd">Story 1
                         <div class="deleteStorylist">
                             <button type="button" class="btnremove">
                                 <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Story 2
+                    <a href="#" class="padd">Story 2
                         <div class="deleteStorylist">
                             <button type="button" class="btnremove">
                                 <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Story 3
+                    <a href="#" class="padd">Story 3
                         <div class="deleteStorylist">
                             <button type="button" class="btnremove">
                                 <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -85,7 +85,7 @@
                     <span class="glybtnright glyphicon glyphicon-plus"></span>
                     <span th:text="#{new.sprint}"></span>
                 </button>
-                <form action="addSprint" method="post" id="formaddnewsprint">
+                <div id="divaddnewsprint">
                     <div class="form-group">
                         <label for="newsprintname">Sprint name</label>
                         <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30" required/>
@@ -94,10 +94,10 @@
                         <label for="newsprintdescription">Sprint description</label>
                         <textarea id="newsprintdescription" rows="3" class="form-control" name="newsprintdescription"></textarea>
                     </div>
-                    <button id="createnewSprint" type="submit" class="btn-md btn btn-primary">
+                    <button id="createnewSprint" type="button" class="btn-md btn btn-primary">
                         <span th:text="#{create.sprint}"></span>
                     </button>
-                </form>
+                </div>
             </div>
 
 
@@ -107,13 +107,15 @@
 
                 <div class="sprint">
                     <div class="list-group-item storyinsprint" onclick="showSprint(this)">
-                        <span class="bold">Sprint 1</span>
+                        <div class="padd2">
+                            <span class="bold">Sprint 1</span>
+                        </div>
                         <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='sprints'">
                             <span th:text="#{see.tasks}"></span>
                             <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
                         </button>
                         <ul>
-                            <li><a href="#"><span class="fini">[Fini]</span>Story 1
+                            <li><a href="#" class="padd"><span class="fini">[Fini]</span>Story 1
                                     <div class="deleteStorylist">
                                         <button type="button" class="btnremove">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -121,7 +123,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li><a href="#"><span class="fini">[Fini]</span>Story 2
+                            <li><a href="#" class="padd"><span class="fini">[Fini]</span>Story 2
                                     <div class="deleteStorylist">
                                         <button type="button" class="btnremove">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -129,7 +131,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li><a href="#"><span class="fini">[Fini]</span>Story 3
+                            <li><a href="#" class="padd"><span class="fini">[Fini]</span>Story 3
                                     <div class="deleteStorylist">
                                         <button type="button" class="btnremove">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -139,7 +141,7 @@
                             </li>
                             <li>
                                 <div>
-                                    <button type="button" class="newStory btn-md btn btn-primary" onclick="addNewStory(this)">
+                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
                                         <span class="glybtnright glyphicon glyphicon-plus"></span>
                                         <span th:text="#{new.story}"></span>
                                     </button>
@@ -152,7 +154,7 @@
                                             <label for="newstorydescription1">Story goals</label>
                                             <textarea id="newstorydescription1" rows="3" class="form-control newstorydescription" name="newstorydescription1"></textarea>
                                         </div>
-                                        <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
+                                        <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
                                     </div>
                                 </div>
                             </li>
@@ -171,13 +173,15 @@
 
                 <div class="sprint">
                     <div class="list-group-item storyinsprint" onclick="showSprint(this)">
-                        <span class="bold">Sprint 2</span>
+                        <div class="padd2">
+                            <span class="bold">Sprint 2</span>
+                        </div>
                         <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='sprints'">
                             <span th:text="#{see.tasks}"></span>
                             <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
                         </button>
                         <ul>
-                            <li><a href="#"><span class="fini">[Fini]</span>Story 1
+                            <li><a href="#" class="padd"><span class="fini">[Fini]</span>Story 1
                                     <div class="deleteStorylist">
                                         <button type="button" class="btnremove">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -185,7 +189,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li><a href="#"><span class="en-cours">[En-cours]</span>Story 2
+                            <li><a href="#" class="padd"><span class="en-cours">[En-cours]</span>Story 2
                                     <div class="deleteStorylist">
                                         <button type="button" class="btnremove">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -193,7 +197,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li><a href="#"><span class="en-cours">[En-cours]</span>Story 3
+                            <li><a href="#" class="padd"><span class="en-cours">[En-cours]</span>Story 3
                                     <div class="deleteStorylist">
                                         <button type="button" class="btnremove">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -203,7 +207,7 @@
                             </li>
                             <li>
                                 <div>
-                                    <button type="button" class="newStory btn-md btn btn-primary" onclick="addNewStory(this)">
+                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
                                         <span class="glybtnright glyphicon glyphicon-plus"></span>
                                         <span th:text="#{new.story}"></span>
                                     </button>
@@ -216,7 +220,7 @@
                                             <label for="newstorydescription2">Story goals</label>
                                             <textarea id="newstorydescription2" rows="3" class="form-control newstorydescription" name="newstorydescription2"></textarea>
                                         </div>
-                                        <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
+                                        <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
                                     </div>
                                 </div>
                             </li>
@@ -235,7 +239,9 @@
 
                 <div class="sprint">
                     <div class="list-group-item storyinsprint" onclick="showSprint(this)">
-                        <span class="bold">Sprint 3</span>
+                        <div class="padd2">
+                            <span class="bold">Sprint 3</span>
+                        </div>
                         <button class="btn btn-xs btn-default btnseetasks" onclick="location.href='sprints'">
                             <span th:text="#{see.tasks}"></span>
                             <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
@@ -243,7 +249,7 @@
                         <ul>
                             <li>
                                 <div>
-                                    <button type="button" class="newStory btn-md btn btn-primary" onclick="addNewStory(this)">
+                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
                                         <span class="glybtnright glyphicon glyphicon-plus"></span>
                                         <span th:text="#{new.story}"></span>
                                     </button>
@@ -256,7 +262,7 @@
                                             <label for="newstorydescription3">Story goals</label>
                                             <textarea id="newstorydescription3" rows="3" class="form-control newstorydescription" name="newstorydescription3"></textarea>
                                         </div>
-                                        <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
+                                        <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
                                     </div>
                                 </div>
                             </li>
@@ -290,7 +296,6 @@
                 </div>
                 <p>Sprint name : xxx</p>
                 <p>Creation date : xxx</p>
-                <p>State : xxx</p>
                 <p>Total hours of works : xxx</p>
                 <p>Number of Stories : xxx</p>
                 <p>Description : xxx</p>
@@ -307,6 +312,7 @@
                 </div>
                 <p>Story name : xxx</p>
                 <p>Creation date : xxx</p>
+                <p>State : xxx</p>
                 <p>Total hours of works : xxx</p>
                 <p>Number of tasks : xxx</p>
                 <p>Goals : xxx</p>
