@@ -167,4 +167,6 @@ textarea{
 }
 .padd2{
 	padding-right: 130px;
+#divMessage{
+	font-weight: bold;
 }

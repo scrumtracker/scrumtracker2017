@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>ITI - ScrumTracker</title>
-    <link rel="icon" href="../../static/img/unicorn2.ico"/>
+    <link rel="icon" th:href="@{/img/unicorn2.ico}"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,37 +44,14 @@
                         <label for="newstorydescriptionUnaffected">Story goals</label>
                         <textarea id="newstorydescriptionUnaffected" rows="3" class="form-control" name="newstorydescriptionUnaffected"></textarea>
                     </div>
-                  <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
+                    <button id="createNewStory" type="button" class="btn-md btn btn-primary">
+                    <span th:text="#{create.story}"></span>
+                    </button>
                 </div>
             </div>
-            <ul class="list-group">
-                <li>
-                    <a href="#" class="padd">Story 1
-                        <div class="deleteStorylist">
-                            <button type="button" class="btnremove">
-                                <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                            </button>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="padd">Story 2
-                        <div class="deleteStorylist">
-                            <button type="button" class="btnremove">
-                                <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                            </button>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="padd">Story 3
-                        <div class="deleteStorylist">
-                            <button type="button" class="btnremove">
-                                <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                            </button>
-                        </div>
-                    </a>
-                </li>
+            <div id="divMessage" class="text-center"></div>
+            <ul id="divliststory" class="list-group">
+                <p class="h2 text-left" id="storyNone" th:text="#{story.none}"></p>
             </ul>
         </div>
 
@@ -88,18 +65,19 @@
                 <div id="divaddnewsprint">
                     <div class="form-group">
                         <label for="newsprintname">Sprint name</label>
-                        <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30" required/>
+                        <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30"
+                               required/>
                     </div>
                     <div class="form-group">
                         <label for="newsprintdescription">Sprint description</label>
-                        <textarea id="newsprintdescription" rows="3" class="form-control" name="newsprintdescription"></textarea>
+                        <textarea id="newsprintdescription" rows="3" class="form-control"
+                                  name="newsprintdescription"></textarea>
                     </div>
                     <button id="createnewSprint" type="button" class="btn-md btn btn-primary">
                         <span th:text="#{create.sprint}"></span>
                     </button>
                 </div>
             </div>
-
 
 
             <div id="divlistsprint" class="list-group">
@@ -148,19 +126,24 @@
                                     <div class="divaddnewstory" id="divaddnewstory1">
                                         <div class="form-group">
                                             <label for="newstoryname1">Story name</label>
-                                            <input id="newstoryname1" type="text" class="form-control" name="newstoryname1" maxlength="50" required/>
+                                            <input id="newstoryname1" type="text" class="form-control"
+                                                   name="newstoryname1" maxlength="50" required/>
                                         </div>
                                         <div class="form-group">
                                             <label for="newstorydescription1">Story goals</label>
-                                            <textarea id="newstorydescription1" rows="3" class="form-control newstorydescription" name="newstorydescription1"></textarea>
+                                            <textarea id="newstorydescription1" rows="3"
+                                                      class="form-control newstorydescription"
+                                                      name="newstorydescription1"></textarea>
                                         </div>
+
                                         <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
+
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div><!--
-                    --><div class="deletesprint">
+                ---><div class="deletesprint">
                         <div>
                             <button type="button" class="btnremove"><span
                                     class="glyremove glyphicon glyphicon-remove-sign"></span>
@@ -168,7 +151,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
                 <div class="sprint">
@@ -181,6 +163,7 @@
                             <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
                         </button>
                         <ul>
+
                             <li><a href="#" class="padd"><span class="fini">[Fini]</span>Story 1
                                     <div class="deleteStorylist">
                                         <button type="button" class="btnremove">
@@ -214,19 +197,23 @@
                                     <div class="divaddnewstory" id="divaddnewstory2">
                                         <div class="form-group">
                                             <label for="newstoryname2">Story name</label>
-                                            <input id="newstoryname2" type="text" class="form-control" name="newstoryname2" maxlength="50" required/>
+                                            <input id="newstoryname2" type="text" class="form-control"
+                                                   name="newstoryname2" maxlength="50" required/>
                                         </div>
                                         <div class="form-group">
                                             <label for="newstorydescription2">Story goals</label>
-                                            <textarea id="newstorydescription2" rows="3" class="form-control newstorydescription" name="newstorydescription2"></textarea>
+                                            <textarea id="newstorydescription2" rows="3"
+                                                      class="form-control newstorydescription"
+                                                      name="newstorydescription2"></textarea>
                                         </div>
+
                                         <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div><!--
-                    --><div class="deletesprint">
+                --><div class="deletesprint">
                         <div>
                             <button type="button" class="btnremove"><span
                                     class="glyremove glyphicon glyphicon-remove-sign"></span>
@@ -234,7 +221,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
                 <div class="sprint">
@@ -256,11 +242,14 @@
                                     <div class="divaddnewstory" id="divaddnewstory3">
                                         <div class="form-group">
                                             <label for="newstoryname3">Story name</label>
-                                            <input id="newstoryname3" type="text" class="form-control" name="newstoryname3" maxlength="50" required/>
+                                            <input id="newstoryname3" type="text" class="form-control"
+                                                   name="newstoryname3" maxlength="50" required/>
                                         </div>
                                         <div class="form-group">
                                             <label for="newstorydescription3">Story goals</label>
-                                            <textarea id="newstorydescription3" rows="3" class="form-control newstorydescription" name="newstorydescription3"></textarea>
+                                            <textarea id="newstorydescription3" rows="3"
+                                                      class="form-control newstorydescription"
+                                                      name="newstorydescription3"></textarea>
                                         </div>
                                         <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
                                     </div>
@@ -268,7 +257,7 @@
                             </li>
                         </ul>
                     </div><!--
-                    --><div class="deletesprint">
+                --><div class="deletesprint">
                         <div>
                             <button type="button" class="btnremove"><span
                                     class="glyremove glyphicon glyphicon-remove-sign"></span>
@@ -276,7 +265,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
             </div>
