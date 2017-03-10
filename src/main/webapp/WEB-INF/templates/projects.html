@@ -31,7 +31,7 @@
 
         <div class="col-sm-3">
             <div id="divaddstoryunaffected">
-                <button id="newStoryUnaffected" type="button" class="btn-md btn btn-primary" onclick="addNewSprintUnaffected()">
+                <button id="newStoryUnaffected" type="button" class="btn-md btn btn-primary" onclick="addNewStoryUnaffected()">
                     <span class="glybtnright glyphicon glyphicon-plus"></span>
                     <span th:text="#{new.story}"></span>
                 </button>
@@ -85,7 +85,7 @@
                     <span class="glybtnright glyphicon glyphicon-plus"></span>
                     <span th:text="#{new.sprint}"></span>
                 </button>
-                <form action="addSprint" method="post" id="formaddnewsprint">
+                <div id="divaddnewsprint">
                     <div class="form-group">
                         <label for="newsprintname">Sprint name</label>
                         <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30" required/>
@@ -94,10 +94,10 @@
                         <label for="newsprintdescription">Sprint description</label>
                         <textarea id="newsprintdescription" rows="3" class="form-control" name="newsprintdescription"></textarea>
                     </div>
-                    <button id="createnewSprint" type="submit" class="btn-md btn btn-primary">
+                    <button id="createnewSprint" type="button" class="btn-md btn btn-primary">
                         <span th:text="#{create.sprint}"></span>
                     </button>
-                </form>
+                </div>
             </div>
 
 
@@ -141,7 +141,7 @@
                             </li>
                             <li>
                                 <div>
-                                    <button type="button" class="newStory btn-md btn btn-primary" onclick="addNewStory(this)">
+                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
                                         <span class="glybtnright glyphicon glyphicon-plus"></span>
                                         <span th:text="#{new.story}"></span>
                                     </button>
@@ -154,7 +154,7 @@
                                             <label for="newstorydescription1">Story goals</label>
                                             <textarea id="newstorydescription1" rows="3" class="form-control newstorydescription" name="newstorydescription1"></textarea>
                                         </div>
-                                        <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
+                                        <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
                                     </div>
                                 </div>
                             </li>
@@ -207,7 +207,7 @@
                             </li>
                             <li>
                                 <div>
-                                    <button type="button" class="newStory btn-md btn btn-primary" onclick="addNewStory(this)">
+                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
                                         <span class="glybtnright glyphicon glyphicon-plus"></span>
                                         <span th:text="#{new.story}"></span>
                                     </button>
@@ -220,7 +220,7 @@
                                             <label for="newstorydescription2">Story goals</label>
                                             <textarea id="newstorydescription2" rows="3" class="form-control newstorydescription" name="newstorydescription2"></textarea>
                                         </div>
-                                        <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
+                                        <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
                                     </div>
                                 </div>
                             </li>
@@ -249,7 +249,7 @@
                         <ul>
                             <li>
                                 <div>
-                                    <button type="button" class="newStory btn-md btn btn-primary" onclick="addNewStory(this)">
+                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
                                         <span class="glybtnright glyphicon glyphicon-plus"></span>
                                         <span th:text="#{new.story}"></span>
                                     </button>
@@ -262,7 +262,7 @@
                                             <label for="newstorydescription3">Story goals</label>
                                             <textarea id="newstorydescription3" rows="3" class="form-control newstorydescription" name="newstorydescription3"></textarea>
                                         </div>
-                                        <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
+                                        <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
                                     </div>
                                 </div>
                             </li>
@@ -296,7 +296,6 @@
                 </div>
                 <p>Sprint name : xxx</p>
                 <p>Creation date : xxx</p>
-                <p>State : xxx</p>
                 <p>Total hours of works : xxx</p>
                 <p>Number of Stories : xxx</p>
                 <p>Description : xxx</p>
@@ -313,6 +312,7 @@
                 </div>
                 <p>Story name : xxx</p>
                 <p>Creation date : xxx</p>
+                <p>State : xxx</p>
                 <p>Total hours of works : xxx</p>
                 <p>Number of tasks : xxx</p>
                 <p>Goals : xxx</p>

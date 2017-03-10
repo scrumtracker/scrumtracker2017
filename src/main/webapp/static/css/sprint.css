@@ -1,3 +1,4 @@
+/*
 #divdetail{
 	background-color: #F8F8F8;
 	border: 1px solid #C8C8C8;
@@ -73,4 +74,56 @@
 	color: red;
 	padding-top: 2px;
 	font-size: 17px;
+}*/
+
+#headerproject{
+	margin-bottom: 60px;
+}
+#btnback{
+	position: absolute;
+}#divdetail{
+	 background-color: #F8F8F8;
+	 border: 1px solid #C8C8C8;
+	 border-radius: 3px;
+ }
+#btnedit{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+.btnremove{
+	border: 0px;
+	padding: 0px;
+	background: none;
+}
+.deletetask{
+//float: right;
+//vertical-align: top;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.glyremovelist{
+	color: red;
+	padding-top: 3px;
+}
+.padd{
+	padding-right: 35px;
+}
+.divaddnewtask{
+	display: none;
+}
+#divaddnewstory{
+	display: none;
+}
+textarea{
+	resize: none;
+}
+.task{
+	margin-bottom: 10px;
+}
+.story{
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-bottom: solid 1px #dddddd;
 }
