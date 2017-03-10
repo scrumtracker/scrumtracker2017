@@ -100,11 +100,11 @@
                     <div class="col-sm-3">
                         <div class="task">
                             <a href="#" class="list-group-item padd">Task 3
-                                <form action="removeTask" method="post" class="deletetask">
-                                    <button type="submit" class="btnremove">
+                                <div class="deletetask">
+                                    <button type="button" class="btnremove">
                                         <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                     </button>
-                                </form>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -113,11 +113,11 @@
                     <div class="col-sm-3">
                         <div class="task">
                             <a href="#" class="list-group-item padd">Task 4
-                                <form action="removeTask" method="post" class="deletetask">
-                                    <button type="submit" class="btnremove">
+                                <div class="deletetask">
+                                    <button type="button" class="btnremove">
                                         <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                     </button>
-                                </form>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -130,6 +130,8 @@
 
                     <div class="col-sm-3">
                         <p><span class="bold">Afficher les détails d'un projet</span></p>
+                        <p>Creation date : xxx</p>
+                        <p>Total hours of works : xxx</p>
                         <p>Description de la story</p>
                     </div>
 
@@ -175,20 +177,20 @@
                     <div class="col-sm-3">
                         <div class="task">
                             <a href="#" class="list-group-item padd">Task 3
-                                <form action="removeTask" method="post" class="deletetask">
-                                    <button type="submit" class="btnremove">
+                                <div class="deletetask">
+                                    <button type="button" class="btnremove">
                                         <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                     </button>
-                                </form>
+                                </div>
                             </a>
                         </div>
                         <div class="task">
                             <a href="#" class="list-group-item padd">Task 4
-                                <form action="removeTask" method="post" class="deletetask">
-                                    <button type="submit" class="btnremove">
+                                <div class="deletetask">
+                                    <button type="button" class="btnremove">
                                         <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                     </button>
-                                </form>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -197,11 +199,11 @@
                     <div class="col-sm-3">
                         <div class="task">
                             <a href="#" class="list-group-item padd">Task 5
-                                <form action="removeTask" method="post" class="deletetask">
-                                    <button type="submit" class="btnremove">
+                                <div class="deletetask">
+                                    <button type="button" class="btnremove">
                                         <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                     </button>
-                                </form>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -210,7 +212,7 @@
 
 
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-6">
                         <button id="newStory" type="button" class="btn-md btn btn-primary" onclick="addNewStory()">
                             <span class="glybtnright glyphicon glyphicon-plus"></span>
                             <span th:text="#{new.story}"></span>
@@ -227,9 +229,7 @@
                             <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
                         </div>
                     </div>
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6"></div>
                 </div>
 
             </div>
