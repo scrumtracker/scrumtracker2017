@@ -5,6 +5,8 @@ $(document).ready(function () {
 
 });
 
+});
+
 function getProjectsListMenu() {
     $.getJSON('/api/project',
         function (data) {
