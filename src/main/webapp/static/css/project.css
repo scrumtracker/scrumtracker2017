@@ -165,8 +165,12 @@ textarea{
 .padd{
 	padding-right: 35px;
 }
-.padd2{
+.padd2 {
 	padding-right: 130px;
+}
 #divMessage{
 	font-weight: bold;
+}
+#newstorypointsUnaffected{
+	max-width: 60px;
 }
