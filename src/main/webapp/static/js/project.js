@@ -15,6 +15,7 @@ $(document).ready(function () {
                 $('#divaddstoryunaffected').show();
                 $('#divMessage').html(data.nom + " has been successfully added.");
                 getListStories();
+                getStoriesListMenu();
 
             },
             error: function (resultat, statut, erreur) {

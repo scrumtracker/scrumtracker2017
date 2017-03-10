@@ -2,26 +2,33 @@ $(document).ready(function () {
 
     $("#createNewProject").click(function () {
 
-        $.ajax({
+        if($("#newprojectname").val()!='') {
+            $.ajax({
 
-            url: '/api/project/add',
-            // cache: false,
-            type: 'POST',
-            headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data: '{"description": "' + $("#newprojectdescription").val() + '", "nom": "' + $("#newprojectname").val() + '"}',
-            success: function (data) {
-                $('#formaddnewproject').hide();
-                $('#formaddnewproject').trigger("reset");
-                $('#newProject').show();
-                $('#divMessage').html(data.nom + " has been successfully added.");
-                getListProjects();
+                url: '/api/project/add',
+                // cache: false,
+                type: 'POST',
+                headers: {"Accept": "application/json", "Content-Type": "application/json"},
+                data: '{"description": "' + $("#newprojectdescription").val() + '", "nom": "' + $("#newprojectname").val() + '"}',
+                success: function (data) {
+                    $('#formaddnewproject').hide();
+                    $('#formaddnewproject').trigger("reset");
+                    $('#newProject').show();
+                    $('#divMessage').html(data.nom + " has been successfully added.");
+                    getListProjects();
+                    getProjectsListMenu();
 
-            },
-            error: function (resultat, statut, erreur) {
-                $('#divMessage').html("This project already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
-            }
+                },
+                error: function (resultat, statut, erreur) {
+                    $('#divMessage').html("This project already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
+                }
 
-        });
+            });
+        }
+        else{
+            $('#divMessage').html("Project name is required.");
+        }
+
 
     });
 
