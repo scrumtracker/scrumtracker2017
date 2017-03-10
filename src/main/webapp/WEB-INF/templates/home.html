@@ -31,7 +31,7 @@
             <span class="glybtn glyphicon glyphicon-plus"></span>
             <span th:text="#{project.new}"></span>
         </button>
-        <form id="formaddnewproject">
+        <div id="formaddnewproject">
             <div class="form-group">
                 <label for="newprojectname">Project name</label>
                 <input id="newprojectname" type="text" class="form-control" name="newprojectname" maxlength="50"
@@ -48,7 +48,7 @@
             <button id="createNewProject" type="button" class="btn-md btn btn-primary">
                 <span th:text="#{project.create}"></span>
             </button>
-        </form>
+        </div>
     </div>
     <div id="divMessage" class="text-center"></div>
 
