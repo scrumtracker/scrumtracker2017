@@ -9,10 +9,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
-
-    <script type="text/javascript" th:src="@{/js/bootbox.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<!--    <script type="text/javascript" th:src="@{/js/bootbox.min.js}"></script>-->
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/home.js}"></script>
+
 </head>
 
 <body>
@@ -30,7 +31,7 @@
             <span class="glybtn glyphicon glyphicon-plus"></span>
             <span th:text="#{project.new}"></span>
         </button>
-        <form action="" id="formaddnewproject">
+        <form id="formaddnewproject">
             <div class="form-group">
                 <label for="newprojectname">Project name</label>
                 <input id="newprojectname" type="text" class="form-control" name="newprojectname" maxlength="50"
@@ -44,34 +45,30 @@
                 </div>
                 <div class="col-sm-3"></div>
             </div>
-            <button id="createNewProject" type="submit" class="btn-md btn btn-primary">
+            <button id="createNewProject" type="button" class="btn-md btn btn-primary">
                 <span th:text="#{project.create}"></span>
             </button>
         </form>
     </div>
-    <div id="divTest"></div>
-    <div id="divlistproject" th:if="${projects}">
-        <p class="h2 text-center" th:text="#{project.list}"></p>
-        <div class="row">
-            <div class="col-sm-2">
-            </div>
-            <div class="col-sm-8 list-group">
-                <a th:each="project:${projects}" href="@{/project/project.id}" class="list-group-item"
-                   th:text="${project.nom}"></a>
-            </div>
-            <div class="col-sm-2">
-            </div>
-        </div>
+    <div id="divMessage" class="text-center"></div>
+
+    <div id="divlistproject">
+        <p class="h2 text-center" id="projectNone" th:text="#{project.none}"></p>
     </div>
 
+<!--
     <div th:unless="${projects}">
         <p class="h2 text-center" th:text="#{project.none}"></p>
-    </div>
+    </div>-->
+
+
+
 </section>
 
 <div th:replace="fragments/footer :: footer"></div>
 
-<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
+
 </body>
 </html>
 

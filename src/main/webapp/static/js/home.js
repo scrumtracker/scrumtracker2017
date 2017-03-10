@@ -1,41 +1,78 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-    $("#createNewProject").click(function(){
+    $("#createNewProject").click(function () {
 
         $.ajax({
 
             url: '/api/project/add',
+            // cache: false,
             type: 'POST',
-            contentType: "application/json",
-            accept: 'application/json',
-            dataType: "json",
-            data: '{"nom":"WAOUUUUUU","description":"YOUHOUUUHOUUUHOUUUHOUUU"}',
-            //data : '{"description": "' + $("#newprojectdescription").val() + '", "nom": "' + $("#nameProject").val() + '"}',
+            headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            data: '{"description": "' + $("#newprojectdescription").val() + '", "nom": "' + $("#newprojectname").val() + '"}',
             success: function (data) {
-                $('#divTest').html(data);
+                $('#formaddnewproject').hide();
+                $('#formaddnewproject').trigger("reset");
+                $('#newProject').show();
+                $('#divMessage').html(data.nom + " has been successfully added.");
+                getListProjects();
+
             },
             error: function (resultat, statut, erreur) {
-                $('#divTest').html(resultat + " /// " + statut + " /// " + erreur);
+                $('#divMessage').html("This project already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
             }
 
         });
 
     });
 
+    getListProjects();
+
+
+    function getListProjects() {
+        $.getJSON('/api/project',
+            function (data) {
+                listeProjets = document.getElementById("divlistproject");
+
+                if (data != '[]') {
+                    var html = '<p class="h2 text-center" th:text="#{project.list}"></p>';
+
+                    $.each(data, function (key, val) {
+
+                        html +=
+                            "<div class='row'>" +
+                            "<div class='col-sm-3'></div>" +
+                            "<div class='col-sm-6 list-group'>" +
+                            "<a href=project/" + val.id + " data-ajax='false' class='list-group-item'>" +
+                            "<div class='dsc'>" + val.nom + "</div>" +
+                            "</a>" +
+                            "</div>" +
+                            "<div class='col-sm-3'></div>" +
+                            "</div>";
+                    });
+                    $("#projectNone").hide();
+                    listeProjets.innerHTML = html;
+                }
+                else {
+                    $("#projectNone").show();
+                }
+
+
+            });
+
+    };
+
 });
 
 
-$("#codeActivated").change(function(){
-    if($("#codeActivated").is(':checked'))
-    {
+$("#codeActivated").change(function () {
+    if ($("#codeActivated").is(':checked')) {
         $("#code").prop('disabled', false);
     }
-    else
-    {
+    else {
         $("#code").prop('disabled', true);
     }
 });
-function addNewProject(){
+function addNewProject() {
 
     var formaddnewproject = document.getElementById("formaddnewproject");
     var newProject = document.getElementById("newProject");
@@ -43,18 +80,6 @@ function addNewProject(){
     formaddnewproject.style.display = "block";
     newProject.style.display = "none";
 }
-/*
-$("#newProject").click(function(){
-    bootbox.alert({
-        message: "This is the small alert!"
-    });
-
-    if($("#formaddnewproject").style.display == "block"){
-        $("#formaddnewproject").style.display = "none";
-    }else{
-        $("#formaddnewproject").style.display = "block";
-    }
-})*/
 
 
 
