@@ -100,7 +100,7 @@ $(document).ready(function () {
 
                         html +=
                             '<div class="sprint">'+
-                            '<div class="list-group-item storyinsprint" onclick="getDetailSprint(this)">'+
+                            '<div id="onClickSprint" class="list-group-item storyinsprint" onclick="getDetailSprint(this)">'+
                             '<div class="padd2">'+
                             '<span class="bold">' + val.nom+ '</span>'+
                             '</div>'+
@@ -122,6 +122,47 @@ $(document).ready(function () {
             });
 
     };
+
+    $("#onClickSprint").click(function () {
+
+        $.ajax({
+
+            url: '/api/sprint',
+            type: 'GET',
+            // headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            // data: '{"nom": "' + $("#newsprintname").val() + '", "date de début": "' + $("#newSprintDateDebut").val() + '", "date de fin": "' + $("#newSprintDateFin").val() + '"}',
+            success: function (data) {
+                listeSprints = document.getElementById("divlistsprint");
+
+                if (data.length != 0) {
+                    var html = '<p class="h2 text-center" th:text="#{sprint.list}"></p>';
+
+                    $.each(data, function (key, val) {
+
+                        html +=
+                            '<div class="sprint">' +
+                            '<div class="list-group-item storyinsprint" onclick="getDetailSprint(this)">' +
+                            '<div class="padd2">' +
+                            '<span class="bold">' + val.nom + '</span>' +
+                            '</div>' +
+                            '<button id="onClickSprint" class="btn btn-xs btn-default btnseetasks" onclick="">' +
+                            '<span th:text="#{see.tasks}"></span>' +
+                            '<span class="glybtnleft glyphicon glyphicon-chevron-right"></span>' +
+                            '</button>' +
+                            '</div>' +
+                            '</div>';
+                    });
+                    $("#sprintNone").hide();
+                    listeSprints.innerHTML = html;
+                }
+                else {
+                    $("#sprintNone").show();
+                }
+            }
+        })
+
+    });
+
 
     function getDetailSprint() {
         $.getJSON('/api/sprint',
@@ -172,6 +213,10 @@ function addNewSprint(){
     divaddnewstoryUnaffected.style.display = "none";
     newStoryUnaffected.style.display = "block";
 }
+
+// function showDetailSprint(obj){
+//     var detail = obj
+// }
 
 function showSprint(obj){
 
