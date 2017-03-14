@@ -45,6 +45,14 @@ public class ApiController {
     /*
      * Requêtes DEBUG
      */
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/test", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<Project> test()
+    {
+        return projectService.findAll();
+    }
+
     // ***/api/debug ajoute des entités en BDD
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/debug", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
@@ -144,6 +152,17 @@ public class ApiController {
         return projectService.findAll();
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/project/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<Project> showProject(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showProject");
+        Project projet = projectService.findOneById(id);
+        if(null!=projet)
+            return new ResponseEntity<Project>(projet, HttpStatus.OK);
+        return new ResponseEntity<Project>(projet, HttpStatus.NOT_FOUND);
+    }
+
     @RequestMapping(value = "/api/project/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Project> sendProject(@RequestBody Project project)
     {
@@ -186,6 +205,17 @@ public class ApiController {
     {
         LOGGER.debug("ApiController - showSprints");
         return sprintService.findAll();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/sprint/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<Sprint> showSprint(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showSprint");
+        Sprint sprint = sprintService.findOneById(id);
+        if(null!=sprint)
+            return new ResponseEntity<Sprint>(sprint, HttpStatus.OK);
+        return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value = "/api/sprint/add", method = RequestMethod.POST, produces = "application/json")
@@ -233,6 +263,17 @@ public class ApiController {
         return storyService.findAll();
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/story/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<Story> showStory(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showStory");
+        Story story = storyService.findOneById(id);
+        if(null!=story)
+            return new ResponseEntity<Story>(story, HttpStatus.OK);
+        return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
+    }
+
     @RequestMapping(value = "/api/story/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Story> sendStory(@RequestBody Story story)
     {
@@ -277,6 +318,17 @@ public class ApiController {
         return taskService.findAll();
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/task/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<Task> showTask(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showTask");
+        Task task = taskService.findOneById(id);
+        if(null!=task)
+            return new ResponseEntity<Task>(task, HttpStatus.OK);
+        return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
+    }
+
     @RequestMapping(value = "/api/task/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Task> sendStory(@RequestBody Task task)
     {
@@ -317,6 +369,17 @@ public class ApiController {
     {
         LOGGER.debug("ApiController - showUsers");
         return userService.findAll();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/user/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<User> showUser(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showUser");
+        User user = userService.findOneById(id);
+        if(null!=user)
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value = "/api/user/add", method = RequestMethod.POST, produces = "application/json")
