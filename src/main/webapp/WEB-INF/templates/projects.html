@@ -74,14 +74,24 @@
                                required/>
                     </div>
                     <div class="form-group">
-                        <label for="newsprintdescription">Sprint description</label>
-                        <textarea id="newsprintdescription" rows="3" class="form-control"
-                                  name="newsprintdescription"></textarea>
+                        <label for="newSprintDateDebut">Date de d&eacutebut</label>
+                        <input id="newSprintDateDebut" type="date" class="form-control"
+                                  name="newSprintDateDebut"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="newSprintDateFin">Date de fin</label>
+                        <input id="newSprintDateFin" type="date" class="form-control"
+                                  name="newSprintDateFin"/>
                     </div>
                     <button id="createnewSprint" type="button" class="btn-md btn btn-primary">
                         <span th:text="#{create.sprint}"></span>
                     </button>
                 </div>
+            </div>
+            <div id="divMessageSprint" class="text-left"></div>
+                <ul id="messageSprint" class="list-group">
+                    <p class="h2 text-left" id="sprintNone" th:text="#{sprint.none}"></p>
+                </ul>
             </div>
 
 
@@ -261,8 +271,8 @@
                                 </div>
                             </li>
                         </ul>
-                    </div><!--
-                --><div class="deletesprint">
+                    </div>
+                    <div class="deletesprint">
                         <div>
                             <button type="button" class="btnremove"><span
                                     class="glyremove glyphicon glyphicon-remove-sign"></span>
