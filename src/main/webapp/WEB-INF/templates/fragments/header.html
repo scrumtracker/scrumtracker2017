@@ -7,15 +7,14 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li th:classappend="${isHomePage} ? active"><a th:href="@{/home}" th:text="#{home}"></a></li>
-                    <li th:classappend="${isProjectPage} ? active : a"><a th:href="@{/projects}" th:text="#{projects}"></a></li>
-                    <li th:classappend="${isSprintPage} ? active : a"><a th:href="@{/sprints}" th:text="#{sprints}"></a></li>
-                    <li th:classappend="${isStoryPage} ? active : a"><a th:href="@{/stories}" th:text="#{stories}"></a></li>
-                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Projects list<span class="caret"></span> </a>
+                    <li th:classappend="${isProjectPage} ? active : a"><a th:href="@{/projects}" th:text="'(' + #{projects} + ')'"></a></li>
+                    <li th:classappend="${isSprintPage} ? active : a"><a th:href="@{/sprints}" th:text="'(' + #{sprints} + ')'"></a></li>
+                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{projects}"></span><span class="caret"></span> </a>
                         <ul class="dropdown-menu" id="projectsListMenu">
                         </ul>
                     </li>
-                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Stories list<span class="caret"></span> </a>
-                        <ul class="dropdown-menu" id="storiesListMenu">
+                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{sprints}"></span><span class="caret"></span> </a>
+                        <ul class="dropdown-menu" id="sprintsListMenu">
                         </ul>
                     </li>
                     <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
