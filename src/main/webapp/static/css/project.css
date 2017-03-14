@@ -25,6 +25,28 @@
 	position: relative;
 	margin-bottom: 30px;
 }
+.divdetailSprint{
+	background-color: #F8F8F8;
+	border: 1px solid #C8C8C8;
+	border-radius: 3px;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	position: relative;
+	margin-bottom: 30px;
+}
+.divdetailStory{
+	background-color: #F8F8F8;
+	border: 1px solid #C8C8C8;
+	border-radius: 3px;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	position: relative;
+	margin-bottom: 30px;
+}
 .btnedit{
 	position: absolute;
 	right: 10px;
