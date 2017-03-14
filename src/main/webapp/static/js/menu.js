@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     getProjectsListMenu();
-    getStoriesListMenu();
+    getSprintsListMenu();
 
 });
 
@@ -27,23 +27,23 @@ function getProjectsListMenu() {
 
 };
 
-function getStoriesListMenu() {
-    $.getJSON('/api/story',
+function getSprintsListMenu() {
+    $.getJSON('/api/sprint',
         function (data) {
-            storiesListMenu = document.getElementById("storiesListMenu");
+            sprintsListMenu = document.getElementById("sprintsListMenu");
             var html = '';
 
             if (data.length != 0) {
 
                 $.each(data, function (key, val) {
-                    html += '<li><a href="story/' + val.id + '">' + val.nom + '</a></li>';
+                    html += '<li><a href="sprint/' + val.id + '">' + val.nom + '</a></li>';
                 });
 
             }
             else {
                 html = '<li class="text-center"> No data </li>';
             }
-            storiesListMenu.innerHTML = html;
+            sprintsListMenu.innerHTML = html;
 
         });
 
