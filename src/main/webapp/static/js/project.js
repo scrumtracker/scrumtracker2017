@@ -62,6 +62,63 @@ $(document).ready(function () {
 
     };
 
+    $("#createnewSprint").click(function () {
+
+        $.ajax({
+
+            url: '/api/sprint/add',
+            type: 'POST',
+            headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            data: '{"nom": "' + $("#newsprintname").val() + '", "date de début": "' + $("#newSprintDateDebut").val() + '", "date de fin": "' + $("#newSprintDateFin").val() + '"}',
+            success: function (data) {
+                $('#divaddnewsprint').hide();
+                $('#divaddnewsprint').trigger("reset");
+                $('#divaddsprint').show();
+                $('#divMessageSprint').html(data.nom + " has been successfully added.");
+                getListSprints();
+
+            },
+            error: function (resultat, statut, erreur) {
+                $('#divMessageSprint').html("This story already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
+            }
+
+        });
+
+    });
+
+    getListSprints();
+
+    function getListSprints() {
+        $.getJSON('/api/sprint',
+            function (data) {
+                listeSprints = document.getElementById("divlistsprint");
+
+                if (data.length!=0) {
+                    var html = '<p class="h2 text-center" th:text="#{sprint.list}"></p>';
+
+                    $.each(data, function (key, val) {
+
+                        html +=
+                            '<div class="sprint">'+
+                            '<div class="list-group-item storyinsprint" onclick="showSprint(this)">'+
+                            '<div class="padd2">'+
+                            '<span class="bold">' + val.nom+ '</span>'+
+                            '</div>'+
+                            '</div>'+
+                            '</div>';
+                    });
+                    $("#sprintNone").hide();
+                    listeSprints.innerHTML = html;
+                }
+                else {
+                    $("#sprintNone").show();
+                }
+
+
+            });
+
+    };
+
 });
 
 function addNewSprint(){
