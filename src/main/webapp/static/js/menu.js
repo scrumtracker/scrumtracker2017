@@ -1,7 +1,9 @@
 $(document).ready(function () {
 
     getProjectsListMenu();
-    getStoriesListMenu();
+    getSprintsListMenu();
+
+});
 
 function getProjectsListMenu() {
     $.getJSON('/api/project',
@@ -9,16 +11,15 @@ function getProjectsListMenu() {
             projectsListMenu = document.getElementById("projectsListMenu");
             var html = '';
 
-            if (data.length!=0) {
-
+            if (data.length != 0) {
 
                 $.each(data, function (key, val) {
-                    html += '<li><a href="project/'+ val.id +'">' + val.nom + '</a></li>';
+                    html += '<li><a href="project/' + val.id + '">' + val.nom + '</a></li>';
                 });
 
             }
             else {
-               html='<li class="text-center"> No data </li>';
+                html = '<li class="text-center"> No data </li>';
             }
             projectsListMenu.innerHTML = html;
 
@@ -26,27 +27,25 @@ function getProjectsListMenu() {
 
 };
 
-    function getStoriesListMenu() {
-        $.getJSON('/api/story',
-            function (data) {
-                storiesListMenu = document.getElementById("storiesListMenu");
-                var html = '';
+function getSprintsListMenu() {
+    $.getJSON('/api/sprint',
+        function (data) {
+            sprintsListMenu = document.getElementById("sprintsListMenu");
+            var html = '';
 
-                if (data.length!=0) {
+            if (data.length != 0) {
 
+                $.each(data, function (key, val) {
+                    html += '<li><a href="sprint/' + val.id + '">' + val.nom + '</a></li>';
+                });
 
-                    $.each(data, function (key, val) {
-                        html += '<li><a href="story/'+ val.id +'">' + val.nom + '</a></li>';
-                    });
+            }
+            else {
+                html = '<li class="text-center"> No data </li>';
+            }
+            sprintsListMenu.innerHTML = html;
 
-                }
-                else {
-                    html='<li class="text-center"> No data </li>';
-                }
-                storiesListMenu.innerHTML = html;
+        });
 
-            });
+};
 
-    };
-
-});
