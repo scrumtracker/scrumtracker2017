@@ -1,7 +1,9 @@
 package hei2017.entity;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -24,6 +26,8 @@ public class Project {
 
     private String description;
 
+    private Timestamp dateCreation;
+
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<User> projectUsers = new HashSet<User>(0);
@@ -33,17 +37,19 @@ public class Project {
     private Set<Sprint> projectSprints = new HashSet<Sprint>(0);
 
     //Constructeurs
-    public Project(){};
+    public Project(){this.dateCreation = new Timestamp(System.currentTimeMillis());};
 
     public Project(String nom)
     {
         this.nom = nom;
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
     public Project(String nom, String description)
     {
         this.nom = nom;
         this.description = description;
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
     //Méthodes
@@ -76,7 +82,7 @@ public class Project {
     }
 
     public Set<Sprint> getProjectSprints() {
-        return projectSprints;
+        return this.projectSprints;
     }
 
     public void setProjectSprints(Set<Sprint> projectSprints) {
@@ -91,5 +97,13 @@ public class Project {
     public void addUser(User user)
     {
         projectUsers.add(user);
+    }
+
+    public Timestamp getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Timestamp dateCreation) {
+        this.dateCreation = dateCreation;
     }
 }

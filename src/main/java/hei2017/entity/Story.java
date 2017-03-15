@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import hei2017.enumeration.StoryStatus;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +27,8 @@ public class Story {
 
     private Integer points;
 
+    private Timestamp dateCreation;
+
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Sprint storySprint = new Sprint();
@@ -36,12 +39,12 @@ public class Story {
 
     //Constructeurs
     public Story() {
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
-
-    ;
 
     public Story(String nom) {
         this.nom = nom;
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
     //Méthodes
@@ -92,5 +95,21 @@ public class Story {
 
     public void addTask(Task task) {
         storyTasks.add(task);
+    }
+
+    public Timestamp getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Timestamp dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public Set<Task> getStoryTasks() {
+        return storyTasks;
+    }
+
+    public void setStoryTasks(Set<Task> storyTasks) {
+        this.storyTasks = storyTasks;
     }
 }
