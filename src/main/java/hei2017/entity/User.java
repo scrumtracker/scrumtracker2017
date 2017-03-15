@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +28,8 @@ public class User {
 
     private String email;
 
+    private Timestamp dateCreation;
+
     @JsonIgnore
     private String password;
 
@@ -38,11 +41,14 @@ public class User {
     @ManyToMany(mappedBy = "taskUsers", cascade = CascadeType.ALL)
     private Set<Task> userTasks = new HashSet<Task>(0);
 
-    public User() {}
+    public User() {
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
+    }
 
     public User(String pseudo, String email) {
         this.pseudo = pseudo;
         this.email = email;
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
     public User(String nom, String prenom, String pseudo, String email) {
@@ -50,12 +56,14 @@ public class User {
         this.prenom = prenom;
         this.pseudo = pseudo;
         this.email = email;
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
     public User(String email, Set<Project> userProjects)
     {
         this.email = email;
         this.userProjects = userProjects;
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
     public Long getId() { return id; }
@@ -112,5 +120,11 @@ public class User {
         this.userTasks = userTasks;
     }
 
+    public Timestamp getDateCreation() {
+        return dateCreation;
+    }
 
+    public void setDateCreation(Timestamp dateCreation) {
+        this.dateCreation = dateCreation;
+    }
 }
