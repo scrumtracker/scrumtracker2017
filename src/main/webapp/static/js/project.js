@@ -39,17 +39,19 @@ $(document).ready(function () {
 
                         html +=
                             '<li>'+
-                            '<a href=story/' + val.id + ' data-ajax="false" class="list-group-item">'+ val.nom +
+                            '<div class="list-group-item" onclick="showStory('+val.id+')">'
+                            + val.nom +
                             '<div class="deleteStorylist">'+
                             '<button type="button" class="btnremove">'+
                             '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
                             '</button>'+
                             '</div>'+
-                            '</a>'+
+                            '</div>'+
                             '</li>';
                     });
                     $("#storyNone").hide();
                     listeStories.innerHTML = html;
+                    ;
                 }
                 else {
                     $("#storyNone").show();
@@ -279,3 +281,29 @@ function addNewStoryUnaffected(){
     divaddnewsprint.style.display = "none";
     newSprint.style.display = "block";
 }
+
+function showStory(id){
+    console.log(id);
+
+    $.getJSON('/api/story/'+id,
+        function (data) {
+            detailStory = document.getElementById("detailsStory");
+
+            if (data.length!=0) {
+                console.log(data);
+                var html =  '<p>Story name : '+data.nom+'</p>'+
+                '<p>Creation date : </p>'+
+                '<p>State : '+data.status+'</p>'+
+                '<p>Total hours of works : </p>'+
+                '<p>Number of tasks : </p>'+
+                '<p>Goals : '+data.description+'</p>';
+                detailStory.innerHTML = html;
+                ;
+            }
+
+
+        });
+
+
+}
+
