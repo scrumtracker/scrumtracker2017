@@ -1,9 +1,14 @@
 package hei2017.controller;
 
+import hei2017.entity.Sprint;
+import hei2017.service.ProjectService;
+import hei2017.service.SprintService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,12 +18,39 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class SprintController {
 
-    @RequestMapping("/sprints")
+    @Inject
+    ProjectService projectService;
+
+    @Inject
+    SprintService sprintService;
+
+    @RequestMapping("/sprint/{idSprint}")
     public String goSprints(Model model,
                             HttpServletRequest request,
-                            HttpServletResponse response)
+                            HttpServletResponse response,
+                            @PathVariable Long idSprint)
     {
         model.addAttribute("isSprintPage", true);
-        return "sprints";
+
+        model.addAttribute("projects", projectService.findAll());
+
+        model.addAttribute("sprints", sprintService.findAll());
+
+        Sprint sprint = sprintService.findOneById(idSprint);
+
+        if(null==sprint)
+        {
+            model.addAttribute("errorMessage", "Sprint #"+idSprint+" does not exist.");
+
+            model.addAttribute("isErrorPage", true);
+
+            return "erreur";
+        }
+
+        model.addAttribute("sprint", sprint);
+
+        model.addAttribute("sprintProject", sprint.getSprintProject());
+
+        return "sprint";
     }
 }
