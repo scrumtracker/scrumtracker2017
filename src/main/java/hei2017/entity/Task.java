@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import hei2017.enumeration.UniteTemps;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +27,8 @@ public class Task {
 
     private UniteTemps uniteTempsDeCharge;
 
+    private Timestamp dateCreation;
+
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<User> taskUsers = new HashSet<User>(0);
@@ -35,11 +38,14 @@ public class Task {
     private Set<Story> taskStories = new HashSet<Story>(0);
 
     //Constructeurs
-    public Task(){};
+    public Task(){
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
+    }
 
     public Task(String nom)
     {
         this.nom = nom;
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
     //Méthodes

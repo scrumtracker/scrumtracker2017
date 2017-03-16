@@ -15,8 +15,6 @@ $(document).ready(function () {
                 $('#divaddstoryunaffected').show();
                 $('#divMessage').html(data.nom + " has been successfully added.");
                 getListStories();
-                getStoriesListMenu();
-
             },
             error: function (resultat, statut, erreur) {
                 $('#divMessage').html("This story already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
@@ -41,17 +39,19 @@ $(document).ready(function () {
 
                         html +=
                             '<li>'+
-                                '<a href=story/' + val.id + ' data-ajax="false" class="list-group-item">'+ val.nom +
-                                    '<div class="deleteStorylist">'+
-                                        '<button type="button" class="btnremove">'+
-                                            '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
-                                        '</button>'+
-                                    '</div>'+
-                                '</a>'+
+                            '<div class="list-group-item" onclick="showStory('+val.id+')">'
+                            + val.nom +
+                            '<div class="deleteStorylist">'+
+                            '<button type="button" class="btnremove">'+
+                            '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
+                            '</button>'+
+                            '</div>'+
+                            '</div>'+
                             '</li>';
                     });
                     $("#storyNone").hide();
                     listeStories.innerHTML = html;
+                    ;
                 }
                 else {
                     $("#storyNone").show();
@@ -61,6 +61,138 @@ $(document).ready(function () {
             });
 
     };
+
+    $("#createnewSprint").click(function () {
+
+        $.ajax({
+
+            url: '/api/sprint/add',
+            type: 'POST',
+            headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            data: '{"nom": "' + $("#newsprintname").val() + '", "date de début": "' + $("#newSprintDateDebut").val() + '", "date de fin": "' + $("#newSprintDateFin").val() + '"}',
+            success: function (data) {
+                $('#divaddnewsprint').hide();
+                $('#divaddnewsprint').trigger("reset");
+                $('#divaddsprint').show();
+                $('#divMessageSprint').html(data.nom + " has been successfully added.");
+                getListSprints();
+
+            },
+            error: function (resultat, statut, erreur) {
+                $('#divMessageSprint').html("This story already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
+            }
+
+        });
+
+    });
+
+    getListSprints();
+
+    function getListSprints() {
+        $.getJSON('/api/sprint',
+            function (data) {
+                listeSprints = document.getElementById("divlistsprint");
+
+                if (data.length!=0) {
+                    var html = '<p class="h2 text-center" th:text="#{sprint.list}"></p>';
+
+                    $.each(data, function (key, val) {
+
+                        html +=
+                            '<div class="sprint">'+
+                            '<div id="onClickSprint" class="list-group-item storyinsprint" onclick="getDetailSprint(this)">'+
+                            '<div class="padd2">'+
+                            '<span class="bold">' + val.nom+ '</span>'+
+                            '</div>'+
+                            '<button class="btn btn-xs btn-default btnseetasks" onclick="">'+
+                            '<span th:text="#{see.tasks}"></span>'+
+                            '<span class="glybtnleft glyphicon glyphicon-chevron-right"></span>'+
+                            '</button>'+
+                            '</div>'+
+                            '</div>';
+                    });
+                    $("#sprintNone").hide();
+                    listeSprints.innerHTML = html;
+                }
+                else {
+                    $("#sprintNone").show();
+                }
+
+
+            });
+
+    };
+
+    $("#onClickSprint").click(function () {
+
+        $.ajax({
+
+            url: '/api/sprint',
+            type: 'GET',
+            // headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            // data: '{"nom": "' + $("#newsprintname").val() + '", "date de début": "' + $("#newSprintDateDebut").val() + '", "date de fin": "' + $("#newSprintDateFin").val() + '"}',
+            success: function (data) {
+                listeSprints = document.getElementById("divlistsprint");
+
+                if (data.length != 0) {
+                    var html = '<p class="h2 text-center" th:text="#{sprint.list}"></p>';
+
+                    $.each(data, function (key, val) {
+
+                        html +=
+                            '<div class="sprint">' +
+                            '<div class="list-group-item storyinsprint" onclick="getDetailSprint(this)">' +
+                            '<div class="padd2">' +
+                            '<span class="bold">' + val.nom + '</span>' +
+                            '</div>' +
+                            '<button id="onClickSprint" class="btn btn-xs btn-default btnseetasks" onclick="">' +
+                            '<span th:text="#{see.tasks}"></span>' +
+                            '<span class="glybtnleft glyphicon glyphicon-chevron-right"></span>' +
+                            '</button>' +
+                            '</div>' +
+                            '</div>';
+                    });
+                    $("#sprintNone").hide();
+                    listeSprints.innerHTML = html;
+                }
+                else {
+                    $("#sprintNone").show();
+                }
+            }
+        })
+
+    });
+
+
+    function getDetailSprint() {
+        $.getJSON('/api/sprint',
+            function (data) {
+                listeDetailSprint = document.getElementById("divdetail");
+
+                if (data.length!=0) {
+                    var html = '<p class="h2 text-center" th:text="#{sprint.detail}"></p>';
+
+                    $.each(data, function (key, val) {
+
+                        html +=
+                            '<div class="detailSprint">'+
+                            '<p class="h4 text-center"> D&eacutetail du Sprint </p>'+
+                            '<div>'+
+                            '<button type="button" class="btnedit btn-xs btn btn-default">'+
+                            '<span class="glyedit glyphicon glyphicon-edit"></span>'+
+                            '</button>'+
+                            '</div>'+
+                            '</div>'+
+                            '<p>Nom du Sprint : ' +val.nom+ '</p>'+
+                            '<p>D&eacutebut du Sprint : ' +val.dateDebut+ '</p>'+
+                            '<p>Fin du Sprint : ' +val.dateFin+ '</p>'+
+                            '</div>';
+                    });
+                    listeDetailSprint.innerHTML = html;
+                }
+            });
+
+    }
 
 });
 
@@ -149,3 +281,29 @@ function addNewStoryUnaffected(){
     divaddnewsprint.style.display = "none";
     newSprint.style.display = "block";
 }
+
+function showStory(id){
+    console.log(id);
+
+    $.getJSON('/api/story/'+id,
+        function (data) {
+            detailStory = document.getElementById("detailsStory");
+
+            if (data.length!=0) {
+                console.log(data);
+                var html =  '<p>Story name : '+data.nom+'</p>'+
+                '<p>Creation date : </p>'+
+                '<p>State : '+data.status+'</p>'+
+                '<p>Total hours of works : </p>'+
+                '<p>Number of tasks : </p>'+
+                '<p>Goals : '+data.description+'</p>';
+                detailStory.innerHTML = html;
+                ;
+            }
+
+
+        });
+
+
+}
+
