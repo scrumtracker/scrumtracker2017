@@ -21,8 +21,15 @@
 
 <section class="container content-page">
 
-    <img class="center-block" th:src="@{/img/erreur.gif}"/>
+    <div th:if="${errorMessage}" class="center-block">
+        <h1 th:text="#{error}"></h1>
+        <p th:text="${errorMessage}"></p>
+        <a th:href="@{/home}">
+            <button type="button" class="btn btn-default" th:text="#{back.to.menu}"></button>
+        </a>
+    </div>
 
+    <img th:unless="${errorMessage}" class="center-block" th:src="@{/img/erreur.gif}"/>
 </section>
 
 <div th:replace="fragments/footer :: footer"></div>
