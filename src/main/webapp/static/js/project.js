@@ -1,6 +1,12 @@
 $(document).ready(function () {
 
     $("#createNewStory").click(function () {
+        var story = '{"description": "' + $("#newstorydescriptionUnaffected").val() + '", "nom": "' + $("#newstorynameUnaffected").val() + '", "points": "' + $("#newstorypointsUnaffected").val() + '"}';
+        story = {};
+        story.nom = $("#newstorynameUnaffected").val();
+        story.description = $("#newstorydescriptionUnaffected").val();
+        story.points = $("#newstorypointsUnaffected").val();
+
 
         $.ajax({
 
@@ -8,11 +14,11 @@ $(document).ready(function () {
             // cache: false,
             type: 'POST',
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data: '{"description": "' + $("#newstorydescriptionUnaffected").val() + '", "nom": "' + $("#newstorynameUnaffected").val() + '", "points": "' + $("#newstorypointsUnaffected").val() + '"}',
+            data: JSON.stringify(story),
             success: function (data) {
                 $('#divaddnewstoryUnaffected').hide();
                 $('#divaddnewstoryUnaffected').trigger("reset");
-                $('#divaddstoryunaffected').show();
+                $('#divaddnewstoryUnaffected').show();
                 $('#divMessage').html(data.nom + " has been successfully added.");
                 getListStories();
             },
