@@ -70,6 +70,23 @@ Si vous souhaitez vous familiariser avec Thymeleaf, un tutoriel en ligne est dis
 |https://datatables.net|Permet de créer des tableaux dynamiques (recherche, classement, etc)|1.10.13|
 |http://codeseven.github.io/toastr|Permet d'afficher des Toasts (notifications) |2.1.3|
 
+#### Toastr.js
+Si vous devez afficher des notifications à l'utilisateur il y a Toastr ! 
+<br>
+Utile lors des requêtes AJAX par exemple.
+<br>
+`toastr.success("Texte");`
+<br>
+`toastr.info("Texte");`
+<br>
+`toastr.warning("Texte");`
+<br>
+`toastr.error("Texte");`
+<br>
+Pour plus d'infos: c'est ici: http://codeseven.github.io/toastr/demo.html
+   
+
+
 
 ## Commandes CLI utiles
 | Commande | Description|
