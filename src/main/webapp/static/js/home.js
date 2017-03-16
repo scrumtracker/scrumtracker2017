@@ -4,9 +4,7 @@ $(document).ready(function () {
 
         if($("#newprojectname").val()!='') {
             $.ajax({
-
                 url: '/api/project/add',
-                // cache: false,
                 type: 'POST',
                 headers: {"Accept": "application/json", "Content-Type": "application/json"},
                 data: '{"description": "' + $("#newprojectdescription").val() + '", "nom": "' + $("#newprojectname").val() + '"}',
@@ -27,11 +25,7 @@ $(document).ready(function () {
         else{
             $('#divMessage').html("Project name is required.");
         }
-
-
     });
-
-    getListProjects();
 
 
     function getListProjects() {
