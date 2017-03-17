@@ -57,7 +57,7 @@ $(document).ready(function () {
                     });
                     $("#storyNone").hide();
                     listeStories.innerHTML = html;
-                    ;
+
                 }
                 else {
                     $("#storyNone").show();
@@ -106,7 +106,7 @@ $(document).ready(function () {
 
                         html +=
                             '<div class="sprint">'+
-                            '<div id="onClickSprint" class="list-group-item storyinsprint" onclick="getDetailSprint(this)">'+
+                            '<div class="list-group-item storyinsprint" onclick="detailSprint('+val.id+')">'+
                             '<div class="padd2">'+
                             '<span class="bold">' + val.nom+ '</span>'+
                             '</div>'+
@@ -123,83 +123,8 @@ $(document).ready(function () {
                 else {
                     $("#sprintNone").show();
                 }
-
-
             });
-
-    };
-
-    $("#onClickSprint").click(function () {
-
-        $.ajax({
-
-            url: '/api/sprint',
-            type: 'GET',
-            // headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            // data: '{"nom": "' + $("#newsprintname").val() + '", "date de début": "' + $("#newSprintDateDebut").val() + '", "date de fin": "' + $("#newSprintDateFin").val() + '"}',
-            success: function (data) {
-                listeSprints = document.getElementById("divlistsprint");
-
-                if (data.length != 0) {
-                    var html = '<p class="h2 text-center" th:text="#{sprint.list}"></p>';
-
-                    $.each(data, function (key, val) {
-
-                        html +=
-                            '<div class="sprint">' +
-                            '<div class="list-group-item storyinsprint" onclick="getDetailSprint(this)">' +
-                            '<div class="padd2">' +
-                            '<span class="bold">' + val.nom + '</span>' +
-                            '</div>' +
-                            '<button id="onClickSprint" class="btn btn-xs btn-default btnseetasks" onclick="">' +
-                            '<span th:text="#{see.tasks}"></span>' +
-                            '<span class="glybtnleft glyphicon glyphicon-chevron-right"></span>' +
-                            '</button>' +
-                            '</div>' +
-                            '</div>';
-                    });
-                    $("#sprintNone").hide();
-                    listeSprints.innerHTML = html;
-                }
-                else {
-                    $("#sprintNone").show();
-                }
-            }
-        })
-
-    });
-
-
-    function getDetailSprint() {
-        $.getJSON('/api/sprint',
-            function (data) {
-                listeDetailSprint = document.getElementById("divdetail");
-
-                if (data.length!=0) {
-                    var html = '<p class="h2 text-center" th:text="#{sprint.detail}"></p>';
-
-                    $.each(data, function (key, val) {
-
-                        html +=
-                            '<div class="detailSprint">'+
-                            '<p class="h4 text-center"> D&eacutetail du Sprint </p>'+
-                            '<div>'+
-                            '<button type="button" class="btnedit btn-xs btn btn-default">'+
-                            '<span class="glyedit glyphicon glyphicon-edit"></span>'+
-                            '</button>'+
-                            '</div>'+
-                            '</div>'+
-                            '<p>Nom du Sprint : ' +val.nom+ '</p>'+
-                            '<p>D&eacutebut du Sprint : ' +val.dateDebut+ '</p>'+
-                            '<p>Fin du Sprint : ' +val.dateFin+ '</p>'+
-                            '</div>';
-                    });
-                    listeDetailSprint.innerHTML = html;
-                }
-            });
-
     }
-
 });
 
 function addNewSprint(){
@@ -304,7 +229,7 @@ function showStory(id){
                 '<p>Number of tasks : </p>'+
                 '<p>Goals : '+data.description+'</p>';
                 detailStory.innerHTML = html;
-                ;
+
             }
 
 
@@ -313,3 +238,28 @@ function showStory(id){
 
 }
 
+function detailSprint(id){
+    console.log(id);
+
+    $.getJSON('/api/sprint/'+id,
+        function (data) {
+            detailofSprint = document.getElementById("detailsSprint");
+
+            if (data.length!=0) {
+                console.log(data);
+                var html =  '<p>Sprint name : '+data.nom+'</p>'+
+                    '<p>Date of beginning :' +data.dateDebut+ '</p>'+
+                    '<p>Date of the end : '+data.dateFin+'</p>';
+                detailofSprint.innerHTML = html;
+
+            }
+
+
+        });
+
+
+}
+
+function menuSprint(){
+
+}
