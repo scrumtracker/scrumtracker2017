@@ -9,26 +9,26 @@ $(document).ready(function () {
 
 
         if(story.nom!='') {
-            $.ajax({
+        $.ajax({
 
-                url: '/api/story/add',
-                // cache: false,
-                type: 'POST',
-                headers: {"Accept": "application/json", "Content-Type": "application/json"},
-                data: JSON.stringify(story),
-                success: function (data) {
-                    $('#divaddnewstoryUnaffected').hide();
-                    $('#divaddnewstoryUnaffected').trigger("reset");
-                    $('#newStoryUnaffected').show();
+            url: '/api/story/add',
+            // cache: false,
+            type: 'POST',
+            headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            data: JSON.stringify(story),
+            success: function (data) {
+                $('#divaddnewstoryUnaffected').hide();
+                $('#divaddnewstoryUnaffected').trigger("reset");
+                $('#divaddnewstoryUnaffected').show();
                     toastr.success(data.nom + " added");
-                    //$('#divMessage').html(data.nom + " has been successfully added.");
-                    getListStories();
-                },
-                error: function (resultat, statut, erreur) {
-                    toastr.error("An error occurred. This story may already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
-                }
+                $('#divMessage').html(data.nom + " has been successfully added.");
+                getListStories();
+            },
+            error: function (resultat, statut, erreur) {
+                $('#divMessage').html("This story already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
+            }
 
-            });
+        });
         }
         else{toastr.error("Story name is required.");}
 
@@ -86,13 +86,12 @@ $(document).ready(function () {
                 $('#divaddnewsprint').hide();
                 $('#divaddnewsprint').trigger("reset");
                 $('#divaddsprint').show();
-                //$('#divMessageSprint').html(data.nom + " has been successfully added.");
                 toastr.success(data.nom + " has been successfully added.");
                 getListSprints();
+                //getSprintsListMenu();
 
             },
             error: function (resultat, statut, erreur) {
-                //$('#divMessageSprint').html("This story already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
                 toastr.error("An error occurred. This sprint may already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ").");
             }
 
@@ -145,9 +144,6 @@ function addNewSprint(){
 
     divaddnewsprint.style.display = "block";
     newSprint.style.display = "none";
-
-
-
 
     divaddnewstoryUnaffected.style.display = "none";
     newStoryUnaffected.style.display = "block";
@@ -229,7 +225,6 @@ function showStory(id){
             detailStory = document.getElementById("detailsStory");
 
             if (data.length!=0) {
-                console.log(data);
                 var html =  '<p>Story name : '+data.nom+'</p>'+
                 '<p>Creation date : ' + moment(data.dateCreation).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateCreation).fromNow() +')</p>'+
                 '<p>State : '+data.status+'</p>'+
@@ -237,35 +232,23 @@ function showStory(id){
                 '<p>Number of tasks : </p>'+
                 '<p>Goals : '+data.description+'</p>';
                 detailStory.innerHTML = html;
-
             }
-
-
         });
 
 
 }
 
 function detailSprint(id){
-    console.log(id);
 
     $.getJSON('/api/sprint/'+id,
         function (data) {
             detailofSprint = document.getElementById("detailsSprint");
-
             if (data.length!=0) {
                 console.log(data);
                 var html =  '<p>Sprint name : '+data.nom+'</p>'+
                     '<p>Starting date : ' + moment(data.dateDebut).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateDebut).fromNow() +')</p>'+
                     '<p>Ending date : '+ moment(data.dateFin).format('DD/MM/YYYY HH:mm') +'<br/>(' + moment(data.dateFin).fromNow() +')</p>';
                 detailofSprint.innerHTML = html;
-
             }
-
         });
-
-}
-
-function menuSprint(){
-
 }
