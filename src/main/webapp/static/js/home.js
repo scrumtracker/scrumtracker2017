@@ -12,9 +12,9 @@ $(document).ready(function () {
                     $('#formaddnewproject').hide();
                     $('#formaddnewproject').trigger("reset");
                     $('#newProject').show();
-                    //$('#divMessage').html(data.nom + " has been successfully added.");
-                    toastr.success(data.nom+" added");
                     getListProjects();
+                    getProjectsListMenu();
+                    toastr.success(data.nom+" added");
                 },
                 error: function (resultat, statut, erreur) {
                     toastr.error(statut+" - "+erreur);

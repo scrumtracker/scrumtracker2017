@@ -82,6 +82,7 @@ $(document).ready(function () {
                 $('#divaddsprint').show();
                 $('#divMessageSprint').html(data.nom + " has been successfully added.");
                 getListSprints();
+                getSprintsListMenu();
 
             },
             error: function (resultat, statut, erreur) {
@@ -137,9 +138,6 @@ function addNewSprint(){
 
     divaddnewsprint.style.display = "block";
     newSprint.style.display = "none";
-
-
-
 
     divaddnewstoryUnaffected.style.display = "none";
     newStoryUnaffected.style.display = "block";
@@ -221,7 +219,6 @@ function showStory(id){
             detailStory = document.getElementById("detailsStory");
 
             if (data.length!=0) {
-                console.log(data);
                 var html =  '<p>Story name : '+data.nom+'</p>'+
                 '<p>Creation date : </p>'+
                 '<p>State : '+data.status+'</p>'+
@@ -229,37 +226,23 @@ function showStory(id){
                 '<p>Number of tasks : </p>'+
                 '<p>Goals : '+data.description+'</p>';
                 detailStory.innerHTML = html;
-
             }
-
-
         });
 
 
 }
 
 function detailSprint(id){
-    console.log(id);
 
     $.getJSON('/api/sprint/'+id,
         function (data) {
             detailofSprint = document.getElementById("detailsSprint");
-
             if (data.length!=0) {
                 console.log(data);
                 var html =  '<p>Sprint name : '+data.nom+'</p>'+
                     '<p>Date of beginning :' +data.dateDebut+ '</p>'+
                     '<p>Date of the end : '+data.dateFin+'</p>';
                 detailofSprint.innerHTML = html;
-
             }
-
-
         });
-
-
-}
-
-function menuSprint(){
-
 }
