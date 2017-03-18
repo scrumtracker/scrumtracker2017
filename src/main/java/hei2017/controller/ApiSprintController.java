@@ -91,4 +91,16 @@ public class ApiSprintController {
         }
         return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
     }
+
+    //Renvoie tous les SPRINTS attachés au projet d'id idProject
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/sprint/project/{idProject}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<Sprint> showSprintsAssociatedToThisProject(@PathVariable Long idProject)
+    {
+        LOGGER.debug("ApiController - showSprintsAssociatedToThisProject");
+        List<Sprint> sprints = sprintService.findBySprintProject(idProject);
+        return sprints;
+    }
+
+
 }
