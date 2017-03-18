@@ -98,7 +98,7 @@
 	text-align: center;
 }
 
-ul{
+section ul{
 	margin-top: 25px;
 	margin-bottom: 10px;
 	padding-left: 20px;
@@ -107,7 +107,7 @@ ul{
 #divlistsprint ul{
 	display: none;
 }
-ul.list-group li a{
+section ul li a{
 	border: 1px solid #ddd;
 	border-radius: 6px;
 	margin-bottom: -1px;
@@ -118,16 +118,16 @@ ul.list-group li a{
 	text-decoration: none;
 	position: relative;
 }
-ul li a:hover{
+section ul li a:hover{
 	text-decoration: none;
 	background-color: #ccc;
 	color: #333;
 }
-ul li a .fini{
+section ul li a .fini{
 	padding-right: 10px;
 	color: green;
 }
-ul li a .en-cours{
+section ul li a .en-cours{
 	padding-right: 10px;
 	color: orange;
 }
