@@ -12,5 +12,7 @@ public interface StoryDAO extends JpaRepository<Story, Long>
 {
     long count();
 
+    List<Story> findByStorySprintId(Long idSprint);
+
     Story findOneByNom(String nom);
 }

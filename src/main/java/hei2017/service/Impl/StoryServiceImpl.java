@@ -26,6 +26,11 @@ public class StoryServiceImpl implements StoryService
     }
 
     @Override
+    public List<Story> findByStorySprint(Long idSprint) {
+        return storyDAO.findByStorySprintId(idSprint);
+    }
+
+    @Override
     public Story findOneByNom(String nom) {
         return storyDAO.findOneByNom(nom);
     }

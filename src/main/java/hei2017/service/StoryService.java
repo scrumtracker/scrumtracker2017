@@ -24,6 +24,8 @@ public interface StoryService
 
     List<Story> findAll();
 
+    List<Story> findByStorySprint(Long idSprint);
+
     Story findOneByNom(String nom);
 
     void save(Story story);
