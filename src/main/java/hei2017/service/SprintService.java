@@ -21,6 +21,8 @@ public interface SprintService {
 
     List<Sprint> findAll();
 
+    List<Sprint> findBySprintProject(Long idProject);
+
     Sprint findOneById(Long id);
 
     void save(Sprint sprint);

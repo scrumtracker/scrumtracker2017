@@ -26,6 +26,11 @@ public class SprintServiceImpl implements SprintService {
     }
 
     @Override
+    public List<Sprint> findBySprintProject(Long idProject) {
+        return sprintDAO.findBySprintProjectId(idProject);
+    }
+
+    @Override
     public Sprint findOneById(Long id) { return sprintDAO.findOne(id); }
 
     @Override
