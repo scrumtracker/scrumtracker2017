@@ -92,6 +92,26 @@ public class ApiStoryController {
         return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
     }
 
+    //Renvoie toutes les STORIES attachées au SPRINT d'id idSprint
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/story/sprint/{idSprint}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<Story> showStoriesAssociatedToThisSprint(@PathVariable Long idSprint)
+    {
+        LOGGER.debug("ApiController - showStoriesAssociatedToThisSprint");
+        List<Story> stories = storyService.findByStorySprint(idSprint);
+        return stories;
+    }
+
+    //Renvoie toutes les STORIES qui ne sont pas attachées à un SPRINT
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/story/sprint/null", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<Story> showStoriesWithNoSprint()
+    {
+        LOGGER.debug("ApiController - showStoriesWithNoSprint");
+        List<Story> stories = storyService.findByStorySprint(null);
+        return stories;
+    }
+
 
 
 }
