@@ -145,4 +145,16 @@ public class ApiTaskController {
         }
         return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
     }
+
+    //Renvoie toutes les TASKS attachées a la STORY d'id idStory
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/task/story/{idStory}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<Task> showTasksAssociatedToThisStory(@PathVariable Long idStory)
+    {
+        LOGGER.debug("ApiController - showTasksAssociatedToThisStory");
+        List<Task> tasks = taskService.findByTaskStories(idStory);
+        return tasks;
+    }
+
+
 }
