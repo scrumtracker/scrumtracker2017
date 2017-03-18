@@ -107,6 +107,13 @@ section ul{
 #divlistsprint ul{
 	display: none;
 }
+#divlistsprint{
+	margin-bottom: 60px;
+}
+#storyunaffected{
+	padding: 15px 20px;
+	padding-right: 100px;
+}
 section ul li a{
 	border: 1px solid #ddd;
 	border-radius: 6px;
