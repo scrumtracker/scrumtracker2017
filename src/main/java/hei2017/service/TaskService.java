@@ -22,6 +22,8 @@ public interface TaskService
 
     List<Task> findAll();
 
+    List<Task> findByTaskStories(Long idStory);
+
     Task findOneById(Long id);
 
     Task findOneByNom(String nom);

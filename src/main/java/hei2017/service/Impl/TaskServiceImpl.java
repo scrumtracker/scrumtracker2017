@@ -26,6 +26,11 @@ public class TaskServiceImpl implements TaskService
     }
 
     @Override
+    public List<Task> findByTaskStories(Long idStory) {
+        return taskDAO.findByTaskStoriesId(idStory);
+    }
+
+    @Override
     public Task findOneById(Long id) { return taskDAO.findOne(id); }
 
     @Override
