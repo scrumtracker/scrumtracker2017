@@ -61,7 +61,7 @@ public class ApiUserController {
         return userService.findAllWithAll();
     }
 
-    @JsonView(JsonViews.User.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/user/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public ResponseEntity<User> showUser(@PathVariable Long id)
@@ -73,7 +73,7 @@ public class ApiUserController {
         return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
     }
 
-    @JsonView(JsonViews.User.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/user/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<User> sendUser(@RequestBody User user)
     {
@@ -91,7 +91,7 @@ public class ApiUserController {
         }
     }
 
-    @JsonView(JsonViews.User.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/user/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<User> deleteUser(@PathVariable("id") Long id)
     {

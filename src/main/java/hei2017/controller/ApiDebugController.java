@@ -58,8 +58,10 @@ public class ApiDebugController {
     @RequestMapping(value = "/api/debug", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public String debug()
     {
+        /*
         if(null!=userService.findOneByPseudo("Mr Motte"))
             return "DB déjà peuplée";
+         */
         //CREATION DES ENTITES
         User testeur = new User();
         testeur.setNom("Teur");

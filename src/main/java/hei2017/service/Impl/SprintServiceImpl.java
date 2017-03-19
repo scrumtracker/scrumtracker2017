@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -44,8 +45,12 @@ public class SprintServiceImpl implements SprintService {
             Set<Story> sprintStories = storyDAO.findByStorySprintId(sprint.getId());
             sprint.setSprintStories(sprintStories);
 
-            Project sprintProject = projectDAO.findByProjectSprintsId(sprint.getId()).iterator().next();
-            sprint.setSprintProject(sprintProject);
+            Iterator<Project> sprintProjectIterator = projectDAO.findByProjectSprintsId(sprint.getId()).iterator();
+            if(sprintProjectIterator.hasNext())
+            {
+                Project sprintProject = sprintProjectIterator.next();
+                sprint.setSprintProject(sprintProject);
+            }
         }
         return sprints;
     }

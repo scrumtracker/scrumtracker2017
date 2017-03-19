@@ -63,7 +63,7 @@ public class ApiSprintController {
         return sprintService.findAllWithAll();
     }
 
-    @JsonView(JsonViews.Sprint.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/sprint/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public ResponseEntity<Sprint> showSprint(@PathVariable Long id)
@@ -75,7 +75,7 @@ public class ApiSprintController {
         return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
     }
 
-    @JsonView(JsonViews.Sprint.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/sprint/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Sprint> sendSprint(@RequestBody Sprint sprint)
     {
@@ -93,7 +93,7 @@ public class ApiSprintController {
         }
     }
 
-    @JsonView(JsonViews.Sprint.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/sprint/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Sprint> deleteSprint(@PathVariable("id") Long id)
     {
@@ -110,7 +110,7 @@ public class ApiSprintController {
     }
 
     //Renvoie tous les SPRINTS attachés au projet d'id idProject
-    @JsonView(JsonViews.Sprint.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/sprint/project/{idProject}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public Set<Sprint> showSprintsAssociatedToThisProject(@PathVariable Long idProject)

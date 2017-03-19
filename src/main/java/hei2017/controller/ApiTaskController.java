@@ -63,7 +63,7 @@ public class ApiTaskController {
         return taskService.findAllWithAll();
     }
 
-    @JsonView(JsonViews.Task.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/task/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public ResponseEntity<Task> showTask(@PathVariable Long id)
@@ -75,7 +75,7 @@ public class ApiTaskController {
         return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
     }
 
-    @JsonView(JsonViews.Task.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/task/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Task> sendStory(@RequestBody Task task)
     {
@@ -93,7 +93,7 @@ public class ApiTaskController {
         }
     }
 
-    @JsonView(JsonViews.Task.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/task/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Task> deleteTask(@PathVariable("id") Long id)
     {
@@ -110,7 +110,7 @@ public class ApiTaskController {
     }
 
     //Renvoie toutes les TASKS attachées a la STORY d'id idStory
-    @JsonView(JsonViews.Task.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/task/story/{idStory}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public Set<Task> showTasksAssociatedToThisStory(@PathVariable Long idStory)

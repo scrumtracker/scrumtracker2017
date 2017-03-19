@@ -62,7 +62,7 @@ public class ApiStoryController {
         return storyService.findAllWithAll();
     }
 
-    @JsonView(JsonViews.Story.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/story/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public ResponseEntity<Story> showStory(@PathVariable Long id)
@@ -74,7 +74,7 @@ public class ApiStoryController {
         return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
     }
 
-    @JsonView(JsonViews.Story.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/story/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Story> sendStory(@RequestBody Story story)
     {
@@ -92,7 +92,7 @@ public class ApiStoryController {
         }
     }
 
-    @JsonView(JsonViews.Story.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/story/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Story> deleteStory(@PathVariable("id") Long id)
     {
@@ -109,7 +109,7 @@ public class ApiStoryController {
     }
 
     //Renvoie toutes les STORIES attachées au SPRINT d'id idSprint
-    @JsonView(JsonViews.Story.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/story/sprint/{idSprint}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public Set<Story> showStoriesAssociatedToThisSprint(@PathVariable Long idSprint)
@@ -120,7 +120,7 @@ public class ApiStoryController {
     }
 
     //Renvoie toutes les STORIES qui ne sont pas attachées à un SPRINT
-    @JsonView(JsonViews.Story.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/story/sprint/null", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public Set<Story> showStoriesWithNoSprint()
