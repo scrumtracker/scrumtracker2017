@@ -29,5 +29,5 @@ public interface UserService
 
     User findOneByPseudo(String pseudo);
 
-    void save(User user);
+    User save(User user);
 }

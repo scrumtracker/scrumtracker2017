@@ -60,7 +60,7 @@ public class ApiProjectController {
         return projectService.findAllWithAll();
     }
 
-    @JsonView(JsonViews.Project.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/project/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public ResponseEntity<Project> showProject(@PathVariable Long id)
@@ -72,7 +72,7 @@ public class ApiProjectController {
         return new ResponseEntity<Project>(projet, HttpStatus.NOT_FOUND);
     }
 
-    @JsonView(JsonViews.Project.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/project/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Project> sendProject(@RequestBody Project project)
     {
@@ -90,7 +90,7 @@ public class ApiProjectController {
         }
     }
 
-    @JsonView(JsonViews.Project.class)
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/project/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Project> deleteProject(@PathVariable("id") Long id)
     {
