@@ -1,14 +1,20 @@
 package hei2017.service.Impl;
 
 import hei2017.dao.ProjectDAO;
+import hei2017.dao.SprintDAO;
+import hei2017.dao.UserDAO;
 import hei2017.entity.Project;
+import hei2017.entity.Sprint;
+import hei2017.entity.User;
 import hei2017.service.ProjectService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by pic on 09/02/2017.
@@ -20,9 +26,29 @@ public class ProjectServiceImpl implements ProjectService
     @Inject
     ProjectDAO projectDAO;
 
+    @Inject
+    SprintDAO sprintDAO;
+
+    @Inject
+    UserDAO userDAO;
+
     @Override
     public List<Project> findAll() {
         return projectDAO.findAll();
+    }
+
+    @Override
+    public List<Project> findAllWithAll() {
+        List<Project> projects = projectDAO.findAll();
+        for(Project project:projects)
+        {
+            Set<Sprint> projectSprints = sprintDAO.findBySprintProjectId(project.getId());
+            project.setProjectSprints(projectSprints);
+
+            Set<User> projectUsers = userDAO.findByUserProjectsId(project.getId());
+            project.setProjectUsers(projectUsers);
+        }
+        return projects;
     }
 
     @Override

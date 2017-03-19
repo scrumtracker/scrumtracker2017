@@ -22,6 +22,8 @@ public interface ProjectService
 
     List<Project> findAll();
 
+    List<Project> findAllWithAll();
+
     Project findOneById(Long id);
 
     Project findOneByNom(String nom);

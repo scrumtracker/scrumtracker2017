@@ -1,6 +1,10 @@
 package hei2017.service.Impl;
 
+import hei2017.dao.ProjectDAO;
+import hei2017.dao.TaskDAO;
 import hei2017.dao.UserDAO;
+import hei2017.entity.Project;
+import hei2017.entity.Task;
 import hei2017.entity.User;
 import hei2017.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by pic on 02/03/2017.
@@ -18,11 +23,31 @@ import java.util.List;
 public class UserServiceImpl implements UserService
 {
     @Inject
+    ProjectDAO projectDAO;
+
+    @Inject
+    TaskDAO taskDAO;
+
+    @Inject
     UserDAO userDAO;
 
     @Override
     public List<User> findAll() {
         return userDAO.findAll();
+    }
+
+    @Override
+    public List<User> findAllWithAll() {
+        List<User> users = userDAO.findAll();
+        for(User user:users)
+        {
+            Set<Task> userTasks = taskDAO.findByTaskUsersId(user.getId());
+            user.setUserTasks(userTasks);
+
+            Set<Project> userProjects = projectDAO.findByProjectUsersId(user.getId());
+            user.setUserProjects(userProjects);
+        }
+        return users;
     }
 
     @Override
