@@ -47,7 +47,6 @@ public class Sprint implements Serializable {
     @OneToMany(mappedBy = "storySprint", cascade = CascadeType.ALL)
     private Set<Story> sprintStories = new HashSet<Story>(0);
 
-
     //Constructeurs
     public Sprint() {
         this.dateCreation = new Timestamp(System.currentTimeMillis());
@@ -59,7 +58,7 @@ public class Sprint implements Serializable {
         this.dateCreation = new Timestamp(System.currentTimeMillis());
         this.sprintProject = new Project();
     }
-
+    }
 
     //Méthodes
     public Long getId() {

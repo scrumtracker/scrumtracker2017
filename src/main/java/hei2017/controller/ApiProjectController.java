@@ -42,12 +42,21 @@ public class ApiProjectController {
     /*
      * Requêtes PROJET
      */
-    @JsonView(JsonViews.Project.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/project", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<Project> showProjects()
     {
         LOGGER.debug("ApiController - showProjects");
+        return projectService.findAll();
+    }
+
+    @JsonView(JsonViews.Project.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/project/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<Project> showProjectsDetails()
+    {
+        LOGGER.debug("ApiController - showProjectsDetails");
         return projectService.findAllWithAll();
     }
 

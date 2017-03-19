@@ -53,27 +53,6 @@ public class User implements Serializable {
         this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
-    public User(String pseudo, String email) {
-        this.pseudo = pseudo;
-        this.email = email;
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-    }
-
-    public User(String nom, String prenom, String pseudo, String email) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.pseudo = pseudo;
-        this.email = email;
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-    }
-
-    public User(String email, Set<Project> userProjects)
-    {
-        this.email = email;
-        this.userProjects = userProjects;
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-    }
-
     public Long getId() { return id; }
 
     public String getNom() {
@@ -134,5 +113,9 @@ public class User implements Serializable {
 
     public void setDateCreation(Timestamp dateCreation) {
         this.dateCreation = dateCreation;
+    }
+
+    public void addTask(Task tache) {
+        this.userTasks.add(tache);
     }
 }

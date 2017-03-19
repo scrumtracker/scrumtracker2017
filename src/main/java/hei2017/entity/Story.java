@@ -49,13 +49,7 @@ public class Story implements Serializable {
     //Constructeurs
     public Story() {
         this.dateCreation = new Timestamp(System.currentTimeMillis());
-        this.storySprint = new Sprint();
-    }
-
-    public Story(String nom) {
-        this.nom = nom;
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-        this.storySprint = new Sprint();
+        this.storySprint = null;
     }
 
     //Méthodes

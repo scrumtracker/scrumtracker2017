@@ -48,19 +48,6 @@ public class Project implements Serializable {
     //Constructeurs
     public Project(){this.dateCreation = new Timestamp(System.currentTimeMillis());};
 
-    public Project(String nom)
-    {
-        this.nom = nom;
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-    }
-
-    public Project(String nom, String description)
-    {
-        this.nom = nom;
-        this.description = description;
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-    }
-
     //Méthodes
     public Long getId() {
         return id;

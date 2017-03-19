@@ -77,7 +77,7 @@ public class StoryServiceImpl implements StoryService
     public Boolean exists(Long id) { return storyDAO.exists(id); }
 
     @Override
-    public void save(Story story) { storyDAO.save(story); }
+    public Story save(Story story) { return storyDAO.save(story); }
 
     @Override
     public Boolean exists(String nom) { return null!=storyDAO.findOneByNom(nom); }

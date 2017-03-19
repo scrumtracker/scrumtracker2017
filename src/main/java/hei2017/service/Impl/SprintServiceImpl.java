@@ -76,5 +76,5 @@ public class SprintServiceImpl implements SprintService {
     public Boolean exists(String nom) { return null!=sprintDAO.findOneByNom(nom); }
 
     @Override
-    public void save(Sprint sprint) { sprintDAO.save(sprint); }
+    public Sprint save(Sprint sprint) { return sprintDAO.save(sprint); }
 }

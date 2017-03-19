@@ -7,7 +7,6 @@ import hei2017.entity.Project;
 import hei2017.entity.Task;
 import hei2017.entity.User;
 import hei2017.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -62,8 +61,8 @@ public class UserServiceImpl implements UserService
     public User findOneByPseudo(String pseudo) { return userDAO.findOneByPseudo(pseudo); }
 
     @Override
-    public void save(User user) {
-        userDAO.save(user);
+    public User save(User user) {
+        return userDAO.save(user);
     }
 
     @Override

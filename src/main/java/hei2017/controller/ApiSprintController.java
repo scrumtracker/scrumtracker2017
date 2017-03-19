@@ -45,12 +45,21 @@ public class ApiSprintController {
      * Requêtes SPRINT
      */
 
-    @JsonView(JsonViews.Sprint.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/sprint", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<Sprint> showSprints()
     {
         LOGGER.debug("ApiController - showSprints");
+        return sprintService.findAll();
+    }
+
+    @JsonView(JsonViews.Sprint.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/sprint/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<Sprint> showSprintsDetails()
+    {
+        LOGGER.debug("ApiController - showSprintsDetails");
         return sprintService.findAllWithAll();
     }
 

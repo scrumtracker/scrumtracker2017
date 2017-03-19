@@ -44,12 +44,22 @@ public class ApiTaskController {
     /*
      * Requêtes TASK
      */
-    @JsonView(JsonViews.Task.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/task", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<Task> showTasks()
     {
         LOGGER.debug("ApiController - showTasks");
+        return taskService.findAll();
+    }
+
+
+    @JsonView(JsonViews.Task.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/task/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<Task> showTasksDetails()
+    {
+        LOGGER.debug("ApiController - showTasksDetails");
         return taskService.findAllWithAll();
     }
 

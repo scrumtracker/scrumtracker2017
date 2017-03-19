@@ -28,5 +28,5 @@ public interface ProjectService
 
     Project findOneByNom(String nom);
 
-    void save(Project project);
+    Project save(Project project);
 }
