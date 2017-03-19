@@ -1,17 +1,13 @@
 $(document).ready(function () {
 
     $("#createNewStory").click(function () {
-        var story = '{"description": "' + $("#newstorydescriptionUnaffected").val() + '", "nom": "' + $("#newstorynameUnaffected").val() + '", "points": "' + $("#newstorypointsUnaffected").val() + '"}';
-        story = {};
+        var story = {};
         story.nom = $("#newstorynameUnaffected").val();
         story.description = $("#newstorydescriptionUnaffected").val();
         story.points = $("#newstorypointsUnaffected").val();
 
-
         $.ajax({
-
             url: '/api/story/add',
-            // cache: false,
             type: 'POST',
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
             data: JSON.stringify(story),
@@ -70,23 +66,28 @@ $(document).ready(function () {
 
     $("#createnewSprint").click(function () {
 
+        var sprint = {};
+        sprint.nom = $("#newsprintname").val();
+        sprint.dateDebut = $("#newSprintDateDebut").val();
+        sprint.dateFin = $("#newSprintDateFin").val();
+        sprint.idProject = $("#newsprintprojectid").val();
+
         $.ajax({
 
             url: '/api/sprint/add',
             type: 'POST',
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data: '{"nom": "' + $("#newsprintname").val() + '", "date de début": "' + $("#newSprintDateDebut").val() + '", "date de fin": "' + $("#newSprintDateFin").val() + '"}',
+            data: JSON.stringify(sprint),
             success: function (data) {
                 $('#divaddnewsprint').hide();
                 $('#divaddnewsprint').trigger("reset");
                 $('#divaddsprint').show();
-                $('#divMessageSprint').html(data.nom + " has been successfully added.");
+                toastr.success(data.nom+" ajouté");
                 getListSprints();
                 getSprintsListMenu();
-
             },
             error: function (resultat, statut, erreur) {
-                $('#divMessageSprint').html("This story already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
+                toastr.error(statut+" - "+erreur);
             }
 
         });
