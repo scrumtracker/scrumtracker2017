@@ -1,8 +1,11 @@
 package hei2017.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import hei2017.json.JsonViews;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,30 +14,36 @@ import java.util.Set;
  * Created by pic on 08/02/2017.
  */
 @Entity
-public class Sprint {
+public class Sprint implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
     private Long id;
 
+    @JsonView(JsonViews.Basique.class)
     private String nom;
 
+    @JsonView(JsonViews.Basique.class)
     private String description;
 
+    @JsonView(JsonViews.Basique.class)
     private Timestamp dateCreation;
 
+    @JsonView(JsonViews.Basique.class)
     private Timestamp dateModification;
 
+    @JsonView(JsonViews.Basique.class)
     private Timestamp dateDebut;
 
+    @JsonView(JsonViews.Basique.class)
     private Timestamp dateFin;
 
-    @JsonIgnore
+    @JsonView(JsonViews.Sprint.class)
     @ManyToOne(cascade = CascadeType.ALL)
     private Project sprintProject;
 
-    @JsonIgnore
+    @JsonView(JsonViews.Sprint.class)
     @OneToMany(mappedBy = "storySprint", cascade = CascadeType.ALL)
     private Set<Story> sprintStories = new HashSet<Story>(0);
 
@@ -42,11 +51,13 @@ public class Sprint {
     //Constructeurs
     public Sprint() {
         this.dateCreation = new Timestamp(System.currentTimeMillis());
+        this.sprintProject = new Project();
     }
 
     public Sprint(String nom) {
         this.nom = nom;
         this.dateCreation = new Timestamp(System.currentTimeMillis());
+        this.sprintProject = new Project();
     }
 
 

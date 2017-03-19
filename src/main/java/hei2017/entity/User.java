@@ -1,9 +1,11 @@
 package hei2017.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import hei2017.json.JsonViews;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,31 +15,37 @@ import java.util.Set;
  */
 @Entity
 @Table(name="utilisateur") //user déjà utilisé par pgsql
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique=true)
+    @JsonView(JsonViews.Basique.class)
     private Long id;
 
+    @JsonView(JsonViews.Basique.class)
     private String nom;
 
+    @JsonView(JsonViews.Basique.class)
     private String prenom;
 
+    @JsonView(JsonViews.Basique.class)
     private String pseudo;
 
+    @JsonView(JsonViews.Basique.class)
     private String email;
 
+    @JsonView(JsonViews.Basique.class)
     private Timestamp dateCreation;
 
-    @JsonIgnore
+    @JsonView(JsonViews.Hidden.class)
     private String password;
 
-    @JsonIgnore
+    @JsonView(JsonViews.User.class)
     @ManyToMany(mappedBy = "projectUsers", cascade = CascadeType.ALL)
     private Set<Project> userProjects = new HashSet<Project>(0);
 
-    @JsonIgnore
+    @JsonView(JsonViews.User.class)
     @ManyToMany(mappedBy = "taskUsers", cascade = CascadeType.ALL)
     private Set<Task> userTasks = new HashSet<Task>(0);
 

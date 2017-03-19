@@ -1,6 +1,9 @@
 package hei2017.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import hei2017.entity.Project;
+import hei2017.json.JsonViews;
 import hei2017.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,15 +42,16 @@ public class ApiProjectController {
     /*
      * Requêtes PROJET
      */
-
+    @JsonView(JsonViews.Project.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/project", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<Project> showProjects()
     {
         LOGGER.debug("ApiController - showProjects");
-        return projectService.findAll();
+        return projectService.findAllWithAll();
     }
 
+    @JsonView(JsonViews.Project.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/project/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public ResponseEntity<Project> showProject(@PathVariable Long id)
@@ -59,6 +63,7 @@ public class ApiProjectController {
         return new ResponseEntity<Project>(projet, HttpStatus.NOT_FOUND);
     }
 
+    @JsonView(JsonViews.Project.class)
     @RequestMapping(value = "/api/project/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Project> sendProject(@RequestBody Project project)
     {
@@ -76,6 +81,7 @@ public class ApiProjectController {
         }
     }
 
+    @JsonView(JsonViews.Project.class)
     @RequestMapping(value = "/api/project/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Project> deleteProject(@PathVariable("id") Long id)
     {
