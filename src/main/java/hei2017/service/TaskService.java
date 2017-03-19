@@ -31,5 +31,5 @@ public interface TaskService
 
     Task findOneByNom(String nom);
 
-    void save(Task task);
+    Task save(Task task);
 }

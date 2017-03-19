@@ -81,7 +81,7 @@ public class TaskServiceImpl implements TaskService
     public Boolean exists(Long id) { return taskDAO.exists(id); }
 
     @Override
-    public void save(Task task) { taskDAO.save(task); }
+    public Task save(Task task) { return taskDAO.save(task); }
 
     @Override
     public Boolean exists(String nom) { return null!=taskDAO.findOneByNom(nom); }

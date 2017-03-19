@@ -71,9 +71,7 @@ public class ProjectServiceImpl implements ProjectService
     public Boolean exists(Long id) { return projectDAO.exists(id); }
 
     @Override
-    public void save(Project project) {
-        projectDAO.save(project);
-    }
+    public Project save(Project project) { return projectDAO.save(project); }
 
     @Override
     public Boolean exists(String nom) {

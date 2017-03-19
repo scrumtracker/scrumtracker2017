@@ -44,12 +44,21 @@ public class ApiStoryController {
      * Requêtes STORY
      */
 
-    @JsonView(JsonViews.Story.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/story", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<Story> showStories()
     {
         LOGGER.debug("ApiController - showStories");
+        return storyService.findAll();
+    }
+
+    @JsonView(JsonViews.Story.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/story/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<Story> showStoriesDetails()
+    {
+        LOGGER.debug("ApiController - showStoriesDetails");
         return storyService.findAllWithAll();
     }
 

@@ -43,12 +43,21 @@ public class ApiUserController {
     /*
      * Requêtes USER
      */
-    @JsonView(JsonViews.User.class)
+    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/user", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<User> showUsers()
     {
         LOGGER.debug("ApiController - showUsers");
+        return userService.findAll();
+    }
+
+    @JsonView(JsonViews.User.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/user/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public List<User> showUsersDetails()
+    {
+        LOGGER.debug("ApiController - showUsersDetails");
         return userService.findAllWithAll();
     }
 

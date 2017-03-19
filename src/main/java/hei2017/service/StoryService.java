@@ -31,5 +31,5 @@ public interface StoryService
 
     Story findOneByNom(String nom);
 
-    void save(Story story);
+    Story save(Story story);
 }

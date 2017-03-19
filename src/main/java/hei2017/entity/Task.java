@@ -51,12 +51,6 @@ public class Task implements Serializable {
         this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
-    public Task(String nom)
-    {
-        this.nom = nom;
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-    }
-
     //Méthodes
     public Long getId() {
         return id;
@@ -113,5 +107,9 @@ public class Task implements Serializable {
 
     public void setTaskStories(Set<Story> taskStories) {
         this.taskStories = taskStories;
+    }
+
+    public void addStory(Story story) {
+        this.taskStories.add(story);
     }
 }
