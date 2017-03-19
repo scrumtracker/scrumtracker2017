@@ -1,8 +1,7 @@
 $(document).ready(function () {
 
     $("#createNewStory").click(function () {
-        var story = '{"description": "' + $("#newstorydescriptionUnaffected").val() + '", "nom": "' + $("#newstorynameUnaffected").val() + '", "points": "' + $("#newstorypointsUnaffected").val() + '"}';
-        story = {};
+        var story = {};
         story.nom = $("#newstorynameUnaffected").val();
         story.description = $("#newstorydescriptionUnaffected").val();
         story.points = $("#newstorypointsUnaffected").val();
@@ -10,9 +9,7 @@ $(document).ready(function () {
 
         if(story.nom!='') {
         $.ajax({
-
             url: '/api/story/add',
-            // cache: false,
             type: 'POST',
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
             data: JSON.stringify(story),
@@ -74,14 +71,18 @@ $(document).ready(function () {
 
     $("#createnewSprint").click(function () {
 
+        var sprint = {};
+        sprint.nom = $("#newsprintname").val();
+        sprint.dateDebut = moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x');
+        sprint.dateFin = moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x');
+        sprint.idProject = $("#newsprintprojectid").val();
+
         $.ajax({
 
             url: '/api/sprint/add',
             type: 'POST',
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data: '{"nom": "' + $("#newsprintname").val() +
-            '", "dateDebut": "' + moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x') +
-            '", "dateFin": "' + moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x') + '"}',
+            data: JSON.stringify(sprint),
             success: function (data) {
                 $('#divaddnewsprint').hide();
                 $('#divaddnewsprint').trigger("reset");
