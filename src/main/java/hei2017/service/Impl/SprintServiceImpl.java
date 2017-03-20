@@ -64,6 +64,23 @@ public class SprintServiceImpl implements SprintService {
     public Sprint findOneById(Long id) { return sprintDAO.findOne(id); }
 
     @Override
+    public Sprint findOneByIdWithAll(Long id) {
+        Sprint sprint = sprintDAO.findOneById(id);
+
+        Set<Story> sprintStories = storyDAO.findByStorySprintId(sprint.getId());
+        sprint.setSprintStories(sprintStories);
+
+        Iterator<Project> sprintProjectIterator = projectDAO.findByProjectSprintsId(sprint.getId()).iterator();
+        if(sprintProjectIterator.hasNext())
+        {
+            Project sprintProject = sprintProjectIterator.next();
+            sprint.setSprintProject(sprintProject);
+        }
+
+        return sprint;
+    }
+
+    @Override
     public long countAll() {
         return sprintDAO.count();
     }

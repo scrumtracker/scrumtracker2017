@@ -29,6 +29,8 @@ public interface TaskService
 
     Task findOneById(Long id);
 
+    Task findOneByIdWithAll(Long id);
+
     Task findOneByNom(String nom);
 
     Task save(Task task);

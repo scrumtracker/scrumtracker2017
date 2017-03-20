@@ -62,6 +62,19 @@ public class TaskServiceImpl implements TaskService
     public Task findOneById(Long id) { return taskDAO.findOne(id); }
 
     @Override
+    public Task findOneByIdWithAll(Long id) {
+        Task task = taskDAO.findOneById(id);
+
+        Set<User> taskUsers = userDAO.findByUserTasksId(task.getId());
+        Set<Story> taskStories = storyDAO.findByStoryTasksId(task.getId());
+
+        task.setTaskUsers(taskUsers);
+        task.setTaskStories(taskStories);
+
+        return task;
+    }
+
+    @Override
     public Task findOneByNom(String nom) {
         return taskDAO.findOneByNom(nom);
     }

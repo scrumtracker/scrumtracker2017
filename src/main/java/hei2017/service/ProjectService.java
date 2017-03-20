@@ -26,6 +26,8 @@ public interface ProjectService
 
     Project findOneById(Long id);
 
+    Project findOneByIdWithAll(Long id);
+
     Project findOneByNom(String nom);
 
     Project save(Project project);

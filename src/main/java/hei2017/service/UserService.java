@@ -25,6 +25,8 @@ public interface UserService
 
     User findOneById(Long id);
 
+    User findOneByIdWithAll(Long id);
+
     User findOneByNomAndPrenom(String nom, String prenom);
 
     User findOneByPseudo(String pseudo);

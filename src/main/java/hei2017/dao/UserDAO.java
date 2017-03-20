@@ -21,4 +21,6 @@ public interface UserDAO extends JpaRepository<User, Long>
     Set<User> findByUserTasksId(Long id);
 
     Set<User> findByUserProjectsId(Long id);
+
+    User findOneById(Long id);
 }

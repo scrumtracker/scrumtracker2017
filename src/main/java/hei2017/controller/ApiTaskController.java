@@ -75,6 +75,18 @@ public class ApiTaskController {
         return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
     }
 
+    @JsonView(JsonViews.Task.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/task/{id}/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<Task> showTaskWithAll(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showTaskWithAll");
+        Task task = taskService.findOneByIdWithAll(id);
+        if(null!=task)
+            return new ResponseEntity<Task>(task, HttpStatus.OK);
+        return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
+    }
+
     @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/task/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Task> sendStory(@RequestBody Task task)

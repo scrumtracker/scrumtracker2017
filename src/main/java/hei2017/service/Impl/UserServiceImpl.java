@@ -53,6 +53,19 @@ public class UserServiceImpl implements UserService
     public User findOneById(Long id) { return userDAO.findOne(id); }
 
     @Override
+    public User findOneByIdWithAll(Long id) {
+        User user = userDAO.findOneById(id);
+
+        Set<Task> userTasks = taskDAO.findByTaskUsersId(user.getId());
+        user.setUserTasks(userTasks);
+
+        Set<Project> userProjects = projectDAO.findByProjectUsersId(user.getId());
+        user.setUserProjects(userProjects);
+
+        return user;
+    }
+
+    @Override
     public User findOneByNomAndPrenom(String nom, String prenom) {
         return userDAO.findOneByNomAndPrenom(nom, prenom);
     }

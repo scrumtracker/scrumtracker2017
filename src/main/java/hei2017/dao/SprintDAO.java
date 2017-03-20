@@ -15,6 +15,8 @@ public interface SprintDAO extends JpaRepository<Sprint, Long>
 
     Sprint findOneByNom(String nom);
 
+    Sprint findOneById(Long id);
+
     Set<Sprint> findBySprintStoriesId(Long id);
 
     Set<Sprint> findBySprintProjectId(Long idProject);
