@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class ErrorController {
 
-    @RequestMapping("/*")
+    @RequestMapping({"/*","/*/*", "*"})
     public String goError(Model model,
                           HttpServletRequest request,
                           HttpServletResponse response)
