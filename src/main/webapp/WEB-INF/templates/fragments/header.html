@@ -9,19 +9,12 @@
                     <li th:classappend="${isHomePage} ? active"><a th:href="@{/home}" th:text="#{project.new}"></a></li>
                     <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{projects}"></span><span class="caret"></span> </a>
                         <ul class="dropdown-menu" id="projectsListMenu">
-                            <li id="menuProjectsNoData"><a th:text="#{no.data}"></a></li>
-                            <li class="menuProject" th:each="project:${projects}"><a th:href="@{'/project/'+${project.id}}" th:text="${project.nom}"></a></li>
+                            <li th:each="project:${projects}"><a th:href="@{'/project/'+${project.id}}" th:text="${project.nom}"></a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span th:text="#{sprints}"></span>
-                            <span class="caret"></span>
-                        </a>
+                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{report}"></span><span class="caret"></span> </a>
                         <ul class="dropdown-menu" id="sprintsListMenu">
-                            <li id="menuSprintsNoData"><a  th:text="#{no.data}"></a></li>
-                            <li class="menuSprint" th:each="sprint:${sprints}"><a th:href="@{'/sprint/'+${sprint.id}}" th:text="${sprint.nom}"></a></li>
-
+                            <li th:each="sprint:${sprints}"><a th:href="@{'/sprint/'+${sprint.id}}" th:text="${sprint.nom}" th:if="${sprint.getStatus()}=='over'"></a></li>
                         </ul>
                     </li>
                     <li style="display: none"><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
