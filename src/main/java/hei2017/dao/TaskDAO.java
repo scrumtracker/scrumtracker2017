@@ -18,4 +18,6 @@ public interface TaskDAO extends JpaRepository<Task, Long>
     Task findOneByNom(String nom);
 
     Set<Task> findByTaskUsersId(Long id);
+
+    Task findOneById(Long id);
 }

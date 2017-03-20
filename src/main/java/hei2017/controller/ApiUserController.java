@@ -73,6 +73,18 @@ public class ApiUserController {
         return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
     }
 
+    @JsonView(JsonViews.User.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/user/{id}/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<User> showUserWithAll(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showUserWithAll");
+        User user = userService.findOneByIdWithAll(id);
+        if(null!=user)
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
+    }
+
     @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/user/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<User> sendUser(@RequestBody User user)

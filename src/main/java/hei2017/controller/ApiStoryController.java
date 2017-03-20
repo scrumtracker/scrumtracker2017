@@ -75,6 +75,18 @@ public class ApiStoryController {
     }
 
     @JsonView(JsonViews.Basique.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/story/{id}/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<Story> showStoryWithAll(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showStoryWithAll");
+        Story story = storyService.findOneByIdWithAll(id);
+        if(null!=story)
+            return new ResponseEntity<Story>(story, HttpStatus.OK);
+        return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
+    }
+
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/story/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Story> sendStory(@RequestBody Story story)
     {

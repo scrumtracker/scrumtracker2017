@@ -75,6 +75,18 @@ public class ApiSprintController {
         return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
     }
 
+    @JsonView(JsonViews.Sprint.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/sprint/{id}/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<Sprint> showSprintWithAll(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showSprint");
+        Sprint sprint = sprintService.findOneByIdWithAll(id);
+        if(null!=sprint)
+            return new ResponseEntity<Sprint>(sprint, HttpStatus.OK);
+        return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
+    }
+
     @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/sprint/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Sprint> sendSprint(@RequestBody Sprint sprint)

@@ -72,6 +72,18 @@ public class ApiProjectController {
         return new ResponseEntity<Project>(projet, HttpStatus.NOT_FOUND);
     }
 
+    @JsonView(JsonViews.Project.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/project/{id}/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public ResponseEntity<Project> showProjectWithAll(@PathVariable Long id)
+    {
+        LOGGER.debug("ApiController - showProjectWithAll");
+        Project projet = projectService.findOneByIdWithAll(id);
+        if(null!=projet)
+            return new ResponseEntity<Project>(projet, HttpStatus.OK);
+        return new ResponseEntity<Project>(projet, HttpStatus.NOT_FOUND);
+    }
+
     @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/project/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Project> sendProject(@RequestBody Project project)

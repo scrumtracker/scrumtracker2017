@@ -28,5 +28,7 @@ public interface SprintService {
 
     Sprint findOneById(Long id);
 
+    Sprint findOneByIdWithAll(Long id);
+
     Sprint save(Sprint sprint);
 }
