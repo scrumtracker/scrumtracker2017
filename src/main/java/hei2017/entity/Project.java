@@ -34,7 +34,9 @@ public class Project {
 
     @JsonIgnore
     @OneToMany(mappedBy = "sprintProject", cascade = CascadeType.ALL)
-    private Set<Sprint> projectSprints = new HashSet<Sprint>(0);
+    private Set<Sprint> projectSprints;
+
+    //= new HashSet<Sprint>(0);
 
     //Constructeurs
     public Project(){this.dateCreation = new Timestamp(System.currentTimeMillis());};

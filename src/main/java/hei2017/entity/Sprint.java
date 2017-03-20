@@ -15,7 +15,7 @@ public class Sprint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique=true)
+    @Column(unique = true)
     private Long id;
 
     private String nom;
@@ -32,7 +32,7 @@ public class Sprint {
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    private Project sprintProject = new Project();
+    private Project sprintProject;
 
     @JsonIgnore
     @OneToMany(mappedBy = "storySprint", cascade = CascadeType.ALL)
@@ -40,18 +40,20 @@ public class Sprint {
 
 
     //Constructeurs
-    public Sprint(){
+    public Sprint() {
         this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
-    public Sprint(String nom){
+    public Sprint(String nom) {
         this.nom = nom;
         this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
 
     //Méthodes
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
     public String getNom() {
         return nom;
@@ -117,10 +119,24 @@ public class Sprint {
         this.sprintStories = sprintStories;
     }
 
-    public void addStory(Story story)
-    {
+    public void addStory(Story story) {
         sprintStories.add(story);
     }
 
+    public String getStatus() {
+        if (this.getDateFin() != null) {
+            if (this.getDateFin().before(new Timestamp(System.currentTimeMillis()))) {
+                return "over";
+            } else {
+                if (this.getDateDebut().before(new Timestamp(System.currentTimeMillis()))) {
+                    return "actual";
+                } else {
+                    return "upcoming";
+                }
+            }
+        }else{
+            return "undefined";
+        }
+    }
 
 }

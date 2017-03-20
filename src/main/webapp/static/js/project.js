@@ -75,12 +75,12 @@ $(document).ready(function () {
             url: '/api/sprint/add',
             type: 'POST',
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data: '{"nom": "' + $("#newsprintname").val() + '", "date de début": "' + $("#newSprintDateDebut").val() + '", "date de fin": "' + $("#newSprintDateFin").val() + '"}',
+            data: '{"nom": "' + $("#newsprintname").val() + '", "dateDebut": "' + moment($("#newSprintDateDebut").val()).format('x') + '", "dateFin": "' + moment($("#newSprintDateFin").val()).format('x') + '"}',
             success: function (data) {
                 $('#divaddnewsprint').hide();
                 $('#divaddnewsprint').trigger("reset");
                 $('#divaddsprint').show();
-                $('#divMessageSprint').html(data.nom + " has been successfully added.");
+                $('#divMessageSprint').html(data.nom + " has been successfully added. ///"+$("#newSprintDateDebut").val()+ "///" +moment($("#newSprintDateDebut").val())+"///"+$("#newSprintDateDebut"));
                 getListSprints();
 
             },
@@ -223,7 +223,7 @@ function showStory(id){
             if (data.length!=0) {
                 console.log(data);
                 var html =  '<p>Story name : '+data.nom+'</p>'+
-                '<p>Creation date : </p>'+
+                '<p>Creation date : ' + moment(data.dateCreation).format('DD/MM/YYYY') + '<br/>(' + moment(data.dateCreation).fromNow() +')</p>'+
                 '<p>State : '+data.status+'</p>'+
                 '<p>Total hours of works : </p>'+
                 '<p>Number of tasks : </p>'+
@@ -248,15 +248,13 @@ function detailSprint(id){
             if (data.length!=0) {
                 console.log(data);
                 var html =  '<p>Sprint name : '+data.nom+'</p>'+
-                    '<p>Date of beginning :' +data.dateDebut+ '</p>'+
-                    '<p>Date of the end : '+data.dateFin+'</p>';
+                    '<p>Starting date : ' + moment(data.dateDebut).format('DD/MM/YYYY') + '<br/>(' + moment(data.dateDebut).fromNow() +')</p>'+
+                    '<p>Ending date : '+ moment(data.dateFin).format('DD/MM/YYYY') +'<br/>(' + moment(data.dateFin).fromNow() +')</p>';
                 detailofSprint.innerHTML = html;
 
             }
 
-
         });
-
 
 }
 
