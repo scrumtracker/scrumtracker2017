@@ -17,12 +17,13 @@ $(document).ready(function () {
                     getListProjects();
                 },
                 error: function (resultat, statut, erreur) {
-                    toastr.error(statut+" - "+erreur);
+                    toastr.error("An error occurred. This project may already exists. (" + statut + " - " + erreur + ")");
                 }
             });
         }
         else{
-            $('#divMessage').html("Project name is required.");
+            //$('#divMessage').html("Project name is required.");
+            toastr.error("Project name is required.");
         }
     });
 

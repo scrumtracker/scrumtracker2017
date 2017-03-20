@@ -31,7 +31,7 @@ public class Story {
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    private Sprint storySprint = new Sprint();
+    private Sprint storySprint;
 
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
