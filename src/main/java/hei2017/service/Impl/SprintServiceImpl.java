@@ -1,20 +1,14 @@
 package hei2017.service.Impl;
 
-import hei2017.dao.ProjectDAO;
 import hei2017.dao.SprintDAO;
-import hei2017.dao.StoryDAO;
-import hei2017.entity.Project;
 import hei2017.entity.Sprint;
-import hei2017.entity.Story;
 import hei2017.service.SprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by pic on 08/02/2017.
@@ -24,13 +18,7 @@ import java.util.Set;
 public class SprintServiceImpl implements SprintService {
 
     @Inject
-    ProjectDAO projectDAO;
-
-    @Inject
     SprintDAO sprintDAO;
-
-    @Inject
-    StoryDAO storyDAO;
 
     @Override
     public List<Sprint> findAll() {
@@ -38,47 +26,7 @@ public class SprintServiceImpl implements SprintService {
     }
 
     @Override
-    public List<Sprint> findAllWithAll() {
-        List<Sprint> sprints = sprintDAO.findAll();
-        for(Sprint sprint : sprints)
-        {
-            Set<Story> sprintStories = storyDAO.findByStorySprintId(sprint.getId());
-            sprint.setSprintStories(sprintStories);
-
-            Iterator<Project> sprintProjectIterator = projectDAO.findByProjectSprintsId(sprint.getId()).iterator();
-            if(sprintProjectIterator.hasNext())
-            {
-                Project sprintProject = sprintProjectIterator.next();
-                sprint.setSprintProject(sprintProject);
-            }
-        }
-        return sprints;
-    }
-
-    @Override
-    public Set<Sprint> findBySprintProject(Long idProject) {
-        return sprintDAO.findBySprintProjectId(idProject);
-    }
-
-    @Override
     public Sprint findOneById(Long id) { return sprintDAO.findOne(id); }
-
-    @Override
-    public Sprint findOneByIdWithAll(Long id) {
-        Sprint sprint = sprintDAO.findOneById(id);
-
-        Set<Story> sprintStories = storyDAO.findByStorySprintId(sprint.getId());
-        sprint.setSprintStories(sprintStories);
-
-        Iterator<Project> sprintProjectIterator = projectDAO.findByProjectSprintsId(sprint.getId()).iterator();
-        if(sprintProjectIterator.hasNext())
-        {
-            Project sprintProject = sprintProjectIterator.next();
-            sprint.setSprintProject(sprintProject);
-        }
-
-        return sprint;
-    }
 
     @Override
     public long countAll() {
@@ -98,5 +46,5 @@ public class SprintServiceImpl implements SprintService {
     public Boolean exists(String nom) { return null!=sprintDAO.findOneByNom(nom); }
 
     @Override
-    public Sprint save(Sprint sprint) { return sprintDAO.save(sprint); }
+    public void save(Sprint sprint) { sprintDAO.save(sprint); }
 }

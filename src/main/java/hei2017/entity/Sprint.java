@@ -59,7 +59,6 @@ public class Sprint implements Serializable {
         this.dateCreation = new Timestamp(System.currentTimeMillis());
         this.sprintProject = new Project();
     }
-    }
 
     //Méthodes
     public Long getId() {

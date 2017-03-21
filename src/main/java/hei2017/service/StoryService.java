@@ -23,15 +23,9 @@ public interface StoryService
 
     Story findOneById(Long id);
 
-    Story findOneByIdWithAll(Long id);
-
     List<Story> findAll();
-
-    List<Story> findAllWithAll();
-
-    Set<Story> findByStorySprint(Long idSprint);
 
     Story findOneByNom(String nom);
 
-    Story save(Story story);
+    void save(Story story);
 }

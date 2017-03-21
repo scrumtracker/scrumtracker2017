@@ -21,40 +21,12 @@ import java.util.Set;
 @Transactional
 public class StoryServiceImpl implements StoryService
 {
-
-    @Inject
-    SprintDAO sprintDAO;
-
     @Inject
     StoryDAO storyDAO;
-
-    @Inject
-    TaskDAO taskDAO;
-
-
 
     @Override
     public List<Story> findAll() {
         return storyDAO.findAll();
-    }
-
-    @Override
-    public List<Story> findAllWithAll() {
-        List<Story> stories = storyDAO.findAll();
-        for(Story story:stories)
-        {
-            Set<Task> storyTasks = taskDAO.findByTaskStoriesId(story.getId());
-            story.setStoryTasks(storyTasks);
-
-            Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId()).iterator().next();
-            story.setStorySprint(storySprint);
-        }
-        return stories;
-    }
-
-    @Override
-    public Set<Story> findByStorySprint(Long idSprint) {
-        return storyDAO.findByStorySprintId(idSprint);
     }
 
     @Override
@@ -77,24 +49,11 @@ public class StoryServiceImpl implements StoryService
     public Boolean exists(Long id) { return storyDAO.exists(id); }
 
     @Override
-    public Story save(Story story) { return storyDAO.save(story); }
+    public void save(Story story) { storyDAO.save(story); }
 
     @Override
     public Boolean exists(String nom) { return null!=storyDAO.findOneByNom(nom); }
 
     @Override
     public Story findOneById(Long id) { return storyDAO.findOne(id); }
-
-    @Override
-    public Story findOneByIdWithAll(Long id) {
-        Story story = storyDAO.findOneById(id);
-
-        Set<Task> storyTasks = taskDAO.findByTaskStoriesId(story.getId());
-        story.setStoryTasks(storyTasks);
-
-        Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId()).iterator().next();
-        story.setStorySprint(storySprint);
-
-        return story;
-    }
 }

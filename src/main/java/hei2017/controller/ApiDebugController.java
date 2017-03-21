@@ -58,10 +58,6 @@ public class ApiDebugController {
     @RequestMapping(value = "/api/debug", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public String debug()
     {
-        /*
-        if(null!=userService.findOneByPseudo("Mr Motte"))
-            return "DB déjà peuplée";
-         */
         //CREATION DES ENTITES
         User testeur = new User();
         testeur.setNom("Teur");
@@ -93,24 +89,17 @@ public class ApiDebugController {
 
         //AJOUT DES LIAISONS INTER-ENTITES
         projet.addSprint(sprint);
-        sprint.setSprintProject(projet);
-
-        story.setStorySprint(sprint);
-        sprint.addStory(story);
-
-        story.addTask(tache);
-        tache.addStory(story);
-
-        tache.addUser(testeur);
-        testeur.addTask(tache);
-
         projet.addUser(testeur);
 
-        projet = projectService.save(projet);
-        sprint = sprintService.save(sprint);
-        story = storyService.save(story);
-        tache = taskService.save(tache);
-        testeur = userService.save(testeur);
+        sprint.addStory(story);
+        story.addTask(tache);
+        tache.addUser(testeur);
+
+        projectService.save(projet);
+        sprintService.save(sprint);
+        storyService.save(story);
+        taskService.save(tache);
+        userService.save(testeur);
 
         return "DB peuplée";
     }

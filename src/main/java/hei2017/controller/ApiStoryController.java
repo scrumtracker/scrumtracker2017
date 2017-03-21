@@ -44,7 +44,6 @@ public class ApiStoryController {
      * Requêtes STORY
      */
 
-    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/story", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<Story> showStories()
@@ -53,16 +52,6 @@ public class ApiStoryController {
         return storyService.findAll();
     }
 
-    @JsonView(JsonViews.Story.class)
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/api/story/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
-    public List<Story> showStoriesDetails()
-    {
-        LOGGER.debug("ApiController - showStoriesDetails");
-        return storyService.findAllWithAll();
-    }
-
-    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/story/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public ResponseEntity<Story> showStory(@PathVariable Long id)
@@ -74,19 +63,6 @@ public class ApiStoryController {
         return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
     }
 
-    @JsonView(JsonViews.Basique.class)
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/api/story/{id}/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
-    public ResponseEntity<Story> showStoryWithAll(@PathVariable Long id)
-    {
-        LOGGER.debug("ApiController - showStoryWithAll");
-        Story story = storyService.findOneByIdWithAll(id);
-        if(null!=story)
-            return new ResponseEntity<Story>(story, HttpStatus.OK);
-        return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
-    }
-
-    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/story/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Story> sendStory(@RequestBody Story story)
     {
@@ -104,7 +80,6 @@ public class ApiStoryController {
         }
     }
 
-    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/story/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Story> deleteStory(@PathVariable("id") Long id)
     {
@@ -118,28 +93,6 @@ public class ApiStoryController {
             return new ResponseEntity<Story>(story, HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
-    }
-
-    //Renvoie toutes les STORIES attachées au SPRINT d'id idSprint
-    @JsonView(JsonViews.Basique.class)
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/api/story/sprint/{idSprint}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
-    public Set<Story> showStoriesAssociatedToThisSprint(@PathVariable Long idSprint)
-    {
-        LOGGER.debug("ApiController - showStoriesAssociatedToThisSprint");
-        Set<Story> stories = storyService.findByStorySprint(idSprint);
-        return stories;
-    }
-
-    //Renvoie toutes les STORIES qui ne sont pas attachées à un SPRINT
-    @JsonView(JsonViews.Basique.class)
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/api/story/sprint/null", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
-    public Set<Story> showStoriesWithNoSprint()
-    {
-        LOGGER.debug("ApiController - showStoriesWithNoSprint");
-        Set<Story> stories = storyService.findByStorySprint(null);
-        return stories;
     }
 
 

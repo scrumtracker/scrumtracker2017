@@ -42,7 +42,7 @@ public class ApiProjectController {
     /*
      * Requêtes PROJET
      */
-    @JsonView(JsonViews.Basique.class)
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/project", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<Project> showProjects()
@@ -51,16 +51,6 @@ public class ApiProjectController {
         return projectService.findAll();
     }
 
-    @JsonView(JsonViews.Project.class)
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/api/project/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
-    public List<Project> showProjectsDetails()
-    {
-        LOGGER.debug("ApiController - showProjectsDetails");
-        return projectService.findAllWithAll();
-    }
-
-    @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/project/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public ResponseEntity<Project> showProject(@PathVariable Long id)
@@ -72,19 +62,6 @@ public class ApiProjectController {
         return new ResponseEntity<Project>(projet, HttpStatus.NOT_FOUND);
     }
 
-    @JsonView(JsonViews.Project.class)
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/api/project/{id}/details", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
-    public ResponseEntity<Project> showProjectWithAll(@PathVariable Long id)
-    {
-        LOGGER.debug("ApiController - showProjectWithAll");
-        Project projet = projectService.findOneByIdWithAll(id);
-        if(null!=projet)
-            return new ResponseEntity<Project>(projet, HttpStatus.OK);
-        return new ResponseEntity<Project>(projet, HttpStatus.NOT_FOUND);
-    }
-
-    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/project/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Project> sendProject(@RequestBody Project project)
     {
@@ -102,7 +79,6 @@ public class ApiProjectController {
         }
     }
 
-    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/project/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Project> deleteProject(@PathVariable("id") Long id)
     {

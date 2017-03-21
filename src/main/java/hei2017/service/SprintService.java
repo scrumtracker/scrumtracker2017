@@ -22,13 +22,7 @@ public interface SprintService {
 
     List<Sprint> findAll();
 
-    List<Sprint> findAllWithAll();
-
-    Set<Sprint> findBySprintProject(Long idProject);
-
     Sprint findOneById(Long id);
 
-    Sprint findOneByIdWithAll(Long id);
-
-    Sprint save(Sprint sprint);
+    void save(Sprint sprint);
 }

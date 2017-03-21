@@ -22,13 +22,9 @@ public interface ProjectService
 
     List<Project> findAll();
 
-    List<Project> findAllWithAll();
-
     Project findOneById(Long id);
-
-    Project findOneByIdWithAll(Long id);
 
     Project findOneByNom(String nom);
 
-    Project save(Project project);
+    void save(Project project);
 }

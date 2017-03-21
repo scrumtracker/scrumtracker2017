@@ -26,46 +26,13 @@ public class ProjectServiceImpl implements ProjectService
     @Inject
     ProjectDAO projectDAO;
 
-    @Inject
-    SprintDAO sprintDAO;
-
-    @Inject
-    UserDAO userDAO;
-
     @Override
     public List<Project> findAll() {
         return projectDAO.findAll();
     }
 
     @Override
-    public List<Project> findAllWithAll() {
-        List<Project> projects = projectDAO.findAll();
-        for(Project project:projects)
-        {
-            Set<Sprint> projectSprints = sprintDAO.findBySprintProjectId(project.getId());
-            project.setProjectSprints(projectSprints);
-
-            Set<User> projectUsers = userDAO.findByUserProjectsId(project.getId());
-            project.setProjectUsers(projectUsers);
-        }
-        return projects;
-    }
-
-    @Override
     public Project findOneById(Long id) { return projectDAO.findOne(id); }
-
-    @Override
-    public Project findOneByIdWithAll(Long id) {
-        Project project = projectDAO.findOneById(id);
-
-        Set<Sprint> projectSprints = sprintDAO.findBySprintProjectId(project.getId());
-        project.setProjectSprints(projectSprints);
-
-        Set<User> projectUsers = userDAO.findByUserProjectsId(project.getId());
-        project.setProjectUsers(projectUsers);
-
-        return project;
-    }
 
     @Override
     public Project findOneByNom(String nom) {
@@ -84,7 +51,9 @@ public class ProjectServiceImpl implements ProjectService
     public Boolean exists(Long id) { return projectDAO.exists(id); }
 
     @Override
-    public Project save(Project project) { return projectDAO.save(project); }
+    public void save(Project project) {
+        projectDAO.save(project);
+    }
 
     @Override
     public Boolean exists(String nom) {
