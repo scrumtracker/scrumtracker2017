@@ -1,8 +1,3 @@
-$(document).ready(function () {
-    getProjectsListMenu();
-    getSprintsListMenu();
-});
-
 function getProjectsListMenu() {
     $.getJSON('/api/project',
         function (data) {

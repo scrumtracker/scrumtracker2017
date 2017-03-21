@@ -13,7 +13,7 @@ $(document).ready(function () {
                     $('#formaddnewproject').trigger("reset");
                     $('#newProject').show();
                     getListProjects();
-                    getProjectsListMenu();
+                    //getProjectsListMenu();
                     toastr.success(data.nom+" added");
                 },
                 error: function (resultat, statut, erreur) {
@@ -22,7 +22,6 @@ $(document).ready(function () {
             });
         }
         else{
-            //$('#divMessage').html("Project name is required.");
             toastr.error("Project name is required.");
         }
     });

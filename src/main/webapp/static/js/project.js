@@ -18,56 +18,17 @@ $(document).ready(function () {
                 $('#divaddnewstoryUnaffected').trigger("reset");
                 $('#divaddnewstoryUnaffected').show();
                     toastr.success(data.nom + " added");
-                $('#divMessage').html(data.nom + " has been successfully added.");
-                getListStories();
-            },
-            error: function (resultat, statut, erreur) {
-                $('#divMessage').html("This story already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
-            }
+                    getListStories();
+                },
+                error: function (resultat, statut, erreur) {
+                    toastr.error("An error occurred. This story may already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
+                }
 
         });
         }
         else{toastr.error("Story name is required.");}
 
     });
-
-    getListStories();
-
-
-    function getListStories() {
-        $.getJSON('/api/story',
-            function (data) {
-                listeStories = document.getElementById("divliststory");
-
-                if (data.length!=0) {
-                    var html = '<p class="h2 text-center" th:text="#{story.list}"></p>';
-
-                    $.each(data, function (key, val) {
-
-                        html +=
-                            '<li>'+
-                            '<div class="list-group-item" onclick="showStory('+val.id+')">'
-                            + val.nom +
-                            '<div class="deleteStorylist">'+
-                            '<button type="button" class="btnremove">'+
-                            '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
-                            '</button>'+
-                            '</div>'+
-                            '</div>'+
-                            '</li>';
-                    });
-                    $("#storyNone").hide();
-                    listeStories.innerHTML = html;
-
-                }
-                else {
-                    $("#storyNone").show();
-                }
-
-
-            });
-
-    };
 
     $("#createnewSprint").click(function () {
 
@@ -86,11 +47,10 @@ $(document).ready(function () {
             success: function (data) {
                 $('#divaddnewsprint').hide();
                 $('#divaddnewsprint').trigger("reset");
-                $('#divaddsprint').show();
+                $('button#newSprint').show();
                 toastr.success(data.nom + " has been successfully added.");
                 getListSprints();
                 //getSprintsListMenu();
-
             },
             error: function (resultat, statut, erreur) {
                 toastr.error("An error occurred. This sprint may already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ").");
@@ -100,15 +60,50 @@ $(document).ready(function () {
 
     });
 
-    getListSprints();
+});
+
+
+
+
+function getListStories() {
+    $.getJSON('/api/story',
+        function (data) {
+            listeStories = document.getElementById("divliststory");
+            var html = '';
+
+            if (data.length!=0) {
+                 html = '<p class="h2 text-left">List of stories</p>';
+
+                $.each(data, function (key, val) {
+                    html +=
+                        '<li>'+
+                        '<div class="list-group-item mouseLink" onclick="showStory('+val.id+')">'
+                        + val.nom +
+                        '<div class="deleteStorylist hiddenElement">'+
+                        '<button type="button" class="btnremove">'+
+                        '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
+                        '</button>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>';
+                });
+            }
+            else {
+                html='<p class="h2 text-left" id="storyNone">No story (for now)</p>';
+            }
+            listeStories.innerHTML = html;
+        });
+};
+
 
     function getListSprints() {
         $.getJSON('/api/sprint',
             function (data) {
                 listeSprints = document.getElementById("divlistsprint");
+                var html = '';
 
                 if (data.length!=0) {
-                    var html = '<p class="h2 text-center" th:text="#{sprint.list}"></p>';
+                    html = '<p class="h2 text-left">List of sprints</p>';
 
                     $.each(data, function (key, val) {
 
@@ -118,24 +113,23 @@ $(document).ready(function () {
                             '<div class="padd2">'+
                             '<span class="bold">' + val.nom+ '</span>'+
                             '</div>'+
-                            '<button class="btn btn-xs btn-default btnseetasks" onclick="">'+
-                            '<span th:text="#{see.tasks}"></span>'+
+                            '<button class="btn btn-xs btn-default btnseetasks hiddenElement" onclick="showSprint(this)">'+
+                            '<span>See tasks</span>'+
                             '<span class="glybtnleft glyphicon glyphicon-chevron-right"></span>'+
                             '</button>'+
                             '</div>'+
                             '</div>';
                     });
-                    $("#sprintNone").hide();
-                    listeSprints.innerHTML = html;
                 }
                 else {
-                    $("#sprintNone").show();
+                    html='<div class="h2 text-left">No sprint (for now)</div>';
                 }
+                listeSprints.innerHTML = html;
             });
     }
-});
 
-function addNewSprint(){
+
+function showFormToAddNewSprint(){
 
     var divaddnewsprint = document.getElementById("divaddnewsprint");
     var newSprint = document.getElementById("newSprint");
@@ -184,7 +178,6 @@ function addNewStory(obj){
 	}
 
 
-
 	var divaddnewsprint = document.getElementById("divaddnewsprint");
     var newSprint = document.getElementById("newSprint");
     var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
@@ -229,13 +222,12 @@ function showStory(id){
                 var html =  '<p>Story name : '+data.nom+'</p>'+
                 '<p>Creation date : ' + moment(data.dateCreation).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateCreation).fromNow() +')</p>'+
                 '<p>State : '+data.status+'</p>'+
-                '<p>Total hours of works : </p>'+
-                '<p>Number of tasks : </p>'+
-                '<p>Goals : '+data.description+'</p>';
+                '<p>Total hours of works : '+ data.points + '</p>'+
+                '<p>Number of tasks : 0</p>'+
+                '<p>Description : '+data.description+'</p>';
                 detailStory.innerHTML = html;
             }
         });
-
 
 }
 
