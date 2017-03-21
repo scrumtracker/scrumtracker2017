@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    getProjectsListMenu();
-    getSprintsListMenu();
+    //getProjectsListMenu();
+    //getSprintsListMenu();
 });
 
 function getProjectsListMenu() {
