@@ -19,6 +19,7 @@ public class Sprint implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique=true)
+    @JsonView(JsonViews.Basique.class)
     private Long id;
 
     @JsonView(JsonViews.Basique.class)
