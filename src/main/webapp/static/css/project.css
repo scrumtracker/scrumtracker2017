@@ -174,3 +174,6 @@ textarea{
 #newstorypointsUnaffected{
 	max-width: 60px;
 }
+.mouseLink:hover{
+	cursor:pointer;
+}

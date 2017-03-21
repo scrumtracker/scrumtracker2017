@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ITI - ScrumTracker</title>
+    <title>ScrumTracker - Project</title>
     <link rel="icon" th:href="@{/img/unicorn2.ico}"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/project.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/toastr.min.css}">
+    <script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
     <script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
@@ -40,7 +41,7 @@
                     <span class="glybtnright glyphicon glyphicon-plus"></span>
                     <span th:text="#{new.story}"></span>
                 </button>
-                <div id="divaddnewstoryUnaffected">
+                <form id="divaddnewstoryUnaffected">
                     <div class="form-group">
                         <label for="newstorynameUnaffected">Story name</label>
                         <input id="newstorynameUnaffected" type="text" class="form-control" name="newstorynameUnaffected" maxlength="50" required/>
@@ -56,48 +57,69 @@
                     <button id="createNewStory" type="button" class="btn-md btn btn-primary">
                         <span th:text="#{create.story}"></span>
                     </button>
-                </div>
+                </form>
             </div>
-            <div id="divMessage" class="text-left"></div>
-            <ul id="divliststory" class="list-group">
-                <p class="h2 text-left" id="storyNone" th:text="#{story.none}"></p>
+            <ul th:if="${!stories.isEmpty()}" id="divliststory" class="list-group">
+                <p class="h2 text-left" th:text="#{story.list}"></p>
+                <li th:each="story:${stories}">
+                    <div class="list-group-item mouseLink" th:text="${story.nom}" th:onclick="'showStory('+${story.id}+')'">
+                        <div class="deleteStorylist hiddenElement">
+                            <button type="button" class="btnremove">
+                                <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                            </button>
+                        </div>
+                    </div>
+                </li>
             </ul>
+            <div th:unless="${!stories.isEmpty()}" class="h2 text-left" id="storyNone" th:text="#{story.none}"></div>
         </div>
 
         <div class="col-sm-6">
 
             <div id="divaddsprint">
-                <button id="newSprint" type="button" class="btn-md btn btn-primary" onClick="addNewSprint()">
+                <button id="newSprint" type="button" class="btn-md btn btn-primary" onClick="showFormToAddNewSprint()">
                     <span class="glybtnright glyphicon glyphicon-plus"></span>
                     <span th:text="#{new.sprint}"></span>
                 </button>
-                <div id="divaddnewsprint">
+                <form id="divaddnewsprint">
                     <div class="form-group">
                         <label for="newsprintname">Sprint name</label>
-                        <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30"
-                               required/>
+                        <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30">
                     </div>
                     <div class="form-group">
-                        <label for="newSprintDateDebut">Date de d&eacutebut</label>
-                        <input id="newSprintDateDebut" type="date" class="form-control"
-                               name="newSprintDateDebut"/>
+                        <label for="newSprintDateDebut">Starting date</label>
+                        <div class="row">
+                            <div class="col-sm-6"><input id="newSprintDateDebut" type="date" class="form-control" name="newSprintDateDebut"></div>
+                            <div class="col-sm-6"><input id="newSprintHeureDebut" type="time" class="form-control" name="newSprintHeureDebut" value="00:00"></div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="newSprintDateFin">Date de fin</label>
-                        <input id="newSprintDateFin" type="date" class="form-control"
-                               name="newSprintDateFin"/>
+                        <label for="newSprintDateFin">Ending date</label>
+                        <div class="row">
+                            <div class="col-sm-6"><input id="newSprintDateFin" type="date" class="form-control" name="newSprintDateFin"></div>
+                            <div class="col-sm-6"><input id="newSprintHeureFin" type="time" class="form-control" name="newSprintHeureFin" value="23:59"></div>
+                        </div>
                     </div>
                     <button id="createnewSprint" type="button" class="btn-md btn btn-primary">
                         <span th:text="#{create.sprint}"></span>
                     </button>
-                </div>
-                <div id="divlistsprint" class="list-group">
+                </form>
+            </div>
+            <div id="divlistsprint" class="list-group" th:if="${!sprints.isEmpty()}">
+                <p class="h2 text-left" th:text="#{sprint.list}"></p>
+                <div th:each="sprint:${sprints}" class="sprint">
+                    <div class="list-group-item storyinsprint" th:onclick="'detailSprint('+${sprint.id}+')'">
+                        <div class="padd2">
+                            <span class="bold" th:text="${sprint.nom}"></span>
+                        </div>
+                        <button class="btn btn-xs btn-default btnseetasks hiddenElement" onclick="showSprint(this)">
+                            <span th:text="#{see.tasks}"></span>
+                            <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div id="divMessageSprint" class="text-left"></div>
-            <ul id="messageSprint" class="list-group">
-                <p class="h2 text-left" id="sprintNone" th:text="#{sprint.none}"></p>
-            </ul>
+            <div th:unless="${!sprints.isEmpty()}" class="h2 text-left" th:text="#{sprint.none}"></div>
         </div>
 
         <div class="col-sm-3">
@@ -105,7 +127,7 @@
                 <div>
                     <p class="h4 text-center">Details Sprint</p>
                     <div>
-                        <button type="button" class="btnedit btn-xs btn btn-default">
+                        <button type="button" class="btnedit btn-xs btn btn-default hiddenElement">
                             <span class="glyedit glyphicon glyphicon-edit"></span>
                         </button>
                     </div>
@@ -117,7 +139,7 @@
                 <div>
                     <p class="h4 text-center">Details Story</p>
                     <div>
-                        <button type="button" class="btnedit btn-xs btn btn-default">
+                        <button type="button" class="btnedit btn-xs btn btn-default hiddenElement">
                             <span class="glyedit glyphicon glyphicon-edit"></span>
                         </button>
                     </div>

@@ -50,13 +50,13 @@
     </div>
 
     <div id="divlistproject">
-        <div th:each="project:${projects}" class="col-sm-offset-3 col-sm-6 list-group"><a th:href="@{'/project/'+${project.id}}" class="list-group-item" th:text="${project.nom}"></a></div>
-        <p th:unless="${null!=projects}" class="h2 text-center" id="projectNone" th:text="#{project.none}"></p>
+        <div th:if="${!projects.isEmpty()}" th:each="project:${projects}" class="col-sm-offset-3 col-sm-6 list-group" >
+            <a th:href="@{'/project/'+${project.id}}" class="list-group-item" th:text="${project.nom}"></a>
+        </div>
+        <p th:unless="${!projects.isEmpty()}" class="h2 text-center" id="projectNone" th:text="#{project.none}"></p>
     </div>
 
 </section>
 
 </body>
 </html>
-
-
