@@ -22,3 +22,8 @@
 .glyedit{
 	font-size: 17px;
 }
+/*Chaque élément non fonctionnel de l'application est provisoirement affecté à la classe "hiddenElement".
+/*Cela permet de n'afficher aucun lien mort ou fonctionnalité incomplète.*/
+.hiddenElement{
+	display: none;
+}
