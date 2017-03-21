@@ -126,5 +126,19 @@ public class Sprint implements Serializable {
         sprintStories.add(story);
     }
 
-
+    public String getStatus() {
+        if (this.getDateFin() != null) {
+            if (this.getDateFin().before(new Timestamp(System.currentTimeMillis()))) {
+                return "over";
+            } else {
+                if (this.getDateDebut().before(new Timestamp(System.currentTimeMillis()))) {
+                    return "actual";
+                } else {
+                    return "upcoming";
+                }
+            }
+        }else{
+            return "undefined";
+        }
+    }
 }
