@@ -88,13 +88,14 @@ public class StoryServiceImpl implements StoryService
     @Override
     public Story findOneByIdWithAll(Long id) {
         Story story = storyDAO.findOneById(id);
+        if(null!=story)
+        {
+            Set<Task> storyTasks = taskDAO.findByTaskStoriesId(story.getId());
+            story.setStoryTasks(storyTasks);
 
-        Set<Task> storyTasks = taskDAO.findByTaskStoriesId(story.getId());
-        story.setStoryTasks(storyTasks);
-
-        Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId()).iterator().next();
-        story.setStorySprint(storySprint);
-
+            Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId()).iterator().next();
+            story.setStorySprint(storySprint);
+        }
         return story;
     }
 }

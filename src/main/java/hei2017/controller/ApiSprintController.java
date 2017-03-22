@@ -69,9 +69,12 @@ public class ApiSprintController {
     public ResponseEntity<Sprint> showSprint(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showSprint");
-        Sprint sprint = sprintService.findOneById(id);
-        if(null!=sprint)
+        Sprint sprint = null;
+        if(sprintService.exists(id))
+        {
+            sprint = sprintService.findOneById(id);
             return new ResponseEntity<Sprint>(sprint, HttpStatus.OK);
+        }
         return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
     }
 
@@ -81,9 +84,12 @@ public class ApiSprintController {
     public ResponseEntity<Sprint> showSprintWithAll(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showSprint");
-        Sprint sprint = sprintService.findOneByIdWithAll(id);
-        if(null!=sprint)
+        Sprint sprint = null;
+        if(sprintService.exists(id))
+        {
+            sprint = sprintService.findOneByIdWithAll(id);
             return new ResponseEntity<Sprint>(sprint, HttpStatus.OK);
+        }
         return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
     }
 

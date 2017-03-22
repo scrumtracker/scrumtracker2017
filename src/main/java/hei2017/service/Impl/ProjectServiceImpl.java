@@ -57,13 +57,14 @@ public class ProjectServiceImpl implements ProjectService
     @Override
     public Project findOneByIdWithAll(Long id) {
         Project project = projectDAO.findOneById(id);
+        if(null!=project)
+        {
+            Set<Sprint> projectSprints = sprintDAO.findBySprintProjectId(project.getId());
+            project.setProjectSprints(projectSprints);
 
-        Set<Sprint> projectSprints = sprintDAO.findBySprintProjectId(project.getId());
-        project.setProjectSprints(projectSprints);
-
-        Set<User> projectUsers = userDAO.findByUserProjectsId(project.getId());
-        project.setProjectUsers(projectUsers);
-
+            Set<User> projectUsers = userDAO.findByUserProjectsId(project.getId());
+            project.setProjectUsers(projectUsers);
+        }
         return project;
     }
 

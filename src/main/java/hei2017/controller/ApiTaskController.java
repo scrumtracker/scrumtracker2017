@@ -69,9 +69,12 @@ public class ApiTaskController {
     public ResponseEntity<Task> showTask(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showTask");
-        Task task = taskService.findOneById(id);
-        if(null!=task)
+        Task task = null;
+        if(taskService.exists(id))
+        {
+            task = taskService.findOneById(id);
             return new ResponseEntity<Task>(task, HttpStatus.OK);
+        }
         return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
     }
 
@@ -81,9 +84,13 @@ public class ApiTaskController {
     public ResponseEntity<Task> showTaskWithAll(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showTaskWithAll");
-        Task task = taskService.findOneByIdWithAll(id);
-        if(null!=task)
+
+        Task task = null;
+        if(taskService.exists(id))
+        {
+            task = taskService.findOneByIdWithAll(id);
             return new ResponseEntity<Task>(task, HttpStatus.OK);
+        }
         return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
     }
 

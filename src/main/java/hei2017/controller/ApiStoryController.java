@@ -68,10 +68,13 @@ public class ApiStoryController {
     public ResponseEntity<Story> showStory(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showStory");
-        Story story = storyService.findOneById(id);
-        if(null!=story)
+        Story story = null;
+        if(storyService.exists(id))
+        {
+            story = storyService.findOneById(id);
             return new ResponseEntity<Story>(story, HttpStatus.OK);
-        return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Story>(story,HttpStatus.NOT_FOUND);
     }
 
     @JsonView(JsonViews.Basique.class)
@@ -80,9 +83,12 @@ public class ApiStoryController {
     public ResponseEntity<Story> showStoryWithAll(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showStoryWithAll");
-        Story story = storyService.findOneByIdWithAll(id);
-        if(null!=story)
+        Story story = null;
+        if(storyService.exists(id))
+        {
+            story = storyService.findOneByIdWithAll(id);
             return new ResponseEntity<Story>(story, HttpStatus.OK);
+        }
         return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
     }
 

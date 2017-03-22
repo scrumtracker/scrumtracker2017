@@ -66,10 +66,13 @@ public class ApiProjectController {
     public ResponseEntity<Project> showProject(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showProject");
-        Project projet = projectService.findOneById(id);
-        if(null!=projet)
-            return new ResponseEntity<Project>(projet, HttpStatus.OK);
-        return new ResponseEntity<Project>(projet, HttpStatus.NOT_FOUND);
+        Project project = null;
+        if(projectService.exists(id))
+        {
+            project = projectService.findOneById(id);
+            return new ResponseEntity<Project>(project, HttpStatus.OK);
+        }
+        return new ResponseEntity<Project>(project, HttpStatus.NOT_FOUND);
     }
 
     @JsonView(JsonViews.Project.class)
@@ -78,10 +81,13 @@ public class ApiProjectController {
     public ResponseEntity<Project> showProjectWithAll(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showProjectWithAll");
-        Project projet = projectService.findOneByIdWithAll(id);
-        if(null!=projet)
-            return new ResponseEntity<Project>(projet, HttpStatus.OK);
-        return new ResponseEntity<Project>(projet, HttpStatus.NOT_FOUND);
+        Project project = null;
+        if(projectService.exists(id))
+        {
+            project = projectService.findOneByIdWithAll(id);
+            return new ResponseEntity<Project>(project, HttpStatus.OK);
+        }
+        return new ResponseEntity<Project>(project, HttpStatus.NOT_FOUND);
     }
 
     @JsonView(JsonViews.Basique.class)

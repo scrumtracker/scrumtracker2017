@@ -1,6 +1,7 @@
 package hei2017.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import hei2017.entity.Project;
 import hei2017.entity.Task;
 import hei2017.entity.User;
 import hei2017.json.JsonViews;
@@ -67,10 +68,12 @@ public class ApiUserController {
     public ResponseEntity<User> showUser(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showUser");
-        User user = userService.findOneById(id);
-        if(null!=user)
+        if(userService.exists(id))
+        {
+            User user = userService.findOneById(id);
             return new ResponseEntity<User>(user, HttpStatus.OK);
-        return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>( HttpStatus.NOT_FOUND);
     }
 
     @JsonView(JsonViews.User.class)
@@ -79,9 +82,12 @@ public class ApiUserController {
     public ResponseEntity<User> showUserWithAll(@PathVariable Long id)
     {
         LOGGER.debug("ApiController - showUserWithAll");
-        User user = userService.findOneByIdWithAll(id);
-        if(null!=user)
+        User user = null;
+        if(userService.exists(id))
+        {
+            user = userService.findOneByIdWithAll(id);
             return new ResponseEntity<User>(user, HttpStatus.OK);
+        }
         return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
     }
 
@@ -93,6 +99,7 @@ public class ApiUserController {
         if(!userService.exists(user.getEmail()))
         {
             userService.save(user);
+
             LOGGER.debug("ApiController - sendUser - User créé");
             return new ResponseEntity<User>(user, HttpStatus.CREATED);
         }
