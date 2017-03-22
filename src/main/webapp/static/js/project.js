@@ -72,12 +72,12 @@ function getListStories() {
             var html = '';
 
             if (data.length!=0) {
-                html = '<p class="h2 text-left">List of stories</p>';
+                html = '<li><p class="h2 text-left">List of stories</p></li>';
 
                 $.each(data, function (key, val) {
                     html +=
                         '<li>'+
-                        '<div class="list-group-item mouseLink" onclick="showStory('+val.id+')">'
+                        '<div class="padd mouseLink divStoryUnaffected" onclick="showStory('+val.id+')">'
                         + val.nom +
                         '<div class="deleteStorylist hiddenElement">'+
                         '<button type="button" class="btnremove">'+
@@ -90,14 +90,14 @@ function getListStories() {
                 listeStories.innerHTML = html;
             }
             else {
-                html='<p class="h2 text-left" id="storyNone">No story (for now)</p>';
+                html='<li><p class="h2 text-left" id="storyNone">No story (for now)</p></li>';
                 listeStories.innerHTML = html;
             }
         });
 };
 
-
-function getListSprints() {
+//////////////////// Plus utilisé ? ////////////////////////////////////
+/*function getListSprints() {
     $.getJSON('/api/sprint',
         function (data) {
             listeSprints = document.getElementById("divlistsprint");
@@ -128,7 +128,8 @@ function getListSprints() {
                 listeSprints.innerHTML = html;
             }
         });
-}
+}*/
+//////////////////////////////////////////////////////////////////////
 
 
 function showFormToAddNewSprint(){
@@ -145,13 +146,13 @@ function showFormToAddNewSprint(){
     divaddnewstoryUnaffected.style.display = "none";
     newStoryUnaffected.style.display = "block";
 }
-
+/*
 function showSprint(obj){
 
     var sousMenu = obj.childNodes[5];
 
     sousMenu.style.display = "block";
-}
+}*/
 
 function addNewStory(obj){
 
@@ -232,8 +233,28 @@ function showStory(id){
         });
 
 }
-
+/*
 function detailSprint(id){
+
+    $.getJSON('/api/sprint/'+id,
+        function (data) {
+            detailofSprint = document.getElementById("detailsSprint");
+            if (data.length!=0) {
+                console.log(data);
+                var html =  '<p>Sprint name : '+data.nom+'</p>'+
+                    '<p>Starting date : ' + moment(data.dateDebut).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateDebut).fromNow() +')</p>'+
+                    '<p>Ending date : '+ moment(data.dateFin).format('DD/MM/YYYY HH:mm') +'<br/>(' + moment(data.dateFin).fromNow() +')</p>';
+                detailofSprint.innerHTML = html;
+            }
+        });
+}*/
+
+
+function detailSprint(id, obj){
+
+    var sousMenu = obj.childNodes[5];
+    //alert(sousMenu.nodeName);
+    sousMenu.style.display = "block";
 
     $.getJSON('/api/sprint/'+id,
         function (data) {

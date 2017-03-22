@@ -35,53 +35,15 @@
     </header>
 
     <div id="divcontent" class="row">
-        <div class="col-sm-3">
-            <div id="divaddstoryunaffected">
-                <button id="newStoryUnaffected" type="button" class="btn-md btn btn-primary" onclick="addNewStoryUnaffected()">
-                    <span class="glybtnright glyphicon glyphicon-plus"></span>
-                    <span th:text="#{new.story}"></span>
-                </button>
-                <form id="divaddnewstoryUnaffected">
-                    <div class="form-group">
-                        <label for="newstorynameUnaffected">Story name</label>
-                        <input id="newstorynameUnaffected" type="text" class="form-control" name="newstorynameUnaffected" maxlength="50" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="newstorydescriptionUnaffected">Story description</label>
-                        <textarea id="newstorydescriptionUnaffected" rows="3" class="form-control" name="newstorydescriptionUnaffected"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="newstorypointsUnaffected" title="Story points are a unit of measure for expressing an estimate of the overall effort that will be required to fully implement a product backlog item or any other piece of work.">Story points estimation</label>
-                        <input type="number" id="newstorypointsUnaffected" min="1" max="99" class="form-control" name="newstorypointsUnaffected">
-                    </div>
-                    <button id="createNewStory" type="button" class="btn-md btn btn-primary">
-                        <span th:text="#{create.story}"></span>
-                    </button>
-                </form>
-            </div>
-            <ul th:if="${!stories.isEmpty()}" id="divliststory" class="list-group">
-                <p class="h2 text-left" th:text="#{story.list}"></p>
-                <li th:each="story:${stories}">
-                    <div class="list-group-item mouseLink" th:text="${story.nom}" th:onclick="'showStory('+${story.id}+')'">
-                        <div class="deleteStorylist hiddenElement">
-                            <button type="button" class="btnremove">
-                                <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                            </button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div th:unless="${!stories.isEmpty()}" class="h2 text-left" id="storyNone" th:text="#{story.none}"></div>
-        </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-9">
 
             <div id="divaddsprint">
                 <button id="newSprint" type="button" class="btn-md btn btn-primary" onClick="showFormToAddNewSprint()">
                     <span class="glybtnright glyphicon glyphicon-plus"></span>
                     <span th:text="#{new.sprint}"></span>
                 </button>
-                <form id="divaddnewsprint">
+                <div id="divaddnewsprint">
                     <div class="form-group">
                         <label for="newsprintname">Sprint name</label>
                         <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30">
@@ -103,23 +65,132 @@
                     <button id="createnewSprint" type="button" class="btn-md btn btn-primary">
                         <span th:text="#{create.sprint}"></span>
                     </button>
-                </form>
+                </div>
             </div>
+
             <div id="divlistsprint" class="list-group" th:if="${!sprints.isEmpty()}">
                 <p class="h2 text-left" th:text="#{sprint.list}"></p>
                 <div th:each="sprint:${sprints}" class="sprint">
-                    <div class="list-group-item storyinsprint" th:onclick="'detailSprint('+${sprint.id}+')'">
+                    <div class="list-group-item storyinsprint" th:onclick="'detailSprint('+${sprint.id}+',this)'">
                         <div class="padd2">
                             <span class="bold" th:text="${sprint.nom}"></span>
                         </div>
-                        <button class="btn btn-xs btn-default btnseetasks hiddenElement" onclick="showSprint(this)">
+                        <button class="btn btn-xs btn-default btnseetasks hiddenElement" onclick="location.href='sprints'">
                             <span th:text="#{see.tasks}"></span>
                             <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
                         </button>
+
+
+
+
+
+
+
+
+                        <ul><!-- //////////////// A DYNAMISER //////////////// -->
+                            <li>
+                                <a href="#" class="padd"><span class="fini">[Fini]</span>Story 1
+                                    <div class="deleteStorylist hiddenElement">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="padd"><span class="fini">[Fini]</span>Story 2
+                                    <div class="deleteStorylist hiddenElement">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="padd"><span class="en-cours">[En-cours]</span>Story 3
+                                    <div class="deleteStorylist hiddenElement">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <div>
+                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
+                                        <span class="glybtnright glyphicon glyphicon-plus"></span>
+                                        <span th:text="#{new.story}"></span>
+                                    </button>
+                                    <div class="divaddnewstory" id="divaddnewstory1">
+                                        <div class="form-group">
+                                            <label for="newstoryname1">Story name</label>
+                                            <input id="newstoryname1" type="text" class="form-control" name="newstoryname1" maxlength="50" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newstorydescription1">Story goals</label>
+                                            <textarea id="newstorydescription1" rows="3" class="form-control newstorydescription" name="newstorydescription1"></textarea>
+                                        </div>
+                                        <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!--
+                    --><div class="deletesprint hiddenElement">
+                        <div>
+                            <button type="button" class="btnremove"><span
+                                    class="glyremove glyphicon glyphicon-remove-sign"></span>
+                            </button>
+                        </div>
                     </div>
+
+                    <!-- //////////////////////////////// -->
+
+
+
+
+
+
                 </div>
             </div>
+
             <div th:unless="${!sprints.isEmpty()}" class="h2 text-left" th:text="#{sprint.none}"></div>
+
+            <div id="divMessageSprint" class="text-left"></div>
+
+            <ul id="messageSprint" class="list-group">
+                <p class="h2 text-left" id="sprintNone" th:text="#{sprint.none}"></p>
+            </ul>
+
+            <div id="storyunaffected">
+                <div id="divaddstoryunaffected">
+                    <button id="newStoryUnaffected" type="button" class="btn-md btn btn-primary" onclick="addNewStoryUnaffected()">
+                        <span class="glybtnright glyphicon glyphicon-plus"></span>
+                        <span th:text="#{new.story}"></span>
+                    </button>
+                    <div id="divaddnewstoryUnaffected">
+                        <div class="form-group">
+                            <label for="newstorynameUnaffected">Story name</label>
+                            <input id="newstorynameUnaffected" type="text" class="form-control" name="newstorynameUnaffected" maxlength="50" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="newstorydescriptionUnaffected">Story description</label>
+                            <textarea id="newstorydescriptionUnaffected" rows="3" class="form-control" name="newstorydescriptionUnaffected"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="newstorypointsUnaffected" title="Story points are a unit of measure for expressing an estimate of the overall effort that will be required to fully implement a product backlog item or any other piece of work.">Story points estimation</label>
+                            <input type="number" id="newstorypointsUnaffected" min="1" max="99" class="form-control" name="newstorypointsUnaffected">
+                        </div>
+                        <button id="createNewStory" type="button" class="btn-md btn btn-primary">
+                            <span th:text="#{create.story}"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="divMessage" class="text-left"></div>
+                <ul id="divliststory" class="list-group">
+                    <li><p class="h2 text-left" id="storyNone" th:text="#{story.none}"></p></li>
+                </ul>
+            </div>
         </div>
 
         <div class="col-sm-3">
@@ -145,6 +216,18 @@
                     </div>
                 </div>
                 <div id="detailsStory">
+                </div>
+            </div>
+            <div class="divdetail">
+                <div>
+                    <p class="h4 text-center">Details Task</p>
+                    <div>
+                        <button type="button" class="btnedit btn-xs btn btn-default hiddenElement">
+                            <span class="glyedit glyphicon glyphicon-edit"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="detailsTask">
                 </div>
             </div>
 

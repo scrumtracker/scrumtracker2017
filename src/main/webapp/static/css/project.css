@@ -98,7 +98,7 @@
 	text-align: center;
 }
 
-ul{
+section ul{
 	margin-top: 25px;
 	margin-bottom: 10px;
 	padding-left: 20px;
@@ -107,7 +107,14 @@ ul{
 #divlistsprint ul{
 	display: none;
 }
-ul.list-group li a{
+#divlistsprint{
+	margin-bottom: 60px;
+}
+#storyunaffected{
+	padding: 15px 20px;
+	padding-right: 100px;
+}
+section ul li a, .divStoryUnaffected{
 	border: 1px solid #ddd;
 	border-radius: 6px;
 	margin-bottom: -1px;
@@ -118,16 +125,16 @@ ul.list-group li a{
 	text-decoration: none;
 	position: relative;
 }
-ul li a:hover{
+section ul li a:hover, .divStoryUnaffected:hover{
 	text-decoration: none;
 	background-color: #ccc;
 	color: #333;
 }
-ul li a .fini{
+section ul li a .fini, .divStoryUnaffected .fini{
 	padding-right: 10px;
 	color: green;
 }
-ul li a .en-cours{
+section ul li a .en-cours, .divStoryUnaffected .en-cours{
 	padding-right: 10px;
 	color: orange;
 }
@@ -146,9 +153,6 @@ textarea{
 }
 #divaddnewstoryUnaffected{
 	display: none;
-}
-.padd{
-	padding-right: 35px;
 }
 .deleteStorylist{
 	//float: right;
@@ -176,4 +180,6 @@ textarea{
 }
 .mouseLink:hover{
 	cursor:pointer;
+	background-color: #ccc;
+	color: #333;
 }
