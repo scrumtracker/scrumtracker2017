@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+    // $(".sprint").click(function(){
+    //     alert('toto');
+    // });
+
     getListStoriesWithoutSprint();
 
     $("#createNewStory").click(function () {
@@ -63,7 +67,35 @@ $(document).ready(function () {
 
 });
 
+function getListStories() {
+    $.getJSON('/api/story',
+        function (data) {
+            listeStoriesInSprint = document.getElementById("listStoryInSprint");
+            var html = '';
 
+            if (data.length!=0) {
+                html = '<a href="#" class="padd"><span class="fini">[Fini]</span>Story 1';
+
+                $.each(data, function (key, val) {
+                    html +=
+                        '<div class="deleteStorylist hiddenElement">'+
+                        '<button type="button" class="btnremove">'+
+                        '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
+                        '<button type="button" class="btnremove">'+
+                        '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
+                        '</button>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>';
+                });
+                listeStoriesInSprint.innerHTML = html;
+            }
+            else {
+                html='<li><p class="h2 text-left" id="storyNone">No story (for now)</p></li>';
+                listeStoriesInSprint.innerHTML = html;
+            }
+        });
+};
 
 //Affiche les stories non affectées à un sprint
 function getListStoriesWithoutSprint() {

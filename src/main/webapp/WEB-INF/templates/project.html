@@ -75,7 +75,7 @@
                         <div class="padd2">
                             <span class="bold" th:text="${sprint.nom}"></span>
                         </div>
-                        <button class="btn btn-xs btn-default btnseetasks hiddenElement" onclick="location.href='sprints'">
+                        <button class="btn btn-xs btn-default btnseetasks hiddenElement" onclick="">
                             <span th:text="#{see.tasks}"></span>
                             <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
                         </button>
@@ -88,8 +88,8 @@
 
 
                         <ul><!-- //////////////// A DYNAMISER //////////////// -->
-                            <li>
-                                <a href="#" class="padd"><span class="fini">[Fini]</span>Story 1
+                            <li id="listStoryInSprint">
+                                <a href="#" class="padd" th:each="story:${story}"><span class="fini" th:text="${story.nom}"></span>
                                     <div class="deleteStorylist hiddenElement">
                                         <button type="button" class="btnremove">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -97,24 +97,24 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="padd"><span class="fini">[Fini]</span>Story 2
-                                    <div class="deleteStorylist hiddenElement">
-                                        <button type="button" class="btnremove">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="padd"><span class="en-cours">[En-cours]</span>Story 3
-                                    <div class="deleteStorylist hiddenElement">
-                                        <button type="button" class="btnremove">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </li>
+                            <!--<li>-->
+                                <!--<a href="#" class="padd"><span class="fini">[Fini]</span>Story 2-->
+                                    <!--<div class="deleteStorylist hiddenElement">-->
+                                        <!--<button type="button" class="btnremove">-->
+                                            <!--<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="#" class="padd"><span class="en-cours">[En-cours]</span>Story 3-->
+                                    <!--<div class="deleteStorylist hiddenElement">-->
+                                        <!--<button type="button" class="btnremove">-->
+                                            <!--<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</a>-->
+                            <!--</li>-->
                             <li>
                                 <div>
                                     <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
