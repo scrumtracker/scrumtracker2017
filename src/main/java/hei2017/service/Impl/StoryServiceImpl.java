@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -78,6 +79,20 @@ public class StoryServiceImpl implements StoryService
 
     @Override
     public Story save(Story story) { return storyDAO.save(story); }
+
+    //Stories non affectées à un sprint
+    @Override
+    public List<Story> findAllWithoutSprint() {
+        List<Story> listStoriesWithoutSprint = new ArrayList<>();
+        List<Story> listStories = storyDAO.findAll();
+        if(listStories != null){
+            for(Story story : listStories){
+                if(story.getStorySprint() == null)
+                    listStoriesWithoutSprint.add(story);
+            }
+        }
+        return listStoriesWithoutSprint;
+    }
 
     @Override
     public Boolean exists(String nom) { return null!=storyDAO.findOneByNom(nom); }

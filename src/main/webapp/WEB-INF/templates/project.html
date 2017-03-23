@@ -156,12 +156,17 @@
 
             <div th:unless="${!sprints.isEmpty()}" class="h2 text-left" th:text="#{sprint.none}"></div>
 
-            <div id="divMessageSprint" class="text-left"></div>
+            <!--<div id="divMessageSprint" class="text-left"></div>-->
 
-            <ul id="messageSprint" class="list-group">
-                <p class="h2 text-left" id="sprintNone" th:text="#{sprint.none}"></p>
-            </ul>
+            <!--<ul id="messageSprint" class="list-group">-->
+                <!--<p class="h2 text-left" id="sprintNone" th:text="#{sprint.none}"></p>-->
+            <!--</ul>-->
 
+
+
+
+
+            <!-- STORY -->
             <div id="storyunaffected">
                 <div id="divaddstoryunaffected">
                     <button id="newStoryUnaffected" type="button" class="btn-md btn btn-primary" onclick="addNewStoryUnaffected()">
@@ -187,12 +192,15 @@
                     </div>
                 </div>
                 <div id="divMessage" class="text-left"></div>
+
+
                 <ul id="divliststory" class="list-group">
                     <li><p class="h2 text-left" id="storyNone" th:text="#{story.none}"></p></li>
                 </ul>
             </div>
         </div>
 
+        <!-- DETAILS -->
         <div class="col-sm-3">
             <div class="divdetail">
                 <div>

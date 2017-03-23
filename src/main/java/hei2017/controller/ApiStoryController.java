@@ -141,13 +141,11 @@ public class ApiStoryController {
     @JsonView(JsonViews.Basique.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/api/story/sprint/null", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
-    public Set<Story> showStoriesWithNoSprint()
+    public List<Story> showStoriesWithNoSprint()
     {
         LOGGER.debug("ApiController - showStoriesWithNoSprint");
-        Set<Story> stories = storyService.findByStorySprint(null);
+        List<Story> stories = storyService.findAllWithoutSprint();
         return stories;
     }
-
-
 
 }

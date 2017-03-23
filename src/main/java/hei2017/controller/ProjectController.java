@@ -42,6 +42,9 @@ public class ProjectController {
 
         model.addAttribute("stories", storyService.findAll());
 
+        //stories non affectées à un sprint
+        model.addAttribute("storiesAlone", storyService.findAllWithoutSprint());
+
         Project project = projectService.findOneById(idProject);
 
         if(null==project)

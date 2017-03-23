@@ -34,4 +34,6 @@ public interface StoryService
     Story findOneByNom(String nom);
 
     Story save(Story story);
+
+    List<Story> findAllWithoutSprint();
 }

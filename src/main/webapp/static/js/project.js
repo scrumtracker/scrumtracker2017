@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    getListStoriesWithoutSprint();
+
     $("#createNewStory").click(function () {
         var story = {};
         story.nom = $("#newstorynameUnaffected").val();
@@ -18,7 +20,7 @@ $(document).ready(function () {
                     $('#divaddnewstoryUnaffected').trigger("reset");
                     $('button#newStoryUnaffected').show();
                     toastr.success(data.nom + " added");
-                    getListStories();
+                    getListStoriesWithoutSprint();
                 },
                 error: function (resultat, statut, erreur) {
                     toastr.error("An error occurred. This story may already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
@@ -49,7 +51,6 @@ $(document).ready(function () {
                 $('#divaddnewsprint').trigger("reset");
                 $('button#newSprint').show();
                 toastr.success(data.nom + " has been successfully added.");
-                getListSprints();
                 //getSprintsListMenu();
             },
             error: function (resultat, statut, erreur) {
@@ -64,9 +65,9 @@ $(document).ready(function () {
 
 
 
-
-function getListStories() {
-    $.getJSON('/api/story',
+//Affiche les stories non affectées à un sprint
+function getListStoriesWithoutSprint() {
+    $.getJSON('/api/story/sprint/null',
         function (data) {
             listeStories = document.getElementById("divliststory");
             var html = '';
@@ -146,13 +147,6 @@ function showFormToAddNewSprint(){
     divaddnewstoryUnaffected.style.display = "none";
     newStoryUnaffected.style.display = "block";
 }
-/*
-function showSprint(obj){
-
-    var sousMenu = obj.childNodes[5];
-
-    sousMenu.style.display = "block";
-}*/
 
 function addNewStory(obj){
 
@@ -233,22 +227,6 @@ function showStory(id){
         });
 
 }
-/*
-function detailSprint(id){
-
-    $.getJSON('/api/sprint/'+id,
-        function (data) {
-            detailofSprint = document.getElementById("detailsSprint");
-            if (data.length!=0) {
-                console.log(data);
-                var html =  '<p>Sprint name : '+data.nom+'</p>'+
-                    '<p>Starting date : ' + moment(data.dateDebut).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateDebut).fromNow() +')</p>'+
-                    '<p>Ending date : '+ moment(data.dateFin).format('DD/MM/YYYY HH:mm') +'<br/>(' + moment(data.dateFin).fromNow() +')</p>';
-                detailofSprint.innerHTML = html;
-            }
-        });
-}*/
-
 
 function detailSprint(id, obj){
 
