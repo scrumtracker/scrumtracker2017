@@ -130,13 +130,23 @@ section ul li a:hover, .divStoryUnaffected:hover{
 	background-color: #ccc;
 	color: #333;
 }
-section ul li a .fini, .divStoryUnaffected .fini{
-	padding-right: 10px;
-	color: green;
+section ul li a .fini, .divStoryUnaffected .fini, section ul li a .DONE, .divStoryUnaffected .DONE{
+	padding: 4px;
+	border-radius: 5px;
+	background-color: green;
+	color:white;
 }
-section ul li a .en-cours, .divStoryUnaffected .en-cours{
-	padding-right: 10px;
-	color: orange;
+section ul li a .en-cours, .divStoryUnaffected .en-cours,section ul li a .DOING, .divStoryUnaffected .DOING{
+	padding: 4px;
+	border-radius: 5px;
+	background-color: orange;
+	color:white;
+}
+section ul li a .a-faire, .divStoryUnaffected .a-faire, section ul li a .TODO, .divStoryUnaffected .TODO{
+	padding: 4px;
+	border-radius: 5px;
+	background-color: red;
+	color: white;
 }
 .divaddnewstory{
 	display: none;

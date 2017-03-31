@@ -1,7 +1,9 @@
 package hei2017.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import hei2017.entity.Sprint;
 import hei2017.entity.Story;
+import hei2017.enumeration.StoryStatus;
 import hei2017.json.JsonViews;
 import hei2017.service.*;
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.inject.Inject;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -111,6 +114,28 @@ public class ApiStoryController {
     }
 
     @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/story/add/sprint/{idSprint}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Story> sendStoryWithSprintId(@PathVariable Long idSprint, @RequestBody Story story)
+    {
+        LOGGER.debug("ApiController - sendStoryWithSprintId");
+        Sprint sprint = sprintService.findOneById(idSprint);
+        if(null==sprint)
+        {
+            LOGGER.debug("ApiController - sendStoryWithSprintId - Sprint inexistant");
+            return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
+        }
+        if(story.getStatus()==null)
+            story.setStatus(StoryStatus.TODO);
+
+        story = storyService.save(story);
+        story.setStorySprint(sprint);
+        story = storyService.save(story);
+
+        LOGGER.debug("ApiController - sendStoryWithSprintId - Story créé");
+        return new ResponseEntity<Story>(story, HttpStatus.CREATED);
+    }
+
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/story/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Story> deleteStory(@PathVariable("id") Long id)
     {
@@ -120,6 +145,9 @@ public class ApiStoryController {
         if(storyService.exists(id))
         {
             story = storyService.findOneById(id);
+            story.setStorySprint(null);
+            story.setStoryTasks(null);
+            storyService.save(story);
             storyService.deleteOneById(id);
             return new ResponseEntity<Story>(story, HttpStatus.ACCEPTED);
         }

@@ -1,6 +1,7 @@
 package hei2017.controller;
 
 import hei2017.entity.Project;
+import hei2017.enumeration.StoryStatus;
 import hei2017.service.ProjectService;
 import hei2017.service.SprintService;
 import hei2017.service.StoryService;
@@ -44,6 +45,11 @@ public class ProjectController {
 
         //stories non affectées à un sprint
         model.addAttribute("storiesAlone", storyService.findAllWithoutSprint());
+
+        //Sprints du projet
+        model.addAttribute("sprintsOfProjectWithStories", sprintService.findByProjectSprintIdWithStories(idProject));
+
+        model.addAttribute("status", StoryStatus.values());
 
         Project project = projectService.findOneById(idProject);
 

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -51,6 +52,7 @@ public class SprintServiceImpl implements SprintService {
                 Project sprintProject = sprintProjectIterator.next();
                 sprint.setSprintProject(sprintProject);
             }
+
         }
         return sprints;
     }
@@ -68,14 +70,19 @@ public class SprintServiceImpl implements SprintService {
         Sprint sprint = sprintDAO.findOneById(id);
         if(null!=sprint)
         {
+
             Set<Story> sprintStories = storyDAO.findByStorySprintId(sprint.getId());
             sprint.setSprintStories(sprintStories);
 
-            Iterator<Project> sprintProjectIterator = projectDAO.findByProjectSprintsId(sprint.getId()).iterator();
-            if(sprintProjectIterator.hasNext())
+            Set<Project> sprintProjects = projectDAO.findByProjectSprintsId(sprint.getId());
+            if(sprintProjects!=null)
             {
-                Project sprintProject = sprintProjectIterator.next();
-                sprint.setSprintProject(sprintProject);
+                Iterator<Project> sprintProjectIterator = sprintProjects.iterator();
+                if(sprintProjectIterator.hasNext())
+                {
+                    Project sprintProject = sprintProjectIterator.next();
+                    sprint.setSprintProject(sprintProject);
+                }
             }
         }
 
@@ -101,4 +108,17 @@ public class SprintServiceImpl implements SprintService {
 
     @Override
     public Sprint save(Sprint sprint) { return sprintDAO.save(sprint); }
+
+    @Override
+    public List<Sprint> findByProjectSprintIdWithStories(Long idProject) {
+        Set<Sprint> sprints = sprintDAO.findBySprintProjectId(idProject);
+        List<Sprint> sprintsOfProject = new ArrayList<>();
+        for(Sprint sprint : sprints)
+        {
+            Set<Story> sprintStories = storyDAO.findByStorySprintId(sprint.getId());
+            sprint.setSprintStories(sprintStories);
+            sprintsOfProject.add(sprint);
+        }
+        return sprintsOfProject;
+    }
 }

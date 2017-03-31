@@ -81,6 +81,11 @@ public class ApiDebugController {
         story.setDescription("Une story correspond à une fonctionnalité attendue par le client");
         story.setStatus(StoryStatus.DOING);
 
+        Story story2 = new Story();
+        story2.setNom("Je suis une Story finished"+Instant.now());
+        story2.setDescription("Une story correspond à une fonctionnalité attendue par le client");
+        story2.setStatus(StoryStatus.DONE);
+
         Sprint sprint = new Sprint();
         sprint.setNom("Sprint test de "+Instant.now());
         sprint.setDescription("Description du sprint");
@@ -96,7 +101,9 @@ public class ApiDebugController {
         sprint.setSprintProject(projet);
 
         story.setStorySprint(sprint);
+        story2.setStorySprint(sprint);
         sprint.addStory(story);
+        sprint.addStory(story2);
 
         story.addTask(tache);
         tache.addStory(story);
@@ -109,6 +116,7 @@ public class ApiDebugController {
         projet = projectService.save(projet);
         sprint = sprintService.save(sprint);
         story = storyService.save(story);
+        story2 = storyService.save(story2);
         tache = taskService.save(tache);
         testeur = userService.save(testeur);
 

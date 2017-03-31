@@ -1,6 +1,5 @@
 package hei2017.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import hei2017.json.JsonViews;
 
@@ -121,9 +120,10 @@ public class Sprint implements Serializable {
         this.sprintStories = sprintStories;
     }
 
-    public void addStory(Story story)
+    public Sprint addStory(Story story)
     {
         sprintStories.add(story);
+        return this;
     }
 
     public String getStatus() {

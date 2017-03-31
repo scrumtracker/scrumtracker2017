@@ -2,68 +2,66 @@ $(document).ready(function () {
 
     getListStoriesWithoutSprint();
 
-    $("#createNewStory").click(function () {
-        var story = {};
-        story.nom = $("#newstorynameUnaffected").val();
-        story.description = $("#newstorydescriptionUnaffected").val();
-        story.points = $("#newstorypointsUnaffected").val();
+});
+
+$("#createNewStory").click(function () {
+    var story = {};
+    story.nom = $("#newstorynameUnaffected").val();
+    story.description = $("#newstorydescriptionUnaffected").val();
+    story.points = $("#newstorypointsUnaffected").val();
 
 
-        if(story.nom!='') {
-            $.ajax({
-                url: '/api/story/add',
-                type: 'POST',
-                headers: {"Accept": "application/json", "Content-Type": "application/json"},
-                data: JSON.stringify(story),
-                success: function (data) {
-                    $('#divaddnewstoryUnaffected').hide();
-                    $('#divaddnewstoryUnaffected').trigger("reset");
-                    $('button#newStoryUnaffected').show();
-                    toastr.success(data.nom + " added");
-                    getListStoriesWithoutSprint();
-                },
-                error: function (resultat, statut, erreur) {
-                    toastr.error("An error occurred. This story may already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
-                }
-
-            });
-        }
-        else{toastr.error("Story name is required.");}
-
-    });
-
-    $("#createnewSprint").click(function () {
-
-        var sprint = {};
-        sprint.nom = $("#newsprintname").val();
-        sprint.dateDebut = moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x');
-        sprint.dateFin = moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x');
-        sprint.idProject = $("#newsprintprojectid").val();
-
+    if(story.nom!='') {
         $.ajax({
-
-            url: '/api/sprint/add',
+            url: '/api/story/add',
             type: 'POST',
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data: JSON.stringify(sprint),
+            data: JSON.stringify(story),
             success: function (data) {
-                $('#divaddnewsprint').hide();
-                $('#divaddnewsprint').trigger("reset");
-                $('button#newSprint').show();
-                toastr.success(data.nom + " has been successfully added.");
-                //getSprintsListMenu();
+                $('#divaddnewstoryUnaffected').hide();
+                $('#divaddnewstoryUnaffected').trigger("reset");
+                $('button#newStoryUnaffected').show();
+                toastr.success(data.nom + " added");
+                getListStoriesWithoutSprint();
             },
             error: function (resultat, statut, erreur) {
-                toastr.error("An error occurred. This sprint may already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ").");
+                toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ")");
             }
 
         });
+    }
+    else{toastr.error("Story name is required.");}
+
+});
+
+$("#createnewSprint").click(function () {
+
+    var sprint = {};
+    sprint.nom = $("#newsprintname").val();
+    sprint.dateDebut = moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x');
+    sprint.dateFin = moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x');
+    sprint.idProject = $("#newsprintprojectid").val();
+
+    $.ajax({
+
+        url: '/api/sprint/add',
+        type: 'POST',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        data: JSON.stringify(sprint),
+        success: function (data) {
+            $('#divaddnewsprint').hide();
+            $('#divaddnewsprint').trigger("reset");
+            $('button#newSprint').show();
+            toastr.success(data.nom + " has been successfully added.");
+            document.location.reload();
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
 
     });
 
 });
-
-
 
 //Affiche les stories non affectées à un sprint
 function getListStoriesWithoutSprint() {
@@ -201,15 +199,11 @@ function addNewStoryUnaffected(){
     divaddnewstoryUnaffected.style.display = "block";
     newStoryUnaffected.style.display = "none";
 
-
-
-
     divaddnewsprint.style.display = "none";
     newSprint.style.display = "block";
 }
 
 function showStory(id){
-    console.log(id);
 
     $.getJSON('/api/story/'+id,
         function (data) {
@@ -231,7 +225,6 @@ function showStory(id){
 function detailSprint(id, obj){
 
     var sousMenu = obj.childNodes[5];
-    //alert(sousMenu.nodeName);
     sousMenu.style.display = "block";
 
     $.getJSON('/api/sprint/'+id,
@@ -245,4 +238,44 @@ function detailSprint(id, obj){
                 detailofSprint.innerHTML = html;
             }
         });
+}
+
+function effacerStoryById( idStory )
+{
+    $.ajax({
+
+        url: '/api/story/delete/'+idStory,
+        type: 'DELETE',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        success: function (data) {
+            $("#storyId"+idStory).hide(500);
+            toastr.success("Story "+idStory+" deleted.");
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
+
+    });
+}
+
+function creerStoryDansSprint( idSprint )
+{
+    var story = {};
+    story.nom = $("#newstoryname1").val();
+    story.description = $("#newstorydescription1").val();
+    story.status = $("#newstorystatus1").val();
+    $.ajax({
+        url: '/api/story/add/sprint/'+idSprint,
+        type: 'POST',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        data: JSON.stringify(story),
+        success: function (data) {
+            toastr.success(data.nom + " has been successfully added.");
+            document.location.reload();
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
+
+    });
 }
