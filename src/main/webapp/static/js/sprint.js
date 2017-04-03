@@ -43,3 +43,19 @@ function addNewTask(obj){
 }
 
 
+/*function dragAndDropTasks() {
+    window.onload = function() {
+    dragula([$('TODO'), $('DOING'), $('DONE')],
+        {revertOnSpill: true});};
+}*/
+
+
+window.onload = function() {
+    dragula([$('TODO'), $('DOING'), $('DONE')],
+        {revertOnSpill: true});
+}
+
+
+function $ (id) {
+    return document.getElementById(id);
+}

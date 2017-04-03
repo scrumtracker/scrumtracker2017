@@ -21,11 +21,15 @@ public interface UserService
 
     List<User> findAll();
 
+    List<User> findAllWithAll();
+
     User findOneById(Long id);
+
+    User findOneByIdWithAll(Long id);
 
     User findOneByNomAndPrenom(String nom, String prenom);
 
     User findOneByPseudo(String pseudo);
 
-    void save(User user);
+    User save(User user);
 }

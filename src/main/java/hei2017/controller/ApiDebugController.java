@@ -58,6 +58,10 @@ public class ApiDebugController {
     @RequestMapping(value = "/api/debug", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public String debug()
     {
+        /*
+        if(null!=userService.findOneByPseudo("Mr Motte"))
+            return "DB déjà peuplée";
+         */
         //CREATION DES ENTITES
         User testeur = new User();
         testeur.setNom("Teur");
@@ -77,6 +81,11 @@ public class ApiDebugController {
         story.setDescription("Une story correspond à une fonctionnalité attendue par le client");
         story.setStatus(StoryStatus.DOING);
 
+        Story story2 = new Story();
+        story2.setNom("Je suis une Story finished"+Instant.now());
+        story2.setDescription("Une story correspond à une fonctionnalité attendue par le client");
+        story2.setStatus(StoryStatus.DONE);
+
         Sprint sprint = new Sprint();
         sprint.setNom("Sprint test de "+Instant.now());
         sprint.setDescription("Description du sprint");
@@ -89,17 +98,27 @@ public class ApiDebugController {
 
         //AJOUT DES LIAISONS INTER-ENTITES
         projet.addSprint(sprint);
+        sprint.setSprintProject(projet);
+
+        story.setStorySprint(sprint);
+        story2.setStorySprint(sprint);
+        sprint.addStory(story);
+        sprint.addStory(story2);
+
+        story.addTask(tache);
+        tache.addStory(story);
+
+        tache.addUser(testeur);
+        testeur.addTask(tache);
+
         projet.addUser(testeur);
 
-        sprint.addStory(story);
-        story.addTask(tache);
-        tache.addUser(testeur);
-
-        projectService.save(projet);
-        sprintService.save(sprint);
-        storyService.save(story);
-        taskService.save(tache);
-        userService.save(testeur);
+        projet = projectService.save(projet);
+        sprint = sprintService.save(sprint);
+        story = storyService.save(story);
+        story2 = storyService.save(story2);
+        tache = taskService.save(tache);
+        testeur = userService.save(testeur);
 
         return "DB peuplée";
     }

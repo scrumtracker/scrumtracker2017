@@ -1,208 +1,59 @@
 $(document).ready(function () {
 
+    getListStoriesWithoutSprint();
+
+    function showStory(id){
+        $.getJSON('/api/story/'+id,
+            function (data) {
+                detailStory = document.getElementById("detailsStory");
+
+                if (data.length!=0) {
+                    var html =  '<p>Story name : '+data.nom+'</p>'+
+                        '<p>Creation date : ' + moment(data.dateCreation).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateCreation).fromNow() +')</p>'+
+                        '<p>State : '+data.status+'</p>'+
+                        '<p>Total hours of works : '+ data.points + '</p>'+
+                        '<p>Number of tasks : 0</p>'+
+                        '<p>Description : '+data.description+'</p>';
+                    detailStory.innerHTML = html;
+                }
+            });
+    }
+
     $("#createNewStory").click(function () {
-        var story = '{"description": "' + $("#newstorydescriptionUnaffected").val() + '", "nom": "' + $("#newstorynameUnaffected").val() + '", "points": "' + $("#newstorypointsUnaffected").val() + '"}';
-        story = {};
+        var story = {};
         story.nom = $("#newstorynameUnaffected").val();
         story.description = $("#newstorydescriptionUnaffected").val();
         story.points = $("#newstorypointsUnaffected").val();
 
 
-        $.ajax({
-
-            url: '/api/story/add',
-            // cache: false,
-            type: 'POST',
-            headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data: JSON.stringify(story),
-            success: function (data) {
-                $('#divaddnewstoryUnaffected').hide();
-                $('#divaddnewstoryUnaffected').trigger("reset");
-                $('#divaddnewstoryUnaffected').show();
-                $('#divMessage').html(data.nom + " has been successfully added.");
-                getListStories();
-            },
-            error: function (resultat, statut, erreur) {
-                $('#divMessage').html("This story already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
-            }
-
-        });
-
-    });
-
-    getListStories();
-
-
-    function getListStories() {
-        $.getJSON('/api/story',
-            function (data) {
-                listeStories = document.getElementById("divliststory");
-
-                if (data.length!=0) {
-                    var html = '<p class="h2 text-center" th:text="#{story.list}"></p>';
-
-                    $.each(data, function (key, val) {
-
-                        html +=
-                            '<li>'+
-                            '<div class="list-group-item" onclick="showStory('+val.id+')">'
-                            + val.nom +
-                            '<div class="deleteStorylist">'+
-                            '<button type="button" class="btnremove">'+
-                            '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
-                            '</button>'+
-                            '</div>'+
-                            '</div>'+
-                            '</li>';
-                    });
-                    $("#storyNone").hide();
-                    listeStories.innerHTML = html;
-                    ;
+        if(story.nom!='') {
+            $.ajax({
+                url: '/api/story/add',
+                type: 'POST',
+                headers: {"Accept": "application/json", "Content-Type": "application/json"},
+                data: JSON.stringify(story),
+                success: function (data) {
+                    $('#divaddnewstoryUnaffected').hide();
+                    $('#divaddnewstoryUnaffected').trigger("reset");
+                    $('button#newStoryUnaffected').show();
+                    toastr.success(data.nom + " added");
+                    getListStoriesWithoutSprint();
+                },
+                error: function (resultat, statut, erreur) {
+                    toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ")");
                 }
-                else {
-                    $("#storyNone").show();
-                }
-
 
             });
-
-    };
-
-    $("#createnewSprint").click(function () {
-
-        $.ajax({
-
-            url: '/api/sprint/add',
-            type: 'POST',
-            headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data: '{"nom": "' + $("#newsprintname").val() + '", "date de début": "' + $("#newSprintDateDebut").val() + '", "date de fin": "' + $("#newSprintDateFin").val() + '"}',
-            success: function (data) {
-                $('#divaddnewsprint').hide();
-                $('#divaddnewsprint').trigger("reset");
-                $('#divaddsprint').show();
-                $('#divMessageSprint').html(data.nom + " has been successfully added.");
-                getListSprints();
-
-            },
-            error: function (resultat, statut, erreur) {
-                $('#divMessageSprint').html("This story already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
-            }
-
-        });
-
-    });
-
-    getListSprints();
-
-    function getListSprints() {
-        $.getJSON('/api/sprint',
-            function (data) {
-                listeSprints = document.getElementById("divlistsprint");
-
-                if (data.length!=0) {
-                    var html = '<p class="h2 text-center" th:text="#{sprint.list}"></p>';
-
-                    $.each(data, function (key, val) {
-
-                        html +=
-                            '<div class="sprint">'+
-                            '<div id="onClickSprint" class="list-group-item storyinsprint" onclick="getDetailSprint(this)">'+
-                            '<div class="padd2">'+
-                            '<span class="bold">' + val.nom+ '</span>'+
-                            '</div>'+
-                            '<button class="btn btn-xs btn-default btnseetasks" onclick="">'+
-                            '<span th:text="#{see.tasks}"></span>'+
-                            '<span class="glybtnleft glyphicon glyphicon-chevron-right"></span>'+
-                            '</button>'+
-                            '</div>'+
-                            '</div>';
-                    });
-                    $("#sprintNone").hide();
-                    listeSprints.innerHTML = html;
-                }
-                else {
-                    $("#sprintNone").show();
-                }
-
-
-            });
-
-    };
-
-    $("#onClickSprint").click(function () {
-
-        $.ajax({
-
-            url: '/api/sprint',
-            type: 'GET',
-            // headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            // data: '{"nom": "' + $("#newsprintname").val() + '", "date de début": "' + $("#newSprintDateDebut").val() + '", "date de fin": "' + $("#newSprintDateFin").val() + '"}',
-            success: function (data) {
-                listeSprints = document.getElementById("divlistsprint");
-
-                if (data.length != 0) {
-                    var html = '<p class="h2 text-center" th:text="#{sprint.list}"></p>';
-
-                    $.each(data, function (key, val) {
-
-                        html +=
-                            '<div class="sprint">' +
-                            '<div class="list-group-item storyinsprint" onclick="getDetailSprint(this)">' +
-                            '<div class="padd2">' +
-                            '<span class="bold">' + val.nom + '</span>' +
-                            '</div>' +
-                            '<button id="onClickSprint" class="btn btn-xs btn-default btnseetasks" onclick="">' +
-                            '<span th:text="#{see.tasks}"></span>' +
-                            '<span class="glybtnleft glyphicon glyphicon-chevron-right"></span>' +
-                            '</button>' +
-                            '</div>' +
-                            '</div>';
-                    });
-                    $("#sprintNone").hide();
-                    listeSprints.innerHTML = html;
-                }
-                else {
-                    $("#sprintNone").show();
-                }
-            }
-        })
+        }
+        else{toastr.error("Story name is required.");}
 
     });
 
 
-    function getDetailSprint() {
-        $.getJSON('/api/sprint',
-            function (data) {
-                listeDetailSprint = document.getElementById("divdetail");
-
-                if (data.length!=0) {
-                    var html = '<p class="h2 text-center" th:text="#{sprint.detail}"></p>';
-
-                    $.each(data, function (key, val) {
-
-                        html +=
-                            '<div class="detailSprint">'+
-                            '<p class="h4 text-center"> D&eacutetail du Sprint </p>'+
-                            '<div>'+
-                            '<button type="button" class="btnedit btn-xs btn btn-default">'+
-                            '<span class="glyedit glyphicon glyphicon-edit"></span>'+
-                            '</button>'+
-                            '</div>'+
-                            '</div>'+
-                            '<p>Nom du Sprint : ' +val.nom+ '</p>'+
-                            '<p>D&eacutebut du Sprint : ' +val.dateDebut+ '</p>'+
-                            '<p>Fin du Sprint : ' +val.dateFin+ '</p>'+
-                            '</div>';
-                    });
-                    listeDetailSprint.innerHTML = html;
-                }
-            });
-
-    }
-
+    //fin document . ready
 });
 
-function addNewSprint(){
+function showFormToAddNewSprint(){
 
     var divaddnewsprint = document.getElementById("divaddnewsprint");
     var newSprint = document.getElementById("newSprint");
@@ -213,18 +64,93 @@ function addNewSprint(){
     divaddnewsprint.style.display = "block";
     newSprint.style.display = "none";
 
-
-
-
     divaddnewstoryUnaffected.style.display = "none";
     newStoryUnaffected.style.display = "block";
 }
 
-function showSprint(obj){
 
-	var sousMenu = obj.childNodes[5];
-	
-	sousMenu.style.display = "block";
+function addNewStoryUnaffected(){
+
+    var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
+    var newStoryUnaffected = document.getElementById("newStoryUnaffected");
+
+    var divaddnewsprint = document.getElementById("divaddnewsprint");
+    var newSprint = document.getElementById("newSprint");
+
+    divaddnewstoryUnaffected.style.display = "block";
+    newStoryUnaffected.style.display = "none";
+
+    divaddnewsprint.style.display = "none";
+    newSprint.style.display = "block";
+}
+
+function detailSprint(id, obj){
+
+    var sousMenu = obj.childNodes[5];
+    sousMenu.style.display = "block";
+
+    $.getJSON('/api/sprint/'+id,
+        function (data) {
+            detailofSprint = document.getElementById("detailsSprint");
+            if (data.length!=0) {
+                console.log(data);
+                var html =  '<p>Sprint name : '+data.nom+'</p>'+
+                    '<p>Starting date : ' + moment(data.dateDebut).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateDebut).fromNow() +')</p>'+
+                    '<p>Ending date : '+ moment(data.dateFin).format('DD/MM/YYYY HH:mm') +'<br/>(' + moment(data.dateFin).fromNow() +')</p>';
+                detailofSprint.innerHTML = html;
+            }
+        });
+}
+
+//Affiche les stories non affectées à un sprint
+function getListStoriesWithoutSprint() {
+    $.getJSON('/api/story/sprint/null',
+        function (data) {
+            listeStories = document.getElementById("divliststory");
+            var html = '';
+
+            if (data.length!=0) {
+                html = '<li><p class="h2 text-left">List of stories</p></li>';
+
+                $.each(data, function (key, val) {
+                    html +=
+                        '<li>'+
+                        '<div class="padd mouseLink divStoryUnaffected" onclick="showStory('+val.id+')">'
+                        + val.nom +
+                        '<div class="deleteStorylist hiddenElement">'+
+                        '<button type="button" class="btnremove">'+
+                        '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
+                        '</button>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>';
+                });
+                listeStories.innerHTML = html;
+            }
+            else {
+                html='<li><p class="h2 text-left" id="storyNone">No story (for now)</p></li>';
+                listeStories.innerHTML = html;
+            }
+        });
+};
+
+//Efface une story selon son id
+function effacerStoryById( idStory )
+{
+    $.ajax({
+
+        url: '/api/story/delete/'+idStory,
+        type: 'DELETE',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        success: function (data) {
+            $("#storyId"+idStory).hide(500);
+            toastr.success("Story "+idStory+" deleted.");
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
+
+    });
 }
 
 function addNewStory(obj){
@@ -236,80 +162,90 @@ function addNewStory(obj){
     //alert(nb_sprint);
 
     for(var i = 1; i <= nb_sprint; i++){
-		if(document.getElementById('divaddnewstory' + i) && document.getElementById('divaddnewstory' + i) != divaddnewstory){
-			document.getElementById('divaddnewstory' + i).style.display = "none";
-			document.getElementById('divaddnewstory' + i).previousSibling.previousSibling.style.display = "block";
-		}
-	}
+        if(document.getElementById('divaddnewstory' + i) && document.getElementById('divaddnewstory' + i) != divaddnewstory){
+            document.getElementById('divaddnewstory' + i).style.display = "none";
+            document.getElementById('divaddnewstory' + i).previousSibling.previousSibling.style.display = "block";
+        }
+    }
 
-	if(divaddnewstory){
-		if(divaddnewstory.style.display == "block"){
-			divaddnewstory.style.display = "none";
-			newStory.style.display = "block";
-		}
-		else{
-			divaddnewstory.style.display = "block";
-			newStory.style.display = "none";
-		}
-	}
+    if(divaddnewstory){
+        if(divaddnewstory.style.display == "block"){
+            divaddnewstory.style.display = "none";
+            newStory.style.display = "block";
+        }
+        else{
+            divaddnewstory.style.display = "block";
+            newStory.style.display = "none";
+        }
+    }
 
 
-
-	var divaddnewsprint = document.getElementById("divaddnewsprint");
+    var divaddnewsprint = document.getElementById("divaddnewsprint");
     var newSprint = document.getElementById("newSprint");
     var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
     var newStoryUnaffected = document.getElementById("newStoryUnaffected");
 
-	if(newStoryUnaffected.style.display == "none"){
-		divaddnewstoryUnaffected.style.display = "none";
-		newStoryUnaffected.style.display = "block";
-	}
-	if(newSprint.style.display == "none"){
+    if(newStoryUnaffected.style.display == "none"){
+        divaddnewstoryUnaffected.style.display = "none";
+        newStoryUnaffected.style.display = "block";
+    }
+    if(newSprint.style.display == "none"){
         divaddnewsprint.style.display = "none";
-		newSprint.style.display = "block";
-	}
+        newSprint.style.display = "block";
+    }
 }
 
-function addNewStoryUnaffected(){
 
-	var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
-    var newStoryUnaffected = document.getElementById("newStoryUnaffected");
+//Créé une story reliée à un sprint
+function creerStoryDansSprint( idSprint )
+{
+    var story = {};
+    story.nom = $("#newstoryname"+idSprint).val();
+    story.description = $("#newstorydescription"+idSprint).val();
+    story.status = $("#newstorystatus"+idSprint).val();
+    $.ajax({
+        url: '/api/story/add/sprint/'+idSprint,
+        type: 'POST',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        data: JSON.stringify(story),
+        success: function (data) {
+            toastr.success(data.nom + " has been successfully added.");
+            document.location.reload();
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
 
-    var divaddnewsprint = document.getElementById("divaddnewsprint");
-    var newSprint = document.getElementById("newSprint");
-
-    divaddnewstoryUnaffected.style.display = "block";
-    newStoryUnaffected.style.display = "none";
-
-
-
-
-    divaddnewsprint.style.display = "none";
-    newSprint.style.display = "block";
+    });
 }
 
-function showStory(id){
-    console.log(id);
+//Créé un sprint relié à un project
+function creerSprintDansProject( idProject )
+{
+    var sprint = {};
+    sprint.nom = $("#newsprintname").val();
+    sprint.dateDebut = moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x');
+    sprint.dateFin = moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x');
+    $.ajax({
+        url: '/api/sprint/add/project/'+idProject,
+        type: 'POST',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        data: JSON.stringify(sprint),
+        success: function (data) {
+            toastr.success(data.nom + " has been successfully added.");
+            document.location.reload();
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
 
-    $.getJSON('/api/story/'+id,
-        function (data) {
-            detailStory = document.getElementById("detailsStory");
-
-            if (data.length!=0) {
-                console.log(data);
-                var html =  '<p>Story name : '+data.nom+'</p>'+
-                '<p>Creation date : </p>'+
-                '<p>State : '+data.status+'</p>'+
-                '<p>Total hours of works : </p>'+
-                '<p>Number of tasks : </p>'+
-                '<p>Goals : '+data.description+'</p>';
-                detailStory.innerHTML = html;
-                ;
-            }
-
-
-        });
-
-
+    });
 }
 
+////En construction////
+function dragAndDropStories(){
+
+ dragula([$(''), $(''), $('')],
+    {revertOnSpill: true});
+}
+////En construction////

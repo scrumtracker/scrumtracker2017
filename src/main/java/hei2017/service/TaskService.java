@@ -3,6 +3,7 @@ package hei2017.service;
 import hei2017.entity.Task;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by pic on 09/02/2017.
@@ -22,9 +23,15 @@ public interface TaskService
 
     List<Task> findAll();
 
+    List<Task> findAllWithAll();
+
+    Set<Task> findByTaskStories(Long idStory);
+
     Task findOneById(Long id);
+
+    Task findOneByIdWithAll(Long id);
 
     Task findOneByNom(String nom);
 
-    void save(Task task);
+    Task save(Task task);
 }

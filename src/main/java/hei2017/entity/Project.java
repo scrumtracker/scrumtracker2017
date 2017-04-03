@@ -3,9 +3,12 @@ package hei2017.entity;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
+import hei2017.json.JsonViews;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Properties;
@@ -15,42 +18,33 @@ import java.util.Set;
  * Created by pic on 09/02/2017.
  */
 @Entity
-public class Project {
+public class Project implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique=true)
+    @JsonView(JsonViews.Basique.class)
     private Long id;
 
+    @JsonView(JsonViews.Basique.class)
     private String nom;
 
+    @JsonView(JsonViews.Basique.class)
     private String description;
 
+    @JsonView(JsonViews.Basique.class)
     private Timestamp dateCreation;
 
-    @JsonIgnore
+    @JsonView(JsonViews.Project.class)
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<User> projectUsers = new HashSet<User>(0);
 
-    @JsonIgnore
+    @JsonView(JsonViews.Project.class)
     @OneToMany(mappedBy = "sprintProject", cascade = CascadeType.ALL)
     private Set<Sprint> projectSprints = new HashSet<Sprint>(0);
 
     //Constructeurs
     public Project(){this.dateCreation = new Timestamp(System.currentTimeMillis());};
-
-    public Project(String nom)
-    {
-        this.nom = nom;
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-    }
-
-    public Project(String nom, String description)
-    {
-        this.nom = nom;
-        this.description = description;
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-    }
 
     //Méthodes
     public Long getId() {
