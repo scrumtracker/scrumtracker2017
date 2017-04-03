@@ -50,9 +50,13 @@
                     <span th:text="#{new.sprint}"></span>
                 </button>
                 <div id="divaddnewsprint">
+
                     <div class="form-group">
                         <label for="newsprintname">Sprint name</label>
                         <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30">
+                    </div>
+                    <div class="form-group">
+                        <input id="newsprintprojectid" type="text" class="form-control hidden" name="newsprintname" th:value="${project.id}">
                     </div>
                     <div class="form-group">
                         <label for="newSprintDateDebut">Starting date</label>
@@ -68,7 +72,7 @@
                             <div class="col-sm-6"><input id="newSprintHeureFin" type="time" class="form-control" name="newSprintHeureFin" value="23:59"></div>
                         </div>
                     </div>
-                    <button id="createnewSprint" type="button" class="btn-md btn btn-primary">
+                    <button id="createnewSprint" type="button" class="btn-md btn btn-primary" th:onclick="${'creerSprintDansProject('+project.id+')'}">
                         <span th:text="#{create.sprint}"></span>
                     </button>
                 </div>
@@ -100,24 +104,23 @@
 
                             <li>
                                 <div>
-
                                     <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
                                         <span class="glybtnright glyphicon glyphicon-plus"></span>
                                         <span th:text="#{new.story}"></span>
                                     </button>
 
-                                    <div class="divaddnewstory" id="divaddnewstory1">
+                                    <div class="divaddnewstory" th:id="${'divaddnewstory'+sprint.id}">
                                         <div class="form-group">
-                                            <label for="newstoryname1" th:text="#{story.name}"></label>
-                                            <input id="newstoryname1" type="text" class="form-control" name="newstoryname1" maxlength="50" required/>
+                                            <label th:for="${'newstoryname'+sprint.id}" th:text="#{story.name}"></label>
+                                            <input th:id="${'newstoryname'+sprint.id}" type="text" class="form-control" th:name="${'newstoryname'+sprint.id}" maxlength="50" required/>
                                         </div>
                                         <div class="form-group">
-                                            <label for="newstorydescription1" th:text="#{story.description}"></label>
-                                            <textarea id="newstorydescription1" rows="3" class="form-control newstorydescription" name="newstorydescription1"></textarea>
+                                            <label th:for="${'newstorydescription'+sprint.id}" th:text="#{story.description}"></label>
+                                            <textarea th:id="${'newstorydescription'+sprint.id}" rows="3" class="form-control newstorydescription" th:name="${'newstorydescription'+sprint.id}"></textarea>
                                         </div>
                                         <div style="overflow:hidden;" class="row">
-                                            <label class="col-sm-3" for="newstorystatus1" th:text="#{story.status}"></label>
-                                            <select id="newstorystatus1" class="selectpicker col-sm-4" data-container="body">
+                                            <label class="col-sm-3" th:for="${'newstorystatus'+sprint.id}" th:text="#{story.status}"></label>
+                                            <select th:id="${'newstorystatus'+sprint.id}" class="selectpicker col-sm-4" data-container="body">
                                                 <option th:each="stat:${status}"
                                                         th:value="${stat}"
                                                         th:text="${stat}">

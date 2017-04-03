@@ -1,7 +1,10 @@
 package hei2017.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import hei2017.entity.Project;
 import hei2017.entity.Sprint;
+import hei2017.entity.Story;
+import hei2017.enumeration.StoryStatus;
 import hei2017.json.JsonViews;
 import hei2017.service.*;
 import org.slf4j.Logger;
@@ -138,5 +141,25 @@ public class ApiSprintController {
         return sprints;
     }
 
+
+    @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/sprint/add/project/{idProject}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Sprint> sendSprintWithProjectId(@PathVariable Long idProject, @RequestBody Sprint sprint)
+    {
+        LOGGER.debug("ApiController - sendSprintWithProjectId");
+        Project project = projectService.findOneById(idProject);
+        if(null==sprint)
+        {
+            LOGGER.debug("ApiController - sendSprintWithProjectId - Project inexistant");
+            return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
+        }
+
+        sprint = sprintService.save(sprint);
+        sprint.setSprintProject(project);
+        sprint = sprintService.save(sprint);
+
+        LOGGER.debug("ApiController - sendSprintWithProjectId - Sprint créé");
+        return new ResponseEntity<Sprint>(sprint, HttpStatus.CREATED);
+    }
 
 }
