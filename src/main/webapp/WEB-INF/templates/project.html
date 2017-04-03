@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label for="newSprintDateDebut">Starting date</label>
                         <div class="row">
-                            <div class="col-sm-6"><input id="newSprintDateDebut" type="date" class="form-control" name="newSprintDateDebut"></div>
+                            <div class="col-sm-6"><input id="newSprintDateDebut" type="date" class="form-control" name="newSprintDateDebut" onchange="updateDateFin(this.value)"></div>
                             <div class="col-sm-6"><input id="newSprintHeureDebut" type="time" class="form-control" name="newSprintHeureDebut" value="00:00"></div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                         </button>
                         <ul>
                             <li th:each="story:${sprint.sprintStories}" th:id="${'storyId'+story.id}">
-                                <a href="#" class="padd">
+                                <a th:onclick="${'showStory('+story.id+')'}" class="padd">
                                     <span class="fini" th:class="${story.status}" th:text="${story.status}"></span>
                                     <span th:text="${story.nom}"></span>
                                     <div class="deleteStorylist">
@@ -227,6 +227,18 @@
                         <div class="form-group">
                             <label for="newstorypointsUnaffected" title="Story points are a unit of measure for expressing an estimate of the overall effort that will be required to fully implement a product backlog item or any other piece of work.">Story points estimation</label>
                             <input type="number" id="newstorypointsUnaffected" min="1" max="99" class="form-control" name="newstorypointsUnaffected">
+                        </div>
+                        <div style="overflow:hidden;" class="row">
+                            <label class="col-sm-3" th:for="newstorysprintUnaffected" th:text="#{story.sprint}"></label>
+                            <select th:id="newstorysprintUnaffected" class="selectpicker col-sm-4" data-container="body" th:if="${!sprintsOfProjectWithStories.isEmpty()}">
+                                <option value=""
+                                        th:text="#{story.non}">
+                                </option>
+                                <option th:each="sprint:${sprintsOfProjectWithStories}"
+                                        th:value="${sprint.id}"
+                                        th:text="${sprint.nom}">
+                                </option>
+                            </select>
                         </div>
                         <button id="createNewStory" type="button" class="btn-md btn btn-primary">
                             <span th:text="#{create.story}"></span>

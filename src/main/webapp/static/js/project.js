@@ -2,33 +2,21 @@ $(document).ready(function () {
 
     getListStoriesWithoutSprint();
 
-    function showStory(id){
-        $.getJSON('/api/story/'+id,
-            function (data) {
-                detailStory = document.getElementById("detailsStory");
-
-                if (data.length!=0) {
-                    var html =  '<p>Story name : '+data.nom+'</p>'+
-                        '<p>Creation date : ' + moment(data.dateCreation).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateCreation).fromNow() +')</p>'+
-                        '<p>State : '+data.status+'</p>'+
-                        '<p>Total hours of works : '+ data.points + '</p>'+
-                        '<p>Number of tasks : 0</p>'+
-                        '<p>Description : '+data.description+'</p>';
-                    detailStory.innerHTML = html;
-                }
-            });
-    }
-
     $("#createNewStory").click(function () {
+        var url = '/api/story/add';
         var story = {};
         story.nom = $("#newstorynameUnaffected").val();
         story.description = $("#newstorydescriptionUnaffected").val();
         story.points = $("#newstorypointsUnaffected").val();
-
-
+        var storySprint = $("#newstorysprintUnaffected").val();
+        if(storySprint != '') {
+            url = '/api/story/add/sprint/'+storySprint;
+        }else{
+            url = '/api/story/add';
+        }
         if(story.nom!='') {
             $.ajax({
-                url: '/api/story/add',
+                url: url,
                 type: 'POST',
                 headers: {"Accept": "application/json", "Content-Type": "application/json"},
                 data: JSON.stringify(story),
@@ -38,6 +26,7 @@ $(document).ready(function () {
                     $('button#newStoryUnaffected').show();
                     toastr.success(data.nom + " added");
                     getListStoriesWithoutSprint();
+                    document.location.reload();
                 },
                 error: function (resultat, statut, erreur) {
                     toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ")");
@@ -53,6 +42,23 @@ $(document).ready(function () {
     //fin document . ready
 });
 
+function showStory(id){
+    $.getJSON('/api/story/'+id,
+        function (data) {
+            var detailStory = document.getElementById("detailsStory");
+
+            if (data.length!=0) {
+                var html =  '<p>Story name : '+data.nom+'</p>'+
+                    '<p>Creation date : ' + moment(data.dateCreation).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateCreation).fromNow() +')</p>'+
+                    '<p>State : '+data.status+'</p>'+
+                    '<p>Total hours of works : '+ data.points + '</p>'+
+                    '<p>Number of tasks : 0</p>'+
+                    '<p>Description : '+data.description+'</p>';
+                detailStory.innerHTML = html;
+            }
+        });
+}
+
 function showFormToAddNewSprint(){
 
     var divaddnewsprint = document.getElementById("divaddnewsprint");
@@ -66,6 +72,10 @@ function showFormToAddNewSprint(){
 
     divaddnewstoryUnaffected.style.display = "none";
     newStoryUnaffected.style.display = "block";
+}
+
+function updateDateFin(value) {
+    document.getElementById("newSprintDateFin").setAttribute("min", value);
 }
 
 
@@ -89,14 +99,13 @@ function detailSprint(id, obj){
     var sousMenu = obj.childNodes[5];
     sousMenu.style.display = "block";
 
-    $.getJSON('/api/sprint/'+id,
+    $.getJSON('/api/sprint/' + id,
         function (data) {
             detailofSprint = document.getElementById("detailsSprint");
-            if (data.length!=0) {
-                console.log(data);
-                var html =  '<p>Sprint name : '+data.nom+'</p>'+
-                    '<p>Starting date : ' + moment(data.dateDebut).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateDebut).fromNow() +')</p>'+
-                    '<p>Ending date : '+ moment(data.dateFin).format('DD/MM/YYYY HH:mm') +'<br/>(' + moment(data.dateFin).fromNow() +')</p>';
+            if (data.length != 0) {
+                var html = '<p>Sprint name : ' + data.nom + '</p>' +
+                    '<p>Starting date : ' + moment(data.dateDebut).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateDebut).fromNow() + ')</p>' +
+                    '<p>Ending date : ' + moment(data.dateFin).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateFin).fromNow() + ')</p>';
                 detailofSprint.innerHTML = html;
             }
         });
