@@ -127,3 +127,11 @@ textarea{
 	margin-bottom: 15px;
 	border-bottom: solid 1px #dddddd;
 }
+
+/*FOR DRAGULA.JS*/
+
+#TODO, #DOING, #DONE{
+	min-height:200px;
+}
+
+/*---------------*/

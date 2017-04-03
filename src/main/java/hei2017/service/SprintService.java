@@ -3,6 +3,7 @@ package hei2017.service;
 import hei2017.entity.Sprint;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by pic on 08/02/2017.
@@ -21,7 +22,15 @@ public interface SprintService {
 
     List<Sprint> findAll();
 
+    List<Sprint> findAllWithAll();
+
+    Set<Sprint> findBySprintProject(Long idProject);
+
     Sprint findOneById(Long id);
 
-    void save(Sprint sprint);
+    Sprint findOneByIdWithAll(Long id);
+
+    Sprint save(Sprint sprint);
+
+    List<Sprint> findByProjectSprintIdWithStories(Long idProject);
 }

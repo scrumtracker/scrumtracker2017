@@ -6,18 +6,21 @@
                 <a class="navbar-brand" th:href="@{home}"><span><img id="logo-menu" th:src="@{/img/Unicorn-30.png}"></span><span>ScrumTracker</span></a> </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li th:classappend="${isHomePage} ? active"><a th:href="@{/home}" th:text="#{home}"></a></li>
-                    <li th:classappend="${isProjectPage} ? active : a"><a th:href="@{/projects}" th:text="'(' + #{projects} + ')'"></a></li>
-                    <li th:classappend="${isSprintPage} ? active : a"><a th:href="@{/sprints}" th:text="'(' + #{sprints} + ')'"></a></li>
+                    <li th:classappend="${isHomePage} ? active"><a th:href="@{/home}" th:text="#{project.new}"></a></li>
                     <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{projects}"></span><span class="caret"></span> </a>
                         <ul class="dropdown-menu" id="projectsListMenu">
+                            <li th:if="${!projects.isEmpty()}" th:each="project:${projects}"><a th:href="@{'/project/'+${project.id}}" th:text="${project.nom}"></a></li>
+                            <li th:unless="${!projects.isEmpty()}" th:text="#{project.none}"  class="text-center"></li>
                         </ul>
                     </li>
-                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{sprints}"></span><span class="caret"></span> </a>
+                    <li th:each="sprint:${sprints}" th:if="${sprint.getStatus()}=='actual'"><a th:href="@{'/sprint/'+${sprint.id}}" th:text="#{sprint.actual}"></a></li>
+                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{report}"></span><span class="caret"></span> </a>
                         <ul class="dropdown-menu" id="sprintsListMenu">
+                            <li th:if="${sprints.isEmpty()}" th:text="#{sprint.none}" class="text-center"></li>
+                            <li th:unless="${sprints.isEmpty()}" th:each="sprint:${sprints}" th:if="${sprint.getStatus()}=='over'"><a th:href="@{'/sprint/'+${sprint.id}}" th:text="${sprint.nom}"></a></li>
                         </ul>
                     </li>
-                    <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+                    <li class="hiddenElement"><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
                 </ul>
             </div>
         </div>

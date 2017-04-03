@@ -1,28 +1,28 @@
 $(document).ready(function () {
-
-    getProjectsListMenu();
-    getSprintsListMenu();
-
+    //getProjectsListMenu();
+    //getSprintsListMenu();
 });
 
 function getProjectsListMenu() {
     $.getJSON('/api/project',
         function (data) {
-            projectsListMenu = document.getElementById("projectsListMenu");
-            var html = '';
+            //On retire tous les projets affichés
+            $(".menuProject").remove();
 
             if (data.length != 0) {
-
+                // si on a des projets On cache le 'no data'
+                $("#menuProjectsNoData").hide();
+                //On rajoute les nouveaux projets
                 $.each(data, function (key, val) {
-                    html += '<li><a href="project/' + val.id + '">' + val.nom + '</a></li>';
+                    var html = '<li class="menuProject"><a href="../project/' + val.id + '">' + val.nom + '</a></li>';
+                    $("#projectsListMenu").append(html);
                 });
-
             }
-            else {
-                html = '<li class="text-center"> No data </li>';
+            else
+            {
+                //sinon On affiche le 'no data'
+                $("#menuProjectsNoData").show();
             }
-            projectsListMenu.innerHTML = html;
-
         });
 
 };
@@ -30,22 +30,25 @@ function getProjectsListMenu() {
 function getSprintsListMenu() {
     $.getJSON('/api/sprint',
         function (data) {
-            sprintsListMenu = document.getElementById("sprintsListMenu");
-            var html = '';
+            //On retire tous les SPRINTS affichés
+            $(".menuSprint").remove();
 
             if (data.length != 0) {
-
+                // si on a des sprints On cache le 'no data'
+                $("#menuSprintsNoData").hide();
+                //On retire les 'vieux' projets
+                $(".menuSprint").remove();
+                //On rajoute les nouveaux projets
                 $.each(data, function (key, val) {
-                    html += '<li><a href="sprint/' + val.id + '">' + val.nom + '</a></li>';
+                    var html = '<li class="menuSprint"><a href="../sprint/' + val.id + '">' + val.nom + '</a></li>';
+                    $("#sprintsListMenu").append(html);
                 });
-
             }
-            else {
-                html = '<li class="text-center"> No data </li>';
+            else
+            {
+                //sinon On affiche le 'no data'
+                $("#menuSprintsNoData").show();
             }
-            sprintsListMenu.innerHTML = html;
-
         });
 
 };
-

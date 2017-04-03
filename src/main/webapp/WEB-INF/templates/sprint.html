@@ -7,14 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/dragula.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/sprint.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/toastr.min.css}">
     <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
-    <script type="text/javascript" th:src="@{/js/bootbox.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/sprint.js}"></script>
     <script type="text/javascript" th:src="@{/js/menu.js}"></script>
+    <script type="text/javascript" th:src="@{/js/dragula.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/sprint.js}"></script>
+    <script type="text/javascript" th:src="@{/js/toastr.min.js}"></script>
 </head>
 
 <body>
@@ -24,8 +27,12 @@
 <section class="container content-page">
 
     <header id="headerproject">
-        <a href="projects" id="btnback" class="btn-md btn btn-default"><span class="glybtnright glyphicon glyphicon-chevron-left"></span>Back to Project details</a>
-        <p class="h2 text-center">Sprint 1</p>
+        <a th:if="${sprintProject}" th:href="@{'/project/'+${sprintProject.id}}" id="btnback" class="btn-md btn btn-default">
+            <span class="glybtnright glyphicon glyphicon-chevron-left"></span>
+            <span th:if="${sprintProject.nom}" th:text="${sprintProject.nom}"></span>
+            <span th:unless="${sprintProject.nom}" th:text="${'P:'+sprintProject.id}"></span>
+        </a>
+        <p class="h2 text-center" th:text="${sprint.nom}"></p>
     </header>
 
     <div id="divcontent" class="row">
@@ -41,7 +48,7 @@
 
             <div id="divlistories">
 
-                <div class="row story">
+                <div class="row story wrapper">
 
                     <div class="col-sm-3">
                         <p><span class="bold">Afficher les détails d'un projet</span></p>
@@ -50,7 +57,7 @@
                         <p>Description de la story</p>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 container" id="TODO">
                         <div class="task">
                             <a href="#" class="list-group-item padd">Afficher une story
                                 <div class="deletetask">
@@ -98,7 +105,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 container" id="DOING">
                         <div class="task">
                             <a href="#" class="list-group-item padd">Task 3
                                 <div class="deletetask">
@@ -111,7 +118,7 @@
                     </div>
 
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 container" id="DONE">
                         <div class="task">
                             <a href="#" class="list-group-item padd">Task 4
                                 <div class="deletetask">

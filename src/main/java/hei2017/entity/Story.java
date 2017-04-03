@@ -1,9 +1,13 @@
 package hei2017.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import hei2017.enumeration.StoryStatus;
+import hei2017.json.JsonViews;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,37 +15,41 @@ import java.util.Set;
  * Created by pic on 09/02/2017.
  */
 @Entity
-public class Story {
+public class Story implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
+    @JsonView(JsonViews.Basique.class)
     private Long id;
 
+    @JsonView(JsonViews.Basique.class)
     private String nom;
 
+    @JsonView(JsonViews.Basique.class)
     private String description;
 
+    @JsonView(JsonViews.Basique.class)
     private StoryStatus status;
 
+    @JsonView(JsonViews.Basique.class)
     private Integer points;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Sprint storySprint = new Sprint();
+    @JsonView(JsonViews.Basique.class)
+    private Timestamp dateCreation;
 
-    @JsonIgnore
+    @JsonView(JsonViews.Story.class)
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Sprint storySprint;
+
+    @JsonView(JsonViews.Story.class)
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Task> storyTasks = new HashSet<Task>(0);
 
     //Constructeurs
     public Story() {
-    }
-
-    ;
-
-    public Story(String nom) {
-        this.nom = nom;
+        this.dateCreation = new Timestamp(System.currentTimeMillis());
+        this.storySprint = null;
     }
 
     //Méthodes
@@ -92,5 +100,21 @@ public class Story {
 
     public void addTask(Task task) {
         storyTasks.add(task);
+    }
+
+    public Timestamp getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Timestamp dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public Set<Task> getStoryTasks() {
+        return storyTasks;
+    }
+
+    public void setStoryTasks(Set<Task> storyTasks) {
+        this.storyTasks = storyTasks;
     }
 }

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ScrumTracker - Project</title>
+    <link rel="icon" th:href="@{/img/unicorn2.ico}"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/toastr.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-datetimepicker-standalone.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/dragula.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/project.css}">
+    <script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/fonctions.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/js/menu.js}"></script>
+    <script type="text/javascript" th:src="@{/js/toastr.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootbox.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap-select.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/dragula.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/project.js}"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<section class="container content-page">
+
+    <header id="headerproject">
+        <a th:href="@{/home}" id="btnback" class="btn-md btn btn-default">
+            <span class="glybtnleft glyphicon glyphicon-chevron-left"></span>
+            <span th:text="#{back.to.menu}"></span>
+        </a>
+        <p th:if="${project.nom}" class="h2 text-center" th:text="${project.nom}"></p>
+        <p th:unless="${project.nom}" class="h2 text-center" th:text="${'P:'+project.id}"></p>
+        <p th:if="${project.description}" class="text-center" th:text="${project.description}"></p>
+    </header>
+
+    <div id="divcontent" class="row">
+
+        <div class="col-sm-9">
+
+            <div id="divaddsprint">
+                <button id="newSprint" type="button" class="btn-md btn btn-primary" onClick="showFormToAddNewSprint()">
+                    <span class="glybtnright glyphicon glyphicon-plus"></span>
+                    <span th:text="#{new.sprint}"></span>
+                </button>
+                <div id="divaddnewsprint">
+
+                    <div class="form-group">
+                        <label for="newsprintname">Sprint name</label>
+                        <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30">
+                    </div>
+                    <div class="form-group">
+                        <input id="newsprintprojectid" type="text" class="form-control hidden" name="newsprintname" th:value="${project.id}">
+                    </div>
+                    <div class="form-group">
+                        <label for="newSprintDateDebut">Starting date</label>
+                        <div class="row">
+                            <div class="col-sm-6"><input id="newSprintDateDebut" type="date" class="form-control" name="newSprintDateDebut"></div>
+                            <div class="col-sm-6"><input id="newSprintHeureDebut" type="time" class="form-control" name="newSprintHeureDebut" value="00:00"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newSprintDateFin">Ending date</label>
+                        <div class="row">
+                            <div class="col-sm-6"><input id="newSprintDateFin" type="date" class="form-control" name="newSprintDateFin"></div>
+                            <div class="col-sm-6"><input id="newSprintHeureFin" type="time" class="form-control" name="newSprintHeureFin" value="23:59"></div>
+                        </div>
+                    </div>
+                    <button id="createnewSprint" type="button" class="btn-md btn btn-primary" th:onclick="${'creerSprintDansProject('+project.id+')'}">
+                        <span th:text="#{create.sprint}"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="divlistsprint" class="list-group" th:if="${!sprintsOfProjectWithStories.isEmpty()}">
+                <p class="h2 text-left" th:text="#{sprint.list}"></p>
+                <div th:each="sprint:${sprintsOfProjectWithStories}" class="sprint">
+                    <div class="list-group-item storyinsprint" th:onclick="'detailSprint('+${sprint.id}+',this)'">
+                        <div class="padd2">
+                            <span class="bold" th:text="${sprint.nom}"></span>
+                        </div>
+                        <button class="btn btn-xs btn-default btnseetasks hiddenElement" onclick="location.href='sprints'">
+                            <span th:text="#{see.tasks}"></span>
+                            <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
+                        </button>
+                        <ul>
+                            <li th:each="story:${sprint.sprintStories}" th:id="${'storyId'+story.id}">
+                                <a href="#" class="padd">
+                                    <span class="fini" th:class="${story.status}" th:text="${story.status}"></span>
+                                    <span th:text="${story.nom}"></span>
+                                    <div class="deleteStorylist">
+                                        <button type="button" class="btnremove" th:onclick="${'effacerStoryById('+story.id+')'}">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <div>
+                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
+                                        <span class="glybtnright glyphicon glyphicon-plus"></span>
+                                        <span th:text="#{new.story}"></span>
+                                    </button>
+
+                                    <div class="divaddnewstory" th:id="${'divaddnewstory'+sprint.id}">
+                                        <div class="form-group">
+                                            <label th:for="${'newstoryname'+sprint.id}" th:text="#{story.name}"></label>
+                                            <input th:id="${'newstoryname'+sprint.id}" type="text" class="form-control" th:name="${'newstoryname'+sprint.id}" maxlength="50" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label th:for="${'newstorydescription'+sprint.id}" th:text="#{story.description}"></label>
+                                            <textarea th:id="${'newstorydescription'+sprint.id}" rows="3" class="form-control newstorydescription" th:name="${'newstorydescription'+sprint.id}"></textarea>
+                                        </div>
+                                        <div style="overflow:hidden;" class="row">
+                                            <label class="col-sm-3" th:for="${'newstorystatus'+sprint.id}" th:text="#{story.status}"></label>
+                                            <select th:id="${'newstorystatus'+sprint.id}" class="selectpicker col-sm-4" data-container="body">
+                                                <option th:each="stat:${status}"
+                                                        th:value="${stat}"
+                                                        th:text="${stat}">
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <button type="button" class="btn-sm btn btn-primary pull-right" th:onclick="${'creerStoryDansSprint('+sprint.id+')'}"><span th:text="#{create.story}"></span></button>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                        </ul>
+                        <!-- <ul>
+                            <li>
+                                <a href="#" class="padd"><span class="fini">[Fini]</span>Story 1
+                                    <div class="deleteStorylist hiddenElement">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="padd"><span class="en-cours">[En-cours]</span>Story 3
+                                    <div class="deleteStorylist hiddenElement">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <div>
+                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
+                                        <span class="glybtnright glyphicon glyphicon-plus"></span>
+                                        <span th:text="#{new.story}"></span>
+                                    </button>
+                                    <div class="divaddnewstory" id="divaddnewstory1">
+                                        <div class="form-group">
+                                            <label for="newstoryname1">Story name</label>
+                                            <input id="newstoryname1" type="text" class="form-control" name="newstoryname1" maxlength="50" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newstorydescription1">Story goals</label>
+                                            <textarea id="newstorydescription1" rows="3" class="form-control newstorydescription" name="newstorydescription1"></textarea>
+                                        </div>
+                                        <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        -->
+                    </div>
+                        <div class="deletesprint hiddenElement">
+                        <div>
+                            <button type="button" class="btnremove"><span
+                                    class="glyremove glyphicon glyphicon-remove-sign"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////// -->
+
+
+
+
+
+
+                </div>
+            </div>
+
+            <div th:unless="${!sprintsOfProjectWithStories.isEmpty()}" class="h2 text-left" th:text="#{sprint.none}"></div>
+
+            <!--<div id="divMessageSprint" class="text-left"></div>-->
+
+            <!--<ul id="messageSprint" class="list-group">-->
+                <!--<p class="h2 text-left" id="sprintNone" th:text="#{sprint.none}"></p>-->
+            <!--</ul>-->
+
+
+
+
+
+            <!-- STORY -->
+            <div id="storyunaffected">
+                <div id="divaddstoryunaffected">
+                    <button id="newStoryUnaffected" type="button" class="btn-md btn btn-primary" onclick="addNewStoryUnaffected()">
+                        <span class="glybtnright glyphicon glyphicon-plus"></span>
+                        <span th:text="#{new.story}"></span>
+                    </button>
+                    <div id="divaddnewstoryUnaffected">
+                        <div class="form-group">
+                            <label for="newstorynameUnaffected">Story name</label>
+                            <input id="newstorynameUnaffected" type="text" class="form-control" name="newstorynameUnaffected" maxlength="50" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="newstorydescriptionUnaffected">Story description</label>
+                            <textarea id="newstorydescriptionUnaffected" rows="3" class="form-control" name="newstorydescriptionUnaffected"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="newstorypointsUnaffected" title="Story points are a unit of measure for expressing an estimate of the overall effort that will be required to fully implement a product backlog item or any other piece of work.">Story points estimation</label>
+                            <input type="number" id="newstorypointsUnaffected" min="1" max="99" class="form-control" name="newstorypointsUnaffected">
+                        </div>
+                        <button id="createNewStory" type="button" class="btn-md btn btn-primary">
+                            <span th:text="#{create.story}"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="divMessage" class="text-left"></div>
+
+
+                <ul id="divliststory" class="list-group">
+                    <li><p class="h2 text-left" id="storyNone" th:text="#{story.none}"></p></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DETAILS -->
+        <div class="col-sm-3">
+            <div class="divdetail">
+                <div>
+                    <p class="h4 text-center">Details Sprint</p>
+                    <div>
+                        <button type="button" class="btnedit btn-xs btn btn-default hiddenElement">
+                            <span class="glyedit glyphicon glyphicon-edit"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="detailsSprint">
+                </div>
+            </div>
+            <div class="divdetail">
+                <div>
+                    <p class="h4 text-center">Details Story</p>
+                    <div>
+                        <button type="button" class="btnedit btn-xs btn btn-default hiddenElement">
+                            <span class="glyedit glyphicon glyphicon-edit"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="detailsStory">
+                </div>
+            </div>
+            <div class="divdetail">
+                <div>
+                    <p class="h4 text-center">Details Task</p>
+                    <div>
+                        <button type="button" class="btnedit btn-xs btn btn-default hiddenElement">
+                            <span class="glyedit glyphicon glyphicon-edit"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="detailsTask">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>
