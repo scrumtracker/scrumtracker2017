@@ -241,3 +241,11 @@ function creerSprintDansProject( idProject )
 
     });
 }
+
+////En construction////
+function dragAndDropStories(){
+
+ dragula([$(''), $(''), $('')],
+    {revertOnSpill: true});
+}
+////En construction////
