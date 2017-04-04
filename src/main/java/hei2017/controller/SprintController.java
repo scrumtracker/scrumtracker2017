@@ -3,6 +3,7 @@ package hei2017.controller;
 import hei2017.entity.Sprint;
 import hei2017.service.ProjectService;
 import hei2017.service.SprintService;
+import hei2017.service.StoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,9 @@ public class SprintController {
     @Inject
     SprintService sprintService;
 
+    @Inject
+    StoryService storyService;
+
     @RequestMapping("/sprint/{idSprint}")
     public String goSprints(Model model,
                             HttpServletRequest request,
@@ -37,6 +41,8 @@ public class SprintController {
         model.addAttribute("sprints", sprintService.findAll());
 
         Sprint sprint = sprintService.findOneById(idSprint);
+
+        model.addAttribute("sprintStories", storyService.findByStorySprint(idSprint));
 
         if(null==sprint)
         {
