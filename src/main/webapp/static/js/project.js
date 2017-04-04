@@ -100,6 +100,7 @@ function addNewStoryUnaffected(){
 function detailSprint(id, obj){
 
     var sousMenu = obj.childNodes[5];
+    //alert(sousMenu);
     sousMenu.style.display = "block";
 
     $.getJSON('/api/sprint/' + id,
@@ -125,9 +126,9 @@ function getListStoriesWithoutSprint() {
                 html = '<li><p class="h2 text-left">List of stories</p></li>';
 
                 $.each(data, function (key, val) {
-                    html +=
+                    html +
                         '<li id="storyId'+val.id+'">'+
-                        '<a onclick="showStory('+val.id+')" class="padd">'+
+                        '<div onclick="showStory('+val.id+')" class="padd mouseLink divStoryUnaffected">'+
                         '<span class="'+val.status+'">'+val.status+'</span>'+
                         '<span>'+val.nom+'</span>'+
                         '<div class="deleteStorylist">'+
@@ -138,7 +139,7 @@ function getListStoriesWithoutSprint() {
                         '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
                         '</button>'+
                         '</div>'+
-                        '</a>'+
+                        '</div>'+
                         '</li>';
                 });
                 listeStories.innerHTML = html;
@@ -324,9 +325,14 @@ function creerSprintDansProject( idProject )
 }
 
 ////En construction////
-function dragAndDropStories(){
+window.onload = function() {
 
- dragula([$(''), $(''), $('')],
-    {revertOnSpill: true});
+    var containers = $('.listStoryInSprint').toArray();
+    containers.concat($('#divliststory').toArray());
+
+    dragula([document.getElementById('divliststory'),containers], {
+        isContainer: function (el) {
+            return el.classList.contains('listStoryInSprint');
+        }
+    });
 }
-////En construction////
