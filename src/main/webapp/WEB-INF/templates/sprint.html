@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>ITI - ScrumTracker</title>
-    <link rel="icon"  th:href="@{/img/unicorn2.ico}"/>
+    <link rel="icon" th:href="@{/img/unicorn2.ico}"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,8 @@
 <section class="container content-page">
 
     <header id="headerproject">
-        <a th:if="${sprintProject}" th:href="@{'/project/'+${sprintProject.id}}" id="btnback" class="btn-md btn btn-default">
+        <a th:if="${sprintProject}" th:href="@{'/project/'+${sprintProject.id}}" id="btnback"
+           class="btn-md btn btn-default">
             <span class="glybtnright glyphicon glyphicon-chevron-left"></span>
             <span th:if="${sprintProject.nom}" th:text="${sprintProject.nom}"></span>
             <span th:unless="${sprintProject.nom}" th:text="${'P:'+sprintProject.id}"></span>
@@ -48,176 +49,104 @@
 
             <div id="divlistories">
 
-                <div class="row story wrapper">
-
-                    <div class="col-sm-3">
-                        <p><span class="bold">Afficher les détails d'un projet</span></p>
-                        <p>Creation date : xxx</p>
-                        <p>Total hours of works : xxx</p>
-                        <p>Description de la story</p>
-                    </div>
-
-                    <div class="col-sm-3 container" id="TODO">
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Afficher une story
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Task 2
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Task 5
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
-                                </div>
-                            </a>
+                <div class="story">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p><span class="bold">Afficher les détails d'un projet</span></p>
+                            <p>Creation date : xxx</p>
+                            <p>Total hours of works : xxx</p>
+                            <p>Description de la story</p>
                         </div>
 
-                        <div>
-                            <button type="button" class="newTask btn-sm btn btn-primary" onclick="addNewTask(this)">
-                                <span class="glybtn glyphicon glyphicon-plus"></span>
-                                <span th:text="#{new.task}"></span>
-                            </button>
-                            <div class="divaddnewtask" id="divaddnewtask1">
-                                <div class="form-group">
-                                    <label for="newtaskname1">Task name</label>
-                                    <input id="newtaskname1" type="text" class="form-control" name="newtaskname1" maxlength="50" required/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="newtaskdescription1">Task description</label>
-                                    <textarea id="newtaskdescription1" rows="3" class="form-control" name="newtaskdescription1"></textarea>
-                                </div>
-                                <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.task}"></span></button>
+                        <div class="col-sm-3 container" id="TODO">
+                            <div class="task">
+                                <a href="#" class="list-group-item padd">Afficher une story
+                                    <div class="deletetask">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="task">
+                                <a href="#" class="list-group-item padd">Task 2
+                                    <div class="deletetask">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="task">
+                                <a href="#" class="list-group-item padd">Task 5
+                                    <div class="deletetask">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-3 container" id="DOING">
+                            <div class="task">
+                                <a href="#" class="list-group-item padd">Task 3
+                                    <div class="deletetask">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-3 container" id="DONE">
+                            <div class="task">
+                                <a href="#" class="list-group-item padd">Task 4
+                                    <div class="deletetask">
+                                        <button type="button" class="btnremove">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-3 container" id="DOING">
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Task 3
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+
+                        <div class="col-sm-9">
+                            <div>
+                                <button type="button" class="newTask btn-sm btn btn-primary" onclick="addNewTask(this)">
+                                    <span class="glybtn glyphicon glyphicon-plus"></span>
+                                    <span th:text="#{new.task}"></span>
+                                </button>
+                                <div class="divaddnewtask" id="divaddnewtask1">
+                                    <div class="form-group">
+                                        <label for="newtaskname1">Task name</label>
+                                        <input id="newtaskname1" type="text" class="form-control" name="newtaskname1"
+                                               maxlength="50" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newtaskdescription1">Task description</label>
+                                        <textarea id="newtaskdescription1" rows="3" class="form-control"
+                                                  name="newtaskdescription1"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newtasktotalhoursofwork1" title="">Total hours of work</label>
+                                        <input type="number" id="newtasktotalhoursofwork1" min="0" max="99" class="form-control" name="newtasktotalhoursofwork1">
+                                    </div>
+                                    <button type="button" class="btn-sm btn btn-primary"><span
+                                            th:text="#{create.task}"></span></button>
                                 </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="col-sm-3 container" id="DONE">
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Task 4
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-                <div class="row story">
-
-                    <div class="col-sm-3">
-                        <p><span class="bold">Afficher les détails d'un projet</span></p>
-                        <p>Creation date : xxx</p>
-                        <p>Total hours of works : xxx</p>
-                        <p>Description de la story</p>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Task 1
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Task 2
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div>
-                            <button type="button" class="newTask btn-sm btn btn-primary" onclick="addNewTask(this)">
-                                <span class="glybtn glyphicon glyphicon-plus"></span>
-                                <span th:text="#{new.task}"></span>
-                            </button>
-                            <div class="divaddnewtask" id="divaddnewtask2">
-                                <div class="form-group">
-                                    <label for="newtaskname2">Task name</label>
-                                    <input id="newtaskname2" type="text" class="form-control" name="newtaskname2" maxlength="50" required/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="newtaskdescription2">Task description</label>
-                                    <textarea id="newtaskdescription2" rows="3" class="form-control" name="newtaskdescription2"></textarea>
-                                </div>
-                                <button id="createNewTask" type="button" class="btn-sm btn btn-primary"><span th:text="#{create.task}"></span></button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-3">
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Task 3
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Task 4
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="col-sm-3">
-                        <div class="task">
-                            <a href="#" class="list-group-item padd">Task 5
-                                <div class="deletetask">
-                                    <button type="button" class="btnremove">
-                                        <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
-
 
                 <div class="row">
                     <div class="col-sm-6">
@@ -228,13 +157,16 @@
                         <div id="divaddnewstory">
                             <div class="form-group">
                                 <label for="newstoryname">Story name</label>
-                                <input id="newstoryname" type="text" class="form-control" name="newstorynameUnaffecte" maxlength="50" required/>
+                                <input id="newstoryname" type="text" class="form-control" name="newstorynameUnaffecte"
+                                       maxlength="50" required/>
                             </div>
                             <div class="form-group">
                                 <label for="newstorydescription">Story goals</label>
-                                <textarea id="newstorydescription" rows="3" class="form-control" name="newstorydescription"></textarea>
+                                <textarea id="newstorydescription" rows="3" class="form-control"
+                                          name="newstorydescription"></textarea>
                             </div>
-                            <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span></button>
+                            <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span>
+                            </button>
                         </div>
                     </div>
                     <div class="col-sm-6"></div>
@@ -248,7 +180,9 @@
         <div id="divdetail" class="col-sm-3">
 
             <p class="h4 text-center">Details Task</p>
-            <button id="btnedit" type="button" class="btn-xs btn btn-default" onclick=""><span class="glybtnright glyphicon glyphicon-edit"></span>Edit</button>
+            <button id="btnedit" type="button" class="btn-xs btn btn-default" onclick=""><span
+                    class="glybtnright glyphicon glyphicon-edit"></span>Edit
+            </button>
             <p>Task name : xxx</p>
             <p>Creation date : xxx</p>
             <p>Total hours of works : xxx</p>

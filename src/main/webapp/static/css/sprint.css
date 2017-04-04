@@ -128,10 +128,14 @@ textarea{
 	border-bottom: solid 1px #dddddd;
 }
 
+#newtasktotalhoursofwork1 {
+	max-width: 80px;
+}
+
 /*FOR DRAGULA.JS*/
 
 #TODO, #DOING, #DONE{
-	min-height:200px;
+	min-height:40px;
 }
 
 /*---------------*/
