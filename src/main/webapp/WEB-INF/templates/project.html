@@ -91,20 +91,29 @@
                             <span th:text="#{see.tasks}"></span>
                             <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
                         </button>
-                        <ul>
-                            <li th:each="story:${sprint.sprintStories}" th:id="${'storyId'+story.id}">
-                                <a th:onclick="${'showStory('+story.id+')'}" class="padd">
-                                    <span class="fini" th:class="${story.status}" th:text="${story.status}"></span>
-                                    <span th:text="${story.nom}"></span>
-                                    <div class="deleteStorylist">
-                                        <button type="button" class="btnremove" th:onclick="${'effacerStoryById('+story.id+')'}">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </li>
 
-                            <li>
+
+
+
+
+
+
+                        <div id="sprinthidden">
+                            <ul class="listStoryInSprint">
+                                <li th:each="story:${sprint.sprintStories}" th:id="${'storyId'+story.id}">
+                                    <div th:onclick="${'showStory('+story.id+')'}" class="padd mouseLink divStory">
+                                        <span class="fini" th:class="${story.status}" th:text="${story.status}"></span>
+                                        <span th:text="${story.nom}"></span>
+                                        <div class="deleteStorylist">
+                                            <button type="button" class="btnremove" th:onclick="${'effacerStoryById('+story.id+')'}">
+                                                <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div>
                                 <div>
                                     <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
                                         <span class="glybtnright glyphicon glyphicon-plus"></span>
@@ -134,64 +143,19 @@
                                     </div>
 
                                 </div>
-                            </li>
+                            </div>
+                        </div>
 
-                        </ul>
-                        <!-- <ul>
-                            <li>
-                                <a href="#" class="padd"><span class="fini">[Fini]</span>Story 1
-                                    <div class="deleteStorylist hiddenElement">
-                                        <button type="button" class="btnremove">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="padd"><span class="en-cours">[En-cours]</span>Story 3
-                                    <div class="deleteStorylist hiddenElement">
-                                        <button type="button" class="btnremove">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div>
-                                    <button type="button" class="newStory btn-sm btn btn-primary" onclick="addNewStory(this)">
-                                        <span class="glybtnright glyphicon glyphicon-plus"></span>
-                                        <span th:text="#{new.story}"></span>
-                                    </button>
-                                    <div class="divaddnewstory" id="divaddnewstory1">
-                                        <div class="form-group">
-                                            <label for="newstoryname1">Story name</label>
-                                            <input id="newstoryname1" type="text" class="form-control" name="newstoryname1" maxlength="50" required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="newstorydescription1">Story goals</label>
-                                            <textarea id="newstorydescription1" rows="3" class="form-control newstorydescription" name="newstorydescription1"></textarea>
-                                        </div>
-                                        <button type="button" class="btn-sm btn btn-primary"><span th:text="#{create.story}"></span></button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        -->
-                    </div>
-                        <div class="deletesprint hiddenElement">
+
+
+                    </div><!--
+                        --><div class="deletesprint">
                         <div>
                             <button type="button" class="btnremove"><span
                                     class="glyremove glyphicon glyphicon-remove-sign"></span>
                             </button>
                         </div>
                     </div>
-
-                    <!-- //////////////////////////////// -->
-
-
-
-
-
 
                 </div>
             </div>

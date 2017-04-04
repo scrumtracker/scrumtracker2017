@@ -103,8 +103,11 @@ section ul{
 	margin-bottom: 10px;
 	padding-left: 20px;
 	list-style: none;
-}
+}/*
 #divlistsprint ul{
+	display: none;
+}*/
+#sprinthidden{
 	display: none;
 }
 #divlistsprint{
@@ -114,6 +117,50 @@ section ul{
 	padding: 15px 20px;
 	padding-right: 100px;
 }
+
+
+
+
+
+.listStoryInSprint, #divliststory{
+	min-height: 35px;
+}
+.divStory, .divStoryUnaffected{
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	margin-bottom: -1px;
+	background-color: white;
+	padding: 7px;
+	color: #333;
+	display:block;
+	text-decoration: none;
+	position: relative;
+}
+.divStory:hover, .divStoryUnaffected:hover{
+	text-decoration: none;
+	background-color: #ccc;
+	color: #333;
+}
+.divStory .fini, .divStoryUnaffected .fini, .divStory .DONE, .divStoryUnaffected .DONE{
+	padding: 4px;
+	border-radius: 5px;
+	background-color: green;
+	color:white;
+}
+.divStory .en-cours, .divStoryUnaffected .en-cours, .divStory .DOING, .divStoryUnaffected .DOING{
+	padding: 4px;
+	border-radius: 5px;
+	background-color: orange;
+	color:white;
+}
+.divStory .a-faire, .divStoryUnaffected .a-faire, .divStory .TODO, .divStoryUnaffected .TODO{
+	padding: 4px;
+	border-radius: 5px;
+	background-color: red;
+	color: white;
+}
+
+/*
 section ul li a, .divStoryUnaffected{
 	border: 1px solid #ddd;
 	border-radius: 6px;
@@ -147,7 +194,12 @@ section ul li a .a-faire, .divStoryUnaffected .a-faire, section ul li a .TODO, .
 	border-radius: 5px;
 	background-color: red;
 	color: white;
-}
+}*/
+
+
+
+
+
 .divaddnewstory{
 	display: none;
 	margin-top: 20px;

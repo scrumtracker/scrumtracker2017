@@ -97,6 +97,7 @@ function addNewStoryUnaffected(){
 function detailSprint(id, obj){
 
     var sousMenu = obj.childNodes[5];
+    //alert(sousMenu);
     sousMenu.style.display = "block";
 
     $.getJSON('/api/sprint/' + id,
@@ -126,7 +127,7 @@ function getListStoriesWithoutSprint() {
                         '<li>'+
                         '<div class="padd mouseLink divStoryUnaffected" onclick="showStory('+val.id+')">'
                         + val.nom +
-                        '<div class="deleteStorylist hiddenElement">'+
+                        '<div class="deleteStorylist">'+
                         '<button type="button" class="btnremove">'+
                         '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
                         '</button>'+
@@ -252,9 +253,14 @@ function creerSprintDansProject( idProject )
 }
 
 ////En construction////
-function dragAndDropStories(){
+window.onload = function() {
 
- dragula([$(''), $(''), $('')],
-    {revertOnSpill: true});
+    var containers = $('.listStoryInSprint').toArray();
+    containers.concat($('#divliststory').toArray());
+
+    dragula([document.getElementById('divliststory'),containers], {
+        isContainer: function (el) {
+            return el.classList.contains('listStoryInSprint');
+        }
+    });
 }
-////En construction////
