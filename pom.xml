@@ -142,9 +142,14 @@
 			<properties>
 				<env>heroku</env>
 			</properties>
+			<activation>
+				<!-- http://stackoverflow.com/questions/11162194/triggering-maven-profiles-from-heroku-configured-environment-variables -->
+				<property>
+					<name>env.DYNO</name>
+				</property>
+			</activation>
 
 			<dependencies>
-
 				<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 				<dependency>
 					<groupId>org.postgresql</groupId>

@@ -1,5 +1,10 @@
 [![Build Status](https://travis-ci.org/tyrcho/scrumtracker2017.svg?branch=master)](https://travis-ci.org/tyrcho/scrumtracker2017)
 
+Démarrage local : 
+
+    mvn package
+    java -jar target/dependency/webapp-runner.jar target/*.war
+
 # SCRUMTRACKER2017
 Scrumtracker est une application web permettant la gestion de Sprints, Stories et tâches.
 
