@@ -3,7 +3,7 @@ package hei2017.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -12,7 +12,7 @@ import java.util.Properties;
  */
 @Configuration
 @ComponentScan(basePackages = "hei2017.service")
-public class AppConfig {
+public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public Properties dbProperties()

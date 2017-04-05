@@ -9,9 +9,12 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/toastr.min.css}">
     <script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/menu.js}"></script>
     <script type="text/javascript" th:src="@{/js/home.js}"></script>
+    <script type="text/javascript" th:src="@{/js/toastr.min.js}"></script>
 </head>
 
 <body>
@@ -30,33 +33,30 @@
             <span th:text="#{project.new}"></span>
         </button>
         <div id="formaddnewproject">
-            <div class="form-group">
-                <label for="newprojectname" th:text="#{project.name}"></label>
-                <input id="newprojectname" type="text" class="form-control" name="newprojectname" maxlength="50" required>
-            </div>
             <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="form-group col-sm-6">
-                    <label for="newprojectdescription">Project description</label>
+                <div class="form-group col-sm-8 col-sm-offset-2">
+                    <label for="newprojectname" th:text="#{project.name}"></label>
+                    <input id="newprojectname" type="text" class="form-control" th:placeholder="#{project.name}" name="newprojectname" required>
+                </div>
+                <div class="form-group col-sm-6 col-sm-offset-3">
+                    <label for="newprojectdescription" th:text="#{project.description}"></label>
                     <textarea id="newprojectdescription" class="form-control" name="newprojecdescription"></textarea>
                 </div>
-                <div class="col-sm-3"></div>
             </div>
             <button id="createNewProject" type="button" class="btn-md btn btn-primary">
                 <span th:text="#{project.create}"></span>
             </button>
         </div>
     </div>
-    <div id="divMessage" class="text-center"></div>
 
     <div id="divlistproject">
-        <div th:each="project:${projects}" class="col-sm-offset-3 col-sm-6 list-group"><a th:href="@{'/project/'+${project.id}}" class="list-group-item" th:text="${project.nom}">Test David</a></div>
-        <p th:unless="${projects}" class="h2 text-center" id="projectNone" th:text="#{project.none}"></p>
+        <div th:if="${!projects.isEmpty()}" th:each="project:${projects}" class="col-sm-offset-3 col-sm-6 list-group" >
+            <a th:href="@{'/project/'+${project.id}}" class="list-group-item" th:text="${project.nom}"></a>
+        </div>
+        <p th:unless="${!projects.isEmpty()}" class="h2 text-center" id="projectNone" th:text="#{project.none}"></p>
     </div>
 
 </section>
 
 </body>
 </html>
-
-

@@ -1,8 +1,10 @@
 package hei2017.controller;
 
 import hei2017.entity.Project;
+import hei2017.enumeration.StoryStatus;
 import hei2017.service.ProjectService;
 import hei2017.service.SprintService;
+import hei2017.service.StoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,9 @@ public class ProjectController {
     @Inject
     SprintService sprintService;
 
+    @Inject
+    StoryService storyService;
+
     @RequestMapping("/project/{idProject}")
     public String goProjects(Model model,
                              HttpServletRequest request,
@@ -35,6 +40,16 @@ public class ProjectController {
         model.addAttribute("projects", projectService.findAll());
 
         model.addAttribute("sprints", sprintService.findAll());
+
+        model.addAttribute("stories", storyService.findAll());
+
+        //stories non affectées à un sprint
+        model.addAttribute("storiesAlone", storyService.findAllWithoutSprint());
+
+        //Sprints du projet
+        model.addAttribute("sprintsOfProjectWithStories", sprintService.findByProjectSprintIdWithStories(idProject));
+
+        model.addAttribute("status", StoryStatus.values());
 
         Project project = projectService.findOneById(idProject);
 

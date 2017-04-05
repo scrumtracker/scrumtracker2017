@@ -46,7 +46,7 @@ public class ApiController {
      * Requêtes générales
      */
 
-    /*
+
     @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
     @RequestMapping(value="/api/*", produces = "application/json")
     public String showErreur(HttpServletRequest request)
@@ -54,6 +54,6 @@ public class ApiController {
         LOGGER.error("RestAPIController - Requête vers l'api incorrecte. \n"+request.toString());
         return "Demande incorrecte";
     }
-*/
+
 
 }

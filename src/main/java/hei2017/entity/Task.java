@@ -1,9 +1,12 @@
 package hei2017.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import hei2017.enumeration.UniteTemps;
+import hei2017.json.JsonViews;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,39 +15,39 @@ import java.util.Set;
  * Created by pic on 09/02/2017.
  */
 @Entity
-public class Task {
+public class Task implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique=true)
+    @JsonView(JsonViews.Basique.class)
     private Long id;
 
+    @JsonView(JsonViews.Basique.class)
     private String nom;
 
+    @JsonView(JsonViews.Basique.class)
     private String description;
 
+    @JsonView(JsonViews.Basique.class)
     private Long tempsDeCharge;
 
+    @JsonView(JsonViews.Basique.class)
     private UniteTemps uniteTempsDeCharge;
 
+    @JsonView(JsonViews.Basique.class)
     private Timestamp dateCreation;
 
-    @JsonIgnore
+    @JsonView(JsonViews.Task.class)
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<User> taskUsers = new HashSet<User>(0);
 
-    @JsonIgnore
+    @JsonView(JsonViews.Task.class)
     @ManyToMany(mappedBy = "storyTasks", cascade = CascadeType.ALL)
     private Set<Story> taskStories = new HashSet<Story>(0);
 
     //Constructeurs
     public Task(){
-        this.dateCreation = new Timestamp(System.currentTimeMillis());
-    }
-
-    public Task(String nom)
-    {
-        this.nom = nom;
         this.dateCreation = new Timestamp(System.currentTimeMillis());
     }
 
@@ -104,5 +107,9 @@ public class Task {
 
     public void setTaskStories(Set<Story> taskStories) {
         this.taskStories = taskStories;
+    }
+
+    public void addStory(Story story) {
+        this.taskStories.add(story);
     }
 }

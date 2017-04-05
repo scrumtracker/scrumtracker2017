@@ -12,18 +12,17 @@ $(document).ready(function () {
                     $('#formaddnewproject').hide();
                     $('#formaddnewproject').trigger("reset");
                     $('#newProject').show();
-                    $('#divMessage').html(data.nom + " has been successfully added.");
                     getListProjects();
-                    getProjectsListMenu();
+                    //getProjectsListMenu();
+                    toastr.success(data.nom+" added");
                 },
                 error: function (resultat, statut, erreur) {
-                    $('#divMessage').html("This project already exists. Please choose another name. <br/>(" + statut + " - " + erreur + ")");
+                    toastr.error("An error occurred. This project may already exists. (" + statut + " - " + erreur + ")");
                 }
-
             });
         }
         else{
-            $('#divMessage').html("Project name is required.");
+            toastr.error("Project name is required.");
         }
     });
 
@@ -55,12 +54,8 @@ $(document).ready(function () {
                 else {
                     $("#projectNone").show();
                 }
-
-
             });
-
     };
-
 });
 
 

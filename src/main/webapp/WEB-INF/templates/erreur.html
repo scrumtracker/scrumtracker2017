@@ -21,7 +21,7 @@
 
 <section class="container content-page">
 
-    <div th:if="${errorMessage}" class="center-block">
+    <div th:if="${errorMessage != null}" class="center-block">
         <h1 th:text="#{error}"></h1>
         <p th:text="${errorMessage}"></p>
         <a th:href="@{/home}">
@@ -29,11 +29,17 @@
         </a>
     </div>
 
-    <img th:unless="${errorMessage}" class="center-block" th:src="@{/img/erreur.gif}"/>
+
+    <div th:if="${httpErrorCode != null}" class="center-block">
+        <h1 th:text="#{error}"></h1>
+        <p th:text="${httpErrorCode + ' ' + errorMsg}"></p>
+        <a th:href="@{/home}">
+            <button type="button" class="btn btn-default" th:text="#{back.to.menu}"></button>
+        </a>
+    </div>
+
+    <img th:unless="${errorMessage!= null || errorMsg!= null}" class="center-block" th:src="@{/img/erreur.gif}"/>
 </section>
-
-<div th:replace="fragments/footer :: footer"></div>
-
 </body>
 </html>
 
