@@ -38,16 +38,15 @@ public class DBConfig {
 
 		String jdbcUrl = dbProperties.getProperty("jdbcUrl");
 
-		/*
+
 		if (null != System.getenv("DATABASE_URL")) {
 
 			// jdbc:postgresql://<host>:<port>/<dbname>
 			URI dbUri = new URI(System.getenv("DATABASE_URL"));
 			username = dbUri.getUserInfo().split(":")[0];
 			password = dbUri.getUserInfo().split(":")[1];
-			jdbcUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 		}
-		*/
+
 		BoneCPDataSource dataSource = new BoneCPDataSource();
 		dataSource.setDriverClass(dbProperties.getProperty("driverClass"));
 		dataSource.setJdbcUrl(jdbcUrl);
