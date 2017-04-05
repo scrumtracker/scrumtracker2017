@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/tyrcho/scrumtracker2017.svg?branch=master)](https://travis-ci.org/tyrcho/scrumtracker2017)
+[![Build Status](https://travis-ci.org/scrumtracker/scrumtracker2017.svg?branch=master)](https://travis-ci.org/tyrcho/scrumtracker2017)
 
 # SCRUMTRACKER2017
 Scrumtracker est une application web permettant la gestion de Sprints, Stories et tâches.
