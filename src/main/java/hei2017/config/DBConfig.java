@@ -32,11 +32,14 @@ public class DBConfig {
 
 	@Bean
 	public DataSource dataSource(Properties dbProperties) throws URISyntaxException {
-		String username = dbProperties.getProperty("username");
+		String username = "";
+		username = dbProperties.getProperty("username");
 
-		String password = dbProperties.getProperty("password");
+		String password = "";
+		password = dbProperties.getProperty("password");
 
-		String jdbcUrl = dbProperties.getProperty("jdbcUrl");
+		String jdbcUrl = "";
+		jdbcUrl = dbProperties.getProperty("jdbcUrl");
 
 		if (null != System.getenv("DATABASE_URL")) {
 			// jdbc:postgresql://<host>:<port>/<dbname>
@@ -83,7 +86,6 @@ public class DBConfig {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(vendorAdapter);
 		String dialect = dbProperties.getProperty("hibernateDialect");
-
 		factory.getJpaPropertyMap().put("hibernate.dialect", dialect);
 		factory.setPackagesToScan("hei2017.entity");
 		factory.setDataSource(dataSource);

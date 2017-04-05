@@ -97,6 +97,7 @@ Pour plus d'infos: c'est ici: http://codeseven.github.io/toastr/demo.html
 |`heroku logs --app scrumtracker2017 --tail`| Affichage du log de l'application (CTRL + C pour break)|
 |`heroku ps:scale web=1 --app scrumtracker2017`| Active l'app en temps qu'appli web|
 |`heroku run env --app scrumtracker2017`| Affiche les variables locales définies sur le serveur|
+|`heroku logs --tail --ps postgres --app scrumtracker2017`|Log de la BDD|
 ## FAQ
 
 
