@@ -32,23 +32,22 @@ public class DBConfig {
 
 	@Bean
 	public DataSource dataSource(Properties dbProperties) throws URISyntaxException {
-		String username = "";
-		username = dbProperties.getProperty("username");
+		String username = dbProperties.getProperty("username");
 
-		String password = "";
-		password = dbProperties.getProperty("password");
+		String password = dbProperties.getProperty("password");
 
-		String jdbcUrl = "";
-		jdbcUrl = dbProperties.getProperty("jdbcUrl");
+		String jdbcUrl = dbProperties.getProperty("jdbcUrl");
 
+		/*
 		if (null != System.getenv("DATABASE_URL")) {
+
 			// jdbc:postgresql://<host>:<port>/<dbname>
 			URI dbUri = new URI(System.getenv("DATABASE_URL"));
 			username = dbUri.getUserInfo().split(":")[0];
 			password = dbUri.getUserInfo().split(":")[1];
 			jdbcUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 		}
-
+		*/
 		BoneCPDataSource dataSource = new BoneCPDataSource();
 		dataSource.setDriverClass(dbProperties.getProperty("driverClass"));
 		dataSource.setJdbcUrl(jdbcUrl);
