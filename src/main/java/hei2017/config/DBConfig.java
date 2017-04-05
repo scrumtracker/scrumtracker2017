@@ -40,8 +40,7 @@ public class DBConfig {
 
 
 		if (null != System.getenv("DATABASE_URL")) {
-
-			// jdbc:postgresql://<host>:<port>/<dbname>
+			//Si on est sur le serveur on récupère user et mdp
 			URI dbUri = new URI(System.getenv("DATABASE_URL"));
 			username = dbUri.getUserInfo().split(":")[0];
 			password = dbUri.getUserInfo().split(":")[1];
