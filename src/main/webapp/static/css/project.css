@@ -185,9 +185,11 @@ textarea{
 #divMessage{
 	font-weight: bold;
 }
-#newstorypointsUnaffected{
+
+.inputNumber{
 	max-width: 60px;
 }
+
 .mouseLink:hover{
 	cursor:pointer;
 	background-color: #ccc;

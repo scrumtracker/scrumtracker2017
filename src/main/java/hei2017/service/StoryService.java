@@ -17,6 +17,8 @@ public interface StoryService
 
     void deleteOneById(Long id);
 
+    Story updateStory(Long id, Story story);
+
     Boolean exists(Long id);
 
     Boolean exists(String nom);

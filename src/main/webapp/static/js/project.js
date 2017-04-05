@@ -8,6 +8,7 @@ $(document).ready(function () {
         story.nom = $("#newstorynameUnaffected").val();
         story.description = $("#newstorydescriptionUnaffected").val();
         story.points = $("#newstorypointsUnaffected").val();
+        story.status = $("#newstorysprintUnaffectedToDo").val();
         var storySprint = $("#newstorysprintUnaffected").val();
         if(storySprint != '') {
             url = '/api/story/add/sprint/'+storySprint;
@@ -46,7 +47,9 @@ function showStory(id){
     $.getJSON('/api/story/'+id,
         function (data) {
             var detailStory = document.getElementById("detailsStory");
-
+            if(data.points == null) {
+                data.points = "";
+            }
             if (data.length!=0) {
                 var html =  '<p>Story name : '+data.nom+'</p>'+
                     '<p>Creation date : ' + moment(data.dateCreation).format('DD/MM/YYYY HH:mm') + '<br/>(' + moment(data.dateCreation).fromNow() +')</p>'+
@@ -115,7 +118,7 @@ function detailSprint(id, obj){
 function getListStoriesWithoutSprint() {
     $.getJSON('/api/story/sprint/null',
         function (data) {
-            listeStories = document.getElementById("divliststory");
+            var listeStories = document.getElementById("divliststory");
             var html = '';
 
             if (data.length!=0) {
@@ -123,15 +126,19 @@ function getListStoriesWithoutSprint() {
 
                 $.each(data, function (key, val) {
                     html +=
-                        '<li>'+
-                        '<div class="padd mouseLink divStoryUnaffected" onclick="showStory('+val.id+')">'
-                        + val.nom +
-                        '<div class="deleteStorylist hiddenElement">'+
-                        '<button type="button" class="btnremove">'+
+                        '<li id="storyId'+val.id+'">'+
+                        '<a onclick="showStory('+val.id+')" class="padd">'+
+                        '<span class="'+val.status+'">'+val.status+'</span>'+
+                        '<span>'+val.nom+'</span>'+
+                        '<div class="deleteStorylist">'+
+                        '<button type="button" class="btnremove" onclick="modifierStoryById('+val.id+', null)">'+
+                        '<span class="glyremovelist glyphicon glyphicon-edit"></span>'+
+                        '</button>'+
+                        '<button type="button" class="btnremove" onclick="effacerStoryById('+val.id+')">'+
                         '<span class="glyremovelist glyphicon glyphicon-remove-sign"></span>'+
                         '</button>'+
                         '</div>'+
-                        '</div>'+
+                        '</a>'+
                         '</li>';
                 });
                 listeStories.innerHTML = html;
@@ -141,7 +148,7 @@ function getListStoriesWithoutSprint() {
                 listeStories.innerHTML = html;
             }
         });
-};
+}
 
 //Efface une story selon son id
 function effacerStoryById( idStory )
@@ -160,6 +167,70 @@ function effacerStoryById( idStory )
         }
 
     });
+}
+
+function modifierStoryById(idStory, idSprint)
+{
+    if(idSprint != null) {
+        addNewStory(document.getElementById('buttonAjouterStory'+idSprint));
+        $("#buttonEnregistrerModif"+idSprint).show();
+        $("#buttonEnregistrerModif"+idSprint).attr("onclick", "enregistrerModification("+idStory+","+idSprint+")");
+        $("#buttonEnregistrerStory"+idSprint).hide();
+        $.getJSON('/api/story/'+idStory,
+            function (data) {
+                $("#newstoryname"+idSprint).val(data.nom);
+                $("#newstorydescription"+idSprint).val(data.description);
+                $("#newstorystatus"+idSprint).val(data.status);
+                $("#newstorypoints"+idSprint).val(data.points);
+            });
+    } else {
+        addNewStoryUnaffected();
+        $("#updateNewStory").show();
+        $("#updateNewStory").attr("onclick", "enregistrerModification("+idStory+","+idSprint+")");
+        $("#createNewStory").hide();
+        $.getJSON('/api/story/'+idStory,
+            function (data) {
+                $("#newstorynameUnaffected").val(data.nom);
+                $("#newstorydescriptionUnaffected").val(data.description);
+                $("#newstorypointsUnaffected").val(data.points);
+                $("#newstorysprintUnaffectedToDo").val(data.status);
+            });
+    }
+}
+
+function enregistrerModification(idStory, idSprint) {
+    var story = {};
+    if(idSprint != null) {
+        story.nom = $("#newstoryname"+idSprint).val();
+        story.description = $("#newstorydescription"+idSprint).val();
+        story.status = $("#newstorystatus"+idSprint).val();
+        story.points = $("#newstorypoints"+idSprint).val();
+        var storySprint = idSprint;
+    } else {
+        story.nom = $("#newstorynameUnaffected").val();
+        story.description = $("#newstorydescriptionUnaffected").val();
+        story.points = $("#newstorypointsUnaffected").val();
+        story.status = $("#newstorysprintUnaffectedToDo").val();
+        var storySprint = $("#newstorysprintUnaffected").val();
+    }
+
+    if(story.nom!='') {
+        $.ajax({
+            url: '/api/story/update/'+idStory,
+            type: 'POST',
+            headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            data:  { idSprint: storySprint, story : JSON.stringify(story)},
+            success: function (data) {
+                toastr.success(data.nom + " modifié");
+                document.location.reload();
+            },
+            error: function (resultat, statut, erreur) {
+                toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ")");
+            }
+
+        });
+    }
+    else{toastr.error("Story name is required.");}
 }
 
 function addNewStory(obj){
@@ -212,6 +283,7 @@ function creerStoryDansSprint( idSprint )
     story.nom = $("#newstoryname"+idSprint).val();
     story.description = $("#newstorydescription"+idSprint).val();
     story.status = $("#newstorystatus"+idSprint).val();
+    story.points = $("#newstorypoints"+idSprint).val();
     $.ajax({
         url: '/api/story/add/sprint/'+idSprint,
         type: 'POST',

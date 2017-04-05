@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.inject.Inject;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -111,6 +110,28 @@ public class ApiStoryController {
             LOGGER.debug("ApiController - sendStory - Story déjà existante");
             return new ResponseEntity<Story>(story, HttpStatus.CONFLICT);
         }
+    }
+
+    @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/story/update/{idStory}", params = { "idSprint", "story" }, method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Story> updateStory(@PathVariable Long idStory, @RequestParam("idSprint") Long idSprint, @RequestParam("story") Story story)
+    {
+        LOGGER.debug("ApiController - updateStory");
+        System.out.println(idStory);
+        System.out.println(idSprint);
+        System.out.println(story);
+        if(idSprint != null)
+        {
+            Sprint sprint = sprintService.findOneById(idSprint);
+            if(null==sprint) {
+                LOGGER.debug("ApiController - updateStory - Sprint inexistant");
+                return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
+            }
+            story.setStorySprint(sprint);
+        }
+        storyService.updateStory(idStory, story);
+        LOGGER.debug("ApiController - updateStory - Story maj");
+        return new ResponseEntity<Story>(story, HttpStatus.ACCEPTED);
     }
 
     @JsonView(JsonViews.Basique.class)
