@@ -10,4 +10,5 @@ after_success:
 
 notifications:
   email:
-    - tyrcho@tyrcho.com
+    - scrumtracker2017@gmail.com
+    - david.picart@hei.yncrea.fr
