@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5224b363afb481facffeaa71f0cf78d)](https://www.codacy.com/app/scrumtracker/scrumtracker2017?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=scrumtracker/scrumtracker2017&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/scrumtracker/scrumtracker2017.svg?branch=master)](https://travis-ci.org/scrumtracker/scrumtracker2017)
 
 # SCRUMTRACKER2017
