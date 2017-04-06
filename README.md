@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/48babfc088e24ae9ba9ea6e64f2c9693)](https://www.codacy.com/app/michel/scrumtracker2017?utm_source=github.com&utm_medium=referral&utm_content=tyrcho/scrumtracker2017&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/tyrcho/scrumtracker2017.svg?branch=master)](https://travis-ci.org/tyrcho/scrumtracker2017)
 
 Démarrage local : 
