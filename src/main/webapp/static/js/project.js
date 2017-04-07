@@ -180,7 +180,7 @@ function modifierStoryById(idStory, idSprint)
             function (data) {
                 $("#newstoryname"+idSprint).val(data.nom);
                 $("#newstorydescription"+idSprint).val(data.description);
-                $("#newstorystatus"+idSprint).val(data.status);
+                $("#newstorystatus"+idSprint).val(data.status).change();
                 $("#newstorypoints"+idSprint).val(data.points);
             });
     } else {
@@ -193,7 +193,7 @@ function modifierStoryById(idStory, idSprint)
                 $("#newstorynameUnaffected").val(data.nom);
                 $("#newstorydescriptionUnaffected").val(data.description);
                 $("#newstorypointsUnaffected").val(data.points);
-                $("#newstorysprintUnaffectedToDo").val(data.status);
+                $("#newstorysprintUnaffectedToDo").val(data.status).change();
             });
     }
 }
@@ -216,10 +216,10 @@ function enregistrerModification(idStory, idSprint) {
 
     if(story.nom!='') {
         $.ajax({
-            url: '/api/story/update/'+idStory,
+            url: '/api/story/update/'+idStory+'?idSprint='+storySprint,
             type: 'POST',
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            data:  { idSprint: storySprint, story : JSON.stringify(story)},
+            data:  JSON.stringify(story),
             success: function (data) {
                 toastr.success(data.nom + " modifié");
                 document.location.reload();

@@ -113,13 +113,10 @@ public class ApiStoryController {
     }
 
     @JsonView(JsonViews.Basique.class)
-    @RequestMapping(value = "/api/story/update/{idStory}", params = { "idSprint", "story" }, method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<Story> updateStory(@PathVariable Long idStory, @RequestParam("idSprint") Long idSprint, @RequestParam("story") Story story)
+    @RequestMapping(value = "/api/story/update/{idStory}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Story> updateStory(@PathVariable Long idStory, @RequestBody Story story, @RequestParam Long idSprint)
     {
         LOGGER.debug("ApiController - updateStory");
-        System.out.println(idStory);
-        System.out.println(idSprint);
-        System.out.println(story);
         if(idSprint != null)
         {
             Sprint sprint = sprintService.findOneById(idSprint);
