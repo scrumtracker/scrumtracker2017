@@ -80,6 +80,19 @@ public class StoryServiceImpl implements StoryService
     @Override
     public Story save(Story story) { return storyDAO.save(story); }
 
+    @Override
+    public Story updateStory(Long id, Story story) {
+        Story storyAUpdater = storyDAO.findOneById(id);
+        storyAUpdater.setNom(story.getNom());
+        storyAUpdater.setDescription(story.getDescription());
+        storyAUpdater.setPoints(story.getPoints());
+        storyAUpdater.setStatus(story.getStatus());
+        storyAUpdater.setStorySprint(story.getStorySprint());
+        storyAUpdater.setStoryTasks(story.getStoryTasks());
+
+        return storyDAO.save(storyAUpdater);
+    }
+
     //Stories non affectées à un sprint
     @Override
     public List<Story> findAllWithoutSprint() {

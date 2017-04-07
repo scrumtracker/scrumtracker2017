@@ -3,7 +3,6 @@ package hei2017.dao;
 import hei2017.entity.Story;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 import java.util.Set;
 
 /**
