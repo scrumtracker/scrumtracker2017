@@ -120,13 +120,16 @@ function getListStoriesWithoutSprint() {
     $.getJSON('/api/story/sprint/null',
         function (data) {
             var listeStories = document.getElementById("divliststory");
+            var listeStoriesul = document.getElementById("ullistStory");
+            //var html = '<li>test</li>';
             var html = '';
 
             if (data.length!=0) {
-                html = '<li><p class="h2 text-left">List of stories</p></li>';
+                html ='<p class="h2 text-left">List of stories</p>';
+                //listeStories.innerHTML = '<p class="h2 text-left">List of stories</p>';
 
                 $.each(data, function (key, val) {
-                    html +
+                    html +=
                         '<li id="storyId'+val.id+'">'+
                         '<div onclick="showStory('+val.id+')" class="padd mouseLink divStoryUnaffected">'+
                         '<span class="'+val.status+'">'+val.status+'</span>'+
@@ -143,9 +146,10 @@ function getListStoriesWithoutSprint() {
                         '</li>';
                 });
                 listeStories.innerHTML = html;
+                //listeStoriesul.innerHTML = html;
             }
             else {
-                html='<li><p class="h2 text-left" id="storyNone">No story (for now)</p></li>';
+                html='<p class="h2 text-left" id="storyNone">No story (for now)</p>';
                 listeStories.innerHTML = html;
             }
         });
@@ -328,9 +332,9 @@ function creerSprintDansProject( idProject )
 window.onload = function() {
 
     var containers = $('.listStoryInSprint').toArray();
-    containers.concat($('#divliststory').toArray());
+    containers.concat($('#ullistStory').toArray());
 
-    dragula([document.getElementById('divliststory'),containers], {
+    dragula([document.getElementById('ullistStory'),containers], {
         isContainer: function (el) {
             return el.classList.contains('listStoryInSprint');
         }
