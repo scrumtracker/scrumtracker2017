@@ -1,4 +1,5 @@
-function addNewStory(){
+//Affiche le formulaire d'ajout de Story :
+function showFormAddNewStory(){
 
     var divaddnewstory = document.getElementById("divaddnewstory");
     var newStory = document.getElementById("newStory");
@@ -7,7 +8,8 @@ function addNewStory(){
     newStory.style.display = "none";
 }
 
-function addNewTask(obj){
+//Affiche le formulaire d'ajout de tâche :
+function showFormAddNewTask(obj){
 
     var divaddnewtask = obj.nextSibling.nextSibling;
     var newTask = obj;
@@ -42,20 +44,32 @@ function addNewTask(obj){
     }
 }
 
+//Créer une story reliée au sprint de la page sprint actuelle :
+function creerStoryDansSprint( idSprint )
+{
+    var story = {};
+    story.nom = $("#newstoryname"+idSprint).val();
+    story.description = $("#newstorydescription"+idSprint).val();
+    story.status = $("#newstorystatus"+idSprint).val();
+    story.points = $("#newstorypoints"+idSprint).val();
+    $.ajax({
+        url: '/api/story/add/sprint/'+idSprint,
+        type: 'POST',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        data: JSON.stringify(story),
+        success: function (data) {
+            toastr.success(data.nom + " has been successfully added.");
+            document.location.reload();
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
 
-/*function dragAndDropTasks() {
-    window.onload = function() {
-    dragula([$('TODO'), $('DOING'), $('DONE')],
-        {revertOnSpill: true});};
-}*/
-
-
-window.onload = function() {
-    dragula([$('TODO'), $('DOING'), $('DONE')],
-        {revertOnSpill: true});
+    });
 }
 
-
-function $ (id) {
-    return document.getElementById(id);
+//Déplacer une tâche entre les statuts TODO/DOING/DONE :
+function dragDrop( idStory ){
+    dragula([document.getElementById("todo"+idStory), document.getElementById("doing"+idStory), document.getElementById("done"+idStory)],
+        {revertOnSpill: true});
 }

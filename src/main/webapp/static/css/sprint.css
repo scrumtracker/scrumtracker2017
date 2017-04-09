@@ -134,7 +134,7 @@ textarea{
 
 /*FOR DRAGULA.JS*/
 
-#TODO, #DOING, #DONE{
+.TODO, .DOING, .DONE{
 	min-height:40px;
 }
 
