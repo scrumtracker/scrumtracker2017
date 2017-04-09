@@ -54,11 +54,12 @@
                         <div class="col-sm-3">
                             <p><span class="bold" th:text="${story.nom}"></span></p>
                             <p>Creation date : <span th:text="${story.dateCreation}"></span></p>
-                            <p>Story points estimation : <span th:text="${story.points}"></span></p>
                             <p>Description : <span th:text="${story.description}"></span></p>
+                            <p>Story points estimation : <span th:text="${story.points}"></span></p>
+                            <p>Status : <span th:text="${story.status}"></span></p>
                         </div>
 
-                        <div class="col-sm-3 container" id="TODO">
+                        <div class="col-sm-3 container TODO" th:id="${'todo'+story.id}">
                             <div class="task">
                                 <a href="#" class="list-group-item padd">Task 1 (static)
                                     <div class="deletetask">
@@ -89,7 +90,7 @@
 
                         </div>
 
-                        <div class="col-sm-3 container" id="DOING">
+                        <div class="col-sm-3 container DOING" th:id="${'doing'+story.id}">
                             <div class="task">
                                 <a href="#" class="list-group-item padd">Task 3 (static)
                                     <div class="deletetask">
@@ -102,7 +103,7 @@
                         </div>
 
 
-                        <div class="col-sm-3 container" id="DONE">
+                        <div class="col-sm-3 container DONE" th:id="${'done'+story.id}">
                             <div class="task">
                                 <a href="#" class="list-group-item padd">Task 4 (static)
                                     <div class="deletetask">
@@ -120,7 +121,7 @@
 
                         <div class="col-sm-9">
                             <div>
-                                <button type="button" class="newTask btn-sm btn btn-primary" onclick="addNewTask(this)">
+                                <button type="button" class="newTask btn-sm btn btn-primary" onclick="showFormAddNewTask(this)">
                                     <span class="glybtn glyphicon glyphicon-plus"></span>
                                     <span th:text="#{new.task}"></span>
                                 </button>
@@ -145,27 +146,41 @@
                             </div>
                         </div>
                     </div>
-
+                <script type="text/javascript" th:text="${'dragDrop('+story.id+')'}"></script>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
-                        <button id="newStory" type="button" class="btn-md btn btn-primary" onclick="addNewStory()">
+                    <div class="col-sm-9">
+                        <button id="newStory" type="button" class="btn-md btn btn-primary" onclick="showFormAddNewStory()">
                             <span class="glybtnright glyphicon glyphicon-plus"></span>
                             <span th:text="#{new.story}"></span>
                         </button>
                         <div id="divaddnewstory">
                             <div class="form-group">
-                                <label for="newstoryname">Story name</label>
-                                <input id="newstoryname" type="text" class="form-control" name="newstorynameUnaffecte"
-                                       maxlength="50" required/>
+                                <label th:for="${'newstoryname'+sprint.id}" th:text="#{story.name}"></label>
+                                <input th:id="${'newstoryname'+sprint.id}" type="text" class="form-control" th:name="${'newstoryname'+sprint.id}" maxlength="50" required/>
                             </div>
                             <div class="form-group">
-                                <label for="newstorydescription">Story goals</label>
-                                <textarea id="newstorydescription" rows="3" class="form-control"
-                                          name="newstorydescription"></textarea>
+                                <label th:for="${'newstorydescription'+sprint.id}" th:text="#{story.description}"></label>
+                                <textarea th:id="${'newstorydescription'+sprint.id}" rows="3" class="form-control newstorydescription" th:name="${'newstorydescription'+sprint.id}"></textarea>
                             </div>
-                            <button type="button" class="btn-md btn btn-primary"><span th:text="#{create.story}"></span>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label  th:for="${'newstorystatus'+sprint.id}" th:text="#{story.status}"></label>
+                                    <br/>
+                                    <select th:id="${'newstorystatus'+sprint.id}" class="selectpicker col-sm-4" data-container="body">
+                                        <option th:each="stat:${status}"
+                                                th:value="${stat}"
+                                                th:text="${stat}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label th:for="${'newstorypoints'+sprint.id}" title="Story points are a unit of measure for expressing an estimate of the overall effort that will be required to fully implement a product backlog item or any other piece of work.">Story points estimation</label>
+                                    <input type="number" th:id="${'newstorypoints'+sprint.id}" min="1" max="99" class="form-control" th:name="${'newstorypoints'+sprint.id}">
+                                </div>
+                            </div>
+                            <button type="button" class="btn-md btn btn-primary" th:onclick="${'creerStoryDansSprint('+sprint.id+')'}"><span th:text="#{create.story}"></span>
                             </button>
                         </div>
                     </div>
