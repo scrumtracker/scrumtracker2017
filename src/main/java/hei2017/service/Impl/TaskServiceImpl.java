@@ -3,6 +3,7 @@ package hei2017.service.Impl;
 import hei2017.dao.StoryDAO;
 import hei2017.dao.TaskDAO;
 import hei2017.dao.UserDAO;
+import hei2017.entity.Sprint;
 import hei2017.entity.Story;
 import hei2017.entity.Task;
 import hei2017.entity.User;
@@ -99,4 +100,17 @@ public class TaskServiceImpl implements TaskService
 
     @Override
     public Boolean exists(String nom) { return null!=taskDAO.findOneByNom(nom); }
+
+    @Override
+    public List<Story> findBySprintStoryIdWithTasks(Long idSprint) {
+        Set<Story> stories = storyDAO.findByStorySprintId(idSprint);
+        List<Story> storiesOfSprint = new ArrayList<>();
+        for(Story story : stories)
+        {
+            Set<Task> storyTasks = taskDAO.findByTaskStoriesId(story.getId());
+            story.setStoryTasks(storyTasks);
+            storiesOfSprint.add(story);
+        }
+        return storiesOfSprint;
+    }
 }

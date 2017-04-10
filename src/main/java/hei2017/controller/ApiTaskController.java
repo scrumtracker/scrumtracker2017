@@ -1,8 +1,11 @@
 package hei2017.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import hei2017.entity.Sprint;
+import hei2017.entity.Story;
 import hei2017.entity.Task;
 import hei2017.entity.User;
+import hei2017.enumeration.StoryStatus;
 import hei2017.json.JsonViews;
 import hei2017.service.*;
 import org.slf4j.Logger;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.inject.Inject;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -110,6 +114,31 @@ public class ApiTaskController {
             LOGGER.debug("ApiController - sendTask - Task déjà existante");
             return new ResponseEntity<Task>(task, HttpStatus.CONFLICT);
         }
+    }
+
+    @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/task/add/story/{idStory}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Task> sendTaskWithStoryId(@PathVariable Long idStory, @RequestBody Task task)
+    {
+        LOGGER.debug("ApiController - sendTaskWithStoryId");
+        Story story = storyService.findOneById(idStory);
+        Set<Story> stories = new HashSet<Story>(0);
+        stories.add(story);
+
+        if(null==story)
+        {
+            LOGGER.debug("ApiController - sendTaskWithStoryId - Story inexistante");
+            return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
+        }
+        if(task.getStatus()==null)
+            task.setStatus(StoryStatus.TODO);
+
+        task = taskService.save(task);
+        task.setTaskStories(stories);
+        task = taskService.save(task);
+
+        LOGGER.debug("ApiController - sendTaskWithStoryId - Task créée");
+        return new ResponseEntity<Task>(task, HttpStatus.CREATED);
     }
 
     @JsonView(JsonViews.Basique.class)

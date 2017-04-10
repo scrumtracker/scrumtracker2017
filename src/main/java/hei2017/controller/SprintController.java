@@ -1,10 +1,12 @@
 package hei2017.controller;
 
 import hei2017.entity.Sprint;
+import hei2017.entity.Story;
 import hei2017.enumeration.StoryStatus;
 import hei2017.service.ProjectService;
 import hei2017.service.SprintService;
 import hei2017.service.StoryService;
+import hei2017.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +31,9 @@ public class SprintController {
     @Inject
     StoryService storyService;
 
+    @Inject
+    TaskService taskService;
+
     @RequestMapping("/sprint/{idSprint}")
     public String goSprints(Model model,
                             HttpServletRequest request,
@@ -40,6 +45,8 @@ public class SprintController {
         model.addAttribute("projects", projectService.findAll());
 
         model.addAttribute("sprints", sprintService.findAll());
+
+        model.addAttribute("tasks", taskService.findAll());
 
         Sprint sprint = sprintService.findOneById(idSprint);
 
