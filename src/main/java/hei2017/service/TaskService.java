@@ -1,5 +1,6 @@
 package hei2017.service;
 
+import hei2017.entity.Story;
 import hei2017.entity.Task;
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface TaskService
     Task findOneByNom(String nom);
 
     Task save(Task task);
+
+    List<Story> findBySprintStoryIdWithTasks(Long idSprint);
 }

@@ -2,6 +2,7 @@ package hei2017.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import hei2017.enumeration.StoryStatus;
 import hei2017.enumeration.UniteTemps;
 import hei2017.json.JsonViews;
 
@@ -37,6 +38,9 @@ public class Task implements Serializable {
 
     @JsonView(JsonViews.Basique.class)
     private Timestamp dateCreation;
+
+    @JsonView(JsonViews.Basique.class)
+    private StoryStatus status;
 
     @JsonView(JsonViews.Task.class)
     @ManyToMany(cascade = CascadeType.ALL)
@@ -87,6 +91,11 @@ public class Task implements Serializable {
     public void setUniteTempsDeCharge(UniteTemps uniteTempsDeCharge) {
         this.uniteTempsDeCharge = uniteTempsDeCharge;
     }
+
+    @Enumerated(EnumType.STRING)
+    public StoryStatus getStatus() { return status; }
+
+    public void setStatus(StoryStatus status) {this.status = status;}
 
     public Set<User> getTaskUsers() {
         return taskUsers;

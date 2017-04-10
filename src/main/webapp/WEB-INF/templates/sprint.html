@@ -46,10 +46,11 @@
                 <div class="col-sm-3"><h4>DOING</h4></div>
                 <div class="col-sm-3"><h4>DONE</h4></div>
             </div>
-
+            <!-- task.status=='TODO' and -->
+            <!-- th:if="${!(story.storyTasks).isEmpty()}" -->
             <div id="divlistories">
 
-                <div class="story" th:each="story:${sprintStories}" th:id="${'storyId'+story.id}">
+                <div class="story" th:each="story:${sprintStories}" th:id="${'storyId'+story.id}" th:if="${!sprintStories.isEmpty()}">
                     <div class="row">
                         <div class="col-sm-3">
                             <p><span class="bold" th:text="${story.nom}"></span></p>
@@ -60,59 +61,40 @@
                         </div>
 
                         <div class="col-sm-3 container TODO" th:id="${'todo'+story.id}">
-                            <div class="task">
-                                <a href="#" class="list-group-item padd">Task 1 (static)
+                          <!--<div class="task" th:each="task:${story.storyTasks}" th:id="${'taskId'+task.id}" th:if="${!(story.storyTasks).isEmpty()}">
+                                <a href="#" class="list-group-item padd" th:text="${task.nom}">
                                     <div class="deletetask">
-                                        <button type="button" class="btnremove">
+                                        <button type="button" class="btnremove" th:onclick="${'deleteTaskById('+task.id+')'}">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                         </button>
                                     </div>
                                 </a>
-                            </div>
-                            <div class="task">
-                                <a href="#" class="list-group-item padd">Task 2 (static)
-                                    <div class="deletetask">
-                                        <button type="button" class="btnremove">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="task">
-                                <a href="#" class="list-group-item padd">Task 5 (static)
-                                    <div class="deletetask">
-                                        <button type="button" class="btnremove">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </div>
-
+                          </div>-->
                         </div>
 
                         <div class="col-sm-3 container DOING" th:id="${'doing'+story.id}">
-                            <div class="task">
-                                <a href="#" class="list-group-item padd">Task 3 (static)
+                            <!--<div class="task" th:each="task:${tasks}" th:id=${'taskId'+task.id}" th:if="${task.status=='DOING' and !tasks.isEmpty()}">
+                                <a href="#" class="list-group-item padd" th:text="${task.nom}">
                                     <div class="deletetask">
-                                        <button type="button" class="btnremove">
+                                        <button type="button" class="btnremove" th:onclick="${'deleteTaskById('+task.id+')'}">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                         </button>
                                     </div>
                                 </a>
-                            </div>
+                            </div>-->
                         </div>
 
 
                         <div class="col-sm-3 container DONE" th:id="${'done'+story.id}">
-                            <div class="task">
-                                <a href="#" class="list-group-item padd">Task 4 (static)
+                            <!--<div class="task" th:each="task:${tasks}" th:id="${'taskId'+task.id}" th:if="${task.status=='DONE' and !tasks.isEmpty()}">
+                                <a href="#" class="list-group-item padd" th:text="${task.nom}">
                                     <div class="deletetask">
-                                        <button type="button" class="btnremove">
+                                        <button type="button" class="btnremove" th:onclick="${'deleteTaskById('+task.id+')'}">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                         </button>
                                     </div>
                                 </a>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
 
@@ -125,22 +107,22 @@
                                     <span class="glybtn glyphicon glyphicon-plus"></span>
                                     <span th:text="#{new.task}"></span>
                                 </button>
-                                <div class="divaddnewtask" id="divaddnewtask1">
+                                <div class="divaddnewtask" id="divaddnewtask">
                                     <div class="form-group">
-                                        <label for="newtaskname1">Task name</label>
-                                        <input id="newtaskname1" type="text" class="form-control" name="newtaskname1"
+                                        <label th:for="${'newtaskname'+story.id}">Task name</label>
+                                        <input th:id="${'newtaskname'+story.id}" type="text" class="form-control" th:name="${'newtaskname'+story.id}"
                                                maxlength="50" required/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="newtaskdescription1">Task description</label>
-                                        <textarea id="newtaskdescription1" rows="3" class="form-control"
-                                                  name="newtaskdescription1"></textarea>
+                                        <label th:for="${'newtaskdescription'+story.id}">Task description</label>
+                                        <textarea th:id="${'newtaskdescription'+story.id}" rows="3" class="form-control"
+                                                  th:name="${'newtaskdescription'+story.id}"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="newtasktotalhoursofwork1" title="">Total hours of work</label>
-                                        <input type="number" id="newtasktotalhoursofwork1" min="0" max="99" class="form-control" name="newtasktotalhoursofwork1">
+                                        <label th:for="${'newtaskTempsDeCharge'+story.id}" title="">Total hours of work</label>
+                                        <input type="number" th:id="${'newtasktotalhoursofwork'+story.id}" min="0" max="99" class="form-control" th:name="${'newtasktotalhoursofwork'+story.id}">
                                     </div>
-                                    <button type="button" class="btn-sm btn btn-primary"><span
+                                    <button type="button" class="btn-sm btn btn-primary" th:id="${'buttonAjouterTask'+story.id}" th:onclick="${'addNewTaskInStory('+story.id+')'}"><span
                                             th:text="#{create.task}"></span></button>
                                 </div>
                             </div>
