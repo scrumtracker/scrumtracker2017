@@ -68,8 +68,35 @@ function creerStoryDansSprint( idSprint )
     });
 }
 
+function addNewTaskInStory(idStory){
+    var task = {};
+    task.nom = $("#newtaskname"+idStory).val();
+    task.description = $("#newtaskdescription"+idStory).val();
+    task.status = $("#newtaskstatus"+idStory).val();
+    task.tempsDeCharge = $("#newtaskTempsDeCharge"+idStory).val();
+    $.ajax({
+        url: '/api/task/add/story/'+idStory,
+        type: 'POST',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        data: JSON.stringify(task),
+        success: function (data) {
+            toastr.success(data.nom + " has been successfully added.");
+            document.location.reload();
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
+
+    });
+}
+
 //Déplacer une tâche entre les statuts TODO/DOING/DONE :
 function dragDrop( idStory ){
     dragula([document.getElementById("todo"+idStory), document.getElementById("doing"+idStory), document.getElementById("done"+idStory)],
         {revertOnSpill: true});
+}
+
+//Supprimer une tâche (id de la tâche en paramètre) :
+function deleteTaskById(idTask){
+    alert("Suppression de la tâche "+idTask+"à prévoir.");
 }
