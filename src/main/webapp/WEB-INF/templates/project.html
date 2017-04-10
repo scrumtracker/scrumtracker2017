@@ -92,8 +92,8 @@
                             <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
                         </button>
 						<div id="sprinthidden">
-	                        <ul class="listStoryInSprint">
-	                            <li th:each="story:${sprint.sprintStories}" th:id="${'storyId'+story.id}">
+	                        <div class="listStoryInSprint">
+	                            <div th:each="story:${sprint.sprintStories}" th:id="${'storyId'+story.id}">
 	                                <div th:onclick="${'showStory('+story.id+')'}" class="padd mouseLink divStory">
 	                                    <span th:class="${story.status}" th:text="${story.status}"></span>
 	                                    <span th:text="${story.nom}"></span>
@@ -106,8 +106,8 @@
 	                                        </button>
                                         </div>
                                     </div>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
 
                             <div>
                                 <div>
@@ -222,10 +222,9 @@
                     </div>
                 </div>
 
-
-                <div id="divliststory">
-                    <ul id="ullistStory" class="list-group">
-                    </ul>
+                <div id="divtitleliststory">
+                </div>
+                <div id="divliststory" class="list-group">
                 </div>
             </div>
         </div>

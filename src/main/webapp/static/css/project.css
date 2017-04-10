@@ -97,13 +97,14 @@
 	vertical-align: top;
 	text-align: center;
 }
-
+/*
 section ul{
 	margin-top: 25px;
 	margin-bottom: 10px;
 	padding-left: 20px;
 	list-style: none;
-}/*
+}*/
+/*
 #divlistsprint ul{
 	display: none;
 }*/
@@ -120,10 +121,12 @@ section ul{
 
 
 
-
-
 .listStoryInSprint, #divliststory{
 	min-height: 35px;
+	margin-top: 25px;
+	margin-bottom: 10px;
+	padding-left: 20px;
+	list-style: none;
 }
 .divStory, .divStoryUnaffected{
 	border: 1px solid #ddd;

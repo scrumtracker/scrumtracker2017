@@ -119,18 +119,17 @@ function detailSprint(id, obj){
 function getListStoriesWithoutSprint() {
     $.getJSON('/api/story/sprint/null',
         function (data) {
+            var titlelisteStories = document.getElementById("divtitleliststory");
             var listeStories = document.getElementById("divliststory");
-            var listeStoriesul = document.getElementById("ullistStory");
-            //var html = '<li>test</li>';
             var html = '';
+            var html2 = '';
 
             if (data.length!=0) {
                 html ='<p class="h2 text-left">List of stories</p>';
-                //listeStories.innerHTML = '<p class="h2 text-left">List of stories</p>';
 
                 $.each(data, function (key, val) {
-                    html +=
-                        '<li id="storyId'+val.id+'">'+
+                    html2 +=
+                        '<div id="storyId'+val.id+'">'+
                         '<div onclick="showStory('+val.id+')" class="padd mouseLink divStoryUnaffected">'+
                         '<span class="'+val.status+'">'+val.status+'</span>'+
                         '<span>'+val.nom+'</span>'+
@@ -143,17 +142,18 @@ function getListStoriesWithoutSprint() {
                         '</button>'+
                         '</div>'+
                         '</div>'+
-                        '</li>';
+                        '</div>';
                 });
-                listeStories.innerHTML = html;
-                //listeStoriesul.innerHTML = html;
+                titlelisteStories.innerHTML = html;
+                listeStories.innerHTML = html2;
             }
             else {
                 html='<p class="h2 text-left" id="storyNone">No story (for now)</p>';
-                listeStories.innerHTML = html;
+                titlelisteStories.innerHTML = html;
             }
         });
 }
+
 
 //Efface une story selon son id
 function effacerStoryById( idStory )
@@ -329,12 +329,13 @@ function creerSprintDansProject( idProject )
 }
 
 ////En construction////
+
 window.onload = function() {
 
     var containers = $('.listStoryInSprint').toArray();
-    containers.concat($('#ullistStory').toArray());
+    containers.concat($('#divliststory').toArray());
 
-    dragula([document.getElementById('ullistStory'),containers], {
+    dragula([document.getElementById('divliststory'),containers], {
         isContainer: function (el) {
             return el.classList.contains('listStoryInSprint');
         }
