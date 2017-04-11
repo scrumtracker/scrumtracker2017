@@ -327,7 +327,22 @@ function creerSprintDansProject( idProject )
 
     });
 }
+function deleteSprintById( idSprint )
+{
+    $.ajax({
+        url: '/api/sprint/delete/'+idSprint,
+        type: 'DELETE',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        success: function (data) {
+            toastr.success("Sprint #"+idSprint+" has been deleted");
+            $("#sprintId"+idSprint).hide(500);
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
 
+    });
+}
 ////En construction////
 
 window.onload = function() {

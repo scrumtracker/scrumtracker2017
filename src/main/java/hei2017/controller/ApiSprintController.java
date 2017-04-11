@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.inject.Inject;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -124,7 +125,14 @@ public class ApiSprintController {
         if(sprintService.exists(id))
         {
             sprint = sprintService.findOneById(id);
-            sprintService.deleteOneById(id);
+            //On rompt la liaison avec le projet afin que celui ci ne soit pas supprimé en cascade
+            sprint.setSprintProject(null);
+            sprint.setSprintStories(new HashSet<>(0));
+            sprint = sprintService.save(sprint);
+
+            // TODO REVENIR ICI
+            //sprintService.deleteOneById(sprint.getId());
+
             return new ResponseEntity<Sprint>(sprint, HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);

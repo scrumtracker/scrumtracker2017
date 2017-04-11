@@ -82,7 +82,7 @@
 
             <div id="divlistsprint" class="list-group" th:if="${!sprintsOfProjectWithStories.isEmpty()}">
                 <p class="h2 text-left" th:text="#{sprint.list}"></p>
-                <div th:each="sprint:${sprintsOfProjectWithStories}" class="sprint">
+                <div th:each="sprint:${sprintsOfProjectWithStories}" class="sprint" th:id="${'sprintId'+sprint.id}">
                     <div class="list-group-item storyinsprint" th:onclick="'detailSprint('+${sprint.id}+',this)'">
                         <div class="padd2">
                             <span class="bold" th:text="${sprint.nom}"></span>
@@ -151,7 +151,7 @@
                     </div><!--
                         --><div class="deletesprint">
                         <div>
-                            <button type="button" class="btnremove"><span
+                            <button type="button" class="btnremove" th:onclick="${'deleteSprintById('+sprint.id+')'}"><span
                                     class="glyremove glyphicon glyphicon-remove-sign"></span>
                             </button>
                         </div>

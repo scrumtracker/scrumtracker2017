@@ -50,7 +50,7 @@
             <!-- th:if="${!(story.storyTasks).isEmpty()}" -->
             <div id="divlistories">
 
-                <div class="story" th:each="story:${sprintStories}" th:id="${'storyId'+story.id}" th:if="${!sprintStories.isEmpty()}">
+                <div class="story" th:each="story:${sprintStories}" th:id="${'storyId'+story.id}">
                     <div class="row">
                         <div class="col-sm-3">
                             <p><span class="bold" th:text="${story.nom}"></span></p>
@@ -61,24 +61,18 @@
                         </div>
 
                         <div class="col-sm-3 container TODO" th:id="${'todo'+story.id}">
-                          <!--<div class="task" th:each="task:${story.storyTasks}" th:id="${'taskId'+task.id}" th:if="${!(story.storyTasks).isEmpty()}">
-                                <a href="#" class="list-group-item padd" th:text="${task.nom}">
+
+                            <div th:each="task:${story.storyTasks}" class="task" th:if="${task.isTODO()}">
+                                <a href="#" class="list-group-item padd">
+                                    <div th:text="${task.nom}"></div>
                                     <div class="deletetask">
                                         <button type="button" class="btnremove" th:onclick="${'deleteTaskById('+task.id+')'}">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                         </button>
                                     </div>
                                 </a>
-                          </div>-->
-                            <div class="task">
-                                <a href="#" class="list-group-item padd">Task 1 (static)
-                                    <div class="deletetask">
-                                        <button type="button" class="btnremove">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
                             </div>
+
                         </div>
 
                         <div class="col-sm-3 container DOING" th:id="${'doing'+story.id}">
@@ -91,15 +85,19 @@
                                     </div>
                                 </a>
                             </div>-->
-                            <div class="task">
-                                <a href="#" class="list-group-item padd">Task 2 (static)
+
+
+                            <div th:each="task:${story.storyTasks}" class="task" th:if="${task.isDOING()}">
+                                <a href="#" class="list-group-item padd">
+                                    <div th:text="${task.nom+ '- '+task.status}"></div>
                                     <div class="deletetask">
-                                        <button type="button" class="btnremove">
+                                        <button type="button" class="btnremove" th:onclick="${'deleteTaskById('+task.id+')'}">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
                                         </button>
                                     </div>
                                 </a>
                             </div>
+
                         </div>
 
 
@@ -113,6 +111,18 @@
                                     </div>
                                 </a>
                             </div>-->
+
+                            <div th:each="task:${story.storyTasks}" class="task" th:if="${task.isDONE()}">
+                                <a href="#" class="list-group-item padd">
+                                    <div th:text="${task.nom}"></div>
+                                    <div class="deletetask">
+                                        <button type="button" class="btnremove" th:onclick="${'deleteTaskById('+task.id+')'}">
+                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
 

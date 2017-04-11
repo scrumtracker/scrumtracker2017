@@ -108,6 +108,19 @@ public class StoryServiceImpl implements StoryService
     }
 
     @Override
+    public Set<Story> findByStorySprintWithTask(Long idSprint) {
+        Set<Story> stories = findByStorySprint(idSprint);
+        if(stories!=null)
+        {
+            for(Story story:stories){
+                Set<Task> tasks = taskDAO.findByTaskStoriesId(story.getId());
+                story.setStoryTasks(tasks);
+            }
+        }
+        return stories;
+    }
+
+    @Override
     public Boolean exists(String nom) { return null!=storyDAO.findOneByNom(nom); }
 
     @Override

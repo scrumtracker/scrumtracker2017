@@ -50,7 +50,7 @@ public class SprintController {
 
         Sprint sprint = sprintService.findOneById(idSprint);
 
-        model.addAttribute("sprintStories", storyService.findByStorySprint(idSprint));
+        model.addAttribute("sprintStories", storyService.findByStorySprintWithTask(idSprint));
 
         model.addAttribute("status", StoryStatus.values());
 

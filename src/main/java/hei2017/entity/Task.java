@@ -121,4 +121,9 @@ public class Task implements Serializable {
     public void addStory(Story story) {
         this.taskStories.add(story);
     }
+
+    //EVITE BUG THYMELEAF TH:IF SUR STATUS
+    public Boolean isTODO() {return this.status == StoryStatus.TODO;}
+    public Boolean isDOING() {return this.status == StoryStatus.DOING;}
+    public Boolean isDONE() {return this.status == StoryStatus.DONE;}
 }

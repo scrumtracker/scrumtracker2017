@@ -72,6 +72,7 @@ public class ApiDebugController {
 
         Task tache = new Task();
         tache.setNom("Créer une tâche via Controlleur "+Instant.now());
+        tache.setStatus(StoryStatus.TODO);
         tache.setDescription("Je suis la description de la tâche");
         tache.setTempsDeCharge(new Long(2));
         tache.setUniteTempsDeCharge(UniteTemps.h);

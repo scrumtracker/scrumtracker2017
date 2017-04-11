@@ -38,4 +38,6 @@ public interface StoryService
     Story save(Story story);
 
     List<Story> findAllWithoutSprint();
+
+    Set<Story> findByStorySprintWithTask(Long idSprint);
 }

@@ -40,7 +40,7 @@ public class Sprint implements Serializable {
     private Timestamp dateFin;
 
     @JsonView(JsonViews.Sprint.class)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Project sprintProject;
 
     @JsonView(JsonViews.Sprint.class)
