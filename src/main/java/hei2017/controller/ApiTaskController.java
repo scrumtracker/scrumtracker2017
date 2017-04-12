@@ -121,21 +121,26 @@ public class ApiTaskController {
     public ResponseEntity<Task> sendTaskWithStoryId(@PathVariable Long idStory, @RequestBody Task task)
     {
         LOGGER.debug("ApiController - sendTaskWithStoryId");
-        Story story = storyService.findOneById(idStory);
-        Set<Story> stories = new HashSet<Story>(0);
-        stories.add(story);
-
+        Story story = storyService.findOneByIdWithAll(idStory);
         if(null==story)
         {
             LOGGER.debug("ApiController - sendTaskWithStoryId - Story inexistante");
             return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
         }
+
         if(task.getStatus()==null)
             task.setStatus(StoryStatus.TODO);
 
         task = taskService.save(task);
-        task.setTaskStories(stories);
-        task = taskService.save(task);
+        Set<Task> tasksOfStory = story.getStoryTasks();
+        tasksOfStory.add(task);
+        story.setStoryTasks(tasksOfStory);
+        storyService.save(story);
+
+        Set<Story> storiesOfTask = task.getTaskStories();
+        storiesOfTask.add(story);
+        task.setTaskStories(storiesOfTask);
+        taskService.save(task);
 
         LOGGER.debug("ApiController - sendTaskWithStoryId - Task créée");
         return new ResponseEntity<Task>(task, HttpStatus.CREATED);

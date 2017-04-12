@@ -76,20 +76,10 @@
                         </div>
 
                         <div class="col-sm-3 container DOING" th:id="${'doing'+story.id}">
-                            <!--<div class="task" th:each="task:${tasks}" th:id=${'taskId'+task.id}" th:if="${task.status=='DOING' and !tasks.isEmpty()}">
-                                <a href="#" class="list-group-item padd" th:text="${task.nom}">
-                                    <div class="deletetask">
-                                        <button type="button" class="btnremove" th:onclick="${'deleteTaskById('+task.id+')'}">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </div>-->
-
 
                             <div th:each="task:${story.storyTasks}" class="task" th:if="${task.isDOING()}">
                                 <a href="#" class="list-group-item padd">
-                                    <div th:text="${task.nom+ '- '+task.status}"></div>
+                                    <div th:text="${task.nom}"></div>
                                     <div class="deletetask">
                                         <button type="button" class="btnremove" th:onclick="${'deleteTaskById('+task.id+')'}">
                                             <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
@@ -102,15 +92,6 @@
 
 
                         <div class="col-sm-3 container DONE" th:id="${'done'+story.id}">
-                            <!--<div class="task" th:each="task:${tasks}" th:id="${'taskId'+task.id}" th:if="${task.status=='DONE' and !tasks.isEmpty()}">
-                                <a href="#" class="list-group-item padd" th:text="${task.nom}">
-                                    <div class="deletetask">
-                                        <button type="button" class="btnremove" th:onclick="${'deleteTaskById('+task.id+')'}">
-                                            <span class="glyremovelist glyphicon glyphicon-remove-sign"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </div>-->
 
                             <div th:each="task:${story.storyTasks}" class="task" th:if="${task.isDONE()}">
                                 <a href="#" class="list-group-item padd">
