@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import hei2017.enumeration.StoryStatus;
 import hei2017.enumeration.UniteTemps;
 import hei2017.json.JsonViews;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,12 +44,12 @@ public class Task implements Serializable {
     private StoryStatus status;
 
     @JsonView(JsonViews.Task.class)
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<User> taskUsers = new HashSet<User>(0);
 
     @JsonView(JsonViews.Task.class)
-    @ManyToMany(mappedBy = "storyTasks", cascade = CascadeType.ALL)
-    private Set<Story> taskStories = new HashSet<Story>(0);
+    @ManyToOne
+    private Story taskStory;
 
     //Constructeurs
     public Task(){
@@ -110,16 +111,20 @@ public class Task implements Serializable {
         this.taskUsers.add(user);
     }
 
-    public Set<Story> getTaskStories() {
-        return taskStories;
+    public Story getTaskStory() {
+        return taskStory;
     }
 
-    public void setTaskStories(Set<Story> taskStories) {
-        this.taskStories = taskStories;
+    public Timestamp getDateCreation() {
+        return dateCreation;
     }
 
-    public void addStory(Story story) {
-        this.taskStories.add(story);
+    public void setDateCreation(Timestamp dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public void setTaskStory(Story taskStory) {
+        this.taskStory = taskStory;
     }
 
     //EVITE BUG THYMELEAF TH:IF SUR STATUS

@@ -42,11 +42,7 @@ public class User implements Serializable {
     private String password;
 
     @JsonView(JsonViews.User.class)
-    @ManyToMany(mappedBy = "projectUsers", cascade = CascadeType.ALL)
-    private Set<Project> userProjects = new HashSet<Project>(0);
-
-    @JsonView(JsonViews.User.class)
-    @ManyToMany(mappedBy = "taskUsers", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "taskUsers", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Task> userTasks = new HashSet<Task>(0);
 
     public User() {
@@ -90,14 +86,6 @@ public class User implements Serializable {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
-
-    public Set<Project> getUserProjects() {
-        return userProjects;
-    }
-
-    public void setUserProjects(Set<Project> userProjects) {
-        this.userProjects = userProjects;
-    }
 
     public Set<Task> getUserTasks() {
         return userTasks;

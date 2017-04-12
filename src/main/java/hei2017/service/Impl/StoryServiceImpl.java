@@ -44,7 +44,7 @@ public class StoryServiceImpl implements StoryService
         List<Story> stories = storyDAO.findAll();
         for(Story story:stories)
         {
-            Set<Task> storyTasks = taskDAO.findByTaskStoriesId(story.getId());
+            Set<Task> storyTasks = taskDAO.findByTaskStoryId(story.getId());
             story.setStoryTasks(storyTasks);
 
             Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId()).iterator().next();
@@ -113,7 +113,7 @@ public class StoryServiceImpl implements StoryService
         if(stories!=null)
         {
             for(Story story:stories){
-                Set<Task> tasks = taskDAO.findByTaskStoriesId(story.getId());
+                Set<Task> tasks = taskDAO.findByTaskStoryId(story.getId());
                 story.setStoryTasks(tasks);
             }
         }
@@ -131,7 +131,7 @@ public class StoryServiceImpl implements StoryService
         Story story = storyDAO.findOneById(id);
         if(null!=story)
         {
-            Set<Task> storyTasks = taskDAO.findByTaskStoriesId(story.getId());
+            Set<Task> storyTasks = taskDAO.findByTaskStoryId(story.getId());
             story.setStoryTasks(storyTasks);
 
             Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId()).iterator().next();

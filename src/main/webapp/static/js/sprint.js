@@ -141,5 +141,16 @@ function dragDrop( idStory ){
 
 //Supprimer une tâche (id de la tâche en paramètre) :
 function deleteTaskById(idTask){
-    alert("Suppression de la tâche "+idTask+"à prévoir.");
+    $.ajax({
+        url: '/api/task/delete/'+idTask,
+        type: 'DELETE',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        success: function (data) {
+            toastr.success(data.nom + " has been successfully deleted");
+            $("#"+idTask).hide(500);
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
+    });
 }

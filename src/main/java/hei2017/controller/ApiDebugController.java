@@ -107,12 +107,11 @@ public class ApiDebugController {
         sprint.addStory(story2);
 
         story.addTask(tache);
-        tache.addStory(story);
+        tache.setTaskStory(story);
 
         tache.addUser(testeur);
         testeur.addTask(tache);
 
-        projet.addUser(testeur);
 
         projet = projectService.save(projet);
         sprint = sprintService.save(sprint);

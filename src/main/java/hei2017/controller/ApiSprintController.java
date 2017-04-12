@@ -125,13 +125,8 @@ public class ApiSprintController {
         if(sprintService.exists(id))
         {
             sprint = sprintService.findOneById(id);
-            //On rompt la liaison avec le projet afin que celui ci ne soit pas supprimé en cascade
-            sprint.setSprintProject(null);
-            sprint.setSprintStories(new HashSet<>(0));
-            sprint = sprintService.save(sprint);
 
-            // TODO REVENIR ICI
-            //sprintService.deleteOneById(sprint.getId());
+            sprintService.deleteOneById(sprint.getId());
 
             return new ResponseEntity<Sprint>(sprint, HttpStatus.ACCEPTED);
         }

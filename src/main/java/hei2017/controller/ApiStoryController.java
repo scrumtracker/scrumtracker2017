@@ -163,10 +163,7 @@ public class ApiStoryController {
         if(storyService.exists(id))
         {
             story = storyService.findOneById(id);
-            story.setStorySprint(null);
-            story.setStoryTasks(null);
-            storyService.save(story);
-            storyService.deleteOneById(id);
+            storyService.deleteOneById(story.getId());
             return new ResponseEntity<Story>(story, HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);

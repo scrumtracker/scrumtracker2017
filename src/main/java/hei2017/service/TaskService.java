@@ -26,7 +26,7 @@ public interface TaskService
 
     List<Task> findAllWithAll();
 
-    Set<Task> findByTaskStories(Long idStory);
+    Set<Task> findByTaskStory(Long idStory);
 
     Task findOneById(Long id);
 

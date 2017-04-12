@@ -44,9 +44,6 @@ public class ProjectServiceImpl implements ProjectService
         {
             Set<Sprint> projectSprints = sprintDAO.findBySprintProjectId(project.getId());
             project.setProjectSprints(projectSprints);
-
-            Set<User> projectUsers = userDAO.findByUserProjectsId(project.getId());
-            project.setProjectUsers(projectUsers);
         }
         return projects;
     }
@@ -61,9 +58,6 @@ public class ProjectServiceImpl implements ProjectService
         {
             Set<Sprint> projectSprints = sprintDAO.findBySprintProjectId(project.getId());
             project.setProjectSprints(projectSprints);
-
-            Set<User> projectUsers = userDAO.findByUserProjectsId(project.getId());
-            project.setProjectUsers(projectUsers);
         }
         return project;
     }

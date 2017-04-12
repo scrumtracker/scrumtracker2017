@@ -13,7 +13,7 @@ public interface TaskDAO extends JpaRepository<Task, Long>
 {
     long count();
 
-    Set<Task> findByTaskStoriesId(Long idStory);
+    Set<Task> findByTaskStoryId(Long idStory);
 
     Task findOneByNom(String nom);
 

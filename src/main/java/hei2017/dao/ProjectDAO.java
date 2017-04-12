@@ -19,6 +19,4 @@ public interface ProjectDAO extends JpaRepository<Project, Long>
     Project findOneByNom(String nom);
 
     Set<Project> findByProjectSprintsId(Long id);
-
-    Set<Project> findByProjectUsersId(Long id);
 }

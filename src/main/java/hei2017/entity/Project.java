@@ -36,10 +36,6 @@ public class Project implements Serializable {
     private Timestamp dateCreation;
 
     @JsonView(JsonViews.Project.class)
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<User> projectUsers = new HashSet<User>(0);
-
-    @JsonView(JsonViews.Project.class)
     @OneToMany(mappedBy = "sprintProject", cascade = CascadeType.ALL)
     private Set<Sprint> projectSprints = new HashSet<Sprint>(0);
 
@@ -67,14 +63,6 @@ public class Project implements Serializable {
         this.description = description;
     }
 
-    public Set<User> getProjectUsers() {
-        return projectUsers;
-    }
-
-    public void setProjectUsers(Set<User> projectUsers) {
-        this.projectUsers = projectUsers;
-    }
-
     public Set<Sprint> getProjectSprints() {
         return this.projectSprints;
     }
@@ -86,11 +74,6 @@ public class Project implements Serializable {
     public void addSprint(Sprint sprint)
     {
         projectSprints.add(sprint);
-    }
-
-    public void addUser(User user)
-    {
-        projectUsers.add(user);
     }
 
     public Timestamp getDateCreation() {

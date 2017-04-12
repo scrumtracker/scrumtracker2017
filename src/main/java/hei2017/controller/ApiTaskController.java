@@ -121,6 +121,9 @@ public class ApiTaskController {
     public ResponseEntity<Task> sendTaskWithStoryId(@PathVariable Long idStory, @RequestBody Task task)
     {
         LOGGER.debug("ApiController - sendTaskWithStoryId");
+
+        taskService.save(task);
+
         Story story = storyService.findOneByIdWithAll(idStory);
         if(null==story)
         {
@@ -131,15 +134,10 @@ public class ApiTaskController {
         if(task.getStatus()==null)
             task.setStatus(StoryStatus.TODO);
 
-        task = taskService.save(task);
-        Set<Task> tasksOfStory = story.getStoryTasks();
-        tasksOfStory.add(task);
-        story.setStoryTasks(tasksOfStory);
+        story.addTask(task);
         storyService.save(story);
 
-        Set<Story> storiesOfTask = task.getTaskStories();
-        storiesOfTask.add(story);
-        task.setTaskStories(storiesOfTask);
+        task.setTaskStory(story);
         taskService.save(task);
 
         LOGGER.debug("ApiController - sendTaskWithStoryId - Task créée");
@@ -156,7 +154,9 @@ public class ApiTaskController {
         if(taskService.exists(id))
         {
             task = taskService.findOneById(id);
-            taskService.deleteOneById(id);
+            // TODO REVENIR ICI
+            taskService.deleteOneById(task.getId());
+
             return new ResponseEntity<Task>(task, HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
@@ -169,7 +169,7 @@ public class ApiTaskController {
     public Set<Task> showTasksAssociatedToThisStory(@PathVariable Long idStory)
     {
         LOGGER.debug("ApiController - showTasksAssociatedToThisStory");
-        Set<Task> tasks = taskService.findByTaskStories(idStory);
+        Set<Task> tasks = taskService.findByTaskStory(idStory);
         return tasks;
     }
 }

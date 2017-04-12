@@ -42,9 +42,6 @@ public class UserServiceImpl implements UserService
         {
             Set<Task> userTasks = taskDAO.findByTaskUsersId(user.getId());
             user.setUserTasks(userTasks);
-
-            Set<Project> userProjects = projectDAO.findByProjectUsersId(user.getId());
-            user.setUserProjects(userProjects);
         }
         return users;
     }
@@ -59,9 +56,6 @@ public class UserServiceImpl implements UserService
         {
             Set<Task> userTasks = taskDAO.findByTaskUsersId(user.getId());
             user.setUserTasks(userTasks);
-
-            Set<Project> userProjects = projectDAO.findByProjectUsersId(user.getId());
-            user.setUserProjects(userProjects);
         }
         return user;
     }

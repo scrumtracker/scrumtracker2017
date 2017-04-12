@@ -16,7 +16,7 @@ public interface StoryDAO extends JpaRepository<Story, Long>
 
     Story findOneByNom(String nom);
 
-    Set<Story> findByStoryTasksId(Long id);
+    Story findByStoryTasksId(Long id);
 
     Story findOneById(Long id);
 }

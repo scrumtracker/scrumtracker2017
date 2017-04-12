@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -46,17 +47,17 @@ public class TaskServiceImpl implements TaskService
         for(Task task: tasks)
         {
             Set<User> taskUsers = userDAO.findByUserTasksId(task.getId());
-            Set<Story> taskStories = storyDAO.findByStoryTasksId(task.getId());
+            Story taskStory = storyDAO.findByStoryTasksId(task.getId());
 
             task.setTaskUsers(taskUsers);
-            task.setTaskStories(taskStories);
+            task.setTaskStory(taskStory);
         }
         return tasks;
     }
 
     @Override
-    public Set<Task> findByTaskStories(Long idStory) {
-        return taskDAO.findByTaskStoriesId(idStory);
+    public Set<Task> findByTaskStory(Long idStory) {
+        return taskDAO.findByTaskStoryId(idStory);
     }
 
     @Override
@@ -68,10 +69,10 @@ public class TaskServiceImpl implements TaskService
         if(null!=task)
         {
             Set<User> taskUsers = userDAO.findByUserTasksId(task.getId());
-            Set<Story> taskStories = storyDAO.findByStoryTasksId(task.getId());
+            Story taskStory = storyDAO.findByStoryTasksId(task.getId());
 
             task.setTaskUsers(taskUsers);
-            task.setTaskStories(taskStories);
+            task.setTaskStory(taskStory);
         }
         return task;
     }
@@ -90,7 +91,9 @@ public class TaskServiceImpl implements TaskService
     public void delete(Task task) { taskDAO.delete(task); }
 
     @Override
-    public void deleteOneById(Long id) { taskDAO.delete(id); }
+    public void deleteOneById(Long idTask) {
+        taskDAO.delete(idTask);
+    }
 
     @Override
     public Boolean exists(Long id) { return taskDAO.exists(id); }
@@ -107,7 +110,7 @@ public class TaskServiceImpl implements TaskService
         List<Story> storiesOfSprint = new ArrayList<>();
         for(Story story : stories)
         {
-            Set<Task> storyTasks = taskDAO.findByTaskStoriesId(story.getId());
+            Set<Task> storyTasks = taskDAO.findByTaskStoryId(story.getId());
             story.setStoryTasks(storyTasks);
             storiesOfSprint.add(story);
         }

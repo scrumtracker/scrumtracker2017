@@ -39,11 +39,11 @@ public class Story implements Serializable {
     private Timestamp dateCreation;
 
     @JsonView(JsonViews.Story.class)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Sprint storySprint;
 
     @JsonView(JsonViews.Story.class)
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "taskStory", cascade = CascadeType.ALL)
     private Set<Task> storyTasks = new HashSet<Task>(0);
 
     //Constructeurs
