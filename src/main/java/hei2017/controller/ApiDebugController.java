@@ -28,6 +28,9 @@ public class ApiDebugController {
     private final static Logger LOGGER = LoggerFactory.getLogger(ApiController.class);
 
     @Inject
+    MainService mainService;
+
+    @Inject
     ProjectService projectService;
 
     @Inject
@@ -128,21 +131,7 @@ public class ApiDebugController {
     @RequestMapping(value = "/api/debug/wipe", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public String debugWipe()
     {
-        for (Project x:projectService.findAll()) {
-            projectService.delete(x);
-        }
-        for (Sprint x:sprintService.findAll()) {
-            sprintService.delete(x);
-        }
-        for (Story x:storyService.findAll()) {
-            storyService.delete(x);
-        }
-        for (Task x:taskService.findAll()) {
-            taskService.delete(x);
-        }
-        for (User x:userService.findAll()) {
-            userService.delete(x);
-        }
+        mainService.wipe();
 
         return "Reset BDD";
     }

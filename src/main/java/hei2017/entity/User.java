@@ -42,7 +42,7 @@ public class User implements Serializable {
     private String password;
 
     @JsonView(JsonViews.User.class)
-    @ManyToMany(mappedBy = "taskUsers", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Task> userTasks = new HashSet<Task>(0);
 
     public User() {

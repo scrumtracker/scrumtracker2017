@@ -44,7 +44,7 @@ public class Task implements Serializable {
     private StoryStatus status;
 
     @JsonView(JsonViews.Task.class)
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "userTasks", cascade = {CascadeType.ALL})
     private Set<User> taskUsers = new HashSet<User>(0);
 
     @JsonView(JsonViews.Task.class)
