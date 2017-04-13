@@ -28,3 +28,20 @@
 	//display: none;
 	visibility: hidden;
 }
+
+.btnedit{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+.glyremove{
+	height: 46px;
+	line-height: 46px;
+	color: red;
+	font-size: 17px;
+}
+.btnremove{
+	border: 0px;
+	padding: 0px;
+	background: none;
+}

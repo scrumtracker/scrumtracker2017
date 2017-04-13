@@ -5,4 +5,6 @@ package hei2017.service;
  */
 public interface MainService {
     void wipe();
+
+    void populate();
 }

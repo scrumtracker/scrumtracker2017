@@ -62,6 +62,16 @@ function showStory(id){
         });
 }
 
+//Cache les détails latéraux (utile après suppression d'un élément)
+function hideDetails(){
+    var detail = document.getElementById("detailsStory");
+    detail.innerHTML = "";
+    detail = document.getElementById("detailsSprint");
+    detail.innerHTML = "";
+    detail = document.getElementById("detailsTask");
+    detail.innerHTML = "";
+}
+
 function showFormToAddNewSprint(){
 
     var divaddnewsprint = document.getElementById("divaddnewsprint");
@@ -158,20 +168,41 @@ function getListStoriesWithoutSprint() {
 //Efface une story selon son id
 function effacerStoryById( idStory )
 {
-    $.ajax({
-
-        url: '/api/story/delete/'+idStory,
-        type: 'DELETE',
-        headers: {"Accept": "application/json", "Content-Type": "application/json"},
-        success: function (data) {
-            $("#storyId"+idStory).hide(500);
-            toastr.success("Story "+idStory+" deleted.");
+    bootbox.confirm({
+        message: "Would you really want to delete story #"+idStory+"?",
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
         },
-        error: function (resultat, statut, erreur) {
-            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
-        }
+        callback: function (result) {
+            if(result)
+            {
+                $.ajax({
+                    url: '/api/story/delete/'+idStory,
+                    type: 'DELETE',
+                    headers: {"Accept": "application/json", "Content-Type": "application/json"},
+                    success: function (data) {
+                        $("#storyId"+idStory).hide(500);
+                        toastr.success("Story "+idStory+" has been deleted.");
+                        var detail = document.getElementById("detailsStory");
+                        detail.innerHTML = "";
+                    },
+                    error: function (resultat, statut, erreur) {
+                        toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+                    }
 
+                });
+            }
+        }
     });
+
+
 }
 
 function modifierStoryById(idStory, idSprint)
@@ -244,7 +275,7 @@ function addNewStory(obj){
     var newStory = obj;
 
     var nb_sprint = document.getElementById("divlistsprint").getElementsByClassName("sprint").length;
-    //alert(nb_sprint);
+
 
     for(var i = 1; i <= nb_sprint; i++){
         if(document.getElementById('divaddnewstory' + i) && document.getElementById('divaddnewstory' + i) != divaddnewstory){
@@ -329,18 +360,38 @@ function creerSprintDansProject( idProject )
 }
 function deleteSprintById( idSprint )
 {
-    $.ajax({
-        url: '/api/sprint/delete/'+idSprint,
-        type: 'DELETE',
-        headers: {"Accept": "application/json", "Content-Type": "application/json"},
-        success: function (data) {
-            toastr.success("Sprint #"+idSprint+" has been deleted");
-            $("#sprintId"+idSprint).hide(500);
-        },
-        error: function (resultat, statut, erreur) {
-            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
-        }
 
+    bootbox.confirm({
+        message: "Would you really want to delete sprint #"+idSprint+"?",
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if(result)
+            {
+                $.ajax({
+                    url: '/api/sprint/delete/'+idSprint,
+                    type: 'DELETE',
+                    headers: {"Accept": "application/json", "Content-Type": "application/json"},
+                    success: function (data) {
+                        toastr.success("Sprint #"+idSprint+" has been deleted");
+                        $("#sprintId"+idSprint).hide(500);
+                        hideDetails();
+                    },
+                    error: function (resultat, statut, erreur) {
+                        toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+                    }
+
+                });
+            }
+        }
     });
 }
 ////En construction////

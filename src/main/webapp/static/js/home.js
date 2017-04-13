@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    getListProjects();
     $("#createNewProject").click(function () {
 
         if($("#newprojectname").val()!='') {
@@ -15,6 +15,8 @@ $(document).ready(function () {
                     getListProjects();
                     //getProjectsListMenu();
                     toastr.success(data.nom+" added");
+                    $("#newprojectname").val("");
+                    $("#newprojectdescription").val("");
                 },
                 error: function (resultat, statut, erreur) {
                     toastr.error("An error occurred. This project may already exists. (" + statut + " - " + erreur + ")");
@@ -38,14 +40,16 @@ $(document).ready(function () {
                     $.each(data, function (key, val) {
 
                         html +=
-                            "<div class='row'>" +
+                            "<div class='row' id='projectId"+val.id+"'>" +
                             "<div class='col-sm-3'></div>" +
                             "<div class='col-sm-6 list-group'>" +
                             "<a href=project/" + val.id + " data-ajax='false' class='list-group-item'>" +
                             "<div class='dsc'>" + val.nom + "</div>" +
                             "</a>" +
                             "</div>" +
-                            "<div class='col-sm-3'></div>" +
+                            "<div class='col-sm-3 list-group'>" +
+                            "<div class='col-sm-3'><button type='button' class='btnremove' onclick='deleteProjectById("+val.id+")'><span class='glyremove glyphicon glyphicon-remove-sign'></span></button></div>"+
+                            "</div>"+
                             "</div>";
                     });
                     $("#projectNone").hide();
@@ -74,6 +78,44 @@ function addNewProject() {
 
     formaddnewproject.style.display = "block";
     newProject.style.display = "none";
+}
+
+
+//Efface un projet d'id idProject
+function deleteProjectById( idProject)
+{
+    bootbox.confirm({
+        message: "Would you really want to delete project #"+idProject+"?",
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if(result)
+            {
+                $.ajax({
+                    url: '/api/project/delete/'+idProject,
+                    type: 'DELETE',
+                    headers: {"Accept": "application/json", "Content-Type": "application/json"},
+                    success: function (data) {
+                        toastr.success("Project #"+idProject+" has been deleted");
+                        $("#projectId"+idProject).hide(500);
+                    },
+                    error: function (resultat, statut, erreur) {
+                        toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+                    }
+
+                });
+            }
+        }
+    });
+
 }
 
 

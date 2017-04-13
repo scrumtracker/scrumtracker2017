@@ -61,68 +61,7 @@ public class ApiDebugController {
     @RequestMapping(value = "/api/debug", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public String debug()
     {
-        /*
-        if(null!=userService.findOneByPseudo("Mr Motte"))
-            return "DB déjà peuplée";
-         */
-        //CREATION DES ENTITES
-        User testeur = new User();
-        testeur.setNom("Teur");
-        testeur.setPrenom("Tess");
-        testeur.setEmail("tess.teur@da.fr");
-        testeur.setPassword("LetMeIn");
-        testeur.setPseudo("Mr Motte");
-
-        Task tache = new Task();
-        tache.setNom("Créer une tâche via Controlleur "+Instant.now());
-        tache.setStatus(StoryStatus.TODO);
-        tache.setDescription("Je suis la description de la tâche");
-        tache.setTempsDeCharge(new Long(2));
-        tache.setUniteTempsDeCharge(UniteTemps.h);
-
-        Story story = new Story();
-        story.setNom("Je suis une Story "+Instant.now());
-        story.setDescription("Une story correspond à une fonctionnalité attendue par le client");
-        story.setStatus(StoryStatus.DOING);
-
-        Story story2 = new Story();
-        story2.setNom("Je suis une Story finished"+Instant.now());
-        story2.setDescription("Une story correspond à une fonctionnalité attendue par le client");
-        story2.setStatus(StoryStatus.DONE);
-
-        Sprint sprint = new Sprint();
-        sprint.setNom("Sprint test de "+Instant.now());
-        sprint.setDescription("Description du sprint");
-        sprint.setDateDebut(new Timestamp(System.currentTimeMillis()));
-        sprint.setDateFin(new Timestamp(System.currentTimeMillis()));
-
-        Project projet = new Project();
-        projet.setNom("Projet test du "+ Instant.now());
-        projet.setDescription("Description du "+projet.getNom());
-
-        //AJOUT DES LIAISONS INTER-ENTITES
-        projet.addSprint(sprint);
-        sprint.setSprintProject(projet);
-
-        story.setStorySprint(sprint);
-        story2.setStorySprint(sprint);
-        sprint.addStory(story);
-        sprint.addStory(story2);
-
-        story.addTask(tache);
-        tache.setTaskStory(story);
-
-        tache.addUser(testeur);
-        testeur.addTask(tache);
-
-
-        projet = projectService.save(projet);
-        sprint = sprintService.save(sprint);
-        story = storyService.save(story);
-        story2 = storyService.save(story2);
-        tache = taskService.save(tache);
-        testeur = userService.save(testeur);
-
+        mainService.populate();
         return "DB peuplée";
     }
 

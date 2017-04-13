@@ -84,8 +84,9 @@
                 <p class="h2 text-left" th:text="#{sprint.list}"></p>
                 <div th:each="sprint:${sprintsOfProjectWithStories}" class="sprint" th:id="${'sprintId'+sprint.id}">
                     <div class="list-group-item storyinsprint" th:onclick="'detailSprint('+${sprint.id}+',this)'">
-                        <div class="padd2">
+                        <div class="">
                             <span class="bold" th:text="${sprint.nom}"></span>
+                            <span class="pull-right"><a th:href="@{'/sprint/'+${sprint.id}}"><span class="glybtnleft glyphicon glyphicon-eye-open"></span></a></span>
                         </div>
                         <button class="btn btn-xs btn-default btnseetasks hiddenElement" onclick="location.href='sprints'">
                             <span th:text="#{see.tasks}"></span>
