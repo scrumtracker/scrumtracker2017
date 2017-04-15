@@ -186,9 +186,27 @@ public class ApiStoryController {
     @RequestMapping(value = "/api/story/sprint/null", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
     public List<Story> showStoriesWithNoSprint()
     {
-        LOGGER.debug("ApiController - showStoriesWithNoSprint");
+        LOGGER.debug("ApiStoryController - showStoriesWithNoSprint");
         List<Story> stories = storyService.findAllWithoutSprint();
         return stories;
     }
+
+    //Détache une story de son sprint
+    @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/story/{idStory}/detachFromSprint", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Story> detachStoryFromSprint(@PathVariable("idStory") Long idStory)
+    {
+        LOGGER.debug("ApiStoryController - detachStoryFromSprint");
+        Story story = null;
+        if(storyService.exists(idStory))
+        {
+            story = storyService.findOneById(idStory);
+            story.setStorySprint(null);
+            story = storyService.save(story);
+            return new ResponseEntity<Story>(story, HttpStatus.OK);
+        }
+        return new ResponseEntity<Story>(story, HttpStatus.NOT_FOUND);
+    }
+
 
 }
