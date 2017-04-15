@@ -312,20 +312,39 @@ function addNewStory(obj){
 }
 
 //bouton annuler qui cache les div d'ajout
-function hideNewStory (){
+function hideNewStory() {
 
     var divaddnewsprint = document.getElementById("divaddnewsprint");
     var newSprint = document.getElementById("newSprint");
     var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
     var newStoryUnaffected = document.getElementById("newStoryUnaffected");
 
-    if(newStoryUnaffected.style.display == "block"){
+    if(divaddnewsprint.style.display = "block"){
+        divaddnewsprint.style.display = "none";
+        newSprint.style.display = "block";
+    }
+    if(divaddnewstoryUnaffected.style.display = "bock"){
         divaddnewstoryUnaffected.style.display = "none";
         newStoryUnaffected.style.display = "block";
     }
-    if(newSprint.style.display == "block"){
-        divaddnewsprint.style.display = "none";
-        newSprint.style.display = "block";
+}
+
+function hideNewStorySprint(){
+
+    var divaddnewstory = obj.nextSibling.nextSibling;
+    var newStory = obj;
+    var nb_sprint = document.getElementById("divlistsprint").getElementsByClassName("sprint").length;
+
+    for(var i = 1; i <= nb_sprint; i++){
+        if(document.getElementById('divaddnewstory' + i) && document.getElementById('divaddnewstory' + i) != divaddnewstory){
+            document.getElementById('divaddnewstory' + i).style.display = "block";
+            document.getElementById('divaddnewstory' + i).previousSibling.previousSibling.style.display = "none";
+        }
+    }
+
+    if(divaddnewstory.style.display == "block"){
+        divaddnewstory.style.display = "none";
+        newStory.style.display = "block";
     }
 }
 

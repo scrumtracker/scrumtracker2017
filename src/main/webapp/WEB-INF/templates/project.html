@@ -142,7 +142,7 @@
                                         </div>
                                         <button style="display: none" th:id="${'buttonEnregistrerModif'+sprint.id}" type="button" class="btn-sm btn btn-primary pull-right"><span th:text="#{modif.story}"></span></button>
                                         <button th:id="${'buttonEnregistrerStory'+sprint.id}" type="button" class="btn-sm btn btn-primary pull-right" th:onclick="${'creerStoryDansSprint('+sprint.id+')'}"><span th:text="#{create.story}"></span></button>
-                                        <button id="cancelCreateNewStory" type="button" class="btn-sm btn btn-primary pull-right boutonAnnuler"><span th:text="#{cancel}"></span></button>
+                                        <button id="cancelCreateNewStory" type="button" class="btn-sm btn btn-primary pull-right boutonAnnuler" onclick="hideNewStory()"><span th:text="#{cancel}"></span></button>
                                     </div>
 
                                 </div>
@@ -219,11 +219,11 @@
                         <button style="display: none" id="updateNewStory" type="button" class="btn-md btn btn-primary pull-right">
                             <span th:text="#{modif.story}"></span>
                         </button>
-                        <button id="cancelCreateNewStoryUnafected" type="button" class="btn-md btn btn-primary pull-right">
-                            <span th:text="#{cancel}"></span>
-                        </button>
-                        <button id="createNewStory" type="button" class="btn-md btn btn-primary">
+                        <button id="createNewStory" type="button" class="btn-md btn btn-primary pull-right">
                             <span th:text="#{create.story}"></span>
+                        </button>
+                        <button id="cancelCreateNewStoryUnafected" type="button" class="btn-md btn btn-primary pull-right" onclick="hideNewStory()">
+                            <span th:text="#{cancel}"></span>
                         </button>
                     </div>
                 </div>
