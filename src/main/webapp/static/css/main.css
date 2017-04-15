@@ -45,3 +45,13 @@
 	padding: 0px;
 	background: none;
 }
+
+.minHeight28
+{
+	min-height: 28px;
+}
+
+.minHeight50
+{
+	min-height: 50px;
+}

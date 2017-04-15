@@ -146,22 +146,22 @@ public class ApiSprintController {
 
 
     @JsonView(JsonViews.Basique.class)
-    @RequestMapping(value = "/api/sprint/add/project/{idProject}", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<Sprint> sendSprintWithProjectId(@PathVariable Long idProject, @RequestBody Sprint sprint)
+    @RequestMapping(value = "/api/sprint/{idSprint}/story/{idStory}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Sprint> linkSprintIdWithStoryId(@PathVariable Long idSprint, @PathVariable Long idStory)
     {
-        LOGGER.debug("ApiController - sendSprintWithProjectId");
-        Project project = projectService.findOneById(idProject);
-        if(null==sprint)
+        LOGGER.debug("ApiController - linkSprintIdWithStoryId");
+
+        Story story = storyService.findOneByIdWithAll(idStory);
+        Sprint sprint = sprintService.findOneByIdWithAll(idSprint);
+
+        if(null==sprint ||null ==story)
         {
-            LOGGER.debug("ApiController - sendSprintWithProjectId - Project inexistant");
             return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
         }
 
-        sprint = sprintService.save(sprint);
-        sprint.setSprintProject(project);
-        sprint = sprintService.save(sprint);
-
-        LOGGER.debug("ApiController - sendSprintWithProjectId - Sprint créé");
+        story.setStorySprint(sprint);
+        story = storyService.save(story);
+        sprint = sprintService.findOneByIdWithAll(idSprint);
         return new ResponseEntity<Sprint>(sprint, HttpStatus.CREATED);
     }
 

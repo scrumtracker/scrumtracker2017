@@ -139,13 +139,14 @@ function addNewTaskInStory(idStory){
 //Déplacer une tâche entre les statuts TODO/DOING/DONE :
 function dragDrop( idStory ){
     var dg = dragula([document.getElementById("todo"+idStory), document.getElementById("doing"+idStory), document.getElementById("done"+idStory)],
-        {
-            revertOnSpill: true
-        });
+            {
+                revertOnSpill: true
+            }
+        );
     dg.on('drop', function(el)
     {
        var nouveauConteneur = $(el).parent().attr('id').toString().toLowerCase();
-       var idTask = $(el).attr('id');
+       var idTask = $(el).attr('id').toString().toLowerCase();
        var status;
        var idSprint;
        if(nouveauConteneur.includes("todo"))

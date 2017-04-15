@@ -92,8 +92,8 @@
                             <span th:text="#{see.tasks}"></span>
                             <span class="glybtnleft glyphicon glyphicon-chevron-right"></span>
                         </button>
-						<div id="sprinthidden">
-	                        <div class="listStoryInSprint">
+						<div id="sprinthidden" class="sprintContainer">
+	                        <div th:id="${'listStoryInSprint'+sprint.id}" class="minHeight28">
 	                            <div th:each="story:${sprint.sprintStories}" th:id="${'storyId'+story.id}">
 	                                <div th:onclick="${'showStory('+story.id+')'}" class="padd mouseLink divStory">
 	                                    <span th:class="${story.status}" th:text="${story.status}"></span>
