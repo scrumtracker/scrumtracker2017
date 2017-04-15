@@ -209,24 +209,38 @@ function deleteTaskById(idTask){
 }
 
 
+//EDITION DUNE TASK ICI
+//TODO
 function editTaskById( idTask)
 {
-    var dialog = bootbox.dialog({
+
+        var dialog = bootbox.dialog({
         title: 'Edit task #'+idTask,
-        message: '<p>TODO INPUTs HERE</p>',
+        message:
+            '<div>'+
+                '<div class="form-group">'+
+                    '<label for="bb_edit_name">Name:</label>'+
+                    '<input type="text" class="form-control" id="bb_edit_name" value="">'+
+                '</div>'+
+                '<div class="form-group">'+
+                    '<label for="bb_edit_description">Description:</label>'+
+                    '<textarea class="form-control" rows="5" id="bb_edit_description" value=""></textarea>'+
+                '</div>'+
+            '</div>'
+        ,
         buttons: {
             confirm: {
-                label: 'Edit',
+                label: 'Save',
                 className: 'btn-success',
                 callback: function () {
-                    alert('callback edit');
+
                 }
             },
             cancel: {
                 label: 'Cancel',
                 className: 'btn-danger',
                 callback: function () {
-                    alert('callback cancel');
+
                 }
             }
         }
