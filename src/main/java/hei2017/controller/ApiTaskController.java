@@ -172,4 +172,38 @@ public class ApiTaskController {
         Set<Task> tasks = taskService.findByTaskStory(idStory);
         return tasks;
     }
+
+    //Modifie le status d'une task
+    @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/task/{idTask}/update/status", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Task> updateTaskStatus(@PathVariable("idTask") Long idTask,@RequestBody String status)
+    {
+        LOGGER.debug("ApiController - updateTaskStatus");
+
+        Task task = null;
+        if(taskService.exists(idTask))
+        {
+            task = taskService.findOneById(idTask);
+            switch(status)
+            {
+                case "todo":
+                    task.setStatus(StoryStatus.TODO);
+                    break;
+                case "doing":
+                    task.setStatus(StoryStatus.DOING);
+                    break;
+                case "done":
+                    task.setStatus(StoryStatus.DONE);
+                    break;
+                default:
+                    return new ResponseEntity<Task>(task, HttpStatus.NO_CONTENT);
+            }
+            // TODO REVENIR ICI
+            task = taskService.save(task);
+            return new ResponseEntity<Task>(task, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
+    }
+
+
 }
