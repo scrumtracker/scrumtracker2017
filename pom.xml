@@ -141,7 +141,7 @@
 			<id>heroku</id>
 			<activation>
 				<property>
-					<name>env.DYNO</name>
+					<name>heroku</name>
 				</property>
 			</activation>
 			<!--<properties>
