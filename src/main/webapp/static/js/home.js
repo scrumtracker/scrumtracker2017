@@ -28,7 +28,6 @@ $(document).ready(function () {
         }
     });
 
-
     function getListProjects() {
         $.getJSON('/api/project',
             function (data) {
@@ -48,7 +47,8 @@ $(document).ready(function () {
                             "</a>" +
                             "</div>" +
                             "<div class='col-sm-3 list-group'>" +
-                            "<div class='col-sm-3'><button type='button' class='btnremove' onclick='deleteProjectById("+val.id+")'><span class='glyremove glyphicon glyphicon-remove-sign'></span></button></div>"+
+                            "<div class='col-sm-3'><button type='button' class='btnremove' onclick='editProjectById("+val.id+")'><span class='glyremove glyphicon glyphicon-edit'></span></button>"+
+                            "<button type='button' class='btnremove' onclick='deleteProjectById("+val.id+")'><span class='glyremove glyphicon glyphicon-remove-sign'></span></button></div>"+
                             "</div>"+
                             "</div>";
                     });
@@ -80,9 +80,18 @@ function addNewProject() {
     newProject.style.display = "none";
 }
 
+function hideNewProject(){
+
+    var formaddnewproject = document.getElementById("formaddnewproject");
+    var newProject = document.getElementById("newProject");
+
+    newProject.style.display = "inline-block";
+    formaddnewproject.style.display = "none";
+}
+
 
 //Efface un projet d'id idProject
-function deleteProjectById( idProject)
+function deleteProjectById(idProject)
 {
     bootbox.confirm({
         message: "Would you really want to delete project #"+idProject+"?",

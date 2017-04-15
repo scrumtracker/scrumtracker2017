@@ -44,6 +44,9 @@
                     <textarea id="newprojectdescription" class="form-control" name="newprojecdescription"></textarea>
                 </div>
             </div>
+            <button id="cancelNewProject" type="button" class="btn-md btn btn-primary boutonAnnuler" onclick="hideNewProject()">
+            <span th:text="#{cancel}"></span>
+        </button>
             <button id="createNewProject" type="button" class="btn-md btn btn-primary">
                 <span th:text="#{project.create}"></span>
             </button>

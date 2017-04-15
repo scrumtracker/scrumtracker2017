@@ -311,6 +311,23 @@ function addNewStory(obj){
     }
 }
 
+//bouton annuler qui cache les div d'ajout
+function hideNewStory (){
+
+    var divaddnewsprint = document.getElementById("divaddnewsprint");
+    var newSprint = document.getElementById("newSprint");
+    var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
+    var newStoryUnaffected = document.getElementById("newStoryUnaffected");
+
+    if(newStoryUnaffected.style.display == "block"){
+        divaddnewstoryUnaffected.style.display = "none";
+        newStoryUnaffected.style.display = "block";
+    }
+    if(newSprint.style.display == "block"){
+        divaddnewsprint.style.display = "none";
+        newSprint.style.display = "block";
+    }
+}
 
 //Créé une story reliée à un sprint
 function creerStoryDansSprint( idSprint )
@@ -335,6 +352,7 @@ function creerStoryDansSprint( idSprint )
 
     });
 }
+
 
 //Créé un sprint relié à un project
 function creerSprintDansProject( idProject )
@@ -407,3 +425,5 @@ window.onload = function() {
         }
     });
 }
+
+

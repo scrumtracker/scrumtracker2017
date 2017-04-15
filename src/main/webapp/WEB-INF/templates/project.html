@@ -74,6 +74,7 @@
                             <div class="col-sm-6"><input id="newSprintHeureFin" type="time" class="form-control" name="newSprintHeureFin" value="23:59"></div>
                         </div>
                     </div>
+                    <button id="cancelCreateNewSprint" type="button" class="btn-sm btn btn-primary boutonAnnuler" onclick="hideNewStory()"><span th:text="#{cancel}"></span></button>
                     <button id="createnewSprint" type="button" class="btn-md btn btn-primary" th:onclick="${'creerSprintDansProject('+project.id+')'}">
                         <span th:text="#{create.sprint}"></span>
                     </button>
@@ -141,6 +142,7 @@
                                         </div>
                                         <button style="display: none" th:id="${'buttonEnregistrerModif'+sprint.id}" type="button" class="btn-sm btn btn-primary pull-right"><span th:text="#{modif.story}"></span></button>
                                         <button th:id="${'buttonEnregistrerStory'+sprint.id}" type="button" class="btn-sm btn btn-primary pull-right" th:onclick="${'creerStoryDansSprint('+sprint.id+')'}"><span th:text="#{create.story}"></span></button>
+                                        <button id="cancelCreateNewStory" type="button" class="btn-sm btn btn-primary pull-right boutonAnnuler"><span th:text="#{cancel}"></span></button>
                                     </div>
 
                                 </div>
@@ -214,8 +216,11 @@
                                 </option>
                             </select>
                         </div>
-                        <button style="display: none" id="updateNewStory" type="button" class="btn-md btn btn-primary">
+                        <button style="display: none" id="updateNewStory" type="button" class="btn-md btn btn-primary pull-right">
                             <span th:text="#{modif.story}"></span>
+                        </button>
+                        <button id="cancelCreateNewStoryUnafected" type="button" class="btn-md btn btn-primary pull-right">
+                            <span th:text="#{cancel}"></span>
                         </button>
                         <button id="createNewStory" type="button" class="btn-md btn btn-primary">
                             <span th:text="#{create.story}"></span>
