@@ -114,7 +114,7 @@
 		<profile>
 			<id>local</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
 				<env>local</env>
@@ -139,6 +139,11 @@
 		</profile>
 		<profile>
 			<id>heroku</id>
+			<activation>
+				<property>
+					<name>env.DYNO</name>
+				</property>
+			</activation>
 			<properties>
 				<env>heroku</env>
 			</properties>
