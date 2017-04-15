@@ -188,24 +188,45 @@ function dragDrop( idStory ){
 
 //Supprimer une tâche (id de la tâche en paramètre) :
 function deleteTaskById(idTask){
-    $.ajax({
-        url: '/api/task/delete/'+idTask,
-        type: 'DELETE',
-        headers: {"Accept": "application/json", "Content-Type": "application/json"},
-        success: function (data) {
 
-            $("#btnedit").hide(500);
-            $("#taskDetails_nom").text("");
-            $("#taskDetails_dateCreation").text("");
-            $("#taskDetails_totalHoursOfWork").text("");
-            $("#taskDetails_description").text("");
-            toastr.success(data.nom + " has been successfully deleted");
-            $("#"+idTask).hide(500);
+    bootbox.confirm({
+        message: "Would you really want to delete task #" + idTask + "?",
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
         },
-        error: function (resultat, statut, erreur) {
-            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        callback: function (result) {
+
+            if(result){
+                $.ajax({
+                    url: '/api/task/delete/'+idTask,
+                    type: 'DELETE',
+                    headers: {"Accept": "application/json", "Content-Type": "application/json"},
+                    success: function (data) {
+
+                        $("#btnedit").hide(500);
+                        $("#taskDetails_nom").text("");
+                        $("#taskDetails_dateCreation").text("");
+                        $("#taskDetails_totalHoursOfWork").text("");
+                        $("#taskDetails_description").text("");
+                        toastr.success(data.nom + " has been successfully deleted");
+                        $("#"+idTask).hide(500);
+                    },
+                    error: function (resultat, statut, erreur) {
+                        toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+                    }
+                });
+            }
+
         }
     });
+
 }
 
 

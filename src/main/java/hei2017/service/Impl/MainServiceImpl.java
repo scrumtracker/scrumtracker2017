@@ -131,7 +131,9 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public void populate() {
-
+        int nbProject = ThreadLocalRandom.current().nextInt(1, 5);
+        for(int h=0; h<nbProject;h++)
+        {
         Project projet = new Project();
         projet.setNom("Project "+giveName());
         projet.setDescription(giveDescription());
@@ -139,7 +141,7 @@ public class MainServiceImpl implements MainService {
 
         projet = projectDAO.save(projet);
 
-        int nbSprint = ThreadLocalRandom.current().nextInt(1, 5);
+        int nbSprint = ThreadLocalRandom.current().nextInt(2, 6);
         for(int i =0; i<nbSprint; i++)
         {
             Sprint sprint = new Sprint();
@@ -152,7 +154,7 @@ public class MainServiceImpl implements MainService {
 
             sprint = sprintDAO.save(sprint);
 
-            int nbStory = ThreadLocalRandom.current().nextInt(1, 10);
+            int nbStory = ThreadLocalRandom.current().nextInt(2, 10);
             for(int j=0;j<nbStory;j++)
             {
                 Story story = new Story();
@@ -168,7 +170,7 @@ public class MainServiceImpl implements MainService {
                 story.setStorySprint(sprint);
 
                 story = storyDAO.save(story);
-                int nbTask = ThreadLocalRandom.current().nextInt(1, 10);
+                int nbTask = ThreadLocalRandom.current().nextInt(3, 10);
                 for(int k=0; k<nbTask;k++)
                 {
                     Task task = new Task();
@@ -185,7 +187,7 @@ public class MainServiceImpl implements MainService {
                 }
             }
         }
-
+        }
 
     }
 
