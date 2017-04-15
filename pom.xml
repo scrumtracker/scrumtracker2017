@@ -139,14 +139,9 @@
 		</profile>
 		<profile>
 			<id>heroku</id>
-			<activation>
-				<property>
-					<name>heroku</name>
-				</property>
-			</activation>
-			<!--<properties>
+			<properties>
 				<env>heroku</env>
-			</properties>-->
+			</properties>
 
 			<dependencies>
 
