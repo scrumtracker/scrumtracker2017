@@ -139,9 +139,14 @@
 		</profile>
 		<profile>
 			<id>heroku</id>
-			<properties>
+			<activation>
+				<property>
+					<name>env.DYNO</name>
+				</property>
+			</activation>
+			<!--<properties>
 				<env>heroku</env>
-			</properties>
+			</properties>-->
 
 			<dependencies>
 
