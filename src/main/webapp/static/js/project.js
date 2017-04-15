@@ -39,6 +39,9 @@ $(document).ready(function () {
 
     });
 
+    //Partie DnD
+    dragDropProject();
+
 
     //fin document . ready
 });
@@ -431,17 +434,34 @@ function deleteSprintById( idSprint )
         }
     });
 }
-////En construction////
 
-window.onload = function() {
+function dragDropProject()
+{
+    //J'ai saigné du nez en écrivant cette ligne.
+    var dg = dragula( $(".sprintContainer").children().map(function(){return document.getElementById(this.id)}).toArray(), function() {
+        revertOnSpill: true
+    });
 
-    var containers = $('.listStoryInSprint').toArray();
-    containers.concat($('#divliststory').toArray());
+    dg.on('drop', function(el){
+        var idSprint = $(el).parent().attr('id').toString().toLowerCase().replace("liststoryinsprint","");
+        var idStory = $(el).attr('id').toString().toLowerCase().replace("storyid","");
 
-    dragula([document.getElementById('divliststory'),containers], {
-        isContainer: function (el) {
-            return el.classList.contains('listStoryInSprint');
+        if(null!=idSprint && null!=idStory)
+        {
+            $.ajax({
+                url: '/api/sprint/'+idSprint+'/story/'+idStory,
+                type: 'POST',
+                headers: {"Accept": "application/json", "Content-Type": "application/json"},
+                success: function (data) {
+                    //RAS pour ne pas spammer
+                },
+                error: function (resultat, statut, erreur) {
+                    toastr.error("An error occured while linking Sprint #"+idSprint+" & Story #"+idStory+". <br/>(" + statut + " - " + erreur + ").");
+                }
+
+            });
         }
+
     });
 }
 
