@@ -47,7 +47,7 @@ public class StoryServiceImpl implements StoryService
             Set<Task> storyTasks = taskDAO.findByTaskStoryId(story.getId());
             story.setStoryTasks(storyTasks);
 
-            Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId()).iterator().next();
+            Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId());
             story.setStorySprint(storySprint);
         }
         return stories;
@@ -134,7 +134,7 @@ public class StoryServiceImpl implements StoryService
             Set<Task> storyTasks = taskDAO.findByTaskStoryId(story.getId());
             story.setStoryTasks(storyTasks);
 
-            Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId()).iterator().next();
+            Sprint storySprint = sprintDAO.findBySprintStoriesId(story.getId());
             story.setStorySprint(storySprint);
         }
         return story;
