@@ -89,6 +89,29 @@ function showFormAddNewTask(obj){
     }
 }
 
+//bouton annuler
+function hideNewTask(id){
+    var divaddnewtask = document.getElementById('divaddnewtask'+id);
+    var buttonAjouterTask = document.getElementById('buttonAjouterTask'+id);
+
+    if(divaddnewtask.style.display == "block"){
+        divaddnewtask.style.display = "none";
+        buttonAjouterTask.style.display = "block";
+    }
+}
+
+function hideNewStory() {
+
+    var divaddnewstory = document.getElementById("divaddnewstory");
+    var newStory = document.getElementById("newStory");
+
+
+    if(divaddnewstory.style.display == "block"){
+        divaddnewstory.style.display = "none";
+        newStory.style.display = "block";
+    }
+}
+
 //Créer une story reliée au sprint de la page sprint actuelle :
 function creerStoryDansSprint( idSprint )
 {

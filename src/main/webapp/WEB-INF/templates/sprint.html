@@ -114,11 +114,11 @@
 
                         <div class="col-sm-9">
                             <div>
-                                <button type="button" class="newTask btn-sm btn btn-primary" onclick="showFormAddNewTask(this)">
+                                <button th:id="${'buttonAjouterTask'+story.id}" type="button" class="newTask btn-sm btn btn-primary" onclick="showFormAddNewTask(this)">
                                     <span class="glybtn glyphicon glyphicon-plus"></span>
                                     <span th:text="#{new.task}"></span>
                                 </button>
-                                <div class="divaddnewtask" id="divaddnewtask">
+                                <div class="divaddnewtask" th:id="${'divaddnewtask'+story.id}">
                                     <div class="form-group">
                                         <label th:for="${'newtaskname'+story.id}">Task name</label>
                                         <input th:id="${'newtaskname'+story.id}" type="text" class="form-control" th:name="${'newtaskname'+story.id}"
@@ -133,6 +133,7 @@
                                         <label th:for="${'newtasktotalhoursofwork'+story.id}" title="">Total hours of work</label>
                                         <input type="number" th:id="${'newtasktotalhoursofwork'+story.id}" min="0" max="99" class="form-control" th:name="${'newtasktotalhoursofwork'+story.id}">
                                     </div>
+                                    <button id="cancelCreateNewStory" type="button" class="btn-sm btn btn-primary boutonAnnuler" th:onclick="${'hideNewTask('+story.id+')'}"><span th:text="#{cancel}"></span></button>
                                     <button type="button" class="btn-sm btn btn-primary" th:id="${'buttonAjouterTask'+story.id}" th:onclick="${'addNewTaskInStory('+story.id+')'}"><span
                                             th:text="#{create.task}"></span></button>
                                 </div>
@@ -173,6 +174,7 @@
                                     <input type="number" th:id="${'newstorypoints'+sprint.id}" min="1" max="99" class="form-control" th:name="${'newstorypoints'+sprint.id}">
                                 </div>
                             </div>
+                            <button id="cancelCreate" type="button" class="btn-sm btn btn-primary boutonAnnuler" onclick="hideNewStory()"><span th:text="#{cancel}"></span></button>
                             <button type="button" class="btn-md btn btn-primary" th:onclick="${'creerStoryDansSprint('+sprint.id+')'}"><span th:text="#{create.story}"></span>
                             </button>
                         </div>
