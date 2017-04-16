@@ -37,4 +37,6 @@ public interface TaskService
     Task save(Task task);
 
     List<Story> findBySprintStoryIdWithTasks(Long idSprint);
+
+    Task updateTask(Long idTask, Task task);
 }
