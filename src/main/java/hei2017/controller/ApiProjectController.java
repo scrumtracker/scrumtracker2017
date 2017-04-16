@@ -1,6 +1,5 @@
 package hei2017.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import hei2017.entity.Project;
 import hei2017.json.JsonViews;
@@ -106,6 +105,17 @@ public class ApiProjectController {
             LOGGER.debug("ApiController - sendProject - Projet déjà existant");
             return new ResponseEntity<Project>(project, HttpStatus.CONFLICT);
         }
+    }
+
+    @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/project/update/{idProject}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Project> updateProject(@PathVariable Long idProject, @RequestBody Project project)
+    {
+        LOGGER.debug("ApiController - updateProject");
+
+        projectService.updateProject(idProject, project);
+        LOGGER.debug("ApiController - updateProject - Project maj");
+        return new ResponseEntity<Project>(project, HttpStatus.ACCEPTED);
     }
 
     @JsonView(JsonViews.Basique.class)

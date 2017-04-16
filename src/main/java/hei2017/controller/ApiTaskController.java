@@ -1,10 +1,8 @@
 package hei2017.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import hei2017.entity.Sprint;
 import hei2017.entity.Story;
 import hei2017.entity.Task;
-import hei2017.entity.User;
 import hei2017.enumeration.StoryStatus;
 import hei2017.json.JsonViews;
 import hei2017.service.*;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.inject.Inject;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -160,6 +157,17 @@ public class ApiTaskController {
             return new ResponseEntity<Task>(task, HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<Task>(task, HttpStatus.NOT_FOUND);
+    }
+
+    @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/task/update/{idTask}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Task> updateTask(@PathVariable Long idTask, @RequestBody Task task)
+    {
+        LOGGER.debug("ApiController - updateTask");
+
+        taskService.updateTask(idTask, task);
+        LOGGER.debug("ApiController - idTask - Task maj");
+        return new ResponseEntity<Task>(task, HttpStatus.ACCEPTED);
     }
 
     //Renvoie toutes les TASKS attachées a la STORY d'id idStory
