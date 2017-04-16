@@ -5,10 +5,7 @@ import hei2017.dao.SprintDAO;
 import hei2017.dao.UserDAO;
 import hei2017.entity.Project;
 import hei2017.entity.Sprint;
-import hei2017.entity.User;
 import hei2017.service.ProjectService;
-import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -91,4 +88,13 @@ public class ProjectServiceImpl implements ProjectService
 
     @Override
     public void deleteOneById(Long id) { projectDAO.delete(id); }
+
+    @Override
+    public Project updateProject(Long idProject, Project project) {
+        Project projectAUpdater = projectDAO.findOneById(idProject);
+        projectAUpdater.setNom(project.getNom());
+        projectAUpdater.setDescription(project.getDescription());
+
+        return projectDAO.save(projectAUpdater);
+    }
 }

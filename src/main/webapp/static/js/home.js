@@ -127,5 +127,40 @@ function deleteProjectById(idProject)
 
 }
 
+function editProjectById(idProject) {
+    addNewProject();
+    $("#modifierNewProject").show();
+    $("#modifierNewProject").attr("onclick", "enregistrerModificationProject("+idProject+")");
+    $("#createNewProject").hide();
+    $.getJSON('/api/project/'+idProject,
+        function (data) {
+            $("#newprojectname").val(data.nom);
+            $("#newprojectdescription").val(data.description);
+        });
+}
+
+function enregistrerModificationProject(idProject) {
+    var project = {};
+    project.nom = $("#newprojectname").val();
+    project.description = $("#newprojectdescription").val();
+
+    if(project.nom != '') {
+        $.ajax({
+            url: '/api/project/update/'+idProject,
+            type: 'POST',
+            headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            data:  JSON.stringify(project),
+            success: function (data) {
+                toastr.success(data.nom + " modifié");
+                document.location.reload();
+            },
+            error: function (resultat, statut, erreur) {
+                toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ")");
+            }
+
+        });
+    }else {toastr.error("Project name is required.");}
+}
+
 
 

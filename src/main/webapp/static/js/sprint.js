@@ -233,7 +233,7 @@ function deleteTaskById(idTask){
 
 //EDITION DUNE TASK ICI
 //TODO
-function editTaskById( idTask)
+function editTaskById(idTask)
 {
 
         var dialog = bootbox.dialog({
@@ -248,6 +248,10 @@ function editTaskById( idTask)
                     '<label for="bb_edit_description">Description:</label>'+
                     '<textarea class="form-control" rows="5" id="bb_edit_description" value=""></textarea>'+
                 '</div>'+
+                '<div class="form-group">'+
+                    '<label for="bb_edit_hours">Amount of Work:</label>'+
+                    '<input type="number" id="bb_edit_hours" min="0" value="" class="form-control"></input>'+
+                '</div>'+
             '</div>'
         ,
         buttons: {
@@ -255,7 +259,7 @@ function editTaskById( idTask)
                 label: 'Save',
                 className: 'btn-success',
                 callback: function () {
-
+                    saveTaskModif(idTask);
                 }
             },
             cancel: {
@@ -266,7 +270,31 @@ function editTaskById( idTask)
                 }
             }
         }
+    });
+    $.getJSON('/api/task/'+idTask,
+        function (data) {
+            $("#bb_edit_name").val(data.nom);
+            $("#bb_edit_description").val(data.description);
+            $("#bb_edit_hours").val(data.tempsDeCharge);
+        });
+}
 
-        
+function saveTaskModif(idTask) {
+    var task = {};
+    task.nom = $("#bb_edit_name").val(data.nom);
+    task.description = $("#bb_edit_description").val(data.description);
+    task.tempsDeCharge = $("#bb_edit_hours").val(data.tempsDeCharge);
+    $.ajax({
+        url: '/api/task/update/'+idTask,
+        type: 'POST',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        data: JSON.stringify(task),
+        success: function (data) {
+            toastr.success(data.nom + " has been successfully updated.");
+            document.location.reload();
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
     });
 }
