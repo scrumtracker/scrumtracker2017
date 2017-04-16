@@ -322,32 +322,23 @@ function hideNewStory() {
     var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
     var newStoryUnaffected = document.getElementById("newStoryUnaffected");
 
-    if(divaddnewsprint.style.display = "block"){
+    if(divaddnewsprint.style.display == "block"){
         divaddnewsprint.style.display = "none";
         newSprint.style.display = "block";
     }
-    if(divaddnewstoryUnaffected.style.display = "bock"){
+    if(divaddnewstoryUnaffected.style.display == "block"){
         divaddnewstoryUnaffected.style.display = "none";
         newStoryUnaffected.style.display = "block";
     }
 }
 
-function hideNewStorySprint(){
+function hideNewStorySprint(id){
+    var idDivSprint = document.getElementById('divaddnewstory'+id);
+    var buttonAjouterStory = document.getElementById('buttonAjouterStory'+id);
 
-    var divaddnewstory = obj.nextSibling.nextSibling;
-    var newStory = obj;
-    var nb_sprint = document.getElementById("divlistsprint").getElementsByClassName("sprint").length;
-
-    for(var i = 1; i <= nb_sprint; i++){
-        if(document.getElementById('divaddnewstory' + i) && document.getElementById('divaddnewstory' + i) != divaddnewstory){
-            document.getElementById('divaddnewstory' + i).style.display = "block";
-            document.getElementById('divaddnewstory' + i).previousSibling.previousSibling.style.display = "none";
-        }
-    }
-
-    if(divaddnewstory.style.display == "block"){
-        divaddnewstory.style.display = "none";
-        newStory.style.display = "block";
+    if(idDivSprint.style.display == "block"){
+        idDivSprint.style.display = "none";
+        buttonAjouterStory.style.display = "block";
     }
 }
 
