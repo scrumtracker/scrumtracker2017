@@ -36,6 +36,7 @@
             <span th:unless="${sprintProject.nom}" th:text="${'P:'+sprintProject.id}"></span>
         </a>
         <p class="h2 text-center" th:text="${sprint.nom}"></p>
+        <p th:if="${sprint.description}" class="text-center" th:text="${sprint.description}"></p>
     </header>
 
     <div id="divcontent" class="row">

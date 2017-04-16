@@ -7,7 +7,6 @@ import hei2017.entity.Project;
 import hei2017.entity.Sprint;
 import hei2017.entity.Story;
 import hei2017.service.SprintService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -108,6 +107,17 @@ public class SprintServiceImpl implements SprintService {
 
     @Override
     public Sprint save(Sprint sprint) { return sprintDAO.save(sprint); }
+
+    @Override
+    public Sprint updateSprint(Long idSPrint, Sprint sprint) {
+        Sprint sprintAUpdater = sprintDAO.findOneById(idSPrint);
+        sprintAUpdater.setNom(sprint.getNom());
+        sprintAUpdater.setDateDebut(sprint.getDateDebut());
+        sprintAUpdater.setDateFin(sprint.getDateFin());
+        sprintAUpdater.setDescription(sprint.getDescription());
+
+        return sprintDAO.save(sprintAUpdater);
+    }
 
     @Override
     public List<Sprint> findByProjectSprintIdWithStories(Long idProject) {
