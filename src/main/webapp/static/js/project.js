@@ -372,6 +372,7 @@ function creerSprintDansProject( idProject )
 {
     var sprint = {};
     sprint.nom = $("#newsprintname").val();
+    sprint.description = $("#newsprintdescription").val();
     sprint.dateDebut = moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x');
     sprint.dateFin = moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x');
     $.ajax({
@@ -472,4 +473,40 @@ function dragDropProject()
     });
 }
 
+function updateSprint(idSprint) {
+    showFormToAddNewSprint();
+    $("#updateNewSprint").show();
+    $("#updateNewSprint").attr("onclick", "enregistrerModificationProject("+idSprint+")");
+    $("#createnewSprint").hide();
+    $.getJSON('/api/sprint/'+idSprint,
+        function (data) {
+            $("#newsprintname").val(data.nom);
+            $("#newsprintdescription").val(data.description);
+            $("#newSprintDateDebut").val(moment(data.dateDebut).format('YYYY-MM-DD HH:mm').split(" ")[0]);
+            $("#newSprintHeureDebut").val(moment(data.dateDebut).format('YYYY-MM-DD HH:mm').split(" ")[1]);
+            $("#newSprintDateFin").val(moment(data.dateFin).format('YYYY-MM-DD HH:mm').split(" ")[0]);
+            $("#newSprintHeureFin").val(moment(data.dateFin).format('YYYY-MM-DD HH:mm').split(" ")[1]);
+        });
+}
 
+function enregistrerModificationProject(idSprint) {
+    var sprint = {};
+    sprint.nom = $("#newsprintname").val();
+    sprint.description = $("#newsprintdescription").val();
+    sprint.dateDebut = moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x');
+    sprint.dateFin = moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x');
+    $.ajax({
+        url: '/api/sprint/update/'+idSprint,
+        type: 'POST',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        data: JSON.stringify(sprint),
+        success: function (data) {
+            toastr.success(data.nom + " has been successfully updated.");
+            document.location.reload();
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
+
+    });
+}

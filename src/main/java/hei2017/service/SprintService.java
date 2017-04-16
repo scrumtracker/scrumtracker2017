@@ -33,4 +33,6 @@ public interface SprintService {
     Sprint save(Sprint sprint);
 
     List<Sprint> findByProjectSprintIdWithStories(Long idProject);
+
+    Sprint updateSprint(Long idSprint, Sprint sprint);
 }

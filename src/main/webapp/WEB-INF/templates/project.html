@@ -58,7 +58,8 @@
                         <input id="newsprintname" type="text" class="form-control" name="newsprintname" maxlength="30">
                     </div>
                     <div class="form-group">
-                        <input id="newsprintprojectid" type="text" class="form-control hidden" name="newsprintname" th:value="${project.id}">
+                        <label for="newsprintdescription">Sprint description</label>
+                        <textarea id="newsprintdescription" rows="3" class="form-control newsprintdescription" name="newsprintdescription"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="newSprintDateDebut">Starting date</label>
@@ -77,6 +78,9 @@
                     <button id="cancelCreateNewSprint" type="button" class="btn-sm btn btn-primary boutonAnnuler" onclick="hideNewStory()"><span th:text="#{cancel}"></span></button>
                     <button id="createnewSprint" type="button" class="btn-md btn btn-primary" th:onclick="${'creerSprintDansProject('+project.id+')'}">
                         <span th:text="#{create.sprint}"></span>
+                    </button>
+                    <button id="updateNewSprint" style="display: none" type="button" class="btn-md btn btn-primary" th:onclick="${'saveUpdateSprint('+project.id+')'}">
+                        <span th:text="#{modif.story}"></span>
                     </button>
                 </div>
             </div>
@@ -154,6 +158,9 @@
                     </div><!--
                         --><div class="deletesprint">
                         <div>
+                            <button type="button" class="btnremove" th:onclick="${'updateSprint('+sprint.id+')'}"><span
+                                    class="glyremove glyphicon glyphicon-edit"></span>
+                            </button>
                             <button type="button" class="btnremove" th:onclick="${'deleteSprintById('+sprint.id+')'}"><span
                                     class="glyremove glyphicon glyphicon-remove-sign"></span>
                             </button>

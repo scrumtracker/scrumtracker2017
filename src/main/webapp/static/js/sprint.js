@@ -281,9 +281,9 @@ function editTaskById(idTask)
 
 function saveTaskModif(idTask) {
     var task = {};
-    task.nom = $("#bb_edit_name").val(data.nom);
-    task.description = $("#bb_edit_description").val(data.description);
-    task.tempsDeCharge = $("#bb_edit_hours").val(data.tempsDeCharge);
+    task.nom = $("#bb_edit_name").val();
+    task.description = $("#bb_edit_description").val();
+    task.tempsDeCharge = $("#bb_edit_hours").val();
     $.ajax({
         url: '/api/task/update/'+idTask,
         type: 'POST',
