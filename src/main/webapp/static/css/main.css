@@ -59,3 +59,12 @@
 {
 	min-height: 50px;
 }
+
+.dropZone
+{
+	border: 2px grey;
+	border-radius: 10px;
+	padding: 10px 5px;
+	background-color: #fafaf0;
+	background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(125,125,125,.5) 10px, rgba(125,125,125,.5) 20px);
+}

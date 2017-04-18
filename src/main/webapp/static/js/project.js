@@ -370,24 +370,29 @@ function creerStoryDansSprint( idSprint )
 //Créé un sprint relié à un project
 function creerSprintDansProject( idProject )
 {
-    var sprint = {};
-    sprint.nom = $("#newsprintname").val();
-    sprint.dateDebut = moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x');
-    sprint.dateFin = moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x');
-    $.ajax({
-        url: '/api/sprint/add/project/'+idProject,
-        type: 'POST',
-        headers: {"Accept": "application/json", "Content-Type": "application/json"},
-        data: JSON.stringify(sprint),
-        success: function (data) {
-            toastr.success(data.nom + " has been successfully added.");
-            document.location.reload();
-        },
-        error: function (resultat, statut, erreur) {
-            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
-        }
+    if($("#newSprintDateDebut").val() <= $("#newSprintDateFin").val()) {
+        var sprint = {};
+        sprint.nom = $("#newsprintname").val();
+        sprint.description = $("#newsprintdescription").val();
+        sprint.dateDebut = moment($("#newSprintDateDebut").val() + "," + $("#newSprintHeureDebut").val(), 'YYYY-MM-DD,HH:mm').format('x');
+        sprint.dateFin = moment($("#newSprintDateFin").val() + "," + $("#newSprintHeureFin").val(), 'YYYY-MM-DD,HH:mm').format('x');
+        $.ajax({
+            url: '/api/sprint/add/project/' + idProject,
+            type: 'POST',
+            headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            data: JSON.stringify(sprint),
+            success: function (data) {
+                toastr.success(data.nom + " has been successfully added.");
+                document.location.reload();
+            },
+            error: function (resultat, statut, erreur) {
+                toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+            }
 
-    });
+        });
+    }else{
+        toastr.error("Error in dates");
+    }
 }
 function deleteSprintById( idSprint )
 {
@@ -472,4 +477,40 @@ function dragDropProject()
     });
 }
 
+function updateSprint(idSprint) {
+    showFormToAddNewSprint();
+    $("#updateNewSprint").show();
+    $("#updateNewSprint").attr("onclick", "enregistrerModificationProject("+idSprint+")");
+    $("#createnewSprint").hide();
+    $.getJSON('/api/sprint/'+idSprint,
+        function (data) {
+            $("#newsprintname").val(data.nom);
+            $("#newsprintdescription").val(data.description);
+            $("#newSprintDateDebut").val(moment(data.dateDebut).format('YYYY-MM-DD HH:mm').split(" ")[0]);
+            $("#newSprintHeureDebut").val(moment(data.dateDebut).format('YYYY-MM-DD HH:mm').split(" ")[1]);
+            $("#newSprintDateFin").val(moment(data.dateFin).format('YYYY-MM-DD HH:mm').split(" ")[0]);
+            $("#newSprintHeureFin").val(moment(data.dateFin).format('YYYY-MM-DD HH:mm').split(" ")[1]);
+        });
+}
 
+function enregistrerModificationProject(idSprint) {
+    var sprint = {};
+    sprint.nom = $("#newsprintname").val();
+    sprint.description = $("#newsprintdescription").val();
+    sprint.dateDebut = moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x');
+    sprint.dateFin = moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x');
+    $.ajax({
+        url: '/api/sprint/update/'+idSprint,
+        type: 'POST',
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
+        data: JSON.stringify(sprint),
+        success: function (data) {
+            toastr.success(data.nom + " has been successfully updated.");
+            document.location.reload();
+        },
+        error: function (resultat, statut, erreur) {
+            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+        }
+
+    });
+}

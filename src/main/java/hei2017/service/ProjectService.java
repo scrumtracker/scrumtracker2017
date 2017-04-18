@@ -31,4 +31,6 @@ public interface ProjectService
     Project findOneByNom(String nom);
 
     Project save(Project project);
+
+    Project updateProject(Long idProject, Project project);
 }

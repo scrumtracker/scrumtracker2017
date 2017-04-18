@@ -45,10 +45,13 @@
                 </div>
             </div>
             <button id="cancelNewProject" type="button" class="btn-md btn btn-primary boutonAnnuler" onclick="hideNewProject()">
-            <span th:text="#{cancel}"></span>
-        </button>
+                <span th:text="#{cancel}"></span>
+            </button>
             <button id="createNewProject" type="button" class="btn-md btn btn-primary">
                 <span th:text="#{project.create}"></span>
+            </button>
+            <button id="modifierNewProject" type="button" class="btn-md btn btn-primary" style="display: none">
+                <span th:text="#{modif.story}"></span>
             </button>
         </div>
     </div>

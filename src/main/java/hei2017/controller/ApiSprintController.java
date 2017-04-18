@@ -4,19 +4,16 @@ import com.fasterxml.jackson.annotation.JsonView;
 import hei2017.entity.Project;
 import hei2017.entity.Sprint;
 import hei2017.entity.Story;
-import hei2017.enumeration.StoryStatus;
 import hei2017.json.JsonViews;
 import hei2017.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.inject.Inject;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -116,6 +113,32 @@ public class ApiSprintController {
     }
 
     @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/sprint/add/project/{idProject}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Sprint> sendSprintLinkedToProject(@RequestBody Sprint sprint, @PathVariable Long idProject)
+    {
+        LOGGER.debug("ApiController - sendSprintLinkedToProject");
+        Project project = projectService.findOneById(idProject);
+        if(project==null)
+            return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
+        sprint.setSprintProject(project);
+        sprintService.save(sprint);
+        LOGGER.debug("ApiController - sendSprintLinkedToProject - Sprint créé et lié à un projet");
+        return new ResponseEntity<Sprint>(sprint, HttpStatus.CREATED);
+
+    }
+
+    @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/sprint/update/{idSprint}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Sprint> updateSprint(@PathVariable Long idSprint, @RequestBody Sprint sprint)
+    {
+        LOGGER.debug("ApiController - updateSprint");
+
+        sprintService.updateSprint(idSprint, sprint);
+        LOGGER.debug("ApiController - updateSprint - Project maj");
+        return new ResponseEntity<Sprint>(sprint, HttpStatus.ACCEPTED);
+    }
+
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/sprint/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<Sprint> deleteSprint(@PathVariable("id") Long id)
     {
@@ -143,6 +166,7 @@ public class ApiSprintController {
         Set<Sprint> sprints = sprintService.findBySprintProject(idProject);
         return sprints;
     }
+
 
 
     @JsonView(JsonViews.Basique.class)

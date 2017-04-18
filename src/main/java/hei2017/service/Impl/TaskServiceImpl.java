@@ -3,19 +3,15 @@ package hei2017.service.Impl;
 import hei2017.dao.StoryDAO;
 import hei2017.dao.TaskDAO;
 import hei2017.dao.UserDAO;
-import hei2017.entity.Sprint;
 import hei2017.entity.Story;
 import hei2017.entity.Task;
 import hei2017.entity.User;
 import hei2017.service.TaskService;
-import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -103,6 +99,16 @@ public class TaskServiceImpl implements TaskService
 
     @Override
     public Boolean exists(String nom) { return null!=taskDAO.findOneByNom(nom); }
+
+    @Override
+    public Task updateTask(Long idTask, Task task) {
+        Task taskAUpdater = taskDAO.findOneById(idTask);
+        taskAUpdater.setNom(task.getNom());
+        taskAUpdater.setDescription(task.getDescription());
+        taskAUpdater.setTempsDeCharge(task.getTempsDeCharge());
+
+        return taskDAO.save(taskAUpdater);
+    }
 
     @Override
     public List<Story> findBySprintStoryIdWithTasks(Long idSprint) {
