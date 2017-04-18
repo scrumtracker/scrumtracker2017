@@ -370,25 +370,29 @@ function creerStoryDansSprint( idSprint )
 //Créé un sprint relié à un project
 function creerSprintDansProject( idProject )
 {
-    var sprint = {};
-    sprint.nom = $("#newsprintname").val();
-    sprint.description = $("#newsprintdescription").val();
-    sprint.dateDebut = moment($("#newSprintDateDebut").val()+","+$("#newSprintHeureDebut").val(),'YYYY-MM-DD,HH:mm').format('x');
-    sprint.dateFin = moment($("#newSprintDateFin").val()+","+$("#newSprintHeureFin").val(),'YYYY-MM-DD,HH:mm').format('x');
-    $.ajax({
-        url: '/api/sprint/add/project/'+idProject,
-        type: 'POST',
-        headers: {"Accept": "application/json", "Content-Type": "application/json"},
-        data: JSON.stringify(sprint),
-        success: function (data) {
-            toastr.success(data.nom + " has been successfully added.");
-            document.location.reload();
-        },
-        error: function (resultat, statut, erreur) {
-            toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
-        }
+    if($("#newSprintDateDebut").val() <= $("#newSprintDateFin").val()) {
+        var sprint = {};
+        sprint.nom = $("#newsprintname").val();
+        sprint.description = $("#newsprintdescription").val();
+        sprint.dateDebut = moment($("#newSprintDateDebut").val() + "," + $("#newSprintHeureDebut").val(), 'YYYY-MM-DD,HH:mm').format('x');
+        sprint.dateFin = moment($("#newSprintDateFin").val() + "," + $("#newSprintHeureFin").val(), 'YYYY-MM-DD,HH:mm').format('x');
+        $.ajax({
+            url: '/api/sprint/add/project/' + idProject,
+            type: 'POST',
+            headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            data: JSON.stringify(sprint),
+            success: function (data) {
+                toastr.success(data.nom + " has been successfully added.");
+                document.location.reload();
+            },
+            error: function (resultat, statut, erreur) {
+                toastr.error("An error occured. <br/>(" + statut + " - " + erreur + ").");
+            }
 
-    });
+        });
+    }else{
+        toastr.error("La date de fin doit être après la date de début");
+    }
 }
 function deleteSprintById( idSprint )
 {
