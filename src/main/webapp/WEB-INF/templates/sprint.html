@@ -175,7 +175,7 @@
                                     <input type="number" th:id="${'newstorypoints'+sprint.id}" min="1" max="99" class="form-control" th:name="${'newstorypoints'+sprint.id}">
                                 </div>
                             </div>
-                            <button id="cancelCreate" type="button" class="btn-sm btn btn-primary boutonAnnuler" onclick="hideNewStory()"><span th:text="#{cancel}"></span></button>
+                            <button id="cancelCreate" type="button" class="btn-md btn btn-primary boutonAnnuler" th:onclick="${'hideNewStory('+sprint.id+')'}"><span th:text="#{cancel}"></span></button>
                             <button type="button" class="btn-md btn btn-primary" th:onclick="${'creerStoryDansSprint('+sprint.id+')'}"><span th:text="#{create.story}"></span>
                             </button>
                         </div>

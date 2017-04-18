@@ -82,9 +82,13 @@ function addNewProject() {
 
 function hideNewProject(){
 
+    var newprojectname = document.getElementById("newprojectname");
+    var newprojectdescription = document.getElementById("newprojectdescription");
     var formaddnewproject = document.getElementById("formaddnewproject");
     var newProject = document.getElementById("newProject");
 
+    newprojectname.value = "";
+    newprojectdescription.value = "";
     newProject.style.display = "inline-block";
     formaddnewproject.style.display = "none";
 }
