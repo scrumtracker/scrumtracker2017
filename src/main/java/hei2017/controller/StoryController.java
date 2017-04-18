@@ -16,23 +16,4 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class StoryController {
 
-    @Inject
-    ProjectService projectService;
-
-    @Inject
-    SprintService sprintService;
-
-    @RequestMapping("/stories")
-    public String goStories(Model model,
-                            HttpServletRequest request,
-                            HttpServletResponse response)
-    {
-        model.addAttribute("isStoryPage", true);
-
-        model.addAttribute("projects", projectService.findAll());
-
-        model.addAttribute("sprints", sprintService.findAll());
-
-        return "stories";
-    }
 }

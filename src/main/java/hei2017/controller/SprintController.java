@@ -1,5 +1,6 @@
 package hei2017.controller;
 
+import hei2017.entity.Project;
 import hei2017.entity.Sprint;
 import hei2017.entity.Story;
 import hei2017.enumeration.StoryStatus;
@@ -53,6 +54,15 @@ public class SprintController {
         model.addAttribute("sprintStories", storyService.findByStorySprintWithTask(idSprint));
 
         model.addAttribute("status", StoryStatus.values());
+
+        Project project = sprintService.findOneById(idSprint).getSprintProject();
+
+        model.addAttribute("currentProject", project);
+
+        Long idProject = project.getId();
+
+        //Sprints du projet
+        model.addAttribute("sprintsOfProjectWithStories", sprintService.findByProjectSprintIdWithStories(idProject));
 
         if(null==sprint)
         {

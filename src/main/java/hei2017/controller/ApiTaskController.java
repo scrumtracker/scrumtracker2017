@@ -100,17 +100,9 @@ public class ApiTaskController {
     public ResponseEntity<Task> sendStory(@RequestBody Task task)
     {
         LOGGER.debug("ApiController - sendTask");
-        if(!taskService.exists(task.getNom()))
-        {
-            taskService.save(task);
-            LOGGER.debug("ApiController - sendTask - Task créé");
-            return new ResponseEntity<Task>(task, HttpStatus.CREATED);
-        }
-        else
-        {
-            LOGGER.debug("ApiController - sendTask - Task déjà existante");
-            return new ResponseEntity<Task>(task, HttpStatus.CONFLICT);
-        }
+        task = taskService.save(task);
+        LOGGER.debug("ApiController - sendTask - Task créé");
+        return new ResponseEntity<Task>(task, HttpStatus.CREATED);
     }
 
     @JsonView(JsonViews.Basique.class)
@@ -151,7 +143,6 @@ public class ApiTaskController {
         if(taskService.exists(id))
         {
             task = taskService.findOneById(id);
-            // TODO REVENIR ICI
             taskService.deleteOneById(task.getId());
 
             return new ResponseEntity<Task>(task, HttpStatus.ACCEPTED);

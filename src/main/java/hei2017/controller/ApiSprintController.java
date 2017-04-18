@@ -99,17 +99,9 @@ public class ApiSprintController {
     public ResponseEntity<Sprint> sendSprint(@RequestBody Sprint sprint)
     {
         LOGGER.debug("ApiController - sendSprint");
-        if(!sprintService.exists(sprint.getNom()))
-        {
-            sprintService.save(sprint);
-            LOGGER.debug("ApiController - sendSprint - Sprint créé");
-            return new ResponseEntity<Sprint>(sprint, HttpStatus.CREATED);
-        }
-        else
-        {
-            LOGGER.debug("ApiController - sendSprint - Sprint déjà existant");
-            return new ResponseEntity<Sprint>(sprint, HttpStatus.CONFLICT);
-        }
+        sprint = sprintService.save(sprint);
+        LOGGER.debug("ApiController - sendSprint - Sprint créé");
+        return new ResponseEntity<Sprint>(sprint, HttpStatus.CREATED);
     }
 
     @JsonView(JsonViews.Basique.class)

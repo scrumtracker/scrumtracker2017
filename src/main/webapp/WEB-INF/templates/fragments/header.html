@@ -13,11 +13,17 @@
                             <li th:unless="${!projects.isEmpty()}" th:text="#{project.none}"  class="text-center"></li>
                         </ul>
                     </li>
-                    <li th:each="sprint:${sprints}" th:if="${sprint.getStatus()}=='actual'"><a th:href="@{'/sprint/'+${sprint.id}}" th:text="#{sprint.actual}"></a></li>
-                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{report}"></span><span class="caret"></span> </a>
+                    <li th:if="${(isSprintPage == true) OR (isProjectPage == true)}"><a href="#" th:text="${'Project: '+currentProject.nom}"></a></li>
+                    <li th:if="${(isSprintPage == true) OR (isProjectPage == true)}" class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{sprints.started}"></span><span class="caret"></span> </a>
+                        <ul class="dropdown-menu" id="">
+                            <li th:if="${sprintsOfProjectWithStories.isEmpty()}" th:text="#{sprint.none}" class="text-center"></li>
+                            <li th:unless="${sprintsOfProjectWithStories.isEmpty()}" th:each="sprint:${sprintsOfProjectWithStories}" th:if="${sprint.getStatus()}=='actual'"><a th:href="@{'/sprint/'+${sprint.id}}" th:text="${sprint.nom}"></a></li>
+                        </ul>
+                    </li>
+                    <li th:if="${(isSprintPage == true) OR (isProjectPage == true)}" class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span th:text="#{sprints.ended}"></span><span class="caret"></span> </a>
                         <ul class="dropdown-menu" id="sprintsListMenu">
-                            <li th:if="${sprints.isEmpty()}" th:text="#{sprint.none}" class="text-center"></li>
-                            <li th:unless="${sprints.isEmpty()}" th:each="sprint:${sprints}" th:if="${sprint.getStatus()}=='over'"><a th:href="@{'/sprint/'+${sprint.id}}" th:text="${sprint.nom}"></a></li>
+                            <li th:if="${sprintsOfProjectWithStories.isEmpty()}" th:text="#{sprint.none}" class="text-center"></li>
+                            <li th:unless="${sprintsOfProjectWithStories.isEmpty()}" th:each="sprint:${sprintsOfProjectWithStories}" th:if="${sprint.getStatus()}=='over'"><a th:href="@{'/sprint/'+${sprint.id}}" th:text="${sprint.nom}"></a></li>
                         </ul>
                     </li>
                     <li class="hiddenElement"><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>

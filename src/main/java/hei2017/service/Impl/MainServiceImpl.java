@@ -42,12 +42,26 @@ public class MainServiceImpl implements MainService {
             "Lovely",
             "Cute",
             "The Best",
-            "Blind"
+            "Blind",
+            "Fat",
+            "Blue",
+            "Squeeshie",
+            "Dirty",
+            "Sticky",
+            "Fantastic",
+            "Amazing",
+            "Glorious",
+            "Yummy",
+            "Funny",
+            "Terrifying",
+            "Tiny",
+            "Delicious"
     };
     String[] noms = {
             "Jimmie Neutron",
             "Mike from the Goonies",
-            "Yoda", "Chris Knight",
+            "Yoda",
+            "Chris Knight",
             "Smurf",
             "Dada",
             "Harry Potter",
@@ -55,7 +69,22 @@ public class MainServiceImpl implements MainService {
             "Looney Tunes",
             "Bugs Bunny",
             "Daffy Duck",
-            "Forrest Gump"
+            "Forrest Gump",
+            "Bob Ross",
+            "Doctor Who",
+            "Severus Snape",
+            "Nyan Cat",
+            "Charlie the unicorn",
+            "Sponge Bob",
+            "Ninja Turtles",
+            "Francois Lefloch",
+            "Sylvain Duriff",
+            "Milhouse",
+            "Bart",
+            "mummy",
+            "Pamela Anderson",
+            "Mr Robot"
+
     };
     String[] desc = {
             "To be or not to be",
@@ -80,7 +109,12 @@ public class MainServiceImpl implements MainService {
             "Based on this morning’s reading, it would be a Twinkie thirty-five feet long, weighing approximately six hundred pounds.",
             "Time…to die.",
             "Kneel before Zod.",
-            "Ya Ta!"
+            "Ya Ta!",
+            "I'm never gonna give you up, never gonna let you down",
+            "Daydream, I fell asleep amid the flowers",
+            "Sometimes I dream about cheeese",
+            "Catch em all",
+            "Hazardous description"
     };
 
     @Override
@@ -149,7 +183,8 @@ public class MainServiceImpl implements MainService {
             sprint.setDescription(giveDescription());
             sprint.setDateCreation(new Timestamp(System.currentTimeMillis()));
             sprint.setDateDebut(new Timestamp(System.currentTimeMillis()));
-            sprint.setDateFin(new Timestamp(System.currentTimeMillis()));
+            Timestamp ts = new Timestamp(System.currentTimeMillis()+ThreadLocalRandom.current().nextInt(60000, 3600000));
+            sprint.setDateFin(ts);
             sprint.setSprintProject(projet);
 
             sprint = sprintDAO.save(sprint);

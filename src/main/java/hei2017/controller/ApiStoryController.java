@@ -99,17 +99,9 @@ public class ApiStoryController {
     public ResponseEntity<Story> sendStory(@RequestBody Story story)
     {
         LOGGER.debug("ApiController - sendStory");
-        if(!storyService.exists(story.getNom()))
-        {
-            storyService.save(story);
-            LOGGER.debug("ApiController - sendStory - Story créé");
-            return new ResponseEntity<Story>(story, HttpStatus.CREATED);
-        }
-        else
-        {
-            LOGGER.debug("ApiController - sendStory - Story déjà existante");
-            return new ResponseEntity<Story>(story, HttpStatus.CONFLICT);
-        }
+        story = storyService.save(story);
+        LOGGER.debug("ApiController - sendStory - Story créé");
+        return new ResponseEntity<Story>(story, HttpStatus.CREATED);
     }
 
     @JsonView(JsonViews.Basique.class)

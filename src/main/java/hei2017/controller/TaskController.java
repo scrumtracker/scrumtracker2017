@@ -16,24 +16,5 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class TaskController {
 
-    @Inject
-    ProjectService projectService;
-
-    @Inject
-    SprintService sprintService;
-
-    @RequestMapping("/tasks")
-    public String goTasks(Model model,
-                          HttpServletRequest request,
-                          HttpServletResponse response)
-    {
-        model.addAttribute("isTaskPage", true);
-
-        model.addAttribute("projects", projectService.findAll());
-
-        model.addAttribute("sprints", sprintService.findAll());
-
-        return "tasks";
-    }
 
 }

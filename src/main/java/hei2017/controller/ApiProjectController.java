@@ -94,17 +94,9 @@ public class ApiProjectController {
     public ResponseEntity<Project> sendProject(@RequestBody Project project)
     {
         LOGGER.debug("ApiController - sendProject");
-        if(!projectService.exists(project.getNom()))
-        {
-            projectService.save(project);
-            LOGGER.debug("ApiController - sendProject - Projet créé");
-            return new ResponseEntity<Project>(project, HttpStatus.CREATED);
-        }
-        else
-        {
-            LOGGER.debug("ApiController - sendProject - Projet déjà existant");
-            return new ResponseEntity<Project>(project, HttpStatus.CONFLICT);
-        }
+        project = projectService.save(project);
+        LOGGER.debug("ApiController - sendProject - Projet créé");
+        return new ResponseEntity<Project>(project, HttpStatus.CREATED);
     }
 
     @JsonView(JsonViews.Basique.class)

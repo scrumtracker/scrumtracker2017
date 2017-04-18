@@ -64,6 +64,8 @@ public class ProjectController {
 
         model.addAttribute("project", project);
 
+        model.addAttribute("currentProject", project);
+
         model.addAttribute("projectSprints", project.getProjectSprints());
 
         return "project";
