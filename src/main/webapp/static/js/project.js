@@ -317,6 +317,19 @@ function addNewStory(obj){
 //bouton annuler qui cache les div d'ajout
 function hideNewStory() {
 
+    var newsprintname = document.getElementById("newsprintname");
+    var newsprintdescription = document.getElementById("newsprintdescription");
+    var newSprintDateDebut = document.getElementById("newSprintDateDebut");
+    var newSprintHeureDebut = document.getElementById("newSprintHeureDebut");
+    var newSprintDateFin = document.getElementById("newSprintDateFin");
+    var newSprintHeureFin = document.getElementById("newSprintHeureFin");
+
+    var newstorynameUnaffected = document.getElementById("newstorynameUnaffected");
+    var newstorydescriptionUnaffected = document.getElementById("newstorydescriptionUnaffected");
+    var newstorypointsUnaffected = document.getElementById("newstorypointsUnaffected");
+
+
+
     var divaddnewsprint = document.getElementById("divaddnewsprint");
     var newSprint = document.getElementById("newSprint");
     var divaddnewstoryUnaffected = document.getElementById("divaddnewstoryUnaffected");
@@ -325,20 +338,41 @@ function hideNewStory() {
     if(divaddnewsprint.style.display == "block"){
         divaddnewsprint.style.display = "none";
         newSprint.style.display = "block";
+        newsprintname.value = "";
+        newsprintdescription.value = "";
+        newSprintDateDebut.value = "";
+        newSprintHeureDebut.value = "";
+        newSprintDateFin.value = "";
+        newSprintHeureFin.value = "23:59";
     }
+
     if(divaddnewstoryUnaffected.style.display == "block"){
         divaddnewstoryUnaffected.style.display = "none";
         newStoryUnaffected.style.display = "block";
+
+        newstorynameUnaffected.value = "";
+        newstorydescriptionUnaffected.value = "";
+        newstorypointsUnaffected.value = "";
     }
 }
 
 function hideNewStorySprint(id){
+
+    var newstoryname = document.getElementById('newstoryname'+id);
+    var newstorydescription = document.getElementById('newstorydescription'+id);
+    var newstorypoints = document.getElementById('newstorypoints'+id);
+
     var idDivSprint = document.getElementById('divaddnewstory'+id);
     var buttonAjouterStory = document.getElementById('buttonAjouterStory'+id);
 
     if(idDivSprint.style.display == "block"){
         idDivSprint.style.display = "none";
         buttonAjouterStory.style.display = "block";
+
+        newstoryname.value = "";
+        newstorypoints.value = "";
+        newstorydescription.value = "";
+
     }
 }
 

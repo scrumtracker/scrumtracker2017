@@ -89,6 +89,48 @@ function showFormAddNewTask(obj){
     }
 }
 
+//bouton annuler
+function hideNewTask(id){
+
+    var newtaskname = document.getElementById('newtaskname'+id);
+    var newtaskdescription = document.getElementById('newtaskdescription'+id);
+    var newtasktotalhoursofwork = document.getElementById('newtasktotalhoursofwork'+id);
+
+
+    var divaddnewtask = document.getElementById('divaddnewtask'+id);
+    var buttonAjouterTask = document.getElementById('buttonAjouterTask'+id);
+
+    if(divaddnewtask.style.display == "block"){
+        divaddnewtask.style.display = "none";
+        buttonAjouterTask.style.display = "block";
+
+        newtaskname.value = "";
+        newtaskdescription.value = "";
+        newtasktotalhoursofwork.value = "";
+
+    }
+}
+
+function hideNewStory(id) {
+
+    var newstoryname = document.getElementById('newstoryname'+id);
+    var newstorydescription = document.getElementById('newstorydescription'+id);
+    var newstorypoints = document.getElementById('newstorypoints'+id);
+
+    var divaddnewstory = document.getElementById("divaddnewstory");
+    var newStory = document.getElementById("newStory");
+
+
+    if(divaddnewstory.style.display == "block"){
+        divaddnewstory.style.display = "none";
+        newStory.style.display = "block";
+
+        newstoryname.value = "";
+        newstorypoints.value = "";
+        newstorydescription.value = "";
+    }
+}
+
 //Créer une story reliée au sprint de la page sprint actuelle :
 function creerStoryDansSprint( idSprint )
 {
