@@ -1,6 +1,7 @@
 package hei2017.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import hei2017.entity.Project;
 import hei2017.entity.Sprint;
 import hei2017.entity.Story;
 import hei2017.json.JsonViews;
@@ -112,6 +113,21 @@ public class ApiSprintController {
     }
 
     @JsonView(JsonViews.Basique.class)
+    @RequestMapping(value = "/api/sprint/add/project/{idProject}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Sprint> sendSprintLinkedToProject(@RequestBody Sprint sprint, @PathVariable Long idProject)
+    {
+        LOGGER.debug("ApiController - sendSprintLinkedToProject");
+        Project project = projectService.findOneById(idProject);
+        if(project==null)
+            return new ResponseEntity<Sprint>(sprint, HttpStatus.NOT_FOUND);
+        sprint.setSprintProject(project);
+        sprintService.save(sprint);
+        LOGGER.debug("ApiController - sendSprintLinkedToProject - Sprint créé et lié à un projet");
+        return new ResponseEntity<Sprint>(sprint, HttpStatus.CREATED);
+
+    }
+
+    @JsonView(JsonViews.Basique.class)
     @RequestMapping(value = "/api/sprint/update/{idSprint}", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Sprint> updateSprint(@PathVariable Long idSprint, @RequestBody Sprint sprint)
     {
@@ -150,6 +166,7 @@ public class ApiSprintController {
         Set<Sprint> sprints = sprintService.findBySprintProject(idProject);
         return sprints;
     }
+
 
 
     @JsonView(JsonViews.Basique.class)
