@@ -391,7 +391,7 @@ function creerSprintDansProject( idProject )
 
         });
     }else{
-        toastr.error("La date de fin doit être après la date de début");
+        toastr.error("Error in dates");
     }
 }
 function deleteSprintById( idSprint )
