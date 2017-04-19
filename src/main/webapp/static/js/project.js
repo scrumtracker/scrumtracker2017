@@ -86,7 +86,7 @@ function showStory(id){
                     }
                 }
                 if(sum == 0) {
-                    sum = 'undefined';
+                    sum = ' ';
                 }
                 var htmlContenu = '<p>Total number of tasks : ' + data.length + '</p>' +
                     '<p>Total number of hours : ' + sum +'</p>' +
