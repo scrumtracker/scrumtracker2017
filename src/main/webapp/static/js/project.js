@@ -63,6 +63,40 @@ function showStory(id){
                 detailStory.innerHTML = html;
             }
         });
+
+    $.getJSON('/api/task/story/' + id,
+        function (data) {
+            if(data.length != 0) {
+                var sum = 0;
+                var doing = 0;
+                var done = 0;
+                var todo = 0;
+                for(var i in data) {
+                    if(data[i].tempsDeCharge != null) {
+                        sum += parseFloat(data[i].tempsDeCharge);
+                    }
+                    if(data[i].status == "DONE") {
+                        done ++;
+                    }
+                    if(data[i].status == "DOING") {
+                        doing ++;
+                    }
+                    if(data[i].status == "TODO") {
+                        todo ++;
+                    }
+                }
+                if(sum == 0) {
+                    sum = 'undefined';
+                }
+                var htmlContenu = '<p>Total number of tasks : ' + data.length + '</p>' +
+                    '<p>Total number of hours : ' + sum +'</p>' +
+                        '<p>Number of tasks TODO : '+ done +'</p>' +
+                        '<p>Number of tasks DOING : '+ doing +'</p>' +
+                        '<p>Number of tasks DONE : '+ done +'</p>'
+            }
+            $('#detailsTask').html(htmlContenu);
+        }
+    )
 }
 
 //Cache les détails latéraux (utile après suppression d'un élément)
@@ -194,6 +228,8 @@ function effacerStoryById( idStory )
                         $("#storyId"+idStory).hide(500);
                         toastr.success("Story "+idStory+" has been deleted.");
                         var detail = document.getElementById("detailsStory");
+                        detail.innerHTML = "";
+                        detail = document.getElementById("detailsTask");
                         detail.innerHTML = "";
                     },
                     error: function (resultat, statut, erreur) {
