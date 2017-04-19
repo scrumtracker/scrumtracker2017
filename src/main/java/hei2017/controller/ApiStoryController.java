@@ -171,6 +171,16 @@ public class ApiStoryController {
         Set<Story> stories = storyService.findByStorySprint(idSprint);
         return stories;
     }
+    //Renvoie toutes les STORIES attachées au SPRINT d'id idSprint
+    @JsonView(JsonViews.Basique.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/story/sprint/{idSprint}/tasks", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
+    public Set<Story> showStoriesAssociatedToThisSprintWithTasks(@PathVariable Long idSprint)
+    {
+        LOGGER.debug("ApiController - showStoriesAssociatedToThisSprintWithTasks");
+        Set<Story> stories = storyService.findByStorySprintWithTask(idSprint);
+        return stories;
+    }
 
     //Renvoie toutes les STORIES qui ne sont pas attachées à un SPRINT
     @JsonView(JsonViews.Basique.class)
